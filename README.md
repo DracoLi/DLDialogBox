@@ -17,6 +17,7 @@ DLDialogBox is created by [Draco Li](http://www.dracoli.com) when he is chilling
 
 ## Thanks
 - [CCSpriteScale9](https://github.com/schristmann/ccspritescale9/)
+- [CCAutoType](https://github.com/sceresia/CCAutoType)
 
 ## License
 Licensed under [MIT](http://www.opensource.org/licenses/mit-license.php). Whoopeee!
