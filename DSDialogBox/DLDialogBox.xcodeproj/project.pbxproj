@@ -155,6 +155,7 @@
 		D4AC1C6617D9530F005AA9F5 /* CCSprite+GLBoxes.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC1C6517D9530F005AA9F5 /* CCSprite+GLBoxes.m */; };
 		D4AC1C6917D95C6F005AA9F5 /* CCSpriteScale9.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC1C6817D95C6F005AA9F5 /* CCSpriteScale9.m */; };
 		D4AC1C6E17DA472E005AA9F5 /* dialog_border.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC1C6D17DA472D005AA9F5 /* dialog_border.png */; };
+		D4AC1C7117DA58ED005AA9F5 /* DSChatBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC1C7017DA58ED005AA9F5 /* DSChatBox.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -472,6 +473,8 @@
 		D4AC1C6717D95C6F005AA9F5 /* CCSpriteScale9.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSpriteScale9.h; sourceTree = "<group>"; };
 		D4AC1C6817D95C6F005AA9F5 /* CCSpriteScale9.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSpriteScale9.m; sourceTree = "<group>"; };
 		D4AC1C6D17DA472D005AA9F5 /* dialog_border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dialog_border.png; sourceTree = "<group>"; };
+		D4AC1C6F17DA58EC005AA9F5 /* DSChatBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSChatBox.h; sourceTree = "<group>"; };
+		D4AC1C7017DA58ED005AA9F5 /* DSChatBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSChatBox.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -976,6 +979,8 @@
 				D4990C9B17D7D83B00430BFB /* DLSelectableLabel.m */,
 				D4990C9817D7D83B00430BFB /* DLChoicePicker.h */,
 				D4990C9917D7D83B00430BFB /* DLChoicePicker.m */,
+				D4AC1C6F17DA58EC005AA9F5 /* DSChatBox.h */,
+				D4AC1C7017DA58ED005AA9F5 /* DSChatBox.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -1085,6 +1090,7 @@
 				D4990C9E17D7D83B00430BFB /* DLSelectableLabel.m in Sources */,
 				D4AC1C6617D9530F005AA9F5 /* CCSprite+GLBoxes.m in Sources */,
 				D4AC1C6917D95C6F005AA9F5 /* CCSpriteScale9.m in Sources */,
+				D4AC1C7117DA58ED005AA9F5 /* DSChatBox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
