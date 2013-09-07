@@ -17,11 +17,11 @@
 /**
  * A sprite file name, left cap width, and top cap width is used
  * together into order to generate the border for the choice picker.
- * The background sprite file will be stretched to accommodate the content inside.
+ * The border sprite file will be stretched to accommodate the content inside.
  *
- * Please refer to readme for examples on how to use a custom background image
+ * Please refer to readme for examples on how to use a custom border image
  */
-@property (nonatomic, strong) NSString *borderSpriteFileName;
+@property (nonatomic, copy) NSString *borderSpriteFileName;
 @property (nonatomic) CGFloat borderLeftCapWidth;
 @property (nonatomic) CGFloat borderTopCapWidth;
 
@@ -66,7 +66,7 @@
 @protocol DLChoicePickerDelegate <NSObject>
 @optional
 - (void)choiceDialogLabelSelected:(DLChoicePicker *)sender
-                        labelText:(NSString *)text
+                       choiceText:(NSString *)text
                       choiceIndex:(NSUInteger)index;
 @end
 
@@ -103,7 +103,7 @@
  * Note that changing this will essentially redraw everything inside the choice
  * picker, so please don't change this refrequently.
  */
-@property (nonatomic, strong) DLChoicePickerCustomizer *pickerCustomizer;
+@property (nonatomic, strong) DLChoicePickerCustomizer *customizer;
 
 /**
  * Initialization related.
@@ -117,14 +117,14 @@
  * Use the third initializer if you want to control the full look and feel of
  * your choice picker.
  */
-+ (id)dialogWithChoices:(NSArray *)choices
++ (id)pickerWithChoices:(NSArray *)choices
                 fntFile:(NSString *)fntFile
         backgroundColor:(ccColor4F)color
           contentOffset:(CGPoint)offset
   paddingBetweenChoices:(CGFloat)padding;
-+ (id)dialogWithChoices:(NSArray *)choices
++ (id)pickerWithChoices:(NSArray *)choices
        pickerCustomizer:(DLChoicePickerCustomizer *)pickerCustomizer;
-+ (id)dialogWithChoices:(NSArray *)choices;
++ (id)pickerWithChoices:(NSArray *)choices;
 - (id)initWithChoices:(NSArray *)choices
      pickerCustomizer:(DLChoicePickerCustomizer *)pickerCustomizer;
 

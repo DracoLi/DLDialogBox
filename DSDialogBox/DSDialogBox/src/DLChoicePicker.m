@@ -30,8 +30,7 @@
 @end
 
 @interface DLChoicePicker ()
-@property (nonatomic, strong) CCSprite *bgSprite;
-@property (nonatomic, strong) CCSpriteScale9 *borderSprite;
+@property (nonatomic, strong) CCNode *bgSprite;
 @property (nonatomic, copy) NSArray *labels;
 
 - (void)updateAllChoiceLabels;
@@ -46,7 +45,7 @@
   }
 }
 
-+ (id)dialogWithChoices:(NSArray *)choices
++ (id)pickerWithChoices:(NSArray *)choices
                 fntFile:(NSString *)fntFile
         backgroundColor:(ccColor4F)color
           contentOffset:(CGPoint)offset
@@ -61,14 +60,14 @@
                       pickerCustomizer:customizer];
 }
 
-+ (id)dialogWithChoices:(NSArray *)choices
++ (id)pickerWithChoices:(NSArray *)choices
        pickerCustomizer:(DLChoicePickerCustomizer *)pickerCustomizer
 {
   return [[self alloc] initWithChoices:choices
                       pickerCustomizer:pickerCustomizer];
 }
 
-+ (id)dialogWithChoices:(NSArray *)choices
++ (id)pickerWithChoices:(NSArray *)choices
 {
   return [[self alloc] initWithChoices:choices
                       pickerCustomizer:[DLChoicePickerCustomizer defaultCustomizer]];
@@ -85,7 +84,7 @@
     
     // This creates the choice labels, set picker size and creates the background
     // for our choice picker.
-    [self setPickerCustomizer:pickerCustomizer];
+    [self setCustomizer:pickerCustomizer];
   }
   
   return self;
@@ -94,16 +93,12 @@
 
 #pragma mark - Property setter overrides
 
-- (void)setPickerCustomizer:(DLChoicePickerCustomizer *)pickerCustomizer
+- (void)setCustomizer:(DLChoicePickerCustomizer *)customizer
 {
-  if (_pickerCustomizer != pickerCustomizer) {
-    _pickerCustomizer = pickerCustomizer;
+  if (_customizer != customizer) {
+    _customizer = customizer;
     
-    // Remove all existing backgrounds
-    if (_borderSprite) {
-      [_borderSprite removeFromParentAndCleanup:YES];
-    }
-    
+    // Remove existing background sprite
     if (_bgSprite) {
       [_bgSprite removeFromParentAndCleanup:YES];
     }
@@ -115,37 +110,32 @@
     // Must do this after creating pickers since we will be using the size of the pickers
     DLSelectableLabel *oneLabel = [self.labels objectAtIndex:0];
     NSUInteger labelsCount = [self.labels count];
-    CGFloat pickerHeight = _pickerCustomizer.contentOffset.y * 2 \
+    CGFloat pickerHeight = _customizer.contentOffset.y * 2 \
                            + labelsCount * oneLabel.contentSize.height \
-                           + _pickerCustomizer.paddingBetweenChoices * (labelsCount - 1);
-    CGFloat pickerWidth = oneLabel.contentSize.width * pickerCustomizer.contentOffset.x * 2;
+                           + _customizer.paddingBetweenChoices * (labelsCount - 1);
+    CGFloat pickerWidth = oneLabel.contentSize.width * customizer.contentOffset.x * 2;
     CGSize pickerSize = CGSizeMake(pickerWidth, pickerHeight);
     self.contentSize = pickerSize;
     
     // Update picker background
-    if (pickerCustomizer.borderSpriteFileName)
-    {
+    if (customizer.borderSpriteFileName) {
       // If we have border create it along with content background
-      CCSpriteScale9 *border = [CCSpriteScale9
-                                spriteWithFile:pickerCustomizer.borderSpriteFileName
-                                andLeftCapWidth:pickerCustomizer.borderLeftCapWidth
-                                andTopCapHeight:pickerCustomizer.borderTopCapWidth];
-      ccColor4F colors = pickerCustomizer.backgroundColor;
-      [border setColor:ccc3(colors.r, colors.g, colors.b)];
-      [border setOpacity:colors.a];
-      border.anchorPoint = ccp(0, 0);
-      border.position = ccp(0, 0);
-      _borderSprite = border;
-      [self addChild:_borderSprite z:0];
-    }
-    else
-    {
+      CCSpriteScale9 *sprite = [CCSpriteScale9
+                                spriteWithFile:customizer.borderSpriteFileName
+                                andLeftCapWidth:customizer.borderLeftCapWidth
+                                andTopCapHeight:customizer.borderTopCapWidth];
+      ccColor4F colors = customizer.backgroundColor;
+      [sprite setColor:ccc3(colors.r, colors.g, colors.b)];
+      [sprite setOpacity:colors.a];
+      [sprite adaptiveScale9:pickerSize];
+      _bgSprite = sprite;
+    }else {
       // If no border just create choice picker background
-      _bgSprite = [CCSprite rectangleOfSize:pickerSize color:pickerCustomizer.backgroundColor];
-      _bgSprite.anchorPoint = ccp(0, 0);
-      _bgSprite.position = ccp(0, 0);
-      [self addChild:_bgSprite z:0];
+      _bgSprite = [CCSprite rectangleOfSize:pickerSize color:customizer.backgroundColor];
     }
+    _bgSprite.anchorPoint = ccp(0, 0);
+    _bgSprite.position = ccp(0, 0);
+    [self addChild:_bgSprite z:0];
   }
 }
 
@@ -207,22 +197,22 @@
   }
   
   // Create and add choices labels
-  CGFloat heightOffset = _pickerCustomizer.contentOffset.y;
+  CGFloat heightOffset = _customizer.contentOffset.y;
   NSMutableArray *allLabels = [NSMutableArray arrayWithCapacity:_choices.count];
   for (NSString *choice in _choices) {
     DLSelectableLabel *label = [[DLSelectableLabel alloc]
                                 initWithText:choice
-                                fntFile:_pickerCustomizer.fntFile
-                                cutomizer:_pickerCustomizer.labelCustomizer];
+                                fntFile:_customizer.fntFile
+                                cutomizer:_customizer.labelCustomizer];
     label.anchorPoint = ccp(0, 1); // top left corner at anchor
-    label.position = ccp(_pickerCustomizer.contentOffset.x, heightOffset);
+    label.position = ccp(_customizer.contentOffset.x, heightOffset);
     label.preselectEnabled = _preselectEnabled;
     label.delegate = self;
     [self addChild:label z:1];
     [allLabels addObject:label];
     
     // Set the y position of the next label
-    heightOffset = heightOffset + label.contentSize.height + _pickerCustomizer.paddingBetweenChoices;
+    heightOffset = heightOffset + label.contentSize.height + _customizer.paddingBetweenChoices;
   }
   self.labels = [allLabels copy];
 }
@@ -244,10 +234,10 @@
   CCLOG(@"dialog confirmed with value: %@, index: %i",
         sender.text.string, sender.tag);
   if (self.delegate &&
-      [self.delegate respondsToSelector:@selector(choiceDialogLabelSelected:labelText:choiceIndex:)])
+      [self.delegate respondsToSelector:@selector(choiceDialogLabelSelected:choiceText:choiceIndex:)])
   {
     [self.delegate choiceDialogLabelSelected:self
-                                   labelText:sender.text.string
+                                  choiceText:sender.text.string
                                  choiceIndex:sender.tag];
   }
 }

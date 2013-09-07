@@ -26,8 +26,8 @@
 
 - (void)finishTypingAnimation
 {
-  [self stopTypingAnimation];
   [self setString:self.autoTypeString];
+  [self stopTypingAnimation];
 }
 
 - (void)typeText:(NSString*)txt withDelay:(ccTime)d
@@ -83,13 +83,14 @@
 
 - (void)typingFinished
 {
-  if ([self.delegate respondsToSelector:@selector(autoTypeLabelBMTypingFinished:)]) {
+  if (self.delegate &&
+      [self.delegate respondsToSelector:@selector(autoTypeLabelBMTypingFinished:)]) {
     [self.delegate autoTypeLabelBMTypingFinished:self];
   }
 }
 
 - (void)dealloc {
-//  self.delegate = nil;
+  self.delegate = nil;
 }
 
 
