@@ -29,7 +29,7 @@
 /**
  * This determines the inner background color for our picker.
  */
-@property (nonatomic) ccColor4F backgroundColor;
+@property (nonatomic) ccColor4B backgroundColor;
 
 /**
  * The font file used to style the choice labels
@@ -119,7 +119,7 @@
  */
 + (id)pickerWithChoices:(NSArray *)choices
                 fntFile:(NSString *)fntFile
-        backgroundColor:(ccColor4F)color
+        backgroundColor:(ccColor4B)color
           contentOffset:(CGPoint)offset
   paddingBetweenChoices:(CGFloat)padding;
 + (id)pickerWithChoices:(NSArray *)choices

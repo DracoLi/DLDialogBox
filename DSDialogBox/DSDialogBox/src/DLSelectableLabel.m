@@ -14,7 +14,7 @@
 + (DLSelectableLabelCustomizer *)defaultCustomizer
 {
   DLSelectableLabelCustomizer *customizer = [[DLSelectableLabelCustomizer alloc] init];
-  customizer.preSelectedBackgroundColor = ccc4f(200, 0, 0, 0.70);
+  customizer.preSelectedBackgroundColor = ccc4(200, 0, 0, 0.70*255);
   customizer.stringOffset = ccp(10, 5);
   return customizer;
 }

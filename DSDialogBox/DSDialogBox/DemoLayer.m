@@ -8,6 +8,18 @@
 
 #import "DemoLayer.h"
 
+typedef enum {
+  kBasicDialog = 0,
+  kBasicDialogWithChoicesAndPortrait,
+  kStyledDialogWithChoiceAndPortrait,
+  kStyledDialogWithInnerPortrait
+} DialogTypes;
+
+@interface DemoLayer ()
+@property (nonatomic, strong) CCTMXTiledMap *tileMap;
+@property (nonatomic, copy) NSArray *demoDialogs;
+@property (nonatomic, strong) DLDialogBox *currentDialog;
+@end
 
 @implementation DemoLayer
 
@@ -21,9 +33,149 @@
 
 - (id)init
 {
-  if (self = [super init]) {
+  if (self = [super init])
+  {
+    // Load in map
+    _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"demo-room.tmx"];
+    _tileMap.anchorPoint = ccp(0,0);
+    [self addChild:self.tileMap z:-1];
     
+    // Load in some of the images we gonna use for our dialog
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"other-images.plist"];
+    
+    // TODO: Add in a hint label
+    
+    NSArray *words = [NSArray arrayWithObjects:
+                  @"This is the demo for DLDialogBox, \nit is pretty powerful.",
+                  @"You can use this dialog box to create a lot of different dialog boxes."
+                  @"You can make this dialog box write text simply by providing an array of words", nil];
+    
+    NSArray *wordsChoices = [NSArray arrayWithObjects:
+                             @"DLDialog can be fully customized is almost \nevery aspect",
+                             @"You can customize dialog border, portraits, text, etc.\n ALso did I  mention DLDialogBox can also handle \ngetting choice inputs from the player??",
+                             @"How awesome is DLDialogBox?!\nYou tell me!", nil];
+    NSArray *choices = [NSArray arrayWithObjects:
+                        @"Pretty Damn Awesome",
+                        @"So awesome I'm dead",
+                        @"Too awesome for words",
+                        @"I'm not awesome", nil];
+    CCSprite *portrait = [CCSprite spriteWithSpriteFrameName:@"sun-face.png"];
+    
+    
+    DLDialogBox *first = [DLDialogBox dialogWithTextArray:words
+                                          defaultPortrait:nil];
+    first.handleOnlyTapInputsInDialogBox = YES;
+    
+    DLDialogBox *second = [DLDialogBox dialogWithTextArray:wordsChoices
+                                           defaultPortrait:portrait
+                                                   choices:choices
+                                                customizer:[DLDialogBoxCustomizer defaultCustomizer]];
+    second.handleOnlyTapInputsInDialogBox = YES;
+    
+    
+    // Customize dialog box
+    DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
+    customizer.borderSpriteFileName = @"dialog_border.png";
+    customizer.borderLeftCapWidth = 32.0;
+    customizer.borderTopCapWidth = 32.0;
+    customizer.dialogTextOffset = ccp(10, 10);
+    customizer.portraitOffset = ccp(0, 0);
+    customizer.portraitPosition = kDialogPortraitPositionRight;
+    customizer.portaitInsideDialog = NO;
+    customizer.animateOutsidePortraitIn = YES;
+    
+    // Customize choice picker
+    DLChoicePickerCustomizer *choiceCustomizer = [DLChoicePickerCustomizer defaultCustomizer];
+    choiceCustomizer.borderSpriteFileName =  @"dialog_border.png";
+    choiceCustomizer.borderLeftCapWidth = 32.0;
+    choiceCustomizer.borderTopCapWidth = 32.0;
+    choiceCustomizer.contentOffset = ccp(0, 0);
+    choiceCustomizer.paddingBetweenChoices = 0;
+    
+    // Customize choice picker's label
+    DLSelectableLabelCustomizer *labelCustomizer = [DLSelectableLabelCustomizer defaultCustomizer];
+    labelCustomizer.stringOffset = ccp(15, 5);
+    labelCustomizer.preSelectedBackgroundColor = ccc4(0, 200, 50, 0.8*255);
+    labelCustomizer.selectedBackgroundColor = ccc4(0, 225, 100, 0.8*255);
+    
+    choiceCustomizer.labelCustomizer = labelCustomizer;
+    customizer.pickerCustomizer = choiceCustomizer;
+    
+    DLDialogBox *third = [DLDialogBox dialogWithTextArray:wordsChoices
+                                          defaultPortrait:portrait
+                                                  choices:choices
+                                               customizer:customizer];
+    third.handleOnlyTapInputsInDialogBox = YES;
+    
+    
+    // TODO: Create the forth dialog with inner portrait
+    
+    self.demoDialogs = [NSArray arrayWithObjects: first, second, third, nil];
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    
+    CGFloat topPadding = 40;
+    CGFloat fontSize = 20.0;
+    CCMenuItemFont *item1 = [CCMenuItemFont itemWithString:@"Dialog #1" block:^(id sender){
+      [self removeAnyDialog];
+      
+      DLDialogBox *dialog = [self.demoDialogs objectAtIndex:kBasicDialog];
+      dialog.anchorPoint = ccp(0, 0);
+      dialog.position = ccp(0, 0);
+      [self addChild:dialog z:1];
+      
+      self.currentDialog = dialog;
+    }];
+    item1.fontSize = fontSize;
+    
+    CCMenuItemFont *item2 = [CCMenuItemFont itemWithString:@"Dialog #2" block:^(id sender){
+      [self removeAnyDialog];
+      
+      DLDialogBox *dialog = [self.demoDialogs objectAtIndex:kBasicDialogWithChoicesAndPortrait];
+      dialog.anchorPoint = ccp(0, 0);
+      dialog.position = ccp(0, 0);
+      [self addChild:dialog z:1];
+      
+      self.currentDialog = dialog;
+    }];
+    item2.fontSize = fontSize;
+    
+    CCMenuItemFont *item3 = [CCMenuItemFont itemWithString:@"Dialog #3" block:^(id sender){
+      [self removeAnyDialog];
+      
+      DLDialogBox *dialog = [self.demoDialogs objectAtIndex:kStyledDialogWithChoiceAndPortrait];
+      dialog.anchorPoint = ccp(0, 0);
+      dialog.position = ccp(0, 0);
+      [self addChild:dialog z:1];
+      
+      self.currentDialog = dialog;
+    }];
+    item3.fontSize = fontSize;
+    
+    CCMenu *demoMenu = [CCMenu menuWithItems:item1, item2, item3, nil];
+    [demoMenu alignItemsHorizontallyWithPadding:10];
+    demoMenu.position = ccp(winSize.width / 2, winSize.height - topPadding);
+    [self addChild:demoMenu z:0];
+    
+    self.touchEnabled = YES;
+    [self scheduleUpdate];
   }
+  return self;
+}
+
+
+- (void)removeAnyDialog
+{
+  if (self.currentDialog) {
+    [self.currentDialog removeFromParentAndCleanup:YES];
+    self.currentDialog.delegate = nil;
+  }
+}
+
+
+#pragma mark ccTouch Delegate
+
+- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
 }
 
 @end

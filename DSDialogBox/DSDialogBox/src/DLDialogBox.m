@@ -15,7 +15,7 @@
 #define kPageIndicatorZIndex 2
 
 #define kDefaultIndicatorPadding 5
-#define kDefaultTypingSpeed 0.2
+#define kDefaultTypingSpeed 0.1
 
 #define kDialogBoxTouchPriority 0
 
@@ -32,8 +32,8 @@
   DLDialogBoxCustomizer *customizer = [[DLDialogBoxCustomizer alloc] init];
   customizer.dialogSize = CGSizeMake([[CCDirector sharedDirector] winSize].width,
                                      kDialogHeightNormal);
-  customizer.backgroundColor = ccc4f(0, 0, 0, 0.8);
-  customizer.pageFinishedIndicator = [CCSprite spriteWithSpriteFrameName:@"arrow_cusror.png"];
+  customizer.backgroundColor = ccc4(0, 0, 0, 0.8*255);
+  customizer.pageFinishedIndicator = [CCSprite spriteWithFile:@"arrow_cursor.png"];
   customizer.speedPerPageFinishedIndicatorBlink = 1.0;
   customizer.dialogTextOffset = ccp(5, 5);
   customizer.portraitPosition = kDialogPortraitPositionLeft;
@@ -158,7 +158,7 @@
                                 spriteWithFile:customizer.borderSpriteFileName
                                 andLeftCapWidth:customizer.borderLeftCapWidth
                                 andTopCapHeight:customizer.borderTopCapWidth];
-      ccColor4F colors = customizer.backgroundColor;
+      ccColor4B colors = customizer.backgroundColor;
       [sprite setColor:ccc3(colors.r, colors.g, colors.b)];
       [sprite setOpacity:colors.a];
       [sprite adaptiveScale9:dialogSize];
@@ -170,16 +170,6 @@
     _bgSprite.anchorPoint = ccp(0, 0);
     _bgSprite.position = ccp(0, 0);
     [self addChild:_bgSprite z:kBackgroundSpriteZIndex];
-    
-    // Remove any existing indicators
-    if (_customizer && _customizer.pageFinishedIndicator) {
-      [_customizer.pageFinishedIndicator removeFromParentAndCleanup:YES];
-    }
-    
-    // Add new indicator if any
-    if (customizer.pageFinishedIndicator) {
-      [self addChild:customizer.pageFinishedIndicator z:kPageIndicatorZIndex];
-    }
     
     // Adjust label text position if already created
     if (self.label) {
@@ -194,9 +184,10 @@
         customizer.dialogTextOffset.x;
         self.label.position = ccp(x, customizer.dialogTextOffset.y);
       }
+      CCLOG(@"label position: (%0.2f, %0.2f)", self.label.position.x, self.label.position.y);
     }
     
-    // Adjust portrai image position
+    // Adjust portrait image position
     CGSize portraitSize = self.portrait.contentSize;
     CGPoint portraitOffset = customizer.portraitOffset;
     if (customizer.portraitPosition == kDialogPortraitPositionLeft)

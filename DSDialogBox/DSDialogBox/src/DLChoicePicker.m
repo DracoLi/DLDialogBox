@@ -16,12 +16,9 @@
 + (DLChoicePickerCustomizer *)defaultCustomizer
 {
   DLChoicePickerCustomizer *customizer = [[DLChoicePickerCustomizer alloc] init];
-  customizer.borderSpriteFileName = @"dialog_border.png";
-  customizer.borderLeftCapWidth = 32.0;
-  customizer.borderTopCapWidth = 32.0;
-  
-  customizer.backgroundColor = ccc4f(0, 0, 0, 0.8);
+  customizer.backgroundColor = ccc4(0, 0, 0, 0.8*255);
   customizer.contentOffset = ccp(5, 5);
+  customizer.paddingBetweenChoices = 5.0;
   customizer.fntFile = @"demo_fnt.fnt";
   customizer.labelCustomizer = [DLSelectableLabelCustomizer defaultCustomizer];
   return customizer;
@@ -47,7 +44,7 @@
 
 + (id)pickerWithChoices:(NSArray *)choices
                 fntFile:(NSString *)fntFile
-        backgroundColor:(ccColor4F)color
+        backgroundColor:(ccColor4B)color
           contentOffset:(CGPoint)offset
   paddingBetweenChoices:(CGFloat)padding
 {
@@ -124,7 +121,7 @@
                                 spriteWithFile:customizer.borderSpriteFileName
                                 andLeftCapWidth:customizer.borderLeftCapWidth
                                 andTopCapHeight:customizer.borderTopCapWidth];
-      ccColor4F colors = customizer.backgroundColor;
+      ccColor4B colors = customizer.backgroundColor;
       [sprite setColor:ccc3(colors.r, colors.g, colors.b)];
       [sprite setOpacity:colors.a];
       [sprite adaptiveScale9:pickerSize];

@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "DLDialogBox.h"
 
 @interface DemoLayer : CCLayer
+<DLDialogBoxDelegate>
 
 + (CCScene *)scene;
 

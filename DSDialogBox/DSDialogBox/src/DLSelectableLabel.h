@@ -16,17 +16,17 @@
 /**
  * Specifies the color for the label's normal state
  */
-@property (nonatomic) ccColor4F backgroundColor;
+@property (nonatomic) ccColor4B backgroundColor;
 
 /**
  * Specifies a custom color for the label's preselected state
  */
-@property (nonatomic) ccColor4F preSelectedBackgroundColor;
+@property (nonatomic) ccColor4B preSelectedBackgroundColor;
 
 /**
  * Specifies a custom color for the label's selected state
  */
-@property (nonatomic) ccColor4F selectedBackgroundColor;
+@property (nonatomic) ccColor4B selectedBackgroundColor;
 
 /**
  * Specifies the offset between the label's string and the label.

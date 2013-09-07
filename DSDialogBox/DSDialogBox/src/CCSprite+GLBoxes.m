@@ -11,7 +11,7 @@
 @implementation CCSprite (GLBoxes)
 
 + (CCSprite *)rectangleOfSize:(CGSize)size
-                        color:(ccColor4F)color
+                        color:(ccColor4B)color
 {
   // Create the color texture
   GLubyte *buffer = (GLubyte *) malloc(sizeof(GLubyte)*4);

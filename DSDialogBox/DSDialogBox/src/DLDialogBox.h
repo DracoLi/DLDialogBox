@@ -33,7 +33,7 @@ typedef enum {
 /**
  * The background color of the dialog box.
  */
-@property (nonatomic) ccColor4F backgroundColor;
+@property (nonatomic) ccColor4B backgroundColor;
 
 /**
  * A sprite file name, left cap width, and top cap width is used

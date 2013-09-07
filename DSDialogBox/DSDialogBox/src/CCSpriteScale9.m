@@ -298,6 +298,16 @@
 	return color_;
 }
 
+- (void)updateDisplayedColor:(ccColor3B)color
+{
+  self.color = color;
+}
+
+- (void)updateDisplayedOpacity:(GLubyte)opacity
+{
+  self.opacity = opacity;
+}
+
 -(void) setColor:(ccColor3B)color3 {
 	color_ = colorUnmodified_ = color3;
 	

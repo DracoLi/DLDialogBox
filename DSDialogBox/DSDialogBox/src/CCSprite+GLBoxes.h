@@ -11,6 +11,6 @@
 @interface CCSprite (GLBoxes)
 
 + (CCSprite *)rectangleOfSize:(CGSize)size
-                        color:(ccColor4F)color;
+                        color:(ccColor4B)color;
 
 @end
