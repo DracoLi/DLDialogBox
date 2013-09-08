@@ -145,7 +145,7 @@
 		D4990C9117D7D67E00430BFB /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = D4990C2217D7D67E00430BFB /* vec4.c */; };
 		D4990C9417D7D7F800430BFB /* DemoLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D4990C9317D7D7F800430BFB /* DemoLayer.m */; };
 		D4990C9C17D7D83B00430BFB /* DLAutoTypeLabelBM.m in Sources */ = {isa = PBXBuildFile; fileRef = D4990C9717D7D83B00430BFB /* DLAutoTypeLabelBM.m */; };
-		D4990C9D17D7D83B00430BFB /* DLChoicePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D4990C9917D7D83B00430BFB /* DLChoicePicker.m */; };
+		D4990C9D17D7D83B00430BFB /* DLChoiceDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = D4990C9917D7D83B00430BFB /* DLChoiceDialog.m */; };
 		D4990C9E17D7D83B00430BFB /* DLSelectableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4990C9B17D7D83B00430BFB /* DLSelectableLabel.m */; };
 		D4990CA417D7D97300430BFB /* 8bit-20.fnt in Resources */ = {isa = PBXBuildFile; fileRef = D4990C9F17D7D97300430BFB /* 8bit-20.fnt */; };
 		D4990CA517D7D97300430BFB /* 8bit-20.png in Resources */ = {isa = PBXBuildFile; fileRef = D4990CA017D7D97300430BFB /* 8bit-20.png */; };
@@ -466,8 +466,8 @@
 		D4990C9317D7D7F800430BFB /* DemoLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoLayer.m; sourceTree = "<group>"; };
 		D4990C9617D7D83B00430BFB /* DLAutoTypeLabelBM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLAutoTypeLabelBM.h; sourceTree = "<group>"; };
 		D4990C9717D7D83B00430BFB /* DLAutoTypeLabelBM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLAutoTypeLabelBM.m; sourceTree = "<group>"; };
-		D4990C9817D7D83B00430BFB /* DLChoicePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLChoicePicker.h; sourceTree = "<group>"; };
-		D4990C9917D7D83B00430BFB /* DLChoicePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLChoicePicker.m; sourceTree = "<group>"; };
+		D4990C9817D7D83B00430BFB /* DLChoiceDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLChoiceDialog.h; sourceTree = "<group>"; };
+		D4990C9917D7D83B00430BFB /* DLChoiceDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLChoiceDialog.m; sourceTree = "<group>"; };
 		D4990C9A17D7D83B00430BFB /* DLSelectableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSelectableLabel.h; sourceTree = "<group>"; };
 		D4990C9B17D7D83B00430BFB /* DLSelectableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSelectableLabel.m; sourceTree = "<group>"; };
 		D4990C9F17D7D97300430BFB /* 8bit-20.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "8bit-20.fnt"; path = "Resources/8bit-20.fnt"; sourceTree = "<group>"; };
@@ -998,8 +998,8 @@
 				D4990C9717D7D83B00430BFB /* DLAutoTypeLabelBM.m */,
 				D4990C9A17D7D83B00430BFB /* DLSelectableLabel.h */,
 				D4990C9B17D7D83B00430BFB /* DLSelectableLabel.m */,
-				D4990C9817D7D83B00430BFB /* DLChoicePicker.h */,
-				D4990C9917D7D83B00430BFB /* DLChoicePicker.m */,
+				D4990C9817D7D83B00430BFB /* DLChoiceDialog.h */,
+				D4990C9917D7D83B00430BFB /* DLChoiceDialog.m */,
 				D4AC1C6F17DA58EC005AA9F5 /* DLDialogBox.h */,
 				D4AC1C7017DA58ED005AA9F5 /* DLDialogBox.m */,
 			);
@@ -1114,7 +1114,7 @@
 				D4990B0817D7D5FC00430BFB /* PromoLayer.m in Sources */,
 				D4990C9417D7D7F800430BFB /* DemoLayer.m in Sources */,
 				D4990C9C17D7D83B00430BFB /* DLAutoTypeLabelBM.m in Sources */,
-				D4990C9D17D7D83B00430BFB /* DLChoicePicker.m in Sources */,
+				D4990C9D17D7D83B00430BFB /* DLChoiceDialog.m in Sources */,
 				D4990C9E17D7D83B00430BFB /* DLSelectableLabel.m in Sources */,
 				D4AC1C6617D9530F005AA9F5 /* CCSprite+GLBoxes.m in Sources */,
 				D4AC1C6917D95C6F005AA9F5 /* CCSpriteScale9.m in Sources */,

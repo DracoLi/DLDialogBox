@@ -41,7 +41,7 @@
   customizer.animateOutsidePortraitIn = YES;
   //  customizer.outsidePortraitInFront = NO;
   customizer.fntFile = @"demo_fnt.fnt";;
-  customizer.pickerCustomizer = [DLChoicePickerCustomizer defaultCustomizer];
+  customizer.choiceDialogCustomizer = [DLChoiceDialogCustomizer defaultCustomizer];
   return customizer;
 }
 
@@ -125,8 +125,8 @@
     // Creates our background indictator
     self.customizer = customizer;
     
-    // Create choices and our choice picker
-    // Adding choices after customizer allows us to create a choice picker
+    // Create choices and our choice dialog
+    // Adding choices after customizer allows us to create a choice dialog
     // with the supplied customizer
     self.choices = choices;
   }
@@ -222,10 +222,10 @@
     }
     
     // Adjust choice dialog look and feel
-    // If we already created our picker and its got the same customizer then
+    // If we already created our choice dialog and its got the same customizer then
     // it would no nothing
-    if (self.choicePicker) {
-      self.choicePicker.customizer = customizer.pickerCustomizer;
+    if (self.choiceDialog) {
+      self.choiceDialog.customizer = customizer.choiceDialogCustomizer;
     }
     
     // Update page finished indicator
@@ -260,17 +260,17 @@
   if (_choices != choices) {
     _choices = choices;
     
-    if (self.choicePicker) {
-      // Remove existing choice picker
-      [self.choicePicker removeFromParentAndCleanup:YES];
-      self.choicePicker.delegate = nil;
+    if (self.choiceDialog) {
+      // Remove existing choice dialogs
+      [self.choiceDialog removeFromParentAndCleanup:YES];
+      self.choiceDialog.delegate = nil;
     }
     
-    // Make new choice picker
+    // Make new choice dialog
     if (choices && choices.count > 0) {
-      self.choicePicker = [DLChoicePicker pickerWithChoices:choices
-                                           pickerCustomizer:self.customizer.pickerCustomizer];
-      self.choicePicker.delegate = self;
+      self.choiceDialog = [DLChoiceDialog dialogWithChoices:choices
+                                           dialogCustomizer:self.customizer.choiceDialogCustomizer];
+      self.choiceDialog.delegate = self;
     }
   }
 }
@@ -322,9 +322,9 @@
     self.customizer.pageFinishedIndicator.visible = NO;
   }
   
-  // Alert delegate if no more text and has no choice picker.
-  // If does have choice picker, we alert all text finished whithout this additional call
-  if(self.textArray.count == 0 && !self.choicePicker) {
+  // Alert delegate if no more text and has no choice dialog.
+  // If does have choice dialog, we alert all text finished whithout this additional call
+  if(self.textArray.count == 0 && !self.choiceDialog) {
     if (self.delegate &&
         [self.delegate respondsToSelector:@selector(dialogBoxAllTextFinished:)]) {
       [self.delegate dialogBoxAllTextFinished:self];
@@ -337,10 +337,10 @@
     return;
   }
   
-  // Do nothing if we have no more words to display and choice picker is displayed
+  // Do nothing if we have no more words to display and choice dialog is displayed
   if (self.textArray.count == 0 &&
-      self.choicePicker.parent &&
-      self.choicePicker.visible) {
+      self.choiceDialog.parent &&
+      self.choiceDialog.visible) {
     return;
   }
   
@@ -387,26 +387,26 @@
   }
 }
 
-- (void)showChoicePicker
+- (void)showChoiceDialog
 {
   // We add the choice dialog to the parent instead of the dialog box
-  if (self.choicePicker && !self.choicePicker.parent) {
-    self.choicePicker.visible = YES;
-    [self.parent addChild:self.choicePicker z:self.zOrder + 1];
+  if (self.choiceDialog && !self.choiceDialog.parent) {
+    self.choiceDialog.visible = YES;
+    [self.parent addChild:self.choiceDialog z:self.zOrder + 1];
   }
 }
 
-- (void)removeChoicePickerAndCleanUp
+- (void)removeChoiceDialogAndCleanUp
 {
-  if (self.choicePicker && self.choicePicker.parent) {
-    [self.choicePicker removeFromParentAndCleanup:YES];
-    self.choicePicker.delegate = nil;
+  if (self.choiceDialog && self.choiceDialog.parent) {
+    [self.choiceDialog removeFromParentAndCleanup:YES];
+    self.choiceDialog.delegate = nil;
   }
 }
 
 - (void)removeDialogBoxAndCleanUp
 {
-  [self removeChoicePickerAndCleanUp];
+  [self removeChoiceDialogAndCleanUp];
   [self removeFromParentAndCleanup:YES];
   self.delegate = nil;
   self.label.delegate = nil;
@@ -420,11 +420,11 @@
 {
   self.currentPageTyped = YES;
   
-  // Show the choice picker after all words are displayed and we have a picker created
+  // Show the choice dialog after all words are displayed and we have a dialog created
   if (self.textArray.count == 0 &&
-      self.choicePicker)
+      self.choiceDialog)
   {
-    [self showChoicePicker];
+    [self showChoiceDialog];
     
     // Inform delegate we finished all text
     if (self.delegate &&
@@ -444,9 +444,9 @@
 }
 
 
-#pragma mark - DLChoicePickerDelegate
+#pragma mark - DLChoiceDialogDelegate
 
-- (void)choiceDialogLabelSelected:(DLChoicePicker *)sender
+- (void)choiceDialogLabelSelected:(DLChoiceDialog *)sender
                        choiceText:(NSString *)text
                       choiceIndex:(NSUInteger)index
 {
@@ -477,8 +477,8 @@
     shouldClaim = CGRectContainsPoint(relativeRect, touchPoint);
   }
   
-  // Dialog box should not handle any touches when choice picker is showing
-  if (self.choicePicker && self.choicePicker.parent && self.choicePicker.visible) {
+  // Dialog box should not handle any touches when choice dialogs is showing
+  if (self.choiceDialog && self.choiceDialog.parent && self.choiceDialog.visible) {
     shouldClaim = NO;
   }
   

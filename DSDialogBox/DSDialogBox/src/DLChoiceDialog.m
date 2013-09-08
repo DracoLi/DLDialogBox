@@ -6,16 +6,16 @@
 //  Copyright Draco Li 2013. All rights reserved.
 //
 
-#import "DLChoicePicker.h"
+#import "DLChoiceDialog.h"
 #import "CCSprite+GLBoxes.h"
 #import "DLSelectableLabel.h"
 #import "CCSpriteScale9.h"
 
-@implementation DLChoicePickerCustomizer
+@implementation DLChoiceDialogCustomizer
 
-+ (DLChoicePickerCustomizer *)defaultCustomizer
++ (DLChoiceDialogCustomizer *)defaultCustomizer
 {
-  DLChoicePickerCustomizer *customizer = [[DLChoicePickerCustomizer alloc] init];
+  DLChoiceDialogCustomizer *customizer = [[DLChoiceDialogCustomizer alloc] init];
   customizer.backgroundColor = ccc4(0, 0, 0, 0.8*255);
   customizer.contentOffset = ccp(5, 5);
   customizer.paddingBetweenChoices = 5.0;
@@ -26,14 +26,14 @@
 
 @end
 
-@interface DLChoicePicker ()
+@interface DLChoiceDialog ()
 @property (nonatomic, strong) CCNode *bgSprite;
 @property (nonatomic, copy) NSArray *labels;
 
-- (void)updateChoicePickerUI;
+- (void)updateChoiceDialogUI;
 @end
 
-@implementation DLChoicePicker
+@implementation DLChoiceDialog
 
 - (void)dealloc
 {
@@ -43,50 +43,50 @@
   [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
 }
 
-+ (id)pickerWithChoices:(NSArray *)choices
++ (id)dialogWithChoices:(NSArray *)choices
                 fntFile:(NSString *)fntFile
         backgroundColor:(ccColor4B)color
           contentOffset:(CGPoint)offset
   paddingBetweenChoices:(CGFloat)padding
 {
-  DLChoicePickerCustomizer *customizer = [DLChoicePickerCustomizer defaultCustomizer];
+  DLChoiceDialogCustomizer *customizer = [DLChoiceDialogCustomizer defaultCustomizer];
   customizer.fntFile = fntFile;
   customizer.backgroundColor = color;
   customizer.contentOffset = offset;
   customizer.paddingBetweenChoices = padding;
   return [[self alloc] initWithChoices:choices
-                      pickerCustomizer:customizer];
+                      dialogCustomizer:customizer];
 }
 
-+ (id)pickerWithChoices:(NSArray *)choices
-       pickerCustomizer:(DLChoicePickerCustomizer *)pickerCustomizer
++ (id)dialogWithChoices:(NSArray *)choices
+       dialogCustomizer:(DLChoiceDialogCustomizer *)dialogCustomizer
 {
   return [[self alloc] initWithChoices:choices
-                      pickerCustomizer:pickerCustomizer];
+                      dialogCustomizer:dialogCustomizer];
 }
 
-+ (id)pickerWithChoices:(NSArray *)choices
++ (id)dialogWithChoices:(NSArray *)choices
 {
   return [[self alloc] initWithChoices:choices
-                      pickerCustomizer:[DLChoicePickerCustomizer defaultCustomizer]];
+                      dialogCustomizer:[DLChoiceDialogCustomizer defaultCustomizer]];
 }
 
 - (id)initWithChoices:(NSArray *)choices
-     pickerCustomizer:(DLChoicePickerCustomizer *)pickerCustomizer
+     dialogCustomizer:(DLChoiceDialogCustomizer *)dialogCustomizer
 {
   if (self = [super init])
   {
     _preselectEnabled = YES;
     _swallowAllTouches = NO;
     
-    _customizer = pickerCustomizer;
+    _customizer = dialogCustomizer;
     
     // This generates our labels and then update UI according to them
     self.choices = choices;
     
     [[[CCDirector sharedDirector] touchDispatcher]
      addTargetedDelegate:self
-     priority:kChoicePickerDefaultTouchPriority
+     priority:kChoiceDialogDefaultTouchPriority
      swallowsTouches:YES];
   }
   
@@ -96,14 +96,14 @@
 
 #pragma mark - Property setter overrides
 
-- (void)setCustomizer:(DLChoicePickerCustomizer *)customizer
+- (void)setCustomizer:(DLChoiceDialogCustomizer *)customizer
 {
   if (_customizer != customizer) {
     _customizer = customizer;
     
     // Update UI of content only if have content generated after setting choices
     if (self.labels && self.labels.count > 0) {
-      [self updateChoicePickerUI];
+      [self updateChoiceDialogUI];
     }
   }
 }
@@ -138,7 +138,7 @@
     self.labels = [allLabels copy];
     
     // Update all choice labels on screen according to current customizer
-    [self updateChoicePickerUI];
+    [self updateChoiceDialogUI];
   }
 }
 
@@ -166,7 +166,7 @@
 
 #pragma mark - Private methods
 
-- (void)updateChoicePickerUI
+- (void)updateChoiceDialogUI
 {
   if (!self.labels || self.labels.count == 0) {
     return;
@@ -186,7 +186,7 @@
     }
   }
   
-  // Update choice picker contentSize
+  // Update choice dialog contentSize
   NSUInteger totalChoices = _choices.count;
   DLSelectableLabel *oneLabel = [self.labels objectAtIndex:0];
   CGFloat totalHeight = _customizer.contentOffset.y * 2 + \
@@ -217,7 +217,7 @@
     [_bgSprite removeFromParentAndCleanup:YES];
   }
   
-  // Update picker background
+  // Update dialog background
   if (_customizer.borderSpriteFileName) {
     // If we have border create it along with content background
     CCSpriteScale9 *sprite = [CCSpriteScale9
@@ -230,7 +230,7 @@
     [sprite adaptiveScale9:self.contentSize];
     _bgSprite = sprite;
   }else {
-    // If no border just create choice picker background
+    // If no border just create choice dialog background
     _bgSprite = [CCSprite rectangleOfSize:self.contentSize
                                     color:_customizer.backgroundColor];
   }

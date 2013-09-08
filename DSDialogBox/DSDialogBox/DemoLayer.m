@@ -115,22 +115,22 @@ typedef enum {
       customizer.portaitInsideDialog = NO;
       customizer.animateOutsidePortraitIn = YES;
       
-      // Customize choice picker
-      DLChoicePickerCustomizer *choiceCustomizer = [DLChoicePickerCustomizer defaultCustomizer];
+      // Customize choice dialog
+      DLChoiceDialogCustomizer *choiceCustomizer = [DLChoiceDialogCustomizer defaultCustomizer];
       choiceCustomizer.borderSpriteFileName =  @"dialog_border.png";
       choiceCustomizer.borderLeftCapWidth = 32.0;
       choiceCustomizer.borderTopCapWidth = 32.0;
       choiceCustomizer.contentOffset = ccp(0, 0);
       choiceCustomizer.paddingBetweenChoices = 0;
       
-      // Customize choice picker's label
+      // Customize choice dialog's label
       DLSelectableLabelCustomizer *labelCustomizer = [DLSelectableLabelCustomizer defaultCustomizer];
       labelCustomizer.textOffset = ccp(15, 5);
       labelCustomizer.preSelectedBackgroundColor = ccc4(0, 200, 50, 0.8*255);
       labelCustomizer.selectedBackgroundColor = ccc4(0, 225, 100, 0.8*255);
       
       choiceCustomizer.labelCustomizer = labelCustomizer;
-      customizer.pickerCustomizer = choiceCustomizer;
+      customizer.choiceDialogCustomizer = choiceCustomizer;
       
       DLDialogBox *third = [DLDialogBox dialogWithTextArray:wordsChoices
                                             defaultPortrait:portrait

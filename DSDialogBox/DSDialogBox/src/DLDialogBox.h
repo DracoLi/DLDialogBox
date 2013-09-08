@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "DLAutoTypeLabelBM.h"
-#import "DLChoicePicker.h"
+#import "DLChoiceDialog.h"
 
 #define kDialogHeightSmall  50
 #define kDialogHeightNormal 80
@@ -122,15 +122,15 @@ typedef enum {
 /**
  * fntFile used by the dialog for conversation text.
  *
- * This fntFile is also used by the choice picker if the fnt file for 
- * the choice picker is not set (not the default)
+ * This fntFile is also used by the choice dialog if the fnt file for
+ * the choice dialog if not set (not the default)
  */
 @property (nonatomic, copy) NSString *fntFile;
 
 /**
- * The choice picker customizer for the dialog box if it uses the choice picker
+ * The choice dialog customizer for the dialog box if it uses the choice dialog
  */
-@property (nonatomic, strong) DLChoicePickerCustomizer *pickerCustomizer;
+@property (nonatomic, strong) DLChoiceDialogCustomizer *choiceDialogCustomizer;
 
 /**
  * The default customizer for the dialog box using available resources
@@ -147,8 +147,8 @@ typedef enum {
 /**
  * Called after all the text has been displayed by the dialog box.
  *
- * If the dialog box needs to open a choice picker after the last text then
- * this is called after the dialog box text for the picker is displayed, not
+ * If the dialog box needs to open a choice dialog after the last text then
+ * this is called after the choice dialog is displayed, not
  * after a choice has been selected.
  */
 - (void)dialogBoxAllTextFinished:(DLDialogBox *)sender;
@@ -169,7 +169,7 @@ typedef enum {
 @class DSCharater;
 
 @interface DLDialogBox : CCNode
-<DLAutoTypeLabelBMDelegate, DLChoicePickerDelegate, CCTouchOneByOneDelegate>
+<DLAutoTypeLabelBMDelegate, DLChoiceDialogDelegate, CCTouchOneByOneDelegate>
 
 @property (nonatomic, weak) id<DLDialogBoxDelegate> delegate;
 
@@ -181,21 +181,21 @@ typedef enum {
 @property (nonatomic, strong) DLDialogBoxCustomizer *customizer;
 
 /**
- * Choices for the dialog box's choice picker.
+ * Choices for the dialog box's choice dialog.
  *
- * When this is set the dialog box will show the choice picker after the last
+ * When this is set the dialog box will show the choice dialog after the last
  * text page is displayed.
  */
 @property (nonatomic, copy) NSArray *choices;
 
 /**
- * The choice picker to display at the last text page if choices are provided.
+ * The choice dialog to display at the last text page if choices are provided.
  *
- * You can customizer the choice picker by overriding its choice picker customizer
+ * You can customizer the choice dialog by overriding its choice dialog customizer
  *
- * The choice picker is only created when the choices array is set.
+ * The choice dialog is only created when the choices array is set.
  */
-@property (nonatomic, strong) DLChoicePicker *choicePicker;
+@property (nonatomic, strong) DLChoiceDialog *choiceDialog;
 
 
 /**
@@ -237,7 +237,7 @@ typedef enum {
  *
  * If nil, no portrait will be displayed for the dialog box.
  *
- * You can customize the portrait through the ChoicePickerCustomizer
+ * You can customize the portrait posittions through the ChoiceDialogCustomizer
  */
 @property (nonatomic, strong) CCSprite *defaultPortraitSprite;
 
@@ -365,17 +365,17 @@ typedef enum {
  * Shows the choice dialog immediately if one is created.
  *
  * Note that the choice dialog is actually added tho the same parent that this
- * dialog box is added to. Thus you should set the choicePicker's position
+ * dialog box is added to. Thus you should set the choiceDialog's position
  * manually right after setting choices.
  * 
  * The choice Dialog is created when choices are set.
  */
-- (void)showChoicePicker;
+- (void)showChoiceDialog;
 
 /**
- * Remove any displayed choice picker and then perform any cleanup
+ * Remove any displayed choice dialog and then perform any cleanup
  */
-- (void)removeChoicePickerAndCleanUp;
+- (void)removeChoiceDialogAndCleanUp;
 
 /**
  * Remove this dialog from the parent and clean up
