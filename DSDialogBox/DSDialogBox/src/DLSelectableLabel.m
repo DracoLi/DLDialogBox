@@ -283,7 +283,6 @@
                                    self.contentSize.width,
                                    self.contentSize.height);
   BOOL touchValid = CGRectContainsPoint(relativeRect, touchPoint);
-  CCLOG(@"touch point: (%.2f, %.2f)", touchPoint.x, touchPoint.y);
   
   // Handle touch
   if (touchValid) {
