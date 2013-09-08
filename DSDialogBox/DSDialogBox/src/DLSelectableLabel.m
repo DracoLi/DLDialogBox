@@ -26,6 +26,12 @@
 @property (nonatomic, strong) CCTexture2D *defaultTexture;
 @property (nonatomic, strong) CCTexture2D *preSelectedTexture;
 @property (nonatomic, strong) CCTexture2D *selectedTexture;
+@property (nonatomic) BOOL isReceivingTouchEvents;
+
+/**
+ * I implemented my own version of alignment with anchor point.
+ */
+- (void)updateTextWithAlignment:(CCTextAlignment)alignment;
 
 /**
  * Convevient method to update textures with the colors from customizer
@@ -87,15 +93,11 @@
     self.customizer = customizer;
     
     // Add background
+    // This is done fater customizer since customizer sets the defaultTexture
     _bgSprite = [CCSprite spriteWithTexture:self.defaultTexture];
     _bgSprite.anchorPoint = ccp(0, 0);
     _bgSprite.position = ccp(0, 0);
     [self addChild:_bgSprite z:0];
-    
-    // Add touch responder
-    // We only swallow touches on this label
-    [[[CCDirector sharedDirector] touchDispatcher]
-     addTargetedDelegate:self priority:kSelectableLabelTouchPriority swallowsTouches:YES];
   }
   
   return self;
@@ -261,19 +263,27 @@
   }
 }
 
+- (void)onEnter
+{
+  // Only start collecting touch events once this label is displayed to save
+  // some processing power
+  if (!self.isReceivingTouchEvents) {
+    [[[CCDirector sharedDirector] touchDispatcher]
+     addTargetedDelegate:self priority:kSelectableLabelTouchPriority swallowsTouches:YES];
+  }
+}
+
 #pragma mark - Touch delegate
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
   // Only claim touches inside our label rect
-  CGPoint touchPoint = [self convertTouchToNodeSpaceAR:touch];
+  CGPoint touchPoint = [self convertTouchToNodeSpace:touch];
   CGRect relativeRect = CGRectMake(0, 0,
                                    self.contentSize.width,
                                    self.contentSize.height);
   BOOL touchValid = CGRectContainsPoint(relativeRect, touchPoint);
-  
   CCLOG(@"touch point: (%.2f, %.2f)", touchPoint.x, touchPoint.y);
-  CCLOG(@"label rect: (%.2f, %.2f)", relativeRect.origin.x, relativeRect.origin.y);
   
   // Handle touch
   if (touchValid) {
