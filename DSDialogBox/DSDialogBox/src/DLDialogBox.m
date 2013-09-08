@@ -58,14 +58,7 @@
 
 - (void)dealloc
 {
-  self.delegate = nil;
-  self.label.delegate = nil;
-  self.choicePicker.delegate = nil;
-  
-  [self removeChoicePickerAndCleanUp];
-  
-  // This removes any touch delegate
-  self.handleTapInputs = NO;
+  [self removeDialogBoxAndCleanUp];
 }
 
 
@@ -108,8 +101,8 @@
   {
     _currentTextPage = 0;
     _currentPageTyped = YES;
+    _closeWhenDialogFinished = YES;
     _textArray = [texts mutableCopy];
-    _defaultPortraitSprite = portrait;
     self.handleTapInputs = YES;
     _handleOnlyTapInputsInDialogBox = YES;
     _tapToFinishCurrentPage = NO;
@@ -334,6 +327,11 @@
         [self.delegate respondsToSelector:@selector(dialogBoxAllTextFinished:)]) {
       [self.delegate dialogBoxAllTextFinished:self];
     }
+    
+    // Close dialog box if enabled when no more content to display
+    if (self.closeWhenDialogFinished) {
+      [self removeDialogBoxAndCleanUp];
+    }
     return;
   }
   
@@ -379,10 +377,11 @@
 
 - (void)updatePortraitTextureWithSprite:(CCSprite *)sprite
 {
-  // Update dialog portrait if texture is different
-  if (_portrait.texture != sprite.texture) {
-    [_portrait setTexture:sprite.texture];
-    _portrait.contentSize = sprite.contentSize;
+  // Update dialog portrait displayed image if texture is different
+  if (self.portrait.texture != sprite.texture) {
+    [self.portrait setTextureAtlas:sprite.textureAtlas];
+    [self.portrait setTexture:sprite.texture];
+    [self.portrait setDisplayFrame:sprite.displayFrame];
   }
 }
 
@@ -401,6 +400,15 @@
     [self.choicePicker removeFromParentAndCleanup:YES];
     self.choicePicker.delegate = nil;
   }
+}
+
+- (void)removeDialogBoxAndCleanUp
+{
+  [self removeChoicePickerAndCleanUp];
+  [self removeFromParentAndCleanup:YES];
+  self.delegate = nil;
+  self.label.delegate = nil;
+  self.handleTapInputs = NO;
 }
 
 
@@ -446,6 +454,11 @@
     [self.delegate dialogBoxChoiceSelected:self
                                 choiceText:text
                                choiceIndex:index];
+    
+    // Close dialog box when choice is selected
+    if (self.closeWhenDialogFinished) {
+      [self removeDialogBoxAndCleanUp];
+    }
   }
 }
 
@@ -500,12 +513,13 @@
     CGPoint startingPos = CGPointZero;
     CGSize portraitSize = self.portrait.contentSize;
     if (self.customizer.portraitPosition == kDialogPortraitPositionLeft) {
-      startingPos = ccpSub(finalPos, CGPointMake(-portraitSize.width / 2, 0));
+      startingPos = ccpSub(finalPos, CGPointMake(portraitSize.width / 4, 0));
     }else {
-      startingPos = ccpAdd(finalPos, CGPointMake(portraitSize.width / 2, 0));
+      startingPos = ccpAdd(finalPos, CGPointMake(portraitSize.width / 4, 0));
     }
     
     // Animate move and fade in
+    self.portrait.position = startingPos;
     id move = [CCMoveTo actionWithDuration:kPortraitMoveAnimationDuration
                                   position:finalPos];
     //    id moveEaseOut = [CCEaseOut actionWithAction:move

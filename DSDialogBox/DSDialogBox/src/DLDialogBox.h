@@ -291,6 +291,17 @@ typedef enum {
 @property (nonatomic) ccTime typingDelay;
 
 /**
+ * Defaults to YES
+ *
+ * When enabled, the dialog box will automatically close on tap after the 
+ * dialog is finished displaying its final content if no choices are needed.
+ *
+ * When there are choices to be displayed at the end, the dialog will close
+ * automatically after a choice is selected.
+ */
+@property (nonatomic) BOOL closeWhenDialogFinished;
+
+/**
  * This portrait that is being displayed by the dialog box
  *
  * The defaultPortraitSprite is not displayed, only this sprite is displayed.
@@ -365,5 +376,10 @@ typedef enum {
  * Remove any displayed choice picker and then perform any cleanup
  */
 - (void)removeChoicePickerAndCleanUp;
+
+/**
+ * Remove this dialog from the parent and clean up
+ */
+- (void)removeDialogBoxAndCleanUp;
 
 @end
