@@ -40,7 +40,7 @@
  * The larger the string offset the more spacing there are between the label string
  * and the label itself.
  */
-@property (nonatomic) CGPoint stringOffset;
+@property (nonatomic) CGPoint textOffset;
 
 /**
  * Returns the default customizer used by DLSelectedLabel

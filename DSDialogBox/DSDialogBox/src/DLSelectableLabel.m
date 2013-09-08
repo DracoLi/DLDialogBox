@@ -15,7 +15,8 @@
 {
   DLSelectableLabelCustomizer *customizer = [[DLSelectableLabelCustomizer alloc] init];
   customizer.preSelectedBackgroundColor = ccc4(200, 0, 0, 0.70*255);
-  customizer.stringOffset = ccp(10, 5);
+  customizer.textOffset = ccp(10, 5);
+  customizer.textAlignment = kCCTextAlignmentCenter;
   return customizer;
 }
 
@@ -130,10 +131,33 @@
   
   // Update label width + background width
   [self updateBackgrounds];
+  
+  // Update text alignment again since width changed
+  [self updateTextWithAlignment:self.customizer.textAlignment];
 }
 
 
 #pragma mark - Private methods
+
+- (void)updateTextWithAlignment:(CCTextAlignment)alignment
+{
+  DLSelectableLabelCustomizer *customizer = self.customizer;
+  CGSize contentSize = self.contentSize;
+  CGSize labelSize = self.text.contentSize;
+  CGFloat halfYOffset = customizer.textOffset.y + labelSize.height / 2;
+  CGFloat halfXOffset = customizer.textOffset.x + labelSize.width / 2;
+  if (alignment == kCCTextAlignmentLeft) {
+    self.text.anchorPoint = ccp(0, 0.5f);
+    self.text.position = ccp(customizer.textOffset.x, halfYOffset);
+  }else if (alignment == kCCTextAlignmentCenter) {
+    self.text.anchorPoint = ccp(0.5f, 0.5f);
+    self.text.position = ccp(halfXOffset, halfYOffset);
+    CCLOGWARN(@"Know bug! DLSelectableLabel currently does not support center align due to cocos2d bug.");
+  }else if (alignment == kCCTextAlignmentRight) {
+    self.text.anchorPoint = ccp(1.0f, 0.5f);
+    self.text.position = ccp(contentSize.width - customizer.textOffset.x, halfYOffset);
+  }
+}
 
 - (void)updateBackgrounds
 {
@@ -145,8 +169,20 @@
   self.selectedTexture = [CCSprite rectangleOfSize:self.contentSize
                                              color:_customizer.selectedBackgroundColor].texture;
   
-  // Update background size
+  // Update bgsprite size
   self.bgSprite.contentSize = self.contentSize;
+  
+  // Update bgsprite texture
+  if (self.selected) {
+    [self.bgSprite setTexture:self.selectedTexture];
+  }else if (self.preselected) {
+    [self.bgSprite setTexture:self.preSelectedTexture];
+  }else {
+    [self.bgSprite setTexture:self.defaultTexture];
+  }
+  
+  // Update bgsprite rect
+  [self.bgSprite setTextureRect:CGRectMake(0, 0, self.contentSize.width, self.contentSize.height)];
 }
 
 
@@ -158,11 +194,10 @@
     _customizer = customizer;
     
     // Update label size and text position
-    CGSize labelSize = CGSizeMake(_text.contentSize.width + 2 * customizer.stringOffset.x,
-                                  _text.contentSize.height + 2 * customizer.stringOffset.y);
+    CGSize labelSize = CGSizeMake(_text.contentSize.width + 2 * customizer.textOffset.x,
+                                  _text.contentSize.height + 2 * customizer.textOffset.y);
     self.contentSize = labelSize;
-    self.text.position = customizer.stringOffset;
-    self.text.alignment = customizer.textAlignment;
+    [self updateTextWithAlignment:customizer.textAlignment];
     
     // Update backgrounds and its size
     [self updateBackgrounds];
@@ -171,6 +206,10 @@
 
 - (void)setPreselected:(BOOL)preselected
 {
+  if (_preselected == preselected) {
+    return;
+  }
+  
   _preselected = preselected;
   
   if (preselected) {
@@ -192,6 +231,10 @@
 
 - (void)setSelected:(BOOL)selected
 {
+  if (_selected == selected) {
+    return;
+  }
+  
   _selected = selected;
   
   if (selected) {

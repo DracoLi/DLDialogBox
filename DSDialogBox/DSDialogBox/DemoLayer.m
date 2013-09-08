@@ -125,7 +125,7 @@ typedef enum {
       
       // Customize choice picker's label
       DLSelectableLabelCustomizer *labelCustomizer = [DLSelectableLabelCustomizer defaultCustomizer];
-      labelCustomizer.stringOffset = ccp(15, 5);
+      labelCustomizer.textOffset = ccp(15, 5);
       labelCustomizer.preSelectedBackgroundColor = ccc4(0, 200, 50, 0.8*255);
       labelCustomizer.selectedBackgroundColor = ccc4(0, 225, 100, 0.8*255);
       
@@ -161,8 +161,7 @@ typedef enum {
 - (void)removeAnyDialog
 {
   if (self.currentDialog) {
-    [self.currentDialog removeFromParentAndCleanup:YES];
-    self.currentDialog.delegate = nil;
+    [self.currentDialog removeDialogBoxAndCleanUp];
   }
 }
 
