@@ -47,7 +47,7 @@ typedef enum {
     
     NSArray *words = [NSArray arrayWithObjects:
                   @"This is the demo for DLDialogBox, \nit is pretty powerful.",
-                  @"You can use this dialog box to create a lot of different dialog boxes."
+                  @"You can use this dialog box to create a lot\n of different dialog boxes.",
                   @"You can make this dialog box write text simply by providing an array of words", nil];
     
     NSArray *wordsChoices = [NSArray arrayWithObjects:

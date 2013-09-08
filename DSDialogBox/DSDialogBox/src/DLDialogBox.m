@@ -15,7 +15,7 @@
 #define kPageIndicatorZIndex 2
 
 #define kDefaultIndicatorPadding 5
-#define kDefaultTypingSpeed 0.1
+#define kDefaultTypingSpeed 0.02
 
 #define kDialogBoxTouchPriority 0
 
@@ -123,7 +123,7 @@
     // Add in our dialog label
     _label = [DLAutoTypeLabelBM labelWithString:@"" fntFile:customizer.fntFile];
     _label.delegate = self;
-    _label.anchorPoint = ccp(0, 0);
+    _label.anchorPoint = ccp(0, 1);
     _label.visible = NO;
     [self addChild:_label z:kPageTextZIndex];
     
@@ -172,20 +172,26 @@
     [self addChild:_bgSprite z:kBackgroundSpriteZIndex];
     
     // Adjust label text position if already created
-    if (self.label) {
-      self.label.position = ccp(customizer.dialogTextOffset.x,
-                                _bgSprite.contentSize.height - customizer.dialogTextOffset.y);
-      
-      // If portrait is on the left and inside, we must adjust label position
-      if (self.defaultPortraitSprite && customizer.portaitInsideDialog &&
-          customizer.portraitPosition == kDialogPortraitPositionLeft)
-      {
-        CGFloat x = customizer.portraitOffset.x + _defaultPortraitSprite.contentSize.width + \
-        customizer.dialogTextOffset.x;
-        self.label.position = ccp(x, customizer.dialogTextOffset.y);
-      }
-      CCLOG(@"label position: (%0.2f, %0.2f)", self.label.position.x, self.label.position.y);
+    self.label.position = ccp(customizer.dialogTextOffset.x,
+                              _bgSprite.contentSize.height - customizer.dialogTextOffset.y);
+    
+    // If portrait is on the left and inside, we must adjust label position
+    if (self.defaultPortraitSprite && customizer.portaitInsideDialog &&
+        customizer.portraitPosition == kDialogPortraitPositionLeft)
+    {
+      CGFloat x = customizer.portraitOffset.x + _defaultPortraitSprite.contentSize.width + \
+      customizer.dialogTextOffset.x;
+      self.label.position = ccp(x, customizer.dialogTextOffset.y);
     }
+    CCLOG(@"label position: (%0.2f, %0.2f)", self.label.position.x, self.label.position.y);
+    
+    // Adjust label size
+    CGFloat width = dialogSize.width - customizer.dialogTextOffset.x * 2;
+    if (self.defaultPortraitSprite && customizer.portaitInsideDialog) {
+      width = width - _defaultPortraitSprite.contentSize.width - \
+              customizer.portraitOffset.x;
+    }
+    [self.label setWidth:width];
     
     // Adjust portrait image position
     CGSize portraitSize = self.portrait.contentSize;
@@ -194,7 +200,8 @@
     {
       if (customizer.portaitInsideDialog) {
         self.portrait.position = ccp(portraitOffset.x,
-                                     portraitSize.height - portraitOffset.y);
+                                     dialogSize.height - portraitSize.height - \
+                                     portraitOffset.y);
       }else {
         self.portrait.position = portraitOffset;
       }

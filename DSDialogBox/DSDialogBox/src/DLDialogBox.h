@@ -11,9 +11,9 @@
 #import "DLAutoTypeLabelBM.h"
 #import "DLChoicePicker.h"
 
-#define kDialogHeightSmall  100
-#define kDialogHeightNormal 150
-#define kDialogHeightLarge  200
+#define kDialogHeightSmall  50
+#define kDialogHeightNormal 80
+#define kDialogHeightLarge  120
 
 typedef enum {
   kDialogPortraitPositionLeft = 0,
