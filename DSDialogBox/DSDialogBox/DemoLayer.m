@@ -48,10 +48,12 @@ typedef enum {
     NSArray *words = [NSArray arrayWithObjects:
                   @"This is the demo for DLDialogBox, \nit is pretty powerful.",
                   @"You can use this dialog box to create a lot\n of different dialog boxes.",
-                  @"You can make this dialog box write text simply by providing an array of words", nil];
+                  @"You can make this dialog box write text simply by providing an array of words.",
+                  @"Oh yeah did I mention DLDialogBox autowraps to the size of your dialog box?",
+                  @"But of course you can also customize\nnew newlines anywhere if you want. ",nil];
     
     NSArray *wordsChoices = [NSArray arrayWithObjects:
-                             @"DLDialog can be fully customized is almost \nevery aspect",
+                             @"DLDialog can be fully customized is almost \nevery aspect.",
                              @"You can customize dialog border, portraits, text, etc.\n ALso did I  mention DLDialogBox can also handle \ngetting choice inputs from the player??",
                              @"How awesome is DLDialogBox?!\nYou tell me!", nil];
     NSArray *choices = [NSArray arrayWithObjects:
@@ -60,17 +62,6 @@ typedef enum {
                         @"Too awesome for words",
                         @"I'm not awesome", nil];
     CCSprite *portrait = [CCSprite spriteWithSpriteFrameName:@"sun-face.png"];
-    
-    
-    DLDialogBox *first = [DLDialogBox dialogWithTextArray:words
-                                          defaultPortrait:nil];
-    first.handleOnlyTapInputsInDialogBox = YES;
-    
-    DLDialogBox *second = [DLDialogBox dialogWithTextArray:wordsChoices
-                                           defaultPortrait:portrait
-                                                   choices:choices
-                                                customizer:[DLDialogBoxCustomizer defaultCustomizer]];
-    second.handleOnlyTapInputsInDialogBox = YES;
     
     
     // Customize dialog box
@@ -110,32 +101,37 @@ typedef enum {
     
     // TODO: Create the forth dialog with inner portrait
     
-    self.demoDialogs = [NSArray arrayWithObjects: first, second, third, nil];
     CGSize winSize = [[CCDirector sharedDirector] winSize];
-    
     CGFloat topPadding = 40;
     CGFloat fontSize = 20.0;
+    
     CCMenuItemFont *item1 = [CCMenuItemFont itemWithString:@"Dialog #1" block:^(id sender){
       [self removeAnyDialog];
       
-      DLDialogBox *dialog = [self.demoDialogs objectAtIndex:kBasicDialog];
-      dialog.anchorPoint = ccp(0, 0);
-      dialog.position = ccp(0, 0);
-      [self addChild:dialog z:1];
+      DLDialogBox *first = [DLDialogBox dialogWithTextArray:words
+                                            defaultPortrait:nil];
+      first.handleOnlyTapInputsInDialogBox = YES;
+      first.anchorPoint = ccp(0, 0);
+      first.position = ccp(0, 0);
+      [self addChild:first z:1];
       
-      self.currentDialog = dialog;
+      self.currentDialog = first;
     }];
     item1.fontSize = fontSize;
     
     CCMenuItemFont *item2 = [CCMenuItemFont itemWithString:@"Dialog #2" block:^(id sender){
       [self removeAnyDialog];
       
-      DLDialogBox *dialog = [self.demoDialogs objectAtIndex:kBasicDialogWithChoicesAndPortrait];
-      dialog.anchorPoint = ccp(0, 0);
-      dialog.position = ccp(0, 0);
-      [self addChild:dialog z:1];
+      DLDialogBox *second = [DLDialogBox dialogWithTextArray:wordsChoices
+                                             defaultPortrait:portrait
+                                                     choices:choices
+                                                  customizer:[DLDialogBoxCustomizer defaultCustomizer]];
+      second.handleOnlyTapInputsInDialogBox = YES;
+      second.anchorPoint = ccp(0, 0);
+      second.position = ccp(0, 0);
+      [self addChild:second z:1];
       
-      self.currentDialog = dialog;
+      self.currentDialog = second;
     }];
     item2.fontSize = fontSize;
     

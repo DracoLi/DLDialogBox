@@ -10,6 +10,8 @@
 
 @interface DLAutoTypeLabelBM ()
 @property (nonatomic, strong) NSMutableArray *arrayOfCharacters;
+@property (nonatomic, copy) NSString *adjustedTypedString;
+
 - (void)typingFinished;
 - (void)typeWordAtIndex:(int)index;
 @end
@@ -39,10 +41,40 @@
   // Construct our strings data
   self.arrayOfCharacters = [[NSMutableArray alloc] init];
   self.autoTypeString = [[NSString alloc] initWithString:txt];
+  NSUInteger newlineCount = 0;
   for (int j=1; j < [txt length]+1; ++j) {
     NSString *substring = [txt substringToIndex:j];
+    
+    if ([substring characterAtIndex:substring.length - 1] == '\n') {
+      newlineCount++;
+      continue;
+    }
     [_arrayOfCharacters addObject:substring];
   }
+  
+  /**
+   * This is to fix the bug where CCLabelBMFont will not type the trailling characters
+   * if \n is present within the text.
+   *
+   * Thus if there are 3 \n in the text, then CCLabelBMFont will not type the last
+   * 3 characters.
+   *
+   * This is pretty dumb so this is a hack to fix this by appending some whitespace
+   * at the end of the to our typed string so we can type all the characters we were
+   * supposed to. 
+   *
+   * Typing animation would not take longer though since we are skipping the 
+   * typing animation of all new lines. Thus since we are adding the same of 
+   * whitespaces to the end of the string as there are newlines, the animation
+   * will look just like that we are typing character by character.
+   */
+  for (int i = 0; i < newlineCount; i++) {
+    NSString *lastString = [_arrayOfCharacters lastObject];
+    NSString *newString = [lastString stringByAppendingString:@" "];
+    [_arrayOfCharacters addObject:newString];
+  }
+  
+  self.adjustedTypedString = [_arrayOfCharacters lastObject];
   
   // This starts our recursive typing animation
   // We are doing this recursively so that we can change the typing speed
@@ -55,6 +87,7 @@
 {
   // Finish all typing when we are at end of typing index
   if (index == [self.arrayOfCharacters count]) {
+    [self setString:self.adjustedTypedString];
     [self typingFinished];
     return;
   }

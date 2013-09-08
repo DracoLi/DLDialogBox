@@ -15,7 +15,7 @@
 #define kPageIndicatorZIndex 2
 
 #define kDefaultIndicatorPadding 5
-#define kDefaultTypingSpeed 0.02
+#define kDefaultTypingSpeed 0.1
 
 #define kDialogBoxTouchPriority 0
 
@@ -428,7 +428,8 @@
   {
     // Animate arrow cursor blinking
     id blink = [CCBlink actionWithDuration:5.0 blinks:5.0 / self.customizer.speedPerPageFinishedIndicatorBlink];
-    [self runAction:[CCRepeatForever actionWithAction:blink]];
+    [self.customizer.pageFinishedIndicator
+     runAction:[CCRepeatForever actionWithAction:blink]];
   }  
 }
 
