@@ -80,10 +80,10 @@
 @property (nonatomic, copy) NSArray *choices;
 
 /**
+ * Defaults to YES
+ *
  * If set to YES, labels inside the picker will have a preselect state.
  * Thus the user must tap on a label twice to select it.
- *
- * Defaults to YES
  */
 @property (nonatomic) BOOL preselectEnabled;
 

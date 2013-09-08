@@ -64,41 +64,6 @@ typedef enum {
     CCSprite *portrait = [CCSprite spriteWithSpriteFrameName:@"sun-face.png"];
     
     
-    // Customize dialog box
-    DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
-    customizer.borderSpriteFileName = @"dialog_border.png";
-    customizer.borderLeftCapWidth = 32.0;
-    customizer.borderTopCapWidth = 32.0;
-    customizer.dialogTextOffset = ccp(10, 10);
-    customizer.portraitOffset = ccp(0, 0);
-    customizer.portraitPosition = kDialogPortraitPositionRight;
-    customizer.portaitInsideDialog = NO;
-    customizer.animateOutsidePortraitIn = YES;
-    
-    // Customize choice picker
-    DLChoicePickerCustomizer *choiceCustomizer = [DLChoicePickerCustomizer defaultCustomizer];
-    choiceCustomizer.borderSpriteFileName =  @"dialog_border.png";
-    choiceCustomizer.borderLeftCapWidth = 32.0;
-    choiceCustomizer.borderTopCapWidth = 32.0;
-    choiceCustomizer.contentOffset = ccp(0, 0);
-    choiceCustomizer.paddingBetweenChoices = 0;
-    
-    // Customize choice picker's label
-    DLSelectableLabelCustomizer *labelCustomizer = [DLSelectableLabelCustomizer defaultCustomizer];
-    labelCustomizer.stringOffset = ccp(15, 5);
-    labelCustomizer.preSelectedBackgroundColor = ccc4(0, 200, 50, 0.8*255);
-    labelCustomizer.selectedBackgroundColor = ccc4(0, 225, 100, 0.8*255);
-    
-    choiceCustomizer.labelCustomizer = labelCustomizer;
-    customizer.pickerCustomizer = choiceCustomizer;
-    
-    DLDialogBox *third = [DLDialogBox dialogWithTextArray:wordsChoices
-                                          defaultPortrait:portrait
-                                                  choices:choices
-                                               customizer:customizer];
-    third.handleOnlyTapInputsInDialogBox = YES;
-    
-    
     // TODO: Create the forth dialog with inner portrait
     
     CGSize winSize = [[CCDirector sharedDirector] winSize];
@@ -129,6 +94,7 @@ typedef enum {
       second.handleOnlyTapInputsInDialogBox = YES;
       second.anchorPoint = ccp(0, 0);
       second.position = ccp(0, 0);
+      second.tapToFinishCurrentPage = YES;
       [self addChild:second z:1];
       
       self.currentDialog = second;
@@ -138,12 +104,45 @@ typedef enum {
     CCMenuItemFont *item3 = [CCMenuItemFont itemWithString:@"Dialog #3" block:^(id sender){
       [self removeAnyDialog];
       
-      DLDialogBox *dialog = [self.demoDialogs objectAtIndex:kStyledDialogWithChoiceAndPortrait];
-      dialog.anchorPoint = ccp(0, 0);
-      dialog.position = ccp(0, 0);
-      [self addChild:dialog z:1];
+      // Customize dialog box
+      DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
+      customizer.borderSpriteFileName = @"dialog_border.png";
+      customizer.borderLeftCapWidth = 32.0;
+      customizer.borderTopCapWidth = 32.0;
+      customizer.dialogTextOffset = ccp(10, 10);
+      customizer.portraitOffset = ccp(0, 0);
+      customizer.portraitPosition = kDialogPortraitPositionRight;
+      customizer.portaitInsideDialog = NO;
+      customizer.animateOutsidePortraitIn = YES;
       
-      self.currentDialog = dialog;
+      // Customize choice picker
+      DLChoicePickerCustomizer *choiceCustomizer = [DLChoicePickerCustomizer defaultCustomizer];
+      choiceCustomizer.borderSpriteFileName =  @"dialog_border.png";
+      choiceCustomizer.borderLeftCapWidth = 32.0;
+      choiceCustomizer.borderTopCapWidth = 32.0;
+      choiceCustomizer.contentOffset = ccp(0, 0);
+      choiceCustomizer.paddingBetweenChoices = 0;
+      
+      // Customize choice picker's label
+      DLSelectableLabelCustomizer *labelCustomizer = [DLSelectableLabelCustomizer defaultCustomizer];
+      labelCustomizer.stringOffset = ccp(15, 5);
+      labelCustomizer.preSelectedBackgroundColor = ccc4(0, 200, 50, 0.8*255);
+      labelCustomizer.selectedBackgroundColor = ccc4(0, 225, 100, 0.8*255);
+      
+      choiceCustomizer.labelCustomizer = labelCustomizer;
+      customizer.pickerCustomizer = choiceCustomizer;
+      
+      DLDialogBox *third = [DLDialogBox dialogWithTextArray:wordsChoices
+                                            defaultPortrait:portrait
+                                                    choices:choices
+                                                 customizer:customizer];
+      third.handleOnlyTapInputsInDialogBox = YES;
+      
+      third.anchorPoint = ccp(0, 0);
+      third.position = ccp(0, 0);
+      [self addChild:third z:1];
+      
+      self.currentDialog = third;
     }];
     item3.fontSize = fontSize;
     

@@ -14,6 +14,13 @@
 @interface DLSelectableLabelCustomizer : NSObject
 
 /**
+ * Defaults is kCCTextAlignmentLeft
+ *
+ * The alignment of the text in the label
+ */
+@property (nonatomic) CCTextAlignment textAlignment;
+
+/**
  * Specifies the color for the label's normal state
  */
 @property (nonatomic) ccColor4B backgroundColor;
@@ -128,5 +135,13 @@
  * Deselect reverts the label to the default state. Not selected or preselected
  */
 - (void)deselect;
+
+/**
+ * Set the width of the label manually.
+ *
+ * When not set manually, the width of the label equals to the width of the 
+ * label text plus 2*stringOffset.x
+ */
+- (void)setWidth:(CGFloat)width;
 
 @end

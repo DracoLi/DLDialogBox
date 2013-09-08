@@ -25,6 +25,12 @@
 @property (nonatomic, strong) CCTexture2D *defaultTexture;
 @property (nonatomic, strong) CCTexture2D *preSelectedTexture;
 @property (nonatomic, strong) CCTexture2D *selectedTexture;
+
+/**
+ * Convevient method to update textures with the colors from customizer
+ * Also updates our bg sprite contentsize.
+ */
+- (void)updateBackgrounds;
 @end
 
 @implementation DLSelectableLabel
@@ -77,7 +83,7 @@
     [self addChild:_text z:1];
     
     // Setting the customizer will update our textures, label string and text position
-    _customizer = customizer;
+    self.customizer = customizer;
     
     // Add background
     _bgSprite = [CCSprite spriteWithTexture:self.defaultTexture];
@@ -93,6 +99,9 @@
   
   return self;
 }
+
+
+#pragma mark - Public methods
 
 - (void)select
 {
@@ -113,6 +122,36 @@
   self.preselected = NO;
 }
 
+- (void)setWidth:(CGFloat)width
+{
+  // Calculate and update new content size
+  CGSize newSize = CGSizeMake(width, self.contentSize.height);
+  self.contentSize = newSize;
+  
+  // Update label width + background width
+  [self updateBackgrounds];
+}
+
+
+#pragma mark - Private methods
+
+- (void)updateBackgrounds
+{
+  // Update textures
+  self.defaultTexture = [CCSprite rectangleOfSize:self.contentSize
+                                            color:_customizer.backgroundColor].texture;
+  self.preSelectedTexture = [CCSprite rectangleOfSize:self.contentSize
+                                                color:_customizer.preSelectedBackgroundColor].texture;
+  self.selectedTexture = [CCSprite rectangleOfSize:self.contentSize
+                                             color:_customizer.selectedBackgroundColor].texture;
+  
+  // Update background size
+  self.bgSprite.contentSize = self.contentSize;
+}
+
+
+#pragma mark - Property setter overrides
+
 - (void)setCustomizer:(DLSelectableLabelCustomizer *)customizer
 {
   if (_customizer != customizer) {
@@ -123,17 +162,10 @@
                                   _text.contentSize.height + 2 * customizer.stringOffset.y);
     self.contentSize = labelSize;
     self.text.position = customizer.stringOffset;
+    self.text.alignment = customizer.textAlignment;
     
-    // Save textures
-    self.defaultTexture = [CCSprite rectangleOfSize:labelSize
-                                              color:customizer.backgroundColor].texture;
-    self.preSelectedTexture = [CCSprite rectangleOfSize:labelSize
-                                                  color:customizer.preSelectedBackgroundColor].texture;
-    self.selectedTexture = [CCSprite rectangleOfSize:labelSize
-                                               color:customizer.selectedBackgroundColor].texture;
-    
-    // Update background size
-    self.bgSprite.contentSize = labelSize;
+    // Update backgrounds and its size
+    [self updateBackgrounds];
   }
 }
 
@@ -196,6 +228,9 @@
                                    self.contentSize.width,
                                    self.contentSize.height);
   BOOL touchValid = CGRectContainsPoint(relativeRect, touchPoint);
+  
+  CCLOG(@"touch point: (%.2f, %.2f)", touchPoint.x, touchPoint.y);
+  CCLOG(@"label rect: (%.2f, %.2f)", relativeRect.origin.x, relativeRect.origin.y);
   
   // Handle touch
   if (touchValid) {

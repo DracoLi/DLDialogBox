@@ -35,7 +35,7 @@
   customizer.backgroundColor = ccc4(0, 0, 0, 0.8*255);
   customizer.pageFinishedIndicator = [CCSprite spriteWithFile:@"arrow_cursor.png"];
   customizer.speedPerPageFinishedIndicatorBlink = 1.0;
-  customizer.dialogTextOffset = ccp(5, 5);
+  customizer.dialogTextOffset = ccp(5, 15);
   customizer.portraitPosition = kDialogPortraitPositionLeft;
   customizer.portaitInsideDialog = NO;
   customizer.animateOutsidePortraitIn = YES;
@@ -260,12 +260,14 @@
   if (_choices != choices) {
     _choices = choices;
     
-    if (self.choicePicker)
-    {
+    if (self.choicePicker) {
       // Remove existing choice picker
-      [self removeFromParentAndCleanup:YES];
-      
-      // Make new choice picker
+      [self.choicePicker removeFromParentAndCleanup:YES];
+      self.choicePicker.delegate = nil;
+    }
+    
+    // Make new choice picker
+    if (choices && choices.count > 0) {
       self.choicePicker = [DLChoicePicker pickerWithChoices:choices
                                            pickerCustomizer:self.customizer.pickerCustomizer];
       self.choicePicker.delegate = self;
@@ -388,9 +390,9 @@
 - (void)showChoicePicker
 {
   // We add the choice dialog to the parent instead of the dialog box
-  if (self.choicePicker) {
+  if (self.choicePicker && !self.choicePicker.parent) {
+    self.choicePicker.visible = YES;
     [self.parent addChild:self.choicePicker z:self.zOrder + 1];
-    self.choicePicker.delegate = self;
   }
 }
 
