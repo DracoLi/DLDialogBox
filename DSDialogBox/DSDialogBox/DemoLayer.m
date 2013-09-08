@@ -54,7 +54,7 @@ typedef enum {
     
     NSArray *wordsChoices = [NSArray arrayWithObjects:
                              @"DLDialog can be fully customized is almost \nevery aspect.",
-                             @"You can customize dialog border, portraits, text, etc.\n ALso did I  mention DLDialogBox can also handle \ngetting choice inputs from the player??",
+                             @"You can customize dialog border, portraits, text, etc.\n ALso did I mention DLDialogBox can also handle \ngetting choice inputs from the player??",
                              @"How awesome is DLDialogBox?!\nYou tell me!", nil];
     NSArray *choices = [NSArray arrayWithObjects:
                         @"Pretty Damn Awesome",

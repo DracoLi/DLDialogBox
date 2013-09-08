@@ -44,10 +44,8 @@
   NSUInteger newlineCount = 0;
   for (int j=1; j < [txt length]+1; ++j) {
     NSString *substring = [txt substringToIndex:j];
-    
     if ([substring characterAtIndex:substring.length - 1] == '\n') {
       newlineCount++;
-      continue;
     }
     [_arrayOfCharacters addObject:substring];
   }
@@ -63,10 +61,9 @@
    * at the end of the to our typed string so we can type all the characters we were
    * supposed to. 
    *
-   * Typing animation would not take longer though since we are skipping the 
-   * typing animation of all new lines. Thus since we are adding the same of 
-   * whitespaces to the end of the string as there are newlines, the animation
-   * will look just like that we are typing character by character.
+   * Typing animation would not take longer though since we are adding the same 
+   * number of whitespaces to the end of the string as there are newlines,
+   * the animation will look just like that we are typing character by character.
    */
   for (int i = 0; i < newlineCount; i++) {
     NSString *lastString = [_arrayOfCharacters lastObject];

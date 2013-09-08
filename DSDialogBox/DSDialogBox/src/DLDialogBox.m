@@ -15,7 +15,7 @@
 #define kPageIndicatorZIndex 2
 
 #define kDefaultIndicatorPadding 5
-#define kDefaultTypingSpeed 0.1
+#define kDefaultTypingSpeed 0.02
 
 #define kDialogBoxTouchPriority 0
 
