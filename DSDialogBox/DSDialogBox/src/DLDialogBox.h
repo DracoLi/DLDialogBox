@@ -302,6 +302,11 @@ typedef enum {
 @property (nonatomic, strong) CCSprite *portrait;
 
 /**
+ * This is set to YES when the dialogbox has finished typing the current page.
+ */
+@property (nonatomic, readonly) BOOL currentPageTyped;
+
+/**
  * Initializers.
  *
  * The default DialogBox customizer is used if none is provided

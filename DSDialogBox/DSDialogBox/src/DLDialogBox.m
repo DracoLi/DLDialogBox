@@ -50,7 +50,8 @@
 @interface DLDialogBox ()
 @property (nonatomic, strong) DLAutoTypeLabelBM *label;
 @property (nonatomic, strong) CCNode *bgSprite;
-@property (nonatomic) NSUInteger currentTextPage;
+@property (nonatomic, readwrite) NSUInteger currentTextPage;
+@property (nonatomic, readwrite) BOOL currentPageTyped;
 @end
 
 @implementation DLDialogBox
@@ -106,6 +107,7 @@
   if (self = [super init])
   {
     _currentTextPage = 0;
+    _currentPageTyped = YES;
     _textArray = [texts mutableCopy];
     _defaultPortraitSprite = portrait;
     self.handleTapInputs = YES;
@@ -347,6 +349,7 @@
   [self.textArray removeObjectAtIndex:0];
   
   // Type the text
+  self.currentPageTyped = NO;
   NSString *stringToType = text;
   if (self.prependText) {
     stringToType = [NSString stringWithFormat:@"%@%@", self.prependText, stringToType];
@@ -405,6 +408,8 @@
 
 - (void)autoTypeLabelBMTypingFinished:(DLAutoTypeLabelBM *)sender
 {
+  self.currentPageTyped = YES;
+  
   // Show the choice picker after all words are displayed and we have a picker created
   if (self.textArray.count == 0 &&
       self.choicePicker)
@@ -474,7 +479,7 @@
   {
     if (self.tapToFinishCurrentPage) {
       [self finishCurrentPageOrAdvance];
-    }else {
+    }else if (self.currentPageTyped) {
       [self advanceToNextPage];
     }
   }
@@ -488,6 +493,9 @@
 - (void)onEnter
 {
   [super onEnter];
+  
+  // start first page
+  [self advanceToNextPage];
   
   // Animate in our portrait its outsidie of dialog box and animation is enabled
   if (self.defaultPortraitSprite &&
