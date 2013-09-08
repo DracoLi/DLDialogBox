@@ -11,6 +11,7 @@
 @interface DLAutoTypeLabelBM ()
 @property (nonatomic, strong) NSMutableArray *arrayOfCharacters;
 - (void)typingFinished;
+- (void)typeWordAtIndex:(int)index;
 @end
 
 @implementation DLAutoTypeLabelBM
@@ -47,16 +48,14 @@
   // We are doing this recursively so that we can change the typing speed
   // while the words are being typed out if we want.
   self.typingDelay = d;
-  [self typeWordIndex:0];
-  
-  // Continously check if our typing animation is finished
-  [self schedule:@selector(finishCheck:) interval:1.5];
+  [self typeWordAtIndex:0];
 }
 
-- (void)typeWordIndex:(int)index
+- (void)typeWordAtIndex:(int)index
 {
   // Finish all typing when we are at end of typing index
   if (index == [self.arrayOfCharacters count]) {
+    [self typingFinished];
     return;
   }
   
@@ -67,18 +66,10 @@
   // Wait and type next letter after a delay
   __weak DLAutoTypeLabelBM *weakSelf = self;
   id recurseBlock = [CCCallBlock actionWithBlock:^() {
-    [weakSelf typeWordIndex:index + 1];
+    [weakSelf typeWordAtIndex:index + 1];
   }];
   [self runAction:[CCSequence actions:
                    [CCDelayTime actionWithDuration:self.typingDelay], recurseBlock, nil]];
-}
-
-- (void)finishCheck:(ccTime)dt
-{
-  if ([self numberOfRunningActions] == 0) {
-    [self unschedule:@selector(finishCheck:)];
-    [self typingFinished];
-  }
 }
 
 - (void)typingFinished

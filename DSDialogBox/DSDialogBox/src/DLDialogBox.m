@@ -427,18 +427,9 @@
   if (self.textArray.count != 0)
   {
     // Animate arrow cursor blinking
-    // Since there a delay when using using ccblink, we animate the first blink
-    // separately using a delay and then start our inifinite blinking in a callblock
     id blink = [CCBlink actionWithDuration:5.0 blinks:5.0 / self.customizer.speedPerPageFinishedIndicatorBlink];
-    __weak CCSprite *weakCursor = self.customizer.pageFinishedIndicator;
-    id blinkCallBlock = [CCCallBlock actionWithBlock:^() {
-      [weakCursor runAction:[CCRepeatForever actionWithAction:blink]];
-    }];
-    weakCursor.visible = YES; // this results in starting the blink visible
-    [weakCursor runAction:[CCSequence actions:
-                           [CCDelayTime actionWithDuration:self.customizer.speedPerPageFinishedIndicatorBlink],
-                           blinkCallBlock, nil]];
-  }
+    [self runAction:[CCRepeatForever actionWithAction:blink]];
+  }  
 }
 
 
