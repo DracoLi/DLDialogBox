@@ -15,19 +15,28 @@
 @interface DLChoiceDialogCustomizer : NSObject
 
 /**
- * A sprite file name, left cap width, and top cap width is used
- * together into order to generate the border for the choice dialog.
- * The border sprite file will be stretched to accommodate the content inside.
+ * The file name of a stretchable sprite image that will be used as
+ * the background image for the dialog.
  *
- * Please refer to readme for examples on how to use a custom border image
+ * Please refer to usage documentation on how the sprite image should be made.
  */
-@property (nonatomic, copy) NSString *borderSpriteFileName;
-@property (nonatomic) CGFloat borderLeftCapWidth;
-@property (nonatomic) CGFloat borderTopCapWidth;
-
+@property (nonatomic, copy) NSString *backgroundSpriteFile;
 
 /**
- * This determines the inner background color for our dialog.
+ * The sprite frame name of a stretchable sprite image that will be used as
+ * the background image for the dialog.
+ *
+ * If borderSpriteFile is also provided, then only the spriteFrameName will be used.
+ *
+ * Please refer to usage documentation on how the sprite image should be made.
+ */
+@property (nonatomic, copy) NSString *backgroundSpriteFrameName;
+
+/**
+ * If a sprite is not provided as the dialog's background, the dialog will use
+ * a color as its backgorund.
+ *
+ * By default the color is transparent.
  */
 @property (nonatomic) ccColor4B backgroundColor;
 

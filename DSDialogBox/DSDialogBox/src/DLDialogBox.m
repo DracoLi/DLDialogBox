@@ -8,7 +8,7 @@
 
 #import "DLDialogBox.h"
 #import "CCSprite+GLBoxes.h"
-#import "CCSpriteScale9.h"
+#import "CCScale9Sprite.h"
 
 #define kBackgroundSpriteZIndex 0
 #define kPageTextZIndex 1
@@ -105,7 +105,7 @@
     _textArray = [texts mutableCopy];
     self.handleTapInputs = YES;
     _handleOnlyTapInputsInDialogBox = YES;
-    _tapToFinishCurrentPage = NO;
+    _tapToFinishCurrentPage = YES;
     _typingDelay = kDefaultTypingSpeed;
     
     // Add in general portrait
@@ -139,26 +139,32 @@
 
 - (void)setCustomizer:(DLDialogBoxCustomizer *)customizer
 {
-  if (self.customizer != customizer) {
+  if (_customizer != customizer) {
+    
+    // Make sure DLChoiceDialog uses DLDialogBoxCustomizer's font if not set
+    if (!customizer.choiceDialogCustomizer.fntFile) {
+      customizer.choiceDialogCustomizer.fntFile = customizer.fntFile;
+    }
     
     // Remove all existing backgrounds
     if (_bgSprite) {
       [_bgSprite removeFromParentAndCleanup:YES];
     }
     
-    // Create the background images
+    // Create the background image
     CGSize dialogSize = customizer.dialogSize;
-    if (customizer.borderSpriteFileName) {
-      CCSpriteScale9 *sprite = [CCSpriteScale9
-                                spriteWithFile:customizer.borderSpriteFileName
-                                andLeftCapWidth:customizer.borderLeftCapWidth
-                                andTopCapHeight:customizer.borderTopCapWidth];
-      ccColor4B colors = customizer.backgroundColor;
-      [sprite setColor:ccc3(colors.r, colors.g, colors.b)];
-      [sprite setOpacity:colors.a];
-      [sprite adaptiveScale9:dialogSize];
-      _bgSprite = sprite;
-    }else {
+    if (customizer.backgroundSpriteFrameName)
+    {
+      _bgSprite = [CCScale9Sprite spriteWithSpriteFrameName:customizer.backgroundSpriteFrameName];
+      [_bgSprite setContentSize:dialogSize];
+    }
+    else if (customizer.backgroundSpriteFile)
+    {
+      _bgSprite = [CCScale9Sprite spriteWithFile:customizer.backgroundSpriteFile];
+      [_bgSprite setContentSize:dialogSize];
+    }
+    else {
+      // If no border just create choice dialog background
       _bgSprite = [CCSprite rectangleOfSize:dialogSize
                                       color:customizer.backgroundColor];
     }

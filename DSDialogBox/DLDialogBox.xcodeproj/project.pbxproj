@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D4661D8717DD4D22001BDA8B /* CCScale9Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D4661D8617DD4D22001BDA8B /* CCScale9Sprite.m */; };
+		D4661D8C17DD533C001BDA8B /* normal_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D4661D8B17DD533B001BDA8B /* normal_bg.png */; };
 		D499095C17D7D5F800430BFB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D499095B17D7D5F800430BFB /* QuartzCore.framework */; };
 		D499095E17D7D5F800430BFB /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D499095D17D7D5F800430BFB /* OpenGLES.framework */; };
 		D499096017D7D5F800430BFB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D499095F17D7D5F800430BFB /* OpenAL.framework */; };
@@ -147,14 +149,11 @@
 		D4990C9C17D7D83B00430BFB /* DLAutoTypeLabelBM.m in Sources */ = {isa = PBXBuildFile; fileRef = D4990C9717D7D83B00430BFB /* DLAutoTypeLabelBM.m */; };
 		D4990C9D17D7D83B00430BFB /* DLChoiceDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = D4990C9917D7D83B00430BFB /* DLChoiceDialog.m */; };
 		D4990C9E17D7D83B00430BFB /* DLSelectableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4990C9B17D7D83B00430BFB /* DLSelectableLabel.m */; };
-		D4990CA417D7D97300430BFB /* 8bit-20.fnt in Resources */ = {isa = PBXBuildFile; fileRef = D4990C9F17D7D97300430BFB /* 8bit-20.fnt */; };
-		D4990CA517D7D97300430BFB /* 8bit-20.png in Resources */ = {isa = PBXBuildFile; fileRef = D4990CA017D7D97300430BFB /* 8bit-20.png */; };
 		D4990CA617D7D97300430BFB /* demo-room.tmx in Resources */ = {isa = PBXBuildFile; fileRef = D4990CA117D7D97300430BFB /* demo-room.tmx */; };
 		D4990CA717D7D97300430BFB /* other-images.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4990CA217D7D97300430BFB /* other-images.plist */; };
 		D4990CA817D7D97300430BFB /* other-images.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = D4990CA317D7D97300430BFB /* other-images.pvr.ccz */; };
 		D4AC1C6617D9530F005AA9F5 /* CCSprite+GLBoxes.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC1C6517D9530F005AA9F5 /* CCSprite+GLBoxes.m */; };
-		D4AC1C6917D95C6F005AA9F5 /* CCSpriteScale9.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC1C6817D95C6F005AA9F5 /* CCSpriteScale9.m */; };
-		D4AC1C6E17DA472E005AA9F5 /* dialog_border.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC1C6D17DA472D005AA9F5 /* dialog_border.png */; };
+		D4AC1C6E17DA472E005AA9F5 /* fancy_border.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC1C6D17DA472D005AA9F5 /* fancy_border.png */; };
 		D4AC1C7117DA58ED005AA9F5 /* DLDialogBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC1C7017DA58ED005AA9F5 /* DLDialogBox.m */; };
 		D4AC1C7317DA6B73005AA9F5 /* arrow_cursor.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC1C7217DA6B72005AA9F5 /* arrow_cursor.png */; };
 		D4AC1C7A17DA6C1D005AA9F5 /* demo_fnt.fnt in Resources */ = {isa = PBXBuildFile; fileRef = D4AC1C7817DA6C1D005AA9F5 /* demo_fnt.fnt */; };
@@ -179,6 +178,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D4661D8517DD4D22001BDA8B /* CCScale9Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScale9Sprite.h; sourceTree = "<group>"; };
+		D4661D8617DD4D22001BDA8B /* CCScale9Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScale9Sprite.m; sourceTree = "<group>"; };
+		D4661D8B17DD533B001BDA8B /* normal_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normal_bg.png; path = src/normal_bg.png; sourceTree = "<group>"; };
 		D499095817D7D5F800430BFB /* DLDialogBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DLDialogBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D499095B17D7D5F800430BFB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D499095D17D7D5F800430BFB /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -470,16 +472,12 @@
 		D4990C9917D7D83B00430BFB /* DLChoiceDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLChoiceDialog.m; sourceTree = "<group>"; };
 		D4990C9A17D7D83B00430BFB /* DLSelectableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSelectableLabel.h; sourceTree = "<group>"; };
 		D4990C9B17D7D83B00430BFB /* DLSelectableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSelectableLabel.m; sourceTree = "<group>"; };
-		D4990C9F17D7D97300430BFB /* 8bit-20.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "8bit-20.fnt"; path = "Resources/8bit-20.fnt"; sourceTree = "<group>"; };
-		D4990CA017D7D97300430BFB /* 8bit-20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "8bit-20.png"; path = "Resources/8bit-20.png"; sourceTree = "<group>"; };
 		D4990CA117D7D97300430BFB /* demo-room.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "demo-room.tmx"; path = "Resources/demo-room.tmx"; sourceTree = "<group>"; };
 		D4990CA217D7D97300430BFB /* other-images.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "other-images.plist"; path = "Resources/other-images.plist"; sourceTree = "<group>"; };
 		D4990CA317D7D97300430BFB /* other-images.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = "other-images.pvr.ccz"; path = "Resources/other-images.pvr.ccz"; sourceTree = "<group>"; };
 		D4AC1C6417D9530F005AA9F5 /* CCSprite+GLBoxes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCSprite+GLBoxes.h"; sourceTree = "<group>"; };
 		D4AC1C6517D9530F005AA9F5 /* CCSprite+GLBoxes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCSprite+GLBoxes.m"; sourceTree = "<group>"; };
-		D4AC1C6717D95C6F005AA9F5 /* CCSpriteScale9.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSpriteScale9.h; sourceTree = "<group>"; };
-		D4AC1C6817D95C6F005AA9F5 /* CCSpriteScale9.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSpriteScale9.m; sourceTree = "<group>"; };
-		D4AC1C6D17DA472D005AA9F5 /* dialog_border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dialog_border.png; sourceTree = "<group>"; };
+		D4AC1C6D17DA472D005AA9F5 /* fancy_border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fancy_border.png; path = src/fancy_border.png; sourceTree = "<group>"; };
 		D4AC1C6F17DA58EC005AA9F5 /* DLDialogBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLDialogBox.h; sourceTree = "<group>"; };
 		D4AC1C7017DA58ED005AA9F5 /* DLDialogBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLDialogBox.m; sourceTree = "<group>"; };
 		D4AC1C7217DA6B72005AA9F5 /* arrow_cursor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_cursor.png; sourceTree = "<group>"; };
@@ -578,12 +576,12 @@
 		D499097017D7D5F800430BFB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D4661D8B17DD533B001BDA8B /* normal_bg.png */,
+				D4AC1C6D17DA472D005AA9F5 /* fancy_border.png */,
 				D4AC1C7C17DAD813005AA9F5 /* meta_tiles.png */,
 				D4AC1C7D17DAD813005AA9F5 /* InnerModern-A5.png */,
 				D4AC1C7E17DAD813005AA9F5 /* InnerModern-TileB.png */,
 				D4AC1C7F17DAD813005AA9F5 /* newa4.png */,
-				D4990C9F17D7D97300430BFB /* 8bit-20.fnt */,
-				D4990CA017D7D97300430BFB /* 8bit-20.png */,
 				D4990CA117D7D97300430BFB /* demo-room.tmx */,
 				D4990CA217D7D97300430BFB /* other-images.plist */,
 				D4990CA317D7D97300430BFB /* other-images.pvr.ccz */,
@@ -989,9 +987,8 @@
 				D4AC1C7817DA6C1D005AA9F5 /* demo_fnt.fnt */,
 				D4AC1C7917DA6C1D005AA9F5 /* demo_fnt.png */,
 				D4AC1C7217DA6B72005AA9F5 /* arrow_cursor.png */,
-				D4AC1C6D17DA472D005AA9F5 /* dialog_border.png */,
-				D4AC1C6717D95C6F005AA9F5 /* CCSpriteScale9.h */,
-				D4AC1C6817D95C6F005AA9F5 /* CCSpriteScale9.m */,
+				D4661D8517DD4D22001BDA8B /* CCScale9Sprite.h */,
+				D4661D8617DD4D22001BDA8B /* CCScale9Sprite.m */,
 				D4AC1C6417D9530F005AA9F5 /* CCSprite+GLBoxes.h */,
 				D4AC1C6517D9530F005AA9F5 /* CCSprite+GLBoxes.m */,
 				D4990C9617D7D83B00430BFB /* DLAutoTypeLabelBM.h */,
@@ -1086,12 +1083,10 @@
 				D499098217D7D5F800430BFB /* Icon.png in Resources */,
 				D499098417D7D5F800430BFB /* Icon@2x.png in Resources */,
 				D499098717D7D5F800430BFB /* iTunesArtwork in Resources */,
-				D4990CA417D7D97300430BFB /* 8bit-20.fnt in Resources */,
-				D4990CA517D7D97300430BFB /* 8bit-20.png in Resources */,
 				D4990CA617D7D97300430BFB /* demo-room.tmx in Resources */,
 				D4990CA717D7D97300430BFB /* other-images.plist in Resources */,
 				D4990CA817D7D97300430BFB /* other-images.pvr.ccz in Resources */,
-				D4AC1C6E17DA472E005AA9F5 /* dialog_border.png in Resources */,
+				D4AC1C6E17DA472E005AA9F5 /* fancy_border.png in Resources */,
 				D4AC1C7317DA6B73005AA9F5 /* arrow_cursor.png in Resources */,
 				D4AC1C7A17DA6C1D005AA9F5 /* demo_fnt.fnt in Resources */,
 				D4AC1C7B17DA6C1D005AA9F5 /* demo_fnt.png in Resources */,
@@ -1099,6 +1094,7 @@
 				D4AC1C8117DAD813005AA9F5 /* InnerModern-A5.png in Resources */,
 				D4AC1C8217DAD813005AA9F5 /* InnerModern-TileB.png in Resources */,
 				D4AC1C8317DAD813005AA9F5 /* newa4.png in Resources */,
+				D4661D8C17DD533C001BDA8B /* normal_bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1117,8 +1113,8 @@
 				D4990C9D17D7D83B00430BFB /* DLChoiceDialog.m in Sources */,
 				D4990C9E17D7D83B00430BFB /* DLSelectableLabel.m in Sources */,
 				D4AC1C6617D9530F005AA9F5 /* CCSprite+GLBoxes.m in Sources */,
-				D4AC1C6917D95C6F005AA9F5 /* CCSpriteScale9.m in Sources */,
 				D4AC1C7117DA58ED005AA9F5 /* DLDialogBox.m in Sources */,
+				D4661D8717DD4D22001BDA8B /* CCScale9Sprite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

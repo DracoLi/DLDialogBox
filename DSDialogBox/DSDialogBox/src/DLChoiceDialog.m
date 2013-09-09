@@ -9,7 +9,7 @@
 #import "DLChoiceDialog.h"
 #import "CCSprite+GLBoxes.h"
 #import "DLSelectableLabel.h"
-#import "CCSpriteScale9.h"
+#import "CCScale9Sprite.h"
 
 @implementation DLChoiceDialogCustomizer
 
@@ -218,18 +218,17 @@
   }
   
   // Update dialog background
-  if (_customizer.borderSpriteFileName) {
-    // If we have border create it along with content background
-    CCSpriteScale9 *sprite = [CCSpriteScale9
-                              spriteWithFile:_customizer.borderSpriteFileName
-                              andLeftCapWidth:_customizer.borderLeftCapWidth
-                              andTopCapHeight:_customizer.borderTopCapWidth];
-    ccColor4B colors = _customizer.backgroundColor;
-    [sprite setColor:ccc3(colors.r, colors.g, colors.b)];
-    [sprite setOpacity:colors.a];
-    [sprite adaptiveScale9:self.contentSize];
-    _bgSprite = sprite;
-  }else {
+  if (_customizer.backgroundSpriteFrameName)
+  {
+    _bgSprite = [CCScale9Sprite spriteWithSpriteFrameName:_customizer.backgroundSpriteFrameName];
+    [_bgSprite setContentSize:self.contentSize];
+  }
+  else if (_customizer.backgroundSpriteFile)
+  {
+    _bgSprite = [CCScale9Sprite spriteWithFile:_customizer.backgroundSpriteFile];
+    [_bgSprite setContentSize:self.contentSize];
+  }
+  else {
     // If no border just create choice dialog background
     _bgSprite = [CCSprite rectangleOfSize:self.contentSize
                                     color:_customizer.backgroundColor];

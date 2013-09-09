@@ -87,15 +87,26 @@ typedef enum {
     CCMenuItemFont *item2 = [CCMenuItemFont itemWithString:@"Dialog #2" block:^(id sender){
       [self removeAnyDialog];
       
+      // Customize the choice dialog box labels to align right
+      DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
+      customizer.choiceDialogCustomizer.labelCustomizer.textAlignment = kCCTextAlignmentRight;
+      
+      // TESTING: If choice dialog's fnt is not set, then it should uses the dialogbox's provide font file
+      customizer.choiceDialogCustomizer.fntFile = nil;
+      
       DLDialogBox *second = [DLDialogBox dialogWithTextArray:wordsChoices
                                              defaultPortrait:portrait
                                                      choices:choices
-                                                  customizer:[DLDialogBoxCustomizer defaultCustomizer]];
+                                                  customizer:customizer];
       second.handleOnlyTapInputsInDialogBox = YES;
       second.anchorPoint = ccp(0, 0);
       second.position = ccp(0, 0);
       second.tapToFinishCurrentPage = YES;
       [self addChild:second z:1];
+      
+      // Manually set the to be displayed position of the choice dialog
+      second.choiceDialog.anchorPoint = ccp(1, 0);
+      second.choiceDialog.position = ccp(winSize.width, 100);
       
       self.currentDialog = second;
     }];
@@ -106,9 +117,7 @@ typedef enum {
       
       // Customize dialog box
       DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
-      customizer.borderSpriteFileName = @"dialog_border.png";
-      customizer.borderLeftCapWidth = 32.0;
-      customizer.borderTopCapWidth = 32.0;
+      customizer.backgroundSpriteFile = @"fancy_border.png";
       customizer.dialogTextOffset = ccp(10, 10);
       customizer.portraitOffset = ccp(0, 0);
       customizer.portraitPosition = kDialogPortraitPositionRight;
@@ -117,9 +126,7 @@ typedef enum {
       
       // Customize choice dialog
       DLChoiceDialogCustomizer *choiceCustomizer = [DLChoiceDialogCustomizer defaultCustomizer];
-      choiceCustomizer.borderSpriteFileName =  @"dialog_border.png";
-      choiceCustomizer.borderLeftCapWidth = 32.0;
-      choiceCustomizer.borderTopCapWidth = 32.0;
+      choiceCustomizer.backgroundSpriteFile =  @"fancy_border.png";
       choiceCustomizer.contentOffset = ccp(0, 0);
       choiceCustomizer.paddingBetweenChoices = 0;
       

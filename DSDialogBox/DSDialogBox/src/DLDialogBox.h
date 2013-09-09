@@ -31,20 +31,30 @@ typedef enum {
 @property (nonatomic) CGSize dialogSize;
 
 /**
- * The background color of the dialog box.
+ * The file name of a stretchable sprite image that will be used as
+ * the background image for the dialog.
+ *
+ * Please refer to usage documentation on how the sprite image should be made.
  */
-@property (nonatomic) ccColor4B backgroundColor;
+@property (nonatomic, copy) NSString *backgroundSpriteFile;
 
 /**
- * A sprite file name, left cap width, and top cap width is used
- * together into order to generate the border for the dialog box.
- * The border sprite file will be stretched to accommodate the content inside.
+ * The sprite frame name of a stretchable sprite image that will be used as
+ * the background image for the dialog.
  *
- * Please refer to readme for examples on how to use a custom border image
+ * If borderSpriteFile is also provided, then only the spriteFrameName will be used.
+ *
+ * Please refer to usage documentation on how the sprite image should be made.
  */
-@property (nonatomic, copy) NSString *borderSpriteFileName;
-@property (nonatomic) CGFloat borderLeftCapWidth;
-@property (nonatomic) CGFloat borderTopCapWidth;
+@property (nonatomic, copy) NSString *backgroundSpriteFrameName;
+
+/**
+ * If a sprite is not provided as the dialog's background, the dialog will use
+ * a color as its backgorund.
+ *
+ * By default the color is transparent.
+ */
+@property (nonatomic) ccColor4B backgroundColor;
 
 /**
  * The sprite to be used by the dialog box after a page of text is displayed.
@@ -256,7 +266,7 @@ typedef enum {
 @property (nonatomic, copy) NSString *prependText;
 
 /**
- * Defaults to NO.
+ * Defaults to YES.
  *
  * If set to YES, then tapping will first result in the current page be
  * immediately displayed without going through the typing animation.
