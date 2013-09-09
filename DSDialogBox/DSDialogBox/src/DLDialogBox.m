@@ -450,17 +450,17 @@
                        choiceText:(NSString *)text
                       choiceIndex:(NSUInteger)index
 {
+  // Close dialog box when choice is selected
+  if (self.closeWhenDialogFinished) {
+    [self removeDialogBoxAndCleanUp];
+  }
+  
   if (self.delegate &&
       [self.delegate respondsToSelector:@selector(dialogBoxChoiceSelected:choiceText:choiceIndex:)])
   {
     [self.delegate dialogBoxChoiceSelected:self
                                 choiceText:text
                                choiceIndex:index];
-    
-    // Close dialog box when choice is selected
-    if (self.closeWhenDialogFinished) {
-      [self removeDialogBoxAndCleanUp];
-    }
   }
 }
 
