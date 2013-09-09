@@ -29,7 +29,7 @@
 
 - (void)finishTypingAnimation
 {
-  [self setString:self.autoTypeString];
+  [self setString:self.adjustedTypedString];
   [self stopTypingAnimation];
 }
 
