@@ -16,17 +16,19 @@
 
 /**
  * The file name of a stretchable sprite image that will be used as
- * the background image for the dialog.
+ * the background image for the dialog box.
  *
- * Please refer to usage documentation on how the sprite image should be made.
+ * If the `backgroundSpriteFrameName` is also provided, then this value will be ignored
+ *
+ * Please refer to the usage documentation on how the sprite image should be made.
  */
 @property (nonatomic, copy) NSString *backgroundSpriteFile;
 
 /**
  * The sprite frame name of a stretchable sprite image that will be used as
- * the background image for the dialog.
+ * the background image for the dialog box.
  *
- * If borderSpriteFile is also provided, then only the spriteFrameName will be used.
+ * If a `backgroundSpriteFile` is also provided, then only this value will be used.
  *
  * Please refer to usage documentation on how the sprite image should be made.
  */

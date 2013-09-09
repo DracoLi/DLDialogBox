@@ -121,7 +121,7 @@ typedef enum {
       DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
       customizer.backgroundSpriteFile = @"fancy_border.png";
       customizer.dialogTextOffset = ccp(15, 15);
-      customizer.dialogSize = CGSizeMake(customizer.dialogSize.width - 50, customizer.dialogSize.height + 25);
+      customizer.dialogSize = CGSizeMake(customizer.dialogSize.width - 50, k);
       customizer.portraitOffset = ccp(0, 0);
       customizer.portraitPosition = kDialogPortraitPositionRight;
       customizer.portaitInsideDialog = NO;

@@ -23,32 +23,46 @@ typedef enum {
 @interface DLDialogBoxCustomizer : NSObject
 
 /**
- * Default is (current device width, 150)
+ * The size of dialog box (not including the portrait if its outside). Default is (current device width, 80)
  *
- * This will make a dialog what stretch accross the device and can roughly
- * accommodates two rows of text in landscape mode.
+ * The default dialog size will make a dialog what stretches accross the device
+ * and can roughly accommodates 3 rows of text in landscape mode.
+ *
+ * Please note that DLDialogBox does not automatically scale the dialog's height
+ * according to the content so you must make sure to set the dialogSize to a large
+ * enough value so that the dialog box can accommodate all your text.
+ * 
+ * We provided some height constants for you to use:
+ *
+ * - kDialogHeightSmall accommodates about 2 lines of text
+ * - kDialogHeightNormal accommodates about 3 lines of text and is the default height
+ * - kDialogHeightLarge accommodates about 5 lines of text
  */
 @property (nonatomic) CGSize dialogSize;
 
 /**
  * The file name of a stretchable sprite image that will be used as
- * the background image for the dialog.
+ * the background image for the dialog box.
  *
- * Please refer to usage documentation on how the sprite image should be made.
+ * If the `backgroundSpriteFrameName` is also provided, then this value will be ignored
+ *
+ * Please refer to the usage documentation on how the sprite image should be made.
  */
 @property (nonatomic, copy) NSString *backgroundSpriteFile;
 
 /**
  * The sprite frame name of a stretchable sprite image that will be used as
- * the background image for the dialog.
+ * the background image for the dialog box.
  *
- * If borderSpriteFile is also provided, then only the spriteFrameName will be used.
+ * If a `backgroundSpriteFile` is also provided, then only this value will be used.
  *
  * Please refer to usage documentation on how the sprite image should be made.
  */
 @property (nonatomic, copy) NSString *backgroundSpriteFrameName;
 
 /**
+ * Defaults to transparent color
+ *
  * If a sprite is not provided as the dialog's background, the dialog will use
  * a color as its backgorund.
  *
