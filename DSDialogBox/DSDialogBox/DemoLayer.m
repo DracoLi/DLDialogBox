@@ -54,7 +54,7 @@ typedef enum {
     
     NSArray *wordsChoices = [NSArray arrayWithObjects:
                              @"DLDialog can be fully customized is almost \nevery aspect.",
-                             @"You can customize dialog border, portraits, text, etc.\n ALso did I mention DLDialogBox can also handle \ngetting choice inputs from the player??",
+                             @"You can customize borders, portraits, text, etc. DLDialogBox also handles getting choice inputs from the player ;D",
                              @"How awesome is DLDialogBox?!\nYou tell me!", nil];
     NSArray *choices = [NSArray arrayWithObjects:
                         @"Pretty Damn Awesome",
@@ -73,8 +73,10 @@ typedef enum {
     CCMenuItemFont *item1 = [CCMenuItemFont itemWithString:@"Dialog #1" block:^(id sender){
       [self removeAnyDialog];
       
+      DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
+      customizer.dialogSize = CGSizeMake(customizer.dialogSize.width, kDialogHeightSmall);
       DLDialogBox *first = [DLDialogBox dialogWithTextArray:words
-                                            defaultPortrait:nil];
+                                            defaultPortrait:nil customizer:customizer];
       first.handleOnlyTapInputsInDialogBox = YES;
       first.anchorPoint = ccp(0, 0);
       first.position = ccp(0, 0);
@@ -118,23 +120,25 @@ typedef enum {
       // Customize dialog box
       DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
       customizer.backgroundSpriteFile = @"fancy_border.png";
-      customizer.dialogTextOffset = ccp(10, 10);
+      customizer.dialogTextOffset = ccp(15, 15);
+      customizer.dialogSize = CGSizeMake(customizer.dialogSize.width - 50, customizer.dialogSize.height + 25);
       customizer.portraitOffset = ccp(0, 0);
       customizer.portraitPosition = kDialogPortraitPositionRight;
       customizer.portaitInsideDialog = NO;
       customizer.animateOutsidePortraitIn = YES;
       
       // Customize choice dialog
-      DLChoiceDialogCustomizer *choiceCustomizer = [DLChoiceDialogCustomizer defaultCustomizer];
+      DLChoiceDialogCustomizer *choiceCustomizer = customizer.choiceDialogCustomizer;
       choiceCustomizer.backgroundSpriteFile =  @"fancy_border.png";
-      choiceCustomizer.contentOffset = ccp(0, 0);
-      choiceCustomizer.paddingBetweenChoices = 0;
+      choiceCustomizer.contentOffset = ccp(8, 8);
+      choiceCustomizer.paddingBetweenChoices = 0; // Label's closer together
       
       // Customize choice dialog's label
-      DLSelectableLabelCustomizer *labelCustomizer = [DLSelectableLabelCustomizer defaultCustomizer];
-      labelCustomizer.textOffset = ccp(15, 5);
-      labelCustomizer.preSelectedBackgroundColor = ccc4(0, 200, 50, 0.8*255);
-      labelCustomizer.selectedBackgroundColor = ccc4(0, 225, 100, 0.8*255);
+      DLSelectableLabelCustomizer *labelCustomizer = choiceCustomizer.labelCustomizer;
+      labelCustomizer.textOffset = ccp(15, 5); // More horizontal padding
+      labelCustomizer.preSelectedBackgroundColor = ccc4(66, 139, 202, 255);
+      labelCustomizer.selectedBackgroundColor = ccc4(22, 88, 146, 255);
+      labelCustomizer.textAlignment = kCCTextAlignmentLeft;
       
       choiceCustomizer.labelCustomizer = labelCustomizer;
       customizer.choiceDialogCustomizer = choiceCustomizer;
@@ -144,9 +148,13 @@ typedef enum {
                                                     choices:choices
                                                  customizer:customizer];
       third.handleOnlyTapInputsInDialogBox = YES;
-      
       third.anchorPoint = ccp(0, 0);
-      third.position = ccp(0, 0);
+      third.position = ccp(25, 0); // Since dialog box is smaller than screen width, set an offset to center
+      
+      // Position choice dialog on top left
+      third.choiceDialog.anchorPoint = ccp(0, 1);
+      third.choiceDialog.position = ccp(0, winSize.height);
+      
       [self addChild:third z:1];
       
       self.currentDialog = third;

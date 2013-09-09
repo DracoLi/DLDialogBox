@@ -35,7 +35,7 @@
   customizer.backgroundColor = ccc4(0, 0, 0, 0.8*255);
   customizer.pageFinishedIndicator = [CCSprite spriteWithFile:@"arrow_cursor.png"];
   customizer.speedPerPageFinishedIndicatorBlink = 1.0;
-  customizer.dialogTextOffset = ccp(5, 15);
+  customizer.dialogTextOffset = ccp(5, 10);
   customizer.portraitPosition = kDialogPortraitPositionLeft;
   customizer.portaitInsideDialog = NO;
   customizer.animateOutsidePortraitIn = YES;
@@ -79,6 +79,16 @@
                          defaultPortrait:portrait
                                  choices:nil
                               customizer:customizer];
+}
+
++ (id)dialogWithTextArray:(NSArray *)texts
+                  choices:(NSArray *)choices
+          defaultPortrait:(CCSprite *)portrait
+{
+  return [[self alloc] initWithTextArray:texts
+                         defaultPortrait:portrait
+                                 choices:choices
+                              customizer:[DLDialogBoxCustomizer defaultCustomizer]];
 }
 
 + (id)dialogWithTextArray:(NSArray *)texts
@@ -246,12 +256,14 @@
       
     }
     
-    // Create our page indicator if our previous one is not the same as this one
-    if (!newIndicatorSame) {
+    // Create our new page indicator if our previous one is not the same as this one
+    if (customizer.pageFinishedIndicator && !newIndicatorSame) {
       CCSprite *indicator = customizer.pageFinishedIndicator;
       indicator.anchorPoint = ccp(0, 0);
-      indicator.position = ccp(dialogSize.width - indicator.contentSize.width - kDefaultIndicatorPadding,
-                               kDefaultIndicatorPadding);
+      
+      // By default the indicator's offset uses the same one as the dialogTextOffset
+      indicator.position = ccp(dialogSize.width - indicator.contentSize.width - customizer.dialogTextOffset.x,
+                               customizer.dialogTextOffset.y);
       indicator.visible = NO;
       [self addChild:indicator z:kPageIndicatorZIndex];
     }
@@ -440,7 +452,7 @@
   }
   
   // Show blinking page finished indicator after every page except last
-  if (self.textArray.count != 0)
+  if (self.textArray.count != 0 && self.customizer.pageFinishedIndicator)
   {
     // Animate arrow cursor blinking
     id blink = [CCBlink actionWithDuration:5.0 blinks:5.0 / self.customizer.speedPerPageFinishedIndicatorBlink];

@@ -62,8 +62,11 @@ typedef enum {
  * Currently custom animation for this sprite is not supported.
  * By default this sprite will blink continously after being displayed.
  *
- * Also by default DLDialogBox will position the sprite at the bottom right corner,
- * override this sprite's position if you want to customize the position of the arrow.
+ * Also by default DLDialogBox will position the sprite at the bottom right corner
+ * using the same offset as the dialogTextOffset of this customizer.
+ *
+ * Override this sprite's position after setting it on the dialogBox to custoize
+ * the position of the arrow.
  */
 @property (nonatomic, strong) CCSprite *pageFinishedIndicator;
 
@@ -337,6 +340,9 @@ typedef enum {
 + (id)dialogWithTextArray:(NSArray *)texts
           defaultPortrait:(CCSprite *)portrait
                customizer:(DLDialogBoxCustomizer *)customizer;
++ (id)dialogWithTextArray:(NSArray *)texts
+                  choices:(NSArray *)choices
+          defaultPortrait:(CCSprite *)portrait;
 + (id)dialogWithTextArray:(NSArray *)texts
           defaultPortrait:(CCSprite *)portrait
                   choices:(NSArray *)choices

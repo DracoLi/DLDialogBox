@@ -192,7 +192,7 @@
   CGFloat totalHeight = _customizer.contentOffset.y * 2 + \
                         totalChoices * oneLabel.contentSize.height +
                         _customizer.paddingBetweenChoices * (totalChoices - 1);
-  CGFloat totalWidth = largestLabelWidth + _customizer.contentOffset.y * 2;
+  CGFloat totalWidth = largestLabelWidth + _customizer.contentOffset.x * 2;
   self.contentSize = CGSizeMake(totalWidth, totalHeight);
   
   // Position all labels and adjust to common largest width
