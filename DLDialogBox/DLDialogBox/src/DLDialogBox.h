@@ -201,136 +201,158 @@ typedef enum {
 @end
 
 @class DLDialogBox;
-
 @protocol DLDialogBoxDelegate <NSObject>
 @optional
 
 /**
- * Called after all the text has been displayed by the dialog box.
+ * Called after a <DLDialogBox> has displayed all its text pages.
  *
- * If the dialog box needs to open a choice dialog after the last text then
- * this is called after the choice dialog is displayed, not
- * after a choice has been selected.
+ * __Note:__ If the dialog box needs to open a choice dialog after the last text then
+ * this is called after the choice dialog is displayed, not after a choice
+ * has been selected.
  */
 - (void)dialogBoxAllTextFinished:(DLDialogBox *)sender;
 
 /**
- * Called when the current diaplayed text section is finished.
+ * Called when a <DLDialogBox> has finished animating its current page.
+ *
+ * Since the dialog box can display an array of text, this method is called
+ * whenever a single page of text has finished animating and is fully displayed.
  */
 - (void)dialogBoxCurrentTextPageFinished:(DLDialogBox *)sender;
 
 /**
- * Called when a choice is selected for this dialog box
+ * Called when a choice is selected for a <DLDialogBox>
+ *
+ * @param choiceDialog  The used choice dialog
+ * @param text          The text that is select
+ * @param index         The index of the choice
  */
 - (void)dialogBoxChoiceSelected:(DLDialogBox *)sender
+                   choiceDialog:(DLChoiceDialog *)choiceDialog
                      choiceText:(NSString *)text
                     choiceIndex:(NSUInteger)index;
 @end
 
 @class DSCharater;
 
+/**
+ * DLDialogBox is the single interface to create super customizable dialog boxes.
+ *
+ * DLDialogBox provides simple methods to display dialog text and also provide
+ * an easy way to receive player input through the use of an integrated <DLChoiceDialog>.
+ *
+ * A DLDialogBoxCustomizer is used to customize the dialog box any way you like.
+ * Please refer to <DLDialogBoxCustomizer> for more details on available customizations.
+ */
 @interface DLDialogBox : CCNode
 <DLAutoTypeLabelBMDelegate, DLChoiceDialogDelegate, CCTouchOneByOneDelegate>
 
 @property (nonatomic, weak) id<DLDialogBoxDelegate> delegate;
 
 /**
- * This is used to customize the look and feel of the dialog box.
+ * This customizer is used to customize the look and feel of the dialog box.
  *
  * Setting this will immediately redraw child nodes to reflect the new look.
+ *
+ * @see DLDialogBoxCustomizer
  */
 @property (nonatomic, strong) DLDialogBoxCustomizer *customizer;
 
 /**
- * Choices for the dialog box's choice dialog.
+ * An array of choices for the dialog box's choice dialog.
  *
- * When this is set the dialog box will show the choice dialog after the last
- * text page is displayed.
+ * Once a choice array has been provided, a <DLChoiceDialog> will automatically be created.
+ * You can then access the <DLChoiceDialog> through the property <choiceDialog>.
+ *
+ * @see DLChoiceDialog
  */
 @property (nonatomic, copy) NSArray *choices;
 
 /**
- * The choice dialog to display at the last text page if choices are provided.
+ * The `DLChoiceDialog` to be displayed at the last text page if <choices> are provided.
  *
- * You can customizer the choice dialog by overriding its choice dialog customizer
+ * You can customize this choice dialog through the <customizer>.
  *
- * The choice dialog is only created when the choices array is set.
+ * The choice dialog is only created when the <choices> array is set.
  */
 @property (nonatomic, strong) DLChoiceDialog *choiceDialog;
 
 
 /**
- * This is used to override the defaultPortraitSprite you can can provide
- * some different sprite for certain pages.
+ * This is used provide unique portrait sprites for the different dialog pages in a <DLDialogBox>.
  *
- * The key (page) should be > 0
+ * ### Usage
  *
- * Usage:
- * - The key of the dictionary will be the page number.
- * - The value of the dictionary can be two types:
- *  
- *  Type 1:
- *    If the value belongs to the CCSprite class then this sprite will be used
- *    as the portrait sprite for the page indicated by the key.
- *      Example: `{"4": [a cool sprite]}`
+ * - The key of the dictionary must be the page number greater than 0.
+ * - The value of the dictionary can be two class types:
  *
- *  Type 2:
- *    If the value belonds to NSString, then this string will be used by
- *    `[CCSprite spriteWithSpriteFrameName:]` to create the sprite to be used
- *    as the sprite image for the page indicated by the key.
- *      Example: `{"2": "draco_smiling.png"}`
+ * __Type 1:__
  *
+ * If the value belongs to a CCSprite then this sprite will be used
+ * as the portrait image for the dialog page indicated by the key.
+ *
+ * Example: `{"4": [a cool sprite]}`
+ *
+ * __Type 2:__
+ *
+ * If the value belonds to a NSString, then this string will be used by
+ * `[CCSprite spriteWithSpriteFrameName:]` to create the sprite to be used
+ * as the portrait image for the dialog page indicated by the key.
+ *
+ * Example: `{"2": "draco_smiling.png"}`
  */
 @property (nonatomic, copy) NSDictionary *customPortraitForPages;
 
 /**
- * Current page of the text that we are displaying.
- * Current page is one once the dialog starts typing its first words.
- *
- * When the dialog has not typed anything, current page is 0.
- *
- * Note this is readonly
+ * Current dialog page. Starts at 1. 0 when nothing has been typed.
  */
 @property (nonatomic, readonly) NSUInteger currentTextPage;
 
 /**
- * The portrait sprite to display by default. 
+ * The portrait sprite to display by default.
  *
  * If nil, no portrait will be displayed for the dialog box.
  *
- * You can customize the portrait posittions through the ChoiceDialogCustomizer
+ * You can customize the portrait position through the <customizer>.
  */
 @property (nonatomic, strong) CCSprite *defaultPortraitSprite;
 
 /**
- * An array of text to display. The dialog box will display one text per page.
+ * An array of text that this dialog will be typing.
+ *
+ * Each element of this array will be display as a single page.
+ * <currentTextPage> should corresponds to the current page that is being typed.
  */
-@property (nonatomic, strong) NSMutableArray *textArray;
+@property (nonatomic, copy) NSArray *initialTextArray;
 
 /**
- * When set all text page content will start with this prependText.
+ * The text to be displayed before every dialog content.
  *
- * A good use of this will be adding the character name before all dialog text.
- * For example setting prependText to "Draco: " will result in all text displayed
- * by the dialog box to start with "Draco: [content]" as if its me saying it :)
+ * A good use of this will be adding a character name before all dialog content.
+ *
+ * For example setting `prependText` to "Draco: " will result in all text displayed
+ * by the dialog box to start with "Draco: [content]" as if it's me saying it :)
  */
 @property (nonatomic, copy) NSString *prependText;
 
 /**
- * Defaults to YES.
+ * If enabled, tap inputs during dialog typing animation will immediately
+ * finish the current page, bypassing the typing animation.
  *
- * If set to YES, then tapping will first result in the current page be
- * immediately displayed without going through the typing animation.
+ * If the page is already finished then tapping will go to the next page.
  *
- * If the page is already finished then tapping will go to the next page
+ * __Defaults to YES__
  */
 @property (nonatomic) BOOL tapToFinishCurrentPage;
 
 /**
- * Defaults to YES
+ * When enabled, the dialog box will process all tap inputs on the screen.
  *
- * When set, the dialog box will handle all tap inputs on the screen.
- * Since tap will go to the next page or finish current page.
+ * When the dialog's typing animation has finished, tap inputs will result in
+ * the dialog displaying the following page.
+ *
+ * __Defaults to YES__
  */
 @property (nonatomic) BOOL handleTapInputs;
 
@@ -422,6 +444,8 @@ typedef enum {
 
 /**
  * Update this dialog's portrait with the texture of the passed in sprite.
+ *
+ * @param sprite The sprite to use for the dialog portrait
  */
 - (void)updatePortraitTextureWithSprite:(CCSprite *)sprite;
 

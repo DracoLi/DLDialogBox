@@ -348,7 +348,7 @@ used as the background color of the dialog box.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setPortaitInsideDialog:</TokenIdentifier>
-			<Abstract type="html">Defaults to NO.</Abstract>
+			<Abstract type="html">If set to YES, the dialog&apos;s portrait will appear inside the dialog box.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic) BOOL portaitInsideDialog</Declaration>
@@ -360,7 +360,7 @@ used as the background color of the dialog box.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/portaitInsideDialog</TokenIdentifier>
-			<Abstract type="html">Defaults to NO.</Abstract>
+			<Abstract type="html">If set to YES, the dialog&apos;s portrait will appear inside the dialog box.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic) BOOL portaitInsideDialog</Declaration>
@@ -372,7 +372,7 @@ used as the background color of the dialog box.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/portaitInsideDialog</TokenIdentifier>
-			<Abstract type="html">Defaults to NO.</Abstract>
+			<Abstract type="html">If set to YES, the dialog&apos;s portrait will appear inside the dialog box.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic) BOOL portaitInsideDialog</Declaration>
@@ -384,7 +384,7 @@ used as the background color of the dialog box.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setAnimateOutsidePortraitIn:</TokenIdentifier>
-			<Abstract type="html">Defaults to YES.</Abstract>
+			<Abstract type="html">When enabled the dialog&apos;s portrait will be animated if portraitInsdeDialog is set to NO.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic) BOOL animateOutsidePortraitIn</Declaration>
@@ -396,7 +396,7 @@ used as the background color of the dialog box.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/animateOutsidePortraitIn</TokenIdentifier>
-			<Abstract type="html">Defaults to YES.</Abstract>
+			<Abstract type="html">When enabled the dialog&apos;s portrait will be animated if portraitInsdeDialog is set to NO.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic) BOOL animateOutsidePortraitIn</Declaration>
@@ -408,7 +408,7 @@ used as the background color of the dialog box.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/animateOutsidePortraitIn</TokenIdentifier>
-			<Abstract type="html">Defaults to YES.</Abstract>
+			<Abstract type="html">When enabled the dialog&apos;s portrait will be animated if portraitInsdeDialog is set to NO.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic) BOOL animateOutsidePortraitIn</Declaration>
@@ -420,7 +420,7 @@ used as the background color of the dialog box.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setFntFile:</TokenIdentifier>
-			<Abstract type="html">fntFile used by the dialog for conversation text.</Abstract>
+			<Abstract type="html">The font file used by the dialog for displaying text.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, copy) NSString *fntFile</Declaration>
@@ -432,7 +432,7 @@ used as the background color of the dialog box.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/fntFile</TokenIdentifier>
-			<Abstract type="html">fntFile used by the dialog for conversation text.</Abstract>
+			<Abstract type="html">The font file used by the dialog for displaying text.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, copy) NSString *fntFile</Declaration>
@@ -444,7 +444,7 @@ used as the background color of the dialog box.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/fntFile</TokenIdentifier>
-			<Abstract type="html">fntFile used by the dialog for conversation text.</Abstract>
+			<Abstract type="html">The font file used by the dialog for displaying text.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, copy) NSString *fntFile</Declaration>
@@ -456,9 +456,14 @@ used as the background color of the dialog box.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setChoiceDialogCustomizer:</TokenIdentifier>
-			<Abstract type="html">The choice dialog customizer for the dialog box if it uses the choice dialog</Abstract>
+			<Abstract type="html">The DLChoiceDialogCustomizer for the dialog box&apos;s choice dialog.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/clm/DLChoiceDialogCustomizer/defaultCustomizer</TokenIdentifier>
+		
+	</RelatedTokens>
+	
 			<Declaration>@property (nonatomic, strong) DLChoiceDialogCustomizer *choiceDialogCustomizer</Declaration>
 			
 			
@@ -468,9 +473,14 @@ used as the background color of the dialog box.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/choiceDialogCustomizer</TokenIdentifier>
-			<Abstract type="html">The choice dialog customizer for the dialog box if it uses the choice dialog</Abstract>
+			<Abstract type="html">The DLChoiceDialogCustomizer for the dialog box&apos;s choice dialog.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/clm/DLChoiceDialogCustomizer/defaultCustomizer</TokenIdentifier>
+		
+	</RelatedTokens>
+	
 			<Declaration>@property (nonatomic, strong) DLChoiceDialogCustomizer *choiceDialogCustomizer</Declaration>
 			
 			
@@ -480,9 +490,14 @@ used as the background color of the dialog box.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/choiceDialogCustomizer</TokenIdentifier>
-			<Abstract type="html">The choice dialog customizer for the dialog box if it uses the choice dialog</Abstract>
+			<Abstract type="html">The DLChoiceDialogCustomizer for the dialog box&apos;s choice dialog.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/clm/DLChoiceDialogCustomizer/defaultCustomizer</TokenIdentifier>
+		
+	</RelatedTokens>
+	
 			<Declaration>@property (nonatomic, strong) DLChoiceDialogCustomizer *choiceDialogCustomizer</Declaration>
 			
 			
@@ -492,7 +507,7 @@ used as the background color of the dialog box.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/clm/DLDialogBoxCustomizer/defaultCustomizer</TokenIdentifier>
-			<Abstract type="html">The default customizer for the dialog box using available resources</Abstract>
+			<Abstract type="html">Returns a default customizer for the dialog box</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>+ (DLDialogBoxCustomizer *)defaultCustomizer</Declaration>

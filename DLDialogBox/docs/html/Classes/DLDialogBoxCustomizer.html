@@ -296,7 +296,7 @@ dialog box will automatically use the default customizer provided through
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Defaults to YES.</p>
+		<p>When enabled the dialog&rsquo;s portrait will be animated if <code>portraitInsdeDialog</code> is set to NO.</p>
 	</div>		
 	
     
@@ -313,12 +313,14 @@ dialog box will automatically use the default customizer provided through
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>When portraitInsdeDialog is NO (thus the portrait is outside the dialog),
-setting this to YES will results in the portrait being animated in when the
+		<p>When <a href="#//api/name/portaitInsideDialog">portaitInsideDialog</a> is NO (thus the portrait is outside the dialog),
+setting this value to YES will result in the portrait being animated in when the
 dialog is displayed on screen.</p>
 
 <p>For more advanced users, you can animate the portrait property of the DialogBox
 directly if you want some other cool animation.</p>
+
+<p><strong>Defaults to YES</strong></p>
 	</div>
 	
 	
@@ -363,7 +365,7 @@ used as the background color of the dialog box.</p>
 		<p>You can create a <code>ccColor4B</code> via <code>ccc4(red, blue, green, alpha)</code>.
 Note that all color values are from 0-255.</p>
 
-<p><strong>Defaults to a transparent color (<code>ccc4(0,0,0,0)</code>) if not specified.</strong></p>
+<p><strong>Defaults to a semi-transparent black color (<code>ccc4(0,0,0,204)</code>).</strong></p>
 	</div>
 	
 	
@@ -475,7 +477,7 @@ the background image for the dialog box.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The choice dialog customizer for the dialog box if it uses the choice dialog</p>
+		<p>The <code>DLChoiceDialogCustomizer</code> for the dialog box&rsquo;s choice dialog.</p>
 	</div>		
 	
     
@@ -490,9 +492,23 @@ the background image for the dialog box.</p>
 	
 	
 	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p><strong>Defaults to the default DLChoiceDialogCustomizer</strong></p>
+	</div>
 	
 	
 	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Classes/DLChoiceDialogCustomizer.html#//api/name/defaultCustomizer">[DLChoiceDialogCustomizer defaultCustomizer]</a></p></code></li>
+			
+		</ul>
+	</div>
 	
 	
 	
@@ -541,7 +557,7 @@ enough value so that the dialog box can accommodate all your text.</p>
 
 <ul>
 <li><code>kDialogHeightSmall</code> accommodates about 1-2 lines of text</li>
-<li><code>kDialogHeightNormal</code> accommodates about 2-3 lines of text and is the default height</li>
+<li><code>kDialogHeightNormal</code> accommodates about 3-4 lines of text and is the default height</li>
 <li><code>kDialogHeightLarge</code> accommodates about 4-5 lines of text</li>
 </ul>
 
@@ -593,7 +609,7 @@ the dialog box).</p>
 <p>Please note that this value is also used as the default offset between the
 <code>pageFinishedIndicator</code> and the bottom right of the dialog box.</p>
 
-<p><strong>Defaults to (5, 10)</strong></p>
+<p><strong>Defaults to (10, 10)</strong></p>
 	</div>
 	
 	
@@ -617,7 +633,7 @@ the dialog box).</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>fntFile used by the dialog for conversation text.</p>
+		<p>The font file used by the dialog for displaying text.</p>
 	</div>		
 	
     
@@ -634,8 +650,10 @@ the dialog box).</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>This fntFile is also used by the choice dialog if the fnt file for
-the choice dialog if not set (not the default)</p>
+		<p>This font file is also used by the choice dialog if the font file for
+<code>choiceDialogCustomizer</code> is not set.</p>
+
+<p><strong>Defaults to the demo fnt file (<code>demo_fnt.fnt</code>) attached with the project</strong></p>
 	</div>
 	
 	
@@ -710,7 +728,7 @@ attached with the project.</strong></p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Defaults to NO.</p>
+		<p>If set to YES, the dialog&rsquo;s portrait will appear inside the dialog box.</p>
 	</div>		
 	
     
@@ -727,8 +745,14 @@ attached with the project.</strong></p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>By default the portrait will be places outside of the dialog box so you
-can use a big beautiful portrait that will emotionally connect the players.</p>
+		<p>By default the portrait will be placed outside of the dialog box so you
+can use a big beautiful portrait that is just super fabulous.</p>
+
+<p>However if <code>portaitInsideDialog</code> is set to YES, then the portrait will instead
+be placed inside the dialog and <code>portraitOffset</code> will be the spacing
+between the portrait and the top left edge of the dialog box.</p>
+
+<p><strong>Defaults to NO</strong></p>
 	</div>
 	
 	
@@ -769,11 +793,11 @@ can use a big beautiful portrait that will emotionally connect the players.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>If <code>portaitInsideDialog</code> is NO, then this value specifies the offset between
-the portrait and the bottom edge of the dialog box depending on the <code>portraitPosition</code>.</p>
+		<p>If <a href="#//api/name/portaitInsideDialog">portaitInsideDialog</a> is NO, then this value specifies the offset between
+the portrait and the bottom edge of the dialog box depending on the <a href="#//api/name/portraitPosition">portraitPosition</a>.</p>
 
-<p>If <code>portaitInsideDialog</code> is YES, then this value specifies the offset between
-the portrait and the top edge of the dialog box depending on the <code>portraitPosition</code>.</p>
+<p>If <a href="#//api/name/portaitInsideDialog">portaitInsideDialog</a> is YES, then this value specifies the offset between
+the portrait and the top edge of the dialog box depending on the <a href="#//api/name/portraitPosition">portraitPosition</a>.</p>
 
 <p><strong>Defaults to (0, 0)</strong></p>
 	</div>
@@ -895,7 +919,7 @@ the portrait and the top edge of the dialog box depending on the <code>portraitP
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The default customizer for the dialog box using available resources</p>
+		<p>Returns a default customizer for the dialog box</p>
 	</div>		
 	
     
@@ -941,7 +965,7 @@ the portrait and the top edge of the dialog box depending on the <code>portraitP
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Draco. All rights reserved. (Last updated: 2013-09-09)</span><br />
+						<p><span class="copyright">&copy; 2013 Draco. All rights reserved. (Last updated: 2013-09-10)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

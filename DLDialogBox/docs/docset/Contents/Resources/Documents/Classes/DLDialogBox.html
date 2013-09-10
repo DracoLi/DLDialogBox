@@ -26,6 +26,8 @@
 					<select id="jumpTo">
 	<option value="top">Jump To&#133;</option>
 	
+	<option value="overview">Overview</option>
+	
 	
 	
 	
@@ -102,6 +104,8 @@
 		<nav id="tocContainer" class="isShowingTOC">
 			<ul id="toc" role="tree">
 				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
 
 
 
@@ -209,6 +213,20 @@
 					
                     
                     
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>DLDialogBox is the single interface to create super customizable dialog boxes.</p>
+
+<p>DLDialogBox provides simple methods to display dialog text and also provide
+an easy way to receive player input through the use of an integrated <a href="../Classes/DLChoiceDialog.html">DLChoiceDialog</a>.</p>
+
+<p>A DLDialogBoxCustomizer is used to customize the dialog box any way you like.
+Please refer to <a href="../Classes/DLDialogBoxCustomizer.html">DLDialogBoxCustomizer</a> for more details on available customizations.</p>
+					</div>
+					
+					
 					
 					
 					
@@ -379,7 +397,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The choice dialog to display at the last text page if choices are provided.</p>
+		<p>The <code>DLChoiceDialog</code> to be displayed at the last text page if <a href="#//api/name/choices">choices</a> are provided.</p>
 	</div>		
 	
     
@@ -396,9 +414,9 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>You can customizer the choice dialog by overriding its choice dialog customizer</p>
+		<p>You can customize this choice dialog through the <a href="#//api/name/customizer">customizer</a>.</p>
 
-<p>The choice dialog is only created when the choices array is set.</p>
+<p>The choice dialog is only created when the <a href="#//api/name/choices">choices</a> array is set.</p>
 	</div>
 	
 	
@@ -422,7 +440,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Choices for the dialog box&rsquo;s choice dialog.</p>
+		<p>An array of choices for the dialog box&rsquo;s choice dialog.</p>
 	</div>		
 	
     
@@ -439,13 +457,22 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>When this is set the dialog box will show the choice dialog after the last
-text page is displayed.</p>
+		<p>Once a choice array has been provided, a <a href="../Classes/DLChoiceDialog.html">DLChoiceDialog</a> will automatically be created.
+You can then access the <a href="../Classes/DLChoiceDialog.html">DLChoiceDialog</a> through the property <a href="#//api/name/choiceDialog">choiceDialog</a>.</p>
 	</div>
 	
 	
 	
 	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Classes/DLChoiceDialog.html">DLChoiceDialog</a></p></code></li>
+			
+		</ul>
+	</div>
 	
 	
 	
@@ -589,8 +616,7 @@ Current page is one once the dialog starts typing its first words.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>This is used to override the defaultPortraitSprite you can can provide
-some different sprite for certain pages.</p>
+		<p>This is used provide unique portrait sprites for the different dialog pages in a <DLDialogBox>.</p>
 	</div>		
 	
     
@@ -607,22 +633,28 @@ some different sprite for certain pages.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The key (page) should be > 0</p>
+		<h3>Usage</h3>
 
-<p>Usage:
-- The key of the dictionary will be the page number.
-- The value of the dictionary can be two types:</p>
+<ul>
+<li>The key of the dictionary must be the page number greater than 0.</li>
+<li>The value of the dictionary can be two class types:</li>
+</ul>
 
-<p>Type 1:
-If the value belongs to the CCSprite class then this sprite will be used
-as the portrait sprite for the page indicated by the key.
-Example: <code>{"4": [a cool sprite]}</code></p>
 
-<p>Type 2:
-If the value belonds to NSString, then this string will be used by
+<p><strong>Type 1:</strong></p>
+
+<p>If the value belongs to a CCSprite then this sprite will be used
+as the portrait image for the dialog page indicated by the key.</p>
+
+<p>Example: <code>{"4": [a cool sprite]}</code></p>
+
+<p><strong>Type 2:</strong></p>
+
+<p>If the value belonds to a NSString, then this string will be used by
 <code>[CCSprite spriteWithSpriteFrameName:]</code> to create the sprite to be used
-as the sprite image for the page indicated by the key.
-Example: <code>{"2": "draco_smiling.png"}</code></p>
+as the portrait image for the dialog page indicated by the key.</p>
+
+<p>Example: <code>{"2": "draco_smiling.png"}</code></p>
 	</div>
 	
 	
@@ -646,7 +678,7 @@ Example: <code>{"2": "draco_smiling.png"}</code></p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>This is used to customize the look and feel of the dialog box.</p>
+		<p>This customizer is used to customize the look and feel of the dialog box.</p>
 	</div>		
 	
     
@@ -669,6 +701,15 @@ Example: <code>{"2": "draco_smiling.png"}</code></p>
 	
 	
 	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Classes/DLDialogBoxCustomizer.html">DLDialogBoxCustomizer</a></p></code></li>
+			
+		</ul>
+	</div>
 	
 	
 	
@@ -1359,7 +1400,7 @@ manually right after setting choices.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Draco. All rights reserved. (Last updated: 2013-09-09)</span><br />
+						<p><span class="copyright">&copy; 2013 Draco. All rights reserved. (Last updated: 2013-09-10)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

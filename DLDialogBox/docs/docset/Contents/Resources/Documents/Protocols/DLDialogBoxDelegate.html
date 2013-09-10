@@ -43,7 +43,7 @@
 	
 	<option value="//api/name/dialogBoxAllTextFinished:">&nbsp;&nbsp;&nbsp;&nbsp;- dialogBoxAllTextFinished:</option>
 	
-	<option value="//api/name/dialogBoxChoiceSelected:choiceText:choiceIndex:">&nbsp;&nbsp;&nbsp;&nbsp;- dialogBoxChoiceSelected:choiceText:choiceIndex:</option>
+	<option value="//api/name/dialogBoxChoiceSelected:choiceDialog:choiceText:choiceIndex:">&nbsp;&nbsp;&nbsp;&nbsp;- dialogBoxChoiceSelected:choiceDialog:choiceText:choiceIndex:</option>
 	
 	<option value="//api/name/dialogBoxCurrentTextPageFinished:">&nbsp;&nbsp;&nbsp;&nbsp;- dialogBoxCurrentTextPageFinished:</option>
 	
@@ -75,7 +75,7 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/dialogBoxAllTextFinished:">dialogBoxAllTextFinished:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/dialogBoxChoiceSelected:choiceText:choiceIndex:">dialogBoxChoiceSelected:choiceText:choiceIndex:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/dialogBoxChoiceSelected:choiceDialog:choiceText:choiceIndex:">dialogBoxChoiceSelected:choiceDialog:choiceText:choiceIndex:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/dialogBoxCurrentTextPageFinished:">dialogBoxCurrentTextPageFinished:</a></span></li>
 	
@@ -138,7 +138,7 @@
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/dialogBoxChoiceSelected:choiceText:choiceIndex:">&ndash;&nbsp;dialogBoxChoiceSelected:choiceText:choiceIndex:</a></code>
+		<code><a href="#//api/name/dialogBoxChoiceSelected:choiceDialog:choiceText:choiceIndex:">&ndash;&nbsp;dialogBoxChoiceSelected:choiceDialog:choiceText:choiceIndex:</a></code>
 	</span>
 	
 	
@@ -166,7 +166,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Called after all the text has been displayed by the dialog box.</p>
+		<p>Called after a <a href="../Classes/DLDialogBox.html">DLDialogBox</a> has displayed all its text pages.</p>
 	</div>		
 	
     
@@ -183,9 +183,9 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>If the dialog box needs to open a choice dialog after the last text then
-this is called after the choice dialog is displayed, not
-after a choice has been selected.</p>
+		<p><strong>Note:</strong> If the dialog box needs to open a choice dialog after the last text then
+this is called after the choice dialog is displayed, not after a choice
+has been selected.</p>
 	</div>
 	
 	
@@ -203,20 +203,40 @@ after a choice has been selected.</p>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/dialogBoxChoiceSelected:choiceText:choiceIndex:" title="dialogBoxChoiceSelected:choiceText:choiceIndex:"></a>
-	<h3 class="subsubtitle method-title">dialogBoxChoiceSelected:choiceText:choiceIndex:</h3>
+	<a name="//api/name/dialogBoxChoiceSelected:choiceDialog:choiceText:choiceIndex:" title="dialogBoxChoiceSelected:choiceDialog:choiceText:choiceIndex:"></a>
+	<h3 class="subsubtitle method-title">dialogBoxChoiceSelected:choiceDialog:choiceText:choiceIndex:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Called when a choice is selected for this dialog box</p>
+		<p>Called when a choice is selected for a <a href="../Classes/DLDialogBox.html">DLDialogBox</a></p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)dialogBoxChoiceSelected:(DLDialogBox *)<em>sender</em> choiceText:(NSString *)<em>text</em> choiceIndex:(NSUInteger)<em>index</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)dialogBoxChoiceSelected:(DLDialogBox *)<em>sender</em> choiceDialog:(DLChoiceDialog *)<em>choiceDialog</em> choiceText:(NSString *)<em>text</em> choiceIndex:(NSUInteger)<em>index</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>choiceDialog</em></dt>
+			<dd><p>The used choice dialog</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>text</em></dt>
+			<dd><p>The text that is select</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>index</em></dt>
+			<dd><p>The index of the choice</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	
@@ -245,7 +265,7 @@ after a choice has been selected.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Called when the current diaplayed text section is finished.</p>
+		<p>Called when a <a href="../Classes/DLDialogBox.html">DLDialogBox</a> has finished animating its current page.</p>
 	</div>		
 	
     
@@ -259,6 +279,12 @@ after a choice has been selected.</p>
 	
 	
 	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Since the dialog box can display an array of text, this method is called
+whenever a single page of text has finished animating and is fully displayed.</p>
+	</div>
 	
 	
 	
@@ -289,7 +315,7 @@ after a choice has been selected.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Draco. All rights reserved. (Last updated: 2013-09-09)</span><br />
+						<p><span class="copyright">&copy; 2013 Draco. All rights reserved. (Last updated: 2013-09-10)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

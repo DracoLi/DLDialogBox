@@ -156,6 +156,8 @@ typedef enum {
       third.choiceDialog.anchorPoint = ccp(0, 1);
       third.choiceDialog.position = ccp(0, winSize.height);
       
+      third.prependText = @"Draco: ";
+      
       [self addChild:third z:1];
       
       self.currentDialog = third;

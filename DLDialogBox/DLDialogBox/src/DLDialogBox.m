@@ -48,6 +48,7 @@
 @end
 
 @interface DLDialogBox ()
+@property (nonatomic, strong) NSMutableArray *textArray;
 @property (nonatomic, strong) DLAutoTypeLabelBM *label;
 @property (nonatomic, strong) CCNode *bgSprite;
 @property (nonatomic, readwrite) NSUInteger currentTextPage;
@@ -113,6 +114,7 @@
     _currentPageTyped = YES;
     _closeWhenDialogFinished = YES;
     _textArray = [texts mutableCopy];
+    _initialTextArray = texts;
     self.handleTapInputs = YES;
     _handleOnlyTapInputsInDialogBox = YES;
     _tapToFinishCurrentPage = YES;
@@ -474,9 +476,10 @@
   }
   
   if (self.delegate &&
-      [self.delegate respondsToSelector:@selector(dialogBoxChoiceSelected:choiceText:choiceIndex:)])
+      [self.delegate respondsToSelector:@selector(dialogBoxChoiceSelected:choiceDialog:choiceText:choiceIndex:)])
   {
     [self.delegate dialogBoxChoiceSelected:self
+                              choiceDialog:self.choiceDialog
                                 choiceText:text
                                choiceIndex:index];
   }

@@ -4,7 +4,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/cl/DLDialogBox</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<Abstract type="html">DLDialogBox is the single interface to create super customizable dialog boxes.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
             <Availability type="html"></Availability>
 			
@@ -14,9 +14,14 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/setCustomizer:</TokenIdentifier>
-			<Abstract type="html">This is used to customize the look and feel of the dialog box.</Abstract>
+			<Abstract type="html">This customizer is used to customize the look and feel of the dialog box.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/DLDialogBoxCustomizer</TokenIdentifier>
+		
+	</RelatedTokens>
+	
 			<Declaration>@property (nonatomic, strong) DLDialogBoxCustomizer *customizer</Declaration>
 			
 			
@@ -26,9 +31,14 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/customizer</TokenIdentifier>
-			<Abstract type="html">This is used to customize the look and feel of the dialog box.</Abstract>
+			<Abstract type="html">This customizer is used to customize the look and feel of the dialog box.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/DLDialogBoxCustomizer</TokenIdentifier>
+		
+	</RelatedTokens>
+	
 			<Declaration>@property (nonatomic, strong) DLDialogBoxCustomizer *customizer</Declaration>
 			
 			
@@ -38,9 +48,14 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBox/customizer</TokenIdentifier>
-			<Abstract type="html">This is used to customize the look and feel of the dialog box.</Abstract>
+			<Abstract type="html">This customizer is used to customize the look and feel of the dialog box.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/DLDialogBoxCustomizer</TokenIdentifier>
+		
+	</RelatedTokens>
+	
 			<Declaration>@property (nonatomic, strong) DLDialogBoxCustomizer *customizer</Declaration>
 			
 			
@@ -50,9 +65,14 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/setChoices:</TokenIdentifier>
-			<Abstract type="html">Choices for the dialog box&apos;s choice dialog.</Abstract>
+			<Abstract type="html">An array of choices for the dialog box&apos;s choice dialog.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/DLChoiceDialog</TokenIdentifier>
+		
+	</RelatedTokens>
+	
 			<Declaration>@property (nonatomic, copy) NSArray *choices</Declaration>
 			
 			
@@ -62,9 +82,14 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/choices</TokenIdentifier>
-			<Abstract type="html">Choices for the dialog box&apos;s choice dialog.</Abstract>
+			<Abstract type="html">An array of choices for the dialog box&apos;s choice dialog.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/DLChoiceDialog</TokenIdentifier>
+		
+	</RelatedTokens>
+	
 			<Declaration>@property (nonatomic, copy) NSArray *choices</Declaration>
 			
 			
@@ -74,9 +99,14 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBox/choices</TokenIdentifier>
-			<Abstract type="html">Choices for the dialog box&apos;s choice dialog.</Abstract>
+			<Abstract type="html">An array of choices for the dialog box&apos;s choice dialog.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/DLChoiceDialog</TokenIdentifier>
+		
+	</RelatedTokens>
+	
 			<Declaration>@property (nonatomic, copy) NSArray *choices</Declaration>
 			
 			
@@ -86,7 +116,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/setChoiceDialog:</TokenIdentifier>
-			<Abstract type="html">The choice dialog to display at the last text page if choices are provided.</Abstract>
+			<Abstract type="html">The DLChoiceDialog to be displayed at the last text page if choices are provided.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, strong) DLChoiceDialog *choiceDialog</Declaration>
@@ -98,7 +128,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/choiceDialog</TokenIdentifier>
-			<Abstract type="html">The choice dialog to display at the last text page if choices are provided.</Abstract>
+			<Abstract type="html">The DLChoiceDialog to be displayed at the last text page if choices are provided.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, strong) DLChoiceDialog *choiceDialog</Declaration>
@@ -110,7 +140,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBox/choiceDialog</TokenIdentifier>
-			<Abstract type="html">The choice dialog to display at the last text page if choices are provided.</Abstract>
+			<Abstract type="html">The DLChoiceDialog to be displayed at the last text page if choices are provided.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, strong) DLChoiceDialog *choiceDialog</Declaration>
@@ -122,8 +152,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/setCustomPortraitForPages:</TokenIdentifier>
-			<Abstract type="html">This is used to override the defaultPortraitSprite you can can provide
-some different sprite for certain pages.</Abstract>
+			<Abstract type="html">This is used provide unique portrait sprites for the different dialog pages in a &lt;DLDialogBox&gt;.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, copy) NSDictionary *customPortraitForPages</Declaration>
@@ -135,8 +164,7 @@ some different sprite for certain pages.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/customPortraitForPages</TokenIdentifier>
-			<Abstract type="html">This is used to override the defaultPortraitSprite you can can provide
-some different sprite for certain pages.</Abstract>
+			<Abstract type="html">This is used provide unique portrait sprites for the different dialog pages in a &lt;DLDialogBox&gt;.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, copy) NSDictionary *customPortraitForPages</Declaration>
@@ -148,8 +176,7 @@ some different sprite for certain pages.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBox/customPortraitForPages</TokenIdentifier>
-			<Abstract type="html">This is used to override the defaultPortraitSprite you can can provide
-some different sprite for certain pages.</Abstract>
+			<Abstract type="html">This is used provide unique portrait sprites for the different dialog pages in a &lt;DLDialogBox&gt;.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, copy) NSDictionary *customPortraitForPages</Declaration>
