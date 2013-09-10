@@ -121,11 +121,12 @@ typedef enum {
       DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
       customizer.backgroundSpriteFile = @"fancy_border.png";
       customizer.dialogTextOffset = ccp(15, 15);
-      customizer.dialogSize = CGSizeMake(customizer.dialogSize.width - 50, k);
+      customizer.dialogSize = CGSizeMake(customizer.dialogSize.width - 50, kDialogHeightNormal);
       customizer.portraitOffset = ccp(0, 0);
       customizer.portraitPosition = kDialogPortraitPositionRight;
       customizer.portaitInsideDialog = NO;
       customizer.animateOutsidePortraitIn = YES;
+      customizer.speedPerPageFinishedIndicatorBlink = 0.5; // 2 blinks per second
       
       // Customize choice dialog
       DLChoiceDialogCustomizer *choiceCustomizer = customizer.choiceDialogCustomizer;

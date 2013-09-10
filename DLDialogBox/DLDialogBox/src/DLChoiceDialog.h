@@ -18,7 +18,7 @@
  * The file name of a stretchable sprite image that will be used as
  * the background image for the dialog box.
  *
- * If the `backgroundSpriteFrameName` is also provided, then this value will be ignored
+ * If the `backgroundSpriteFrameName` is also provided, then this value will be ignored.
  *
  * Please refer to the usage documentation on how the sprite image should be made.
  */
@@ -35,10 +35,13 @@
 @property (nonatomic, copy) NSString *backgroundSpriteFrameName;
 
 /**
- * If a sprite is not provided as the dialog's background, the dialog will use
- * a color as its backgorund.
+ * If a sprite is not provided as the dialog's background, this property will be
+ * used as the background color of the dialog box.
  *
- * By default the color is transparent.
+ * Defaults to a transparent color (`ccc4(0,0,0,0)`) if not specified.
+ *
+ * You can create a `ccColor4B` via `ccc4(red, blue, green, alpha)`.
+ * Note that all color values are from 0-255.
  */
 @property (nonatomic) ccColor4B backgroundColor;
 

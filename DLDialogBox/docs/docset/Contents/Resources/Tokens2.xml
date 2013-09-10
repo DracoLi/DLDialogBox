@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/DLAutoTypeLabelBM.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/DLAutoTypeLabelBM</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DLAutoTypeLabelBM.h</DeclaredIn>
+            <Availability type="html"></Availability>
+			
+			<NodeRef refid="2"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLAutoTypeLabelBM/setTypingDelay:</TokenIdentifier>
+			<Abstract type="html">The delay between each word typed.</Abstract>
+			<DeclaredIn>DLAutoTypeLabelBM.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) ccTime typingDelay</Declaration>
+			
+			
+			<Anchor>//api/name/typingDelay</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLAutoTypeLabelBM/typingDelay</TokenIdentifier>
+			<Abstract type="html">The delay between each word typed.</Abstract>
+			<DeclaredIn>DLAutoTypeLabelBM.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) ccTime typingDelay</Declaration>
+			
+			
+			<Anchor>//api/name/typingDelay</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLAutoTypeLabelBM/typingDelay</TokenIdentifier>
+			<Abstract type="html">The delay between each word typed.</Abstract>
+			<DeclaredIn>DLAutoTypeLabelBM.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) ccTime typingDelay</Declaration>
+			
+			
+			<Anchor>//api/name/typingDelay</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLAutoTypeLabelBM/setAutoTypeString:</TokenIdentifier>
+			<Abstract type="html">The string this label is about to type.</Abstract>
+			<DeclaredIn>DLAutoTypeLabelBM.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *autoTypeString</Declaration>
+			
+			
+			<Anchor>//api/name/autoTypeString</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLAutoTypeLabelBM/autoTypeString</TokenIdentifier>
+			<Abstract type="html">The string this label is about to type.</Abstract>
+			<DeclaredIn>DLAutoTypeLabelBM.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *autoTypeString</Declaration>
+			
+			
+			<Anchor>//api/name/autoTypeString</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLAutoTypeLabelBM/autoTypeString</TokenIdentifier>
+			<Abstract type="html">The string this label is about to type.</Abstract>
+			<DeclaredIn>DLAutoTypeLabelBM.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *autoTypeString</Declaration>
+			
+			
+			<Anchor>//api/name/autoTypeString</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLAutoTypeLabelBM/stopTypingAnimation</TokenIdentifier>
+			<Abstract type="html">When called the current typing animation will stop and the label will display
+whatever has been typed so far. Will trigger tying finished delegate method</Abstract>
+			<DeclaredIn>DLAutoTypeLabelBM.h</DeclaredIn>
+			
+			<Declaration>- (void)stopTypingAnimation</Declaration>
+			
+			
+			<Anchor>//api/name/stopTypingAnimation</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLAutoTypeLabelBM/finishTypingAnimation</TokenIdentifier>
+			<Abstract type="html">When called, the current typing animation will stop and the label will display
+the full text that is meant to be typed immediately.</Abstract>
+			<DeclaredIn>DLAutoTypeLabelBM.h</DeclaredIn>
+			
+			<Declaration>- (void)finishTypingAnimation</Declaration>
+			
+			
+			<Anchor>//api/name/finishTypingAnimation</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLAutoTypeLabelBM/typeText:withDelay:</TokenIdentifier>
+			<Abstract type="html">Type in some text with a delay for every character typed</Abstract>
+			<DeclaredIn>DLAutoTypeLabelBM.h</DeclaredIn>
+			
+			<Declaration>- (void)typeText:(NSString *)txt withDelay:(ccTime)d</Declaration>
+			
+			
+			<Anchor>//api/name/typeText:withDelay:</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

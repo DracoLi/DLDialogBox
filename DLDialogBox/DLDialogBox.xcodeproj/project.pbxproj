@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		D49D9FA717DE798A002C8E9B /* Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = D49D9FAA17DE798A002C8E9B /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildPhases = (
+				D49D9FAB17DE799F002C8E9B /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Documentation;
+			productName = Documentation;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		D4661D8717DD4D22001BDA8B /* CCScale9Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D4661D8617DD4D22001BDA8B /* CCScale9Sprite.m */; };
 		D4661D8C17DD533C001BDA8B /* normal_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D4661D8B17DD533B001BDA8B /* normal_bg.png */; };
@@ -569,8 +583,7 @@
 				D499097017D7D5F800430BFB /* Resources */,
 				D4990AFC17D7D5FC00430BFB /* Supporting Files */,
 			);
-			name = DLDialogBox;
-			path = DSDialogBox;
+			path = DLDialogBox;
 			sourceTree = "<group>";
 		};
 		D499097017D7D5F800430BFB /* Resources */ = {
@@ -1019,7 +1032,7 @@
 			dependencies = (
 			);
 			name = DLDialogBox;
-			productName = DSDialogBox;
+			productName = DLDialogBox;
 			productReference = D499095817D7D5F800430BFB /* DLDialogBox.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -1063,6 +1076,7 @@
 			targets = (
 				D499095717D7D5F800430BFB /* DLDialogBox */,
 				D4990B1117D7D62400430BFB /* cocos2d-library */,
+				D49D9FA717DE798A002C8E9B /* Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -1099,6 +1113,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D49D9FAB17DE799F002C8E9B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#appledoc Xcode script\n# Start constants\ncompany=\"Draco\";\ncompanyID=\"com.dracoli\";\ncompanyURL=\"http://www.dracoli.com\";\ntarget=\"iphoneos\";\n#target=\"macosx\";\noutputPath=\"./docs\";\n# End constants\n/usr/local/bin/appledoc \\\n--project-name \"${PROJECT_NAME}\" \\\n--project-company \"${company}\" \\\n--company-id \"${companyID}\" \\\n--docset-atom-filename \"${company}.atom\" \\\n--docset-feed-url \"${companyURL}/${company}/%DOCSETATOMFILENAME\" \\\n--docset-package-url \"${companyURL}/${company}/%DOCSETPACKAGEFILENAME\" \\\n--docset-fallback-url \"${companyURL}/${company}\" \\\n--output \"${outputPath}\" \\\n--publish-docset \\\n--docset-platform-family \"${target}\" \\\n--logformat xcode \\\n--keep-intermediate-files \\\n--no-repeat-first-par \\\n--no-warn-invalid-crossref \\\n--exit-threshold 2 \\\n--crossref-format \"<%@>\" \\\n--index-desc \"${PROJECT_DIR}/../README.md\" \\\n--ignore \"*.m\" \\\n\"${PROJECT_DIR}/DLDialogBox/src\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D499095417D7D5F800430BFB /* Sources */ = {
@@ -1285,9 +1315,9 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = DSDialogBox/Prefix.pch;
-				HEADER_SEARCH_PATHS = "\"DSDialogBox/libs/kazmath/include\"";
-				INFOPLIST_FILE = DSDialogBox/Resources/Info.plist;
+				GCC_PREFIX_HEADER = DLDialogBox/Prefix.pch;
+				HEADER_SEARCH_PATHS = "\"DLDialogBox/libs/kazmath/include\"";
+				INFOPLIST_FILE = DLDialogBox/Resources/Info.plist;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
@@ -1306,9 +1336,9 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = DSDialogBox/Prefix.pch;
-				HEADER_SEARCH_PATHS = "\"DSDialogBox/libs/kazmath/include\"";
-				INFOPLIST_FILE = DSDialogBox/Resources/Info.plist;
+				GCC_PREFIX_HEADER = DLDialogBox/Prefix.pch;
+				HEADER_SEARCH_PATHS = "\"DLDialogBox/libs/kazmath/include\"";
+				INFOPLIST_FILE = DLDialogBox/Resources/Info.plist;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
@@ -1376,6 +1406,20 @@
 			};
 			name = Release;
 		};
+		D49D9FA817DE798A002C8E9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D49D9FA917DE798A002C8E9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1402,6 +1446,15 @@
 			buildConfigurations = (
 				D4990B1C17D7D62400430BFB /* Debug */,
 				D4990B1D17D7D62400430BFB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D49D9FAA17DE798A002C8E9B /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D49D9FA817DE798A002C8E9B /* Debug */,
+				D49D9FA917DE798A002C8E9B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/DLSelectableLabel.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/DLSelectableLabel</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+            <Availability type="html"></Availability>
+			
+			<NodeRef refid="7"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/setPreselected:</TokenIdentifier>
+			<Abstract type="html">When set to YES, the label&apos;s background will change to reflect the label
+being preselected and the delegate will be notified.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL preselected</Declaration>
+			
+			
+			<Anchor>//api/name/preselected</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/preselected</TokenIdentifier>
+			<Abstract type="html">When set to YES, the label&apos;s background will change to reflect the label
+being preselected and the delegate will be notified.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL preselected</Declaration>
+			
+			
+			<Anchor>//api/name/preselected</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabel/preselected</TokenIdentifier>
+			<Abstract type="html">When set to YES, the label&apos;s background will change to reflect the label
+being preselected and the delegate will be notified.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL preselected</Declaration>
+			
+			
+			<Anchor>//api/name/preselected</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/setSelected:</TokenIdentifier>
+			<Abstract type="html">When set to YES, the label&apos;s background will change to reflect the label
+being selected and the delegate will be notified.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL selected</Declaration>
+			
+			
+			<Anchor>//api/name/selected</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/selected</TokenIdentifier>
+			<Abstract type="html">When set to YES, the label&apos;s background will change to reflect the label
+being selected and the delegate will be notified.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL selected</Declaration>
+			
+			
+			<Anchor>//api/name/selected</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabel/selected</TokenIdentifier>
+			<Abstract type="html">When set to YES, the label&apos;s background will change to reflect the label
+being selected and the delegate will be notified.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL selected</Declaration>
+			
+			
+			<Anchor>//api/name/selected</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/setDeselectOnOutsideTap:</TokenIdentifier>
+			<Abstract type="html">If enabled this label will automatically be deselected if tapped outside.
+Default is NO</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL deselectOnOutsideTap</Declaration>
+			
+			
+			<Anchor>//api/name/deselectOnOutsideTap</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/deselectOnOutsideTap</TokenIdentifier>
+			<Abstract type="html">If enabled this label will automatically be deselected if tapped outside.
+Default is NO</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL deselectOnOutsideTap</Declaration>
+			
+			
+			<Anchor>//api/name/deselectOnOutsideTap</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabel/deselectOnOutsideTap</TokenIdentifier>
+			<Abstract type="html">If enabled this label will automatically be deselected if tapped outside.
+Default is NO</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL deselectOnOutsideTap</Declaration>
+			
+			
+			<Anchor>//api/name/deselectOnOutsideTap</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/setPreselectEnabled:</TokenIdentifier>
+			<Abstract type="html">When set to YES, tapping the label the first time will result in the label
+being preselected. When preselect the delegate will be notified and the label&apos;s
+background will change to the preselected background (if it is set).</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL preselectEnabled</Declaration>
+			
+			
+			<Anchor>//api/name/preselectEnabled</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/preselectEnabled</TokenIdentifier>
+			<Abstract type="html">When set to YES, tapping the label the first time will result in the label
+being preselected. When preselect the delegate will be notified and the label&apos;s
+background will change to the preselected background (if it is set).</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL preselectEnabled</Declaration>
+			
+			
+			<Anchor>//api/name/preselectEnabled</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabel/preselectEnabled</TokenIdentifier>
+			<Abstract type="html">When set to YES, tapping the label the first time will result in the label
+being preselected. When preselect the delegate will be notified and the label&apos;s
+background will change to the preselected background (if it is set).</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL preselectEnabled</Declaration>
+			
+			
+			<Anchor>//api/name/preselectEnabled</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/setCustomizer:</TokenIdentifier>
+			<Abstract type="html">The customizer is used to customize the look of the label</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) DLSelectableLabelCustomizer *customizer</Declaration>
+			
+			
+			<Anchor>//api/name/customizer</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/customizer</TokenIdentifier>
+			<Abstract type="html">The customizer is used to customize the look of the label</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) DLSelectableLabelCustomizer *customizer</Declaration>
+			
+			
+			<Anchor>//api/name/customizer</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabel/customizer</TokenIdentifier>
+			<Abstract type="html">The customizer is used to customize the look of the label</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) DLSelectableLabelCustomizer *customizer</Declaration>
+			
+			
+			<Anchor>//api/name/customizer</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DLSelectableLabel/labelWithText:fntFile:</TokenIdentifier>
+			<Abstract type="html">Bunch of initialization methods</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>+ (id)labelWithText:(NSString *)text fntFile:(NSString *)fntFile</Declaration>
+			
+			
+			<Anchor>//api/name/labelWithText:fntFile:</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/select</TokenIdentifier>
+			<Abstract type="html">Called to select the current label.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>- (void)select</Declaration>
+			
+			
+			<Anchor>//api/name/select</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/deselect</TokenIdentifier>
+			<Abstract type="html">Deselect reverts the label to the default state. Not selected or preselected</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>- (void)deselect</Declaration>
+			
+			
+			<Anchor>//api/name/deselect</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/setWidth:</TokenIdentifier>
+			<Abstract type="html">Set the width of the label manually.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>- (void)setWidth:(CGFloat)width</Declaration>
+			
+			
+			<Anchor>//api/name/setWidth:</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

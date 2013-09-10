@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/DLDialogBoxDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/DLDialogBoxDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+            <Availability type="html"></Availability>
+			
+			<NodeRef refid="9"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DLDialogBoxDelegate/dialogBoxAllTextFinished:</TokenIdentifier>
+			<Abstract type="html">Called after all the text has been displayed by the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>- (void)dialogBoxAllTextFinished:(DLDialogBox *)sender</Declaration>
+			
+			
+			<Anchor>//api/name/dialogBoxAllTextFinished:</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DLDialogBoxDelegate/dialogBoxCurrentTextPageFinished:</TokenIdentifier>
+			<Abstract type="html">Called when the current diaplayed text section is finished.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>- (void)dialogBoxCurrentTextPageFinished:(DLDialogBox *)sender</Declaration>
+			
+			
+			<Anchor>//api/name/dialogBoxCurrentTextPageFinished:</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DLDialogBoxDelegate/dialogBoxChoiceSelected:choiceText:choiceIndex:</TokenIdentifier>
+			<Abstract type="html">Called when a choice is selected for this dialog box</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>- (void)dialogBoxChoiceSelected:(DLDialogBox *)sender choiceText:(NSString *)text choiceIndex:(NSUInteger)index</Declaration>
+			
+			
+			<Anchor>//api/name/dialogBoxChoiceSelected:choiceText:choiceIndex:</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

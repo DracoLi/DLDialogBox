@@ -11,32 +11,42 @@
 #import "DLAutoTypeLabelBM.h"
 #import "DLChoiceDialog.h"
 
-#define kDialogHeightSmall  50
-#define kDialogHeightNormal 80
-#define kDialogHeightLarge  120
+#define kDialogHeightSmall  55
+#define kDialogHeightNormal 90
+#define kDialogHeightLarge  130
 
 typedef enum {
   kDialogPortraitPositionLeft = 0,
   kDialogPortraitPositionRight
 } DialogPortraitPosition;
 
+/**
+ * DLDialogBoxCustomizer Stores customization properties for how a <DLDialogBox> 
+ * should be displayed.
+ *
+ * Each <DLDialogBox> must use a customizer, if no customizers are given the
+ * dialog box will automatically use the default customizer provided through
+ * <defaultCustomizer>.
+ */
 @interface DLDialogBoxCustomizer : NSObject
 
 /**
- * The size of dialog box (not including the portrait if its outside). Default is (current device width, 80)
+ * The size of dialog box (not including the portrait if its outside).
+ *
+ * __Default is (current device width, kDialogHeightNormal)__
  *
  * The default dialog size will make a dialog what stretches accross the device
  * and can roughly accommodates 3 rows of text in landscape mode.
  *
  * Please note that DLDialogBox does not automatically scale the dialog's height
- * according to the content so you must make sure to set the dialogSize to a large
+ * according to the content so you must make sure to set the <dialogSize> to a large
  * enough value so that the dialog box can accommodate all your text.
  * 
  * We provided some height constants for you to use:
  *
- * - kDialogHeightSmall accommodates about 2 lines of text
- * - kDialogHeightNormal accommodates about 3 lines of text and is the default height
- * - kDialogHeightLarge accommodates about 5 lines of text
+ * - `kDialogHeightSmall` accommodates about 1-2 lines of text
+ * - `kDialogHeightNormal` accommodates about 3-4 lines of text and is the default height
+ * - `kDialogHeightLarge` accommodates about 4-5 lines of text
  */
 @property (nonatomic) CGSize dialogSize;
 
@@ -44,7 +54,7 @@ typedef enum {
  * The file name of a stretchable sprite image that will be used as
  * the background image for the dialog box.
  *
- * If the `backgroundSpriteFrameName` is also provided, then this value will be ignored
+ * If the `backgroundSpriteFrameName` is also provided, then this value will be ignored.
  *
  * Please refer to the usage documentation on how the sprite image should be made.
  */
@@ -61,12 +71,13 @@ typedef enum {
 @property (nonatomic, copy) NSString *backgroundSpriteFrameName;
 
 /**
- * Defaults to transparent color
+ * If a sprite is not provided as the dialog's background, this property will be
+ * used as the background color of the dialog box.
  *
- * If a sprite is not provided as the dialog's background, the dialog will use
- * a color as its backgorund.
+ * You can create a `ccColor4B` via `ccc4(red, blue, green, alpha)`.
+ * Note that all color values are from 0-255.
  *
- * By default the color is transparent.
+ * __Defaults to a semi-transparent black color (`ccc4(0,0,0,204)`).__
  */
 @property (nonatomic) ccColor4B backgroundColor;
 
@@ -74,93 +85,116 @@ typedef enum {
  * The sprite to be used by the dialog box after a page of text is displayed.
  *
  * Currently custom animation for this sprite is not supported.
- * By default this sprite will blink continously after being displayed.
+ * By default this sprite will blink continously after the dialog texts are typed.
  *
- * Also by default DLDialogBox will position the sprite at the bottom right corner
- * using the same offset as the dialogTextOffset of this customizer.
+ * Also by default DLDialogBox will position this sprite at the bottom right corner
+ * using the same offset as the `dialogTextOffset` of this customizer.
  *
- * Override this sprite's position after setting it on the dialogBox to custoize
- * the position of the arrow.
+ * Override this sprite's position after setting the customizer on a DLDialogBox
+ * to adjust the extact position of this indicator sprite.
+ *
+ * __By default `defaultCustomizer` sets this sprite to an arrow cursor sprite
+ * attached with the project.__
  */
 @property (nonatomic, strong) CCSprite *pageFinishedIndicator;
 
 /**
- * Default is 1.0 for 1 second per blink.
+ * The speed per blink for the page finished indicator sprite.
  *
- * The speed per blink for the page finished indicator.
  * Higher value means it will take longer per blink.
  *
- * Example: 0.5 will result in a blink every half second
+ * Example: 0.5 will result in a blink every half second.
+ *
+ * __Default is 1.0 for 1 second per blink.__
  */
 @property (nonatomic) ccTime speedPerPageFinishedIndicatorBlink;
 
 /**
- * Offset of the dialog text between the top left edge of the border if no portait.
+ * The offset between the dialog text and the top left edge of the dialog box.
  *
- * If portrait exists and it's inside the dialog on the left side then this offset
- * corresponds to the spacing between right side of the portrait and
- * top of the dialog box.
+ * If the dialog box has an inner portrait on the left side of the dialog,
+ * then this offset corresponds to the spacing between the dialog text and the
+ * inner portrait (y offest is still the space bewtween the text and the top of
+ * the dialog box).
+ *
+ * Please note that this value is also used as the default offset between the 
+ * `pageFinishedIndicator` and the bottom right of the dialog box.
+ *
+ * __Defaults to (10, 10)__
  */
 @property (nonatomic) CGPoint dialogTextOffset;
 
 /**
- * Position of the portrait in the dialog box. Can be on the left or right
+ * Position of the portrait in the dialog box.
+ *
+ * This value can be `kDialogPortraitPositionLeft` or `kDialogPortraitPositionRight`
+ *
+ * __Defaults to `kDialogPortraitPositionRight`__
  */
 @property (nonatomic) DialogPortraitPosition portraitPosition;
 
 /**
- * The padding between the portrait and the edge of the dialog box
+ * The padding between the portrait and the edge of the dialog box.
  *
- * Howver if this portrait is outside of the dialog box, then this specifies
- * the padding between the portrait and the bottom edge of the dialog box.
+ * If <portaitInsideDialog> is NO, then this value specifies the offset between
+ * the portrait and the bottom edge of the dialog box depending on the <portraitPosition>.
+ *
+ * If <portaitInsideDialog> is YES, then this value specifies the offset between
+ * the portrait and the top edge of the dialog box depending on the <portraitPosition>.
+ *
+ * __Defaults to (0, 0)__
  */
 @property (nonatomic) CGPoint portraitOffset;
 
 /**
- * Defaults to NO.
+ * If set to YES, the dialog's portrait will appear inside the dialog box.
  *
- * By default the portrait will be places outside of the dialog box so you
- * can use a big beautiful portrait that will emotionally connect the players.
+ * By default the portrait will be placed outside of the dialog box so you
+ * can use a big beautiful portrait that is just super fabulous. 
+ *
+ * However if `portaitInsideDialog` is set to YES, then the portrait will instead
+ * be placed inside the dialog and `portraitOffset` will be the spacing
+ * between the portrait and the top left edge of the dialog box.
+ *
+ * __Defaults to NO__
  */
 @property (nonatomic) BOOL portaitInsideDialog;
 
 /**
- * Defaults to NO.
+ * When enabled the dialog's portrait will be animated if `portraitInsdeDialog` is set to NO.
  *
- * This is only valid is portraitInsideDialog is NO.
- *
- * By default is places the portrait behind the dialog box so that the dialog
- * text can use the whole dialog space.
- */
-//@property (nonatomic) BOOL outsidePortraitInFront;
-
-/**
- * Defaults to YES.
- *
- * When portraitInsdeDialog is NO (thus the portrait is outside the dialog), 
- * setting this to YES will results in the portrait being animated in when the
+ * When <portaitInsideDialog> is NO (thus the portrait is outside the dialog),
+ * setting this value to YES will result in the portrait being animated in when the
  * dialog is displayed on screen.
  *
  * For more advanced users, you can animate the portrait property of the DialogBox
  * directly if you want some other cool animation.
+ *
+ * __Defaults to YES__
  */
 @property (nonatomic) BOOL animateOutsidePortraitIn;
 
 /**
- * fntFile used by the dialog for conversation text.
+ * The font file used by the dialog for displaying text.
  *
- * This fntFile is also used by the choice dialog if the fnt file for
- * the choice dialog if not set (not the default)
+ * This font file is also used by the choice dialog if the font file for
+ * `choiceDialogCustomizer` is not set.
+ *
+ * __Defaults to the demo fnt file (`demo_fnt.fnt`) attached with the project__
  */
 @property (nonatomic, copy) NSString *fntFile;
 
 /**
- * The choice dialog customizer for the dialog box if it uses the choice dialog
+ * The `DLChoiceDialogCustomizer` for the dialog box's choice dialog.
+ *
+ * __Defaults to the default DLChoiceDialogCustomizer__
+ *
+ * @see [DLChoiceDialogCustomizer defaultCustomizer]
  */
 @property (nonatomic, strong) DLChoiceDialogCustomizer *choiceDialogCustomizer;
 
 /**
- * The default customizer for the dialog box using available resources
+ * Returns a default customizer for the dialog box
  */
 + (DLDialogBoxCustomizer *)defaultCustomizer;
 

@@ -35,7 +35,7 @@
   customizer.backgroundColor = ccc4(0, 0, 0, 0.8*255);
   customizer.pageFinishedIndicator = [CCSprite spriteWithFile:@"arrow_cursor.png"];
   customizer.speedPerPageFinishedIndicatorBlink = 1.0;
-  customizer.dialogTextOffset = ccp(5, 10);
+  customizer.dialogTextOffset = ccp(10, 10);
   customizer.portraitPosition = kDialogPortraitPositionLeft;
   customizer.portaitInsideDialog = NO;
   customizer.animateOutsidePortraitIn = YES;
