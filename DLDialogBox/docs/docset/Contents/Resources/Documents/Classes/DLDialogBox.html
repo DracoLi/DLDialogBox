@@ -59,13 +59,13 @@
 	
 	<option value="//api/name/handleTapInputs">&nbsp;&nbsp;&nbsp;&nbsp;handleTapInputs</option>
 	
+	<option value="//api/name/initialTextArray">&nbsp;&nbsp;&nbsp;&nbsp;initialTextArray</option>
+	
 	<option value="//api/name/portrait">&nbsp;&nbsp;&nbsp;&nbsp;portrait</option>
 	
 	<option value="//api/name/prependText">&nbsp;&nbsp;&nbsp;&nbsp;prependText</option>
 	
 	<option value="//api/name/tapToFinishCurrentPage">&nbsp;&nbsp;&nbsp;&nbsp;tapToFinishCurrentPage</option>
-	
-	<option value="//api/name/textArray">&nbsp;&nbsp;&nbsp;&nbsp;textArray</option>
 	
 	<option value="//api/name/typingDelay">&nbsp;&nbsp;&nbsp;&nbsp;typingDelay</option>
 	
@@ -139,13 +139,13 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/handleTapInputs">handleTapInputs</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initialTextArray">initialTextArray</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/portrait">portrait</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/prependText">prependText</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tapToFinishCurrentPage">tapToFinishCurrentPage</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/textArray">textArray</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/typingDelay">typingDelay</a></span></li>
 	
@@ -277,7 +277,7 @@ Please refer to <a href="../Classes/DLDialogBoxCustomizer.html">DLDialogBoxCusto
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/textArray">&nbsp;&nbsp;textArray</a></code>
+		<code><a href="#//api/name/initialTextArray">&nbsp;&nbsp;initialTextArray</a></code>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -572,8 +572,7 @@ automatically after a choice is selected.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Current page of the text that we are displaying.
-Current page is one once the dialog starts typing its first words.</p>
+		<p>Current dialog page. Starts at 1. 0 when nothing has been typed.</p>
 	</div>		
 	
     
@@ -587,13 +586,6 @@ Current page is one once the dialog starts typing its first words.</p>
 	
 	
 	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>When the dialog has not typed anything, current page is 0.</p>
-
-<p>Note this is readonly</p>
-	</div>
 	
 	
 	
@@ -747,7 +739,7 @@ as the portrait image for the dialog page indicated by the key.</p>
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>If nil, no portrait will be displayed for the dialog box.</p>
 
-<p>You can customize the portrait posittions through the ChoiceDialogCustomizer</p>
+<p>You can customize the portrait position through the <a href="#//api/name/customizer">customizer</a>.</p>
 	</div>
 	
 	
@@ -815,7 +807,7 @@ of the dialog box.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Defaults to YES</p>
+		<p>When enabled, the dialog box will process all tap inputs on the screen.</p>
 	</div>		
 	
     
@@ -832,8 +824,52 @@ of the dialog box.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>When set, the dialog box will handle all tap inputs on the screen.
-Since tap will go to the next page or finish current page.</p>
+		<p>When the dialog&rsquo;s typing animation has finished, tap inputs will result in
+the dialog displaying the following page.</p>
+
+<p><strong>Defaults to YES</strong></p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DLDialogBox.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initialTextArray" title="initialTextArray"></a>
+	<h3 class="subsubtitle method-title">initialTextArray</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>An array of text that this dialog will be typing.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSArray *initialTextArray</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Each element of this array will be display as a single page.
+<a href="#//api/name/currentTextPage">currentTextPage</a> should corresponds to the current page that is being typed.</p>
 	</div>
 	
 	
@@ -902,7 +938,7 @@ custom onEnter animation) however you like.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>When set all text page content will start with this prependText.</p>
+		<p>The text to be displayed before every dialog content.</p>
 	</div>		
 	
     
@@ -919,9 +955,10 @@ custom onEnter animation) however you like.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>A good use of this will be adding the character name before all dialog text.
-For example setting prependText to &ldquo;Draco: &rdquo; will result in all text displayed
-by the dialog box to start with &ldquo;Draco: [content]&rdquo; as if its me saying it :)</p>
+		<p>A good use of this will be adding a character name before all dialog content.</p>
+
+<p>For example setting <code>prependText</code> to &ldquo;Draco: &rdquo; will result in all text displayed
+by the dialog box to start with &ldquo;Draco: [content]&rdquo; as if it&rsquo;s me saying it :)</p>
 	</div>
 	
 	
@@ -945,7 +982,8 @@ by the dialog box to start with &ldquo;Draco: [content]&rdquo; as if its me sayi
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Defaults to YES.</p>
+		<p>If enabled, tap inputs during dialog typing animation will immediately
+finish the current page, bypassing the typing animation.</p>
 	</div>		
 	
     
@@ -962,47 +1000,10 @@ by the dialog box to start with &ldquo;Draco: [content]&rdquo; as if its me sayi
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>If set to YES, then tapping will first result in the current page be
-immediately displayed without going through the typing animation.</p>
+		<p>If the page is already finished then tapping will go to the next page.</p>
 
-<p>If the page is already finished then tapping will go to the next page</p>
+<p><strong>Defaults to YES</strong></p>
 	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">DLDialogBox.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/textArray" title="textArray"></a>
-	<h3 class="subsubtitle method-title">textArray</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>An array of text to display. The dialog box will display one text per page.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSMutableArray *textArray</code></div>
-
-    
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -1364,6 +1365,16 @@ manually right after setting choices.</p>
 	<div class="method-subsection method-declaration"><code>- (void)updatePortraitTextureWithSprite:(CCSprite *)<em>sprite</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>sprite</em></dt>
+			<dd><p>The sprite to use for the dialog portrait</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	

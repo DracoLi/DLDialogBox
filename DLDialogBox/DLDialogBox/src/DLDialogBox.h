@@ -338,7 +338,7 @@ typedef enum {
 
 /**
  * If enabled, tap inputs during dialog typing animation will immediately
- * finish the current page, bypassing the typing animation.
+ * finish the current page, bypassing anymore typing animations.
  *
  * If the page is already finished then tapping will go to the next page.
  *
@@ -357,70 +357,80 @@ typedef enum {
 @property (nonatomic) BOOL handleTapInputs;
 
 /**
- * Defaults to NO
+ * When enabled, this dialog box will only process tap inputs that are inside
+ * the dialog box.
  *
- * When set to YES, the dialog box will handle only tap inputs within the dialog
- * box, thus the player can only advance to next page by tapping inside the
- * dialog box. This dialog box does not include the portrait when its outside
- * of the dialog box.
+ * This property is only relavent if <handleTapInputs> is enabled.
+ *
+ * __Defaults to YES__
  */
 @property (nonatomic) BOOL handleOnlyTapInputsInDialogBox;
 
 /**
- * Defaults to 0.2
+ * The delay between the typing animation of each character.
  *
- * This controls the delay between each character typed by the dialog box.
+ * __Defaults to 0.02__
  */
 @property (nonatomic) ccTime typingDelay;
 
 /**
- * Defaults to YES
+ * When enabled, this dialog box will automatically close on tap or on choice selection.
  *
- * When enabled, the dialog box will automatically close on tap after the 
- * dialog is finished displaying its final content if no choices are needed.
+ * When there are no choices to be shown, this will allow the player to close
+ * this dialog box on tap after all dialog text are displayed.
  *
- * When there are choices to be displayed at the end, the dialog will close
+ * When there are choices to be displayed at the end, this dialog will close
  * automatically after a choice is selected.
+ *
+ * __Defaults to YES__
  */
 @property (nonatomic) BOOL closeWhenDialogFinished;
 
 /**
- * This portrait that is being displayed by the dialog box
+ * The portrait that is being displayed by the dialog box.
  *
- * The defaultPortraitSprite is not displayed, only this sprite is displayed.
- * This sprite only uses the texture of the defaultPortraitSprite.
+ * This sprite is the only sprite that is used by the dialog box to display the portrait.
  *
- * This is exposed publicly so that you can customize it (like giving it a
- * custom onEnter animation) however you like.
+ * <defaultPortraitSprite> or any other sprites in <customPortraitForPages> is
+ * only used to replace this sprite's texture.
+ *
+ * This sprite is exposed publicly so that you can customize it however you like.
+ * Just don't do anything weird.
+ *
+ * __Please note that this sprite will be `nil` if `defaultPortraitSprite` is not provided.__
+ *
  */
 @property (nonatomic, strong) CCSprite *portrait;
 
 /**
- * This is set to YES when the dialogbox has finished typing the current page.
+ * This value will be YES when the current page displayed by the dialog box
+ * has been fully typed/displayed.
  */
 @property (nonatomic, readonly) BOOL currentPageTyped;
 
 /**
- * Initializers.
- *
- * The default DialogBox customizer is used if none is provided
+ * @param texts       An array of texts to display
+ * @param portrait    The portrait sprite to show
+ * @param choices     An array of choice strings for the choice dialog
+ * @param customizer  A <DLDialogBoxCustomizer> to customize the dialog box
  */
-+ (id)dialogWithTextArray:(NSArray *)texts
-          defaultPortrait:(CCSprite *)portrait;
-+ (id)dialogWithTextArray:(NSArray *)texts
-          defaultPortrait:(CCSprite *)portrait
-               customizer:(DLDialogBoxCustomizer *)customizer;
-+ (id)dialogWithTextArray:(NSArray *)texts
-                  choices:(NSArray *)choices
-          defaultPortrait:(CCSprite *)portrait;
-+ (id)dialogWithTextArray:(NSArray *)texts
-          defaultPortrait:(CCSprite *)portrait
-                  choices:(NSArray *)choices
-               customizer:(DLDialogBoxCustomizer *)customizer;
 - (id)initWithTextArray:(NSArray *)texts
         defaultPortrait:(CCSprite *)portrait
                 choices:(NSArray *)choices
              customizer:(DLDialogBoxCustomizer *)customizer;
+
++ (id)dialogWithTextArray:(NSArray *)texts
+          defaultPortrait:(CCSprite *)portrait;
++ (id)dialogWithTextArray:(NSArray *)texts
+          defaultPortrait:(CCSprite *)portrait
+               customizer:(DLDialogBoxCustomizer *)customizer;
++ (id)dialogWithTextArray:(NSArray *)texts
+                  choices:(NSArray *)choices
+          defaultPortrait:(CCSprite *)portrait;
++ (id)dialogWithTextArray:(NSArray *)texts
+          defaultPortrait:(CCSprite *)portrait
+                  choices:(NSArray *)choices
+               customizer:(DLDialogBoxCustomizer *)customizer;
 
 /**
  * This method essentially calls `finishCurrentPage` if current page is still

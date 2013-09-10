@@ -188,8 +188,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/setCurrentTextPage:</TokenIdentifier>
-			<Abstract type="html">Current page of the text that we are displaying.
-Current page is one once the dialog starts typing its first words.</Abstract>
+			<Abstract type="html">Current dialog page. Starts at 1. 0 when nothing has been typed.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, readonly) NSUInteger currentTextPage</Declaration>
@@ -201,8 +200,7 @@ Current page is one once the dialog starts typing its first words.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/currentTextPage</TokenIdentifier>
-			<Abstract type="html">Current page of the text that we are displaying.
-Current page is one once the dialog starts typing its first words.</Abstract>
+			<Abstract type="html">Current dialog page. Starts at 1. 0 when nothing has been typed.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, readonly) NSUInteger currentTextPage</Declaration>
@@ -214,8 +212,7 @@ Current page is one once the dialog starts typing its first words.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBox/currentTextPage</TokenIdentifier>
-			<Abstract type="html">Current page of the text that we are displaying.
-Current page is one once the dialog starts typing its first words.</Abstract>
+			<Abstract type="html">Current dialog page. Starts at 1. 0 when nothing has been typed.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, readonly) NSUInteger currentTextPage</Declaration>
@@ -262,44 +259,44 @@ Current page is one once the dialog starts typing its first words.</Abstract>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/setTextArray:</TokenIdentifier>
-			<Abstract type="html">An array of text to display. The dialog box will display one text per page.</Abstract>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/setInitialTextArray:</TokenIdentifier>
+			<Abstract type="html">An array of text that this dialog will be typing.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) NSMutableArray *textArray</Declaration>
+			<Declaration>@property (nonatomic, copy) NSArray *initialTextArray</Declaration>
 			
 			
-			<Anchor>//api/name/textArray</Anchor>
+			<Anchor>//api/name/initialTextArray</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/textArray</TokenIdentifier>
-			<Abstract type="html">An array of text to display. The dialog box will display one text per page.</Abstract>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/initialTextArray</TokenIdentifier>
+			<Abstract type="html">An array of text that this dialog will be typing.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) NSMutableArray *textArray</Declaration>
+			<Declaration>@property (nonatomic, copy) NSArray *initialTextArray</Declaration>
 			
 			
-			<Anchor>//api/name/textArray</Anchor>
+			<Anchor>//api/name/initialTextArray</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBox/textArray</TokenIdentifier>
-			<Abstract type="html">An array of text to display. The dialog box will display one text per page.</Abstract>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBox/initialTextArray</TokenIdentifier>
+			<Abstract type="html">An array of text that this dialog will be typing.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) NSMutableArray *textArray</Declaration>
+			<Declaration>@property (nonatomic, copy) NSArray *initialTextArray</Declaration>
 			
 			
-			<Anchor>//api/name/textArray</Anchor>
+			<Anchor>//api/name/initialTextArray</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/setPrependText:</TokenIdentifier>
-			<Abstract type="html">When set all text page content will start with this prependText.</Abstract>
+			<Abstract type="html">The text to be displayed before every dialog content.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, copy) NSString *prependText</Declaration>
@@ -311,7 +308,7 @@ Current page is one once the dialog starts typing its first words.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/prependText</TokenIdentifier>
-			<Abstract type="html">When set all text page content will start with this prependText.</Abstract>
+			<Abstract type="html">The text to be displayed before every dialog content.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, copy) NSString *prependText</Declaration>
@@ -323,7 +320,7 @@ Current page is one once the dialog starts typing its first words.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBox/prependText</TokenIdentifier>
-			<Abstract type="html">When set all text page content will start with this prependText.</Abstract>
+			<Abstract type="html">The text to be displayed before every dialog content.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, copy) NSString *prependText</Declaration>
@@ -335,7 +332,8 @@ Current page is one once the dialog starts typing its first words.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/setTapToFinishCurrentPage:</TokenIdentifier>
-			<Abstract type="html">Defaults to YES.</Abstract>
+			<Abstract type="html">If enabled, tap inputs during dialog typing animation will immediately
+finish the current page, bypassing the typing animation.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic) BOOL tapToFinishCurrentPage</Declaration>
@@ -347,7 +345,8 @@ Current page is one once the dialog starts typing its first words.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/tapToFinishCurrentPage</TokenIdentifier>
-			<Abstract type="html">Defaults to YES.</Abstract>
+			<Abstract type="html">If enabled, tap inputs during dialog typing animation will immediately
+finish the current page, bypassing the typing animation.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic) BOOL tapToFinishCurrentPage</Declaration>
@@ -359,7 +358,8 @@ Current page is one once the dialog starts typing its first words.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBox/tapToFinishCurrentPage</TokenIdentifier>
-			<Abstract type="html">Defaults to YES.</Abstract>
+			<Abstract type="html">If enabled, tap inputs during dialog typing animation will immediately
+finish the current page, bypassing the typing animation.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic) BOOL tapToFinishCurrentPage</Declaration>
@@ -371,7 +371,7 @@ Current page is one once the dialog starts typing its first words.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/setHandleTapInputs:</TokenIdentifier>
-			<Abstract type="html">Defaults to YES</Abstract>
+			<Abstract type="html">When enabled, the dialog box will process all tap inputs on the screen.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic) BOOL handleTapInputs</Declaration>
@@ -383,7 +383,7 @@ Current page is one once the dialog starts typing its first words.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/handleTapInputs</TokenIdentifier>
-			<Abstract type="html">Defaults to YES</Abstract>
+			<Abstract type="html">When enabled, the dialog box will process all tap inputs on the screen.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic) BOOL handleTapInputs</Declaration>
@@ -395,7 +395,7 @@ Current page is one once the dialog starts typing its first words.</Abstract>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBox/handleTapInputs</TokenIdentifier>
-			<Abstract type="html">Defaults to YES</Abstract>
+			<Abstract type="html">When enabled, the dialog box will process all tap inputs on the screen.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic) BOOL handleTapInputs</Declaration>
@@ -641,7 +641,12 @@ will be called.</Abstract>
 			<DeclaredIn>DLDialogBox.h</DeclaredIn>
 			
 			<Declaration>- (void)updatePortraitTextureWithSprite:(CCSprite *)sprite</Declaration>
-			
+			<Parameters>
+				<Parameter>
+					<Name>sprite</Name>
+					<Abstract type="html">The sprite to use for the dialog portrait</Abstract>
+				</Parameter>
+			</Parameters>
 			
 			<Anchor>//api/name/updatePortraitTextureWithSprite:</Anchor>
             <NodeRef refid="5"/>
