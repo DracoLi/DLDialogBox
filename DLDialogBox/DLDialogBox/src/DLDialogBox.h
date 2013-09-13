@@ -21,21 +21,29 @@ typedef enum {
 } DialogPortraitPosition;
 
 /**
- * DLDialogBoxCustomizer Stores customization properties for how a <DLDialogBox> 
- * should be displayed.
+ * A DLDialogBoxCustomizer is used to determine the __look__, __functionalities__,
+ * and the __animations__ related to a <DLDialogBox>.
  *
- * Each <DLDialogBox> must use a customizer, if no customizers are given the
+ * Every <DLDialogBox> must use a dialog customizer. If no customizers are given the
  * dialog box will automatically use the default customizer provided through
  * <defaultCustomizer>.
+ *
+ * The reason a customizer class is used to store how a dialog box should look,
+ * function and animate is because this way you can reuse a single <DLDialogBoxCustomizer>
+ * instance on all the DLDialogBoxes in your game to achieve a consistent look
+ * and behaviour.
  */
 @interface DLDialogBoxCustomizer : NSObject
+
+
+/// @name Customizing DLDialogBox's look/UI
 
 /**
  * The size of dialog box (not including the portrait if its outside).
  *
  * __Default is (current device width, kDialogHeightNormal)__
  *
- * The default dialog size will make a dialog what stretches accross the device
+ * The default dialog size will make a dialog what stretches across the device
  * and can roughly accommodates 3 rows of text in landscape mode.
  *
  * Please note that DLDialogBox does not automatically scale the dialog's height
@@ -77,7 +85,7 @@ typedef enum {
  * You can create a `ccColor4B` via `ccc4(red, blue, green, alpha)`.
  * Note that all color values are from 0-255.
  *
- * __Defaults to a semi-transparent black color (`ccc4(0,0,0,204)`).__
+ * __Defaults to a semi-transparent black color (`ccc4(0,0,0,0.8*255)`).__
  */
 @property (nonatomic) ccColor4B backgroundColor;
 
@@ -129,7 +137,7 @@ typedef enum {
  *
  * This value can be `kDialogPortraitPositionLeft` or `kDialogPortraitPositionRight`
  *
- * __Defaults to `kDialogPortraitPositionRight`__
+ * __Defaults to `kDialogPortraitPositionLeft`__
  */
 @property (nonatomic) DialogPortraitPosition portraitPosition;
 
@@ -153,7 +161,7 @@ typedef enum {
  * can use a big beautiful portrait that is just super fabulous. 
  *
  * However if `portaitInsideDialog` is set to YES, then the portrait will instead
- * be placed inside the dialog and `portraitOffset` will be the spacing
+ * be placed inside the dialog and <portraitOffset> will be the spacing
  * between the portrait and the top left edge of the dialog box.
  *
  * __Defaults to NO__
@@ -161,24 +169,10 @@ typedef enum {
 @property (nonatomic) BOOL portaitInsideDialog;
 
 /**
- * When enabled the dialog's portrait will be animated if `portraitInsdeDialog` is set to NO.
- *
- * When <portaitInsideDialog> is NO (thus the portrait is outside the dialog),
- * setting this value to YES will result in the portrait being animated in when the
- * dialog is displayed on screen.
- *
- * For more advanced users, you can animate the portrait property of the DialogBox
- * directly if you want some other cool animation.
- *
- * __Defaults to YES__
- */
-@property (nonatomic) BOOL animateOutsidePortraitIn;
-
-/**
  * The font file used by the dialog for displaying text.
  *
  * This font file is also used by the choice dialog if the font file for
- * `choiceDialogCustomizer` is not set.
+ * <choiceDialogCustomizer> is not set.
  *
  * __Defaults to the demo fnt file (`demo_fnt.fnt`) attached with the project__
  */
@@ -192,6 +186,79 @@ typedef enum {
  * @see [DLChoiceDialogCustomizer defaultCustomizer]
  */
 @property (nonatomic, strong) DLChoiceDialogCustomizer *choiceDialogCustomizer;
+
+
+/// @name Customizing DLDialogBox's functionalities
+
+/**
+ * If enabled, tap inputs during dialog typing animation will immediately
+ * finish the current page, bypassing anymore typing animations.
+ *
+ * If the page is already finished then tapping will go to the next page.
+ *
+ * __Defaults to YES__
+ */
+@property (nonatomic) BOOL tapToFinishCurrentPage;
+
+/**
+ * When enabled, the dialog box will process all tap inputs on the screen.
+ *
+ * When the dialog's typing animation has finished, tap inputs will result in
+ * the dialog displaying the following page.
+ *
+ * __Defaults to YES__
+ */
+@property (nonatomic) BOOL handleTapInputs;
+
+/**
+ * When enabled, this dialog box will only process tap inputs that are inside
+ * the dialog box.
+ *
+ * This property is only relavent if <handleTapInputs> is enabled.
+ *
+ * __Defaults to YES__
+ */
+@property (nonatomic) BOOL handleOnlyTapInputsInDialogBox;
+
+/**
+ * The delay between the typing animation of each character.
+ *
+ * __Defaults to 0.02__
+ */
+@property (nonatomic) ccTime typingDelay;
+
+/**
+ * When enabled, this dialog box will automatically close on tap or on choice selection.
+ *
+ * When there are no choices to be shown, this will allow the player to close
+ * this dialog box on tap after all dialog text are displayed.
+ *
+ * When there are choices to be displayed at the end, this dialog will close
+ * automatically after a choice is selected.
+ *
+ * __Defaults to YES__
+ *
+ * @see [DLDialogBox removeDialogBoxAndCleanUp]
+ */
+@property (nonatomic) BOOL closeWhenDialogFinished;
+
+
+/// @name Animating a DLDialogBox
+
+/**
+ * A block that is run during the onEnter method of the <DLDialogBox>
+ *
+ * You should use this to make customization show animations for a DLDialogBox.
+ */
+@property (nonatomic, copy) DLAnimationBlock onEnterDialogAnimation;
+
+/**
+ * A block that is run during the onExit method of the <DLDialogBox>
+ *
+ * You should use this to make customization hide animations for a DLDialogBox.
+ */
+@property (nonatomic, copy) DLAnimationBlock onExitDialogAnimation;
+
 
 /**
  * Returns a default customizer for the dialog box
@@ -253,7 +320,15 @@ typedef enum {
 /**
  * This customizer is used to customize the look and feel of the dialog box.
  *
- * Setting this will immediately redraw child nodes to reflect the new look.
+ * Please note that once a DLDialogBox is created with a customizer, you cannot
+ * update UI related properties in the customizer anymore as the dialog box will only
+ * process the UI properties once on creation to draw the dialog box.
+ *
+ * Attempting to update any UI related properties in the customizer
+ * will not do anything and may break some functionalities.
+ *
+ * You can however update functionality related properties on the customizer though
+ * as those are processed whenever they are required.
  *
  * @see DLDialogBoxCustomizer
  */
@@ -264,6 +339,10 @@ typedef enum {
  *
  * Once a choice array has been provided, a <DLChoiceDialog> will automatically be created.
  * You can then access the <DLChoiceDialog> through the property <choiceDialog>.
+ *
+ * You can change this choices array anytime before the choice dialog is displayed.
+ * Changing this choices array will automatically recreate the choice dialog to
+ * reflect the new choices.
  *
  * @see DLChoiceDialog
  */
@@ -277,7 +356,6 @@ typedef enum {
  * The choice dialog is only created when the <choices> array is set.
  */
 @property (nonatomic, strong) DLChoiceDialog *choiceDialog;
-
 
 /**
  * This is used provide unique portrait sprites for the different dialog pages in a <DLDialogBox>.
@@ -306,6 +384,8 @@ typedef enum {
 
 /**
  * Current dialog page. Starts at 1. 0 when nothing has been typed.
+ *
+ * __Defaults to 0__
  */
 @property (nonatomic, readonly) NSUInteger currentTextPage;
 
@@ -337,54 +417,12 @@ typedef enum {
 @property (nonatomic, copy) NSString *prependText;
 
 /**
- * If enabled, tap inputs during dialog typing animation will immediately
- * finish the current page, bypassing anymore typing animations.
+ * This value will be YES when the current page displayed by the dialog box
+ * has been fully typed/displayed.
  *
- * If the page is already finished then tapping will go to the next page.
- *
- * __Defaults to YES__
+ * __By default this is NO__
  */
-@property (nonatomic) BOOL tapToFinishCurrentPage;
-
-/**
- * When enabled, the dialog box will process all tap inputs on the screen.
- *
- * When the dialog's typing animation has finished, tap inputs will result in
- * the dialog displaying the following page.
- *
- * __Defaults to YES__
- */
-@property (nonatomic) BOOL handleTapInputs;
-
-/**
- * When enabled, this dialog box will only process tap inputs that are inside
- * the dialog box.
- *
- * This property is only relavent if <handleTapInputs> is enabled.
- *
- * __Defaults to YES__
- */
-@property (nonatomic) BOOL handleOnlyTapInputsInDialogBox;
-
-/**
- * The delay between the typing animation of each character.
- *
- * __Defaults to 0.02__
- */
-@property (nonatomic) ccTime typingDelay;
-
-/**
- * When enabled, this dialog box will automatically close on tap or on choice selection.
- *
- * When there are no choices to be shown, this will allow the player to close
- * this dialog box on tap after all dialog text are displayed.
- *
- * When there are choices to be displayed at the end, this dialog will close
- * automatically after a choice is selected.
- *
- * __Defaults to YES__
- */
-@property (nonatomic) BOOL closeWhenDialogFinished;
+@property (nonatomic, readonly) BOOL currentPageTyped;
 
 /**
  * The portrait that is being displayed by the dialog box.
@@ -403,10 +441,25 @@ typedef enum {
 @property (nonatomic, strong) CCSprite *portrait;
 
 /**
- * This value will be YES when the current page displayed by the dialog box
- * has been fully typed/displayed.
+ * The node that is the parent of all nodes in the dialog box.
+ *
+ * When the dialog box's portrait is inside, this node should contain everything
+ * including the dialog portrait.
+ * However when the portrait is outside of the portrait then the portrait will
+ * be excluded from the dialogContent.
+ *
+ * This property is exposed so that you can animate just the dialog content in 
+ * isolation of anything that might be outside of it.
  */
-@property (nonatomic, readonly) BOOL currentPageTyped;
+@property (nonatomic, strong) CCNode *dialogContent;
+
+/**
+ * The label that is used to type texts in the dialog box.
+ * 
+ * This property is exposed so that you can provide custom animations
+ * for just the dialog label during dialog onEnter or onExit.
+ */
+@property (nonatomic, strong) DLAutoTypeLabelBM *dialogLabel;
 
 /**
  * @param texts       An array of texts to display
@@ -433,22 +486,38 @@ typedef enum {
                customizer:(DLDialogBoxCustomizer *)customizer;
 
 /**
- * This method essentially calls `finishCurrentPage` if current page is still
- * being animated. Else if the typing animation is finished, then `advanceToNextPage`
+ * Finish animating the current page if the dialog content is still being typed,
+ * else go to the next page.
+ *
+ * This method essentially calls <finishCurrentPage> if current page is still
+ * being animated. Else if <currentPageTyped> is YES, then <advanceToNextPage>
  * will be called.
  *
- *  Example ussage: Make a custom next button that the player can use to skip
- *  the typing animation or go to the next page if page has already finished displaying.
+ * __Example usage:__ Make a custom "Next" button that the player can use to skip
+ * the typing animation or go to the next page if the page has already finished displaying.
+ *
+ * When <tapToFinishCurrentPage> is set to YES, tap inputs are all handled by this
+ * method internally.
  */
 - (void)finishCurrentPageOrAdvance;
 
 /**
  * Finish the current page immediately, skipping any typing animations.
+ *
+ * If the current page has already finished animating, then nothing happens.
  */
 - (void)finishCurrentPage;
 
 /**
- * Finish the current page immediately and display the next page content
+ * Finish the current page immediately and display the next page's content.
+ *
+ * If called before the dialog has finished its typing animation, then the
+ * typing animation will not finish and would instead immeditely start animating
+ * the next page's content.
+ *
+ * If there are no more content left to display this method would do nothing
+ * unless <closeWhenDialogFinished> is set to YES and there are no choice dialogs.
+ * In this case this method would remove the dialog box since everything is done.
  */
 - (void)advanceToNextPage;
 
@@ -460,23 +529,35 @@ typedef enum {
 - (void)updatePortraitTextureWithSprite:(CCSprite *)sprite;
 
 /**
- * Shows the choice dialog immediately if one is created.
+ * Add this dialog's choice dialog to DLDialogBox's parent if a <choiceDialog> exists.
  *
- * Note that the choice dialog is actually added tho the same parent that this
- * dialog box is added to. Thus you should set the choiceDialog's position
- * manually right after setting choices.
+ * Note that the choice dialog is actually added to the same parent that this
+ * dialog box is added to. Thus you should set the <choiceDialog>'s position
+ * manually right after creating a DLDialogBox with choices.
+ *
+ * The z index of the choice dialog is automatically set to the dialog box's zOrder + 1
+ * so it is always above the dialog box.
  * 
- * The choice Dialog is created when choices are set.
+ * <showChoiceDialog> is automatically called after a <DLDialogBox> has finished
+ * typing all its text array.
+ *
+ * The <choiceDialog> is only created when <choices> are set.
  */
 - (void)showChoiceDialog;
 
 /**
- * Remove any displayed choice dialog and then perform any cleanup
+ * Remove any displayed choice dialog and then perform any cleanup.
  */
 - (void)removeChoiceDialogAndCleanUp;
 
 /**
- * Remove this dialog from the parent and clean up
+ * Remove this dialog box from the parent and clean up.
+ *
+ * Also removes any existing choice dialogs by calling <removeChoiceDialogAndCleanUp>.
+ *
+ * If <closeWhenDialogFinished> is set to YES, then this method will be called
+ * automatically after a choice has been selected or if no choices are needed
+ * then when all text are displayed by the dialog box.
  */
 - (void)removeDialogBoxAndCleanUp;
 

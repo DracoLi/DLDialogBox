@@ -10,13 +10,13 @@
 #import "CCSprite+GLBoxes.h"
 #import "CCScale9Sprite.h"
 
+// Constants for z indexes
 #define kBackgroundSpriteZIndex 0
 #define kPageTextZIndex 1
 #define kPageIndicatorZIndex 2
 
-#define kDefaultIndicatorPadding 5
+// Other constants
 #define kDefaultTypingSpeed 0.02
-
 #define kDialogBoxTouchPriority 0
 
 #define kPortraitMoveAnimationDuration 0.3
@@ -28,8 +28,9 @@
 
 + (DLDialogBoxCustomizer *)defaultCustomizer
 {
-  
   DLDialogBoxCustomizer *customizer = [[DLDialogBoxCustomizer alloc] init];
+  
+  // Look
   customizer.dialogSize = CGSizeMake([[CCDirector sharedDirector] winSize].width,
                                      kDialogHeightNormal);
   customizer.backgroundColor = ccc4(0, 0, 0, 0.8*255);
@@ -37,11 +38,18 @@
   customizer.speedPerPageFinishedIndicatorBlink = 1.0;
   customizer.dialogTextOffset = ccp(10, 10);
   customizer.portraitPosition = kDialogPortraitPositionLeft;
+  customizer.portraitOffset = ccp(0, 0);
   customizer.portaitInsideDialog = NO;
-  customizer.animateOutsidePortraitIn = YES;
-  //  customizer.outsidePortraitInFront = NO;
   customizer.fntFile = @"demo_fnt.fnt";;
   customizer.choiceDialogCustomizer = [DLChoiceDialogCustomizer defaultCustomizer];
+  
+  // Functionalities
+  customizer.tapToFinishCurrentPage = YES;
+  customizer.handleTapInputs = YES;
+  customizer.handleOnlyTapInputsInDialogBox = YES;
+  customizer.typingDelay = kDefaultTypingSpeed;
+  customizer.closeWhenDialogFinished = YES;
+  
   return customizer;
 }
 
@@ -49,10 +57,10 @@
 
 @interface DLDialogBox ()
 @property (nonatomic, strong) NSMutableArray *textArray;
-@property (nonatomic, strong) DLAutoTypeLabelBM *label;
 @property (nonatomic, strong) CCNode *bgSprite;
-@property (nonatomic, readwrite) NSUInteger currentTextPage;
 @property (nonatomic, readwrite) BOOL currentPageTyped;
+
+- (void)initializeDialogBoxWithCurrentCustomizer;
 @end
 
 @implementation DLDialogBox
@@ -110,37 +118,50 @@
 {
   if (self = [super init])
   {
-    _currentTextPage = 0;
-    _currentPageTyped = YES;
-    _closeWhenDialogFinished = YES;
+    _currentPageTyped = NO;
     _textArray = [texts mutableCopy];
     _initialTextArray = texts;
-    self.handleTapInputs = YES;
-    _handleOnlyTapInputsInDialogBox = YES;
-    _tapToFinishCurrentPage = YES;
-    _typingDelay = kDefaultTypingSpeed;
+    
+    // Create our dialog content node
+    _dialogContent = [CCNode node];
+    _dialogContent.anchorPoint = ccp(0, 0);
+    _dialogContent.position = ccp(0, 0);
+    _dialogContent.contentSize = customizer.dialogSize;
+    [self addChild:_dialogContent z:kBackgroundSpriteZIndex];
     
     // Add in general portrait
     _defaultPortraitSprite = portrait;
     _portrait = [CCSprite node];
     _portrait.anchorPoint = ccp(0, 0);
-    [self addChild:_portrait]; // Z index determined by customizer
-    [self updatePortraitTextureWithSprite:portrait];
+    [self updatePortraitTextureWithSprite:_defaultPortraitSprite];
+    
+    // Add portrait to dialog content node if its inside the dialog
+    if (customizer.portaitInsideDialog) {
+      [_dialogContent addChild:_portrait z:kBackgroundSpriteZIndex + 1];
+    }else {
+      [self addChild:_portrait z:kBackgroundSpriteZIndex - 1];
+    }
     
     // Add in our dialog label
-    _label = [DLAutoTypeLabelBM labelWithString:@"" fntFile:customizer.fntFile];
-    _label.delegate = self;
-    _label.anchorPoint = ccp(0, 1);
-    _label.visible = NO;
-    [self addChild:_label z:kPageTextZIndex];
+    _dialogLabel = [DLAutoTypeLabelBM labelWithString:@"" fntFile:customizer.fntFile];
+    _dialogLabel.delegate = self;
+    _dialogLabel.anchorPoint = ccp(0, 1);
+    _dialogLabel.visible = NO;
+    [self.dialogContent addChild:_dialogLabel z:kPageTextZIndex];
     
-    // Creates our background indictator
-    self.customizer = customizer;
+    // Set our customizer and layout the UI for our dialog box
+    _customizer = customizer;
+    [self initializeDialogBoxWithCurrentCustomizer];
     
     // Create choices and our choice dialog
     // Adding choices after customizer allows us to create a choice dialog
-    // with the supplied customizer
+    // with the current customizer
     self.choices = choices;
+    
+    // Add touch dispatcher
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self
+                                                              priority:kDialogBoxTouchPriority
+                                                       swallowsTouches:NO];
   }
   
   return self;
@@ -149,144 +170,18 @@
 
 #pragma mark - Custom property setters/getters
 
-- (void)setCustomizer:(DLDialogBoxCustomizer *)customizer
-{
-  if (_customizer != customizer) {
-    
-    // Make sure DLChoiceDialog uses DLDialogBoxCustomizer's font if not set
-    if (!customizer.choiceDialogCustomizer.fntFile) {
-      customizer.choiceDialogCustomizer.fntFile = customizer.fntFile;
-    }
-    
-    // Remove all existing backgrounds
-    if (_bgSprite) {
-      [_bgSprite removeFromParentAndCleanup:YES];
-    }
-    
-    // Create the background image
-    CGSize dialogSize = customizer.dialogSize;
-    if (customizer.backgroundSpriteFrameName)
-    {
-      _bgSprite = [CCScale9Sprite spriteWithSpriteFrameName:customizer.backgroundSpriteFrameName];
-      [_bgSprite setContentSize:dialogSize];
-    }
-    else if (customizer.backgroundSpriteFile)
-    {
-      _bgSprite = [CCScale9Sprite spriteWithFile:customizer.backgroundSpriteFile];
-      [_bgSprite setContentSize:dialogSize];
-    }
-    else {
-      // If no border just create choice dialog background
-      _bgSprite = [CCSprite rectangleOfSize:dialogSize
-                                      color:customizer.backgroundColor];
-    }
-    _bgSprite.anchorPoint = ccp(0, 0);
-    _bgSprite.position = ccp(0, 0);
-    [self addChild:_bgSprite z:kBackgroundSpriteZIndex];
-    
-    // Adjust label text position if already created
-    self.label.position = ccp(customizer.dialogTextOffset.x,
-                              _bgSprite.contentSize.height - customizer.dialogTextOffset.y);
-    
-    // If portrait is on the left and inside, we must adjust label position
-    if (self.defaultPortraitSprite && customizer.portaitInsideDialog &&
-        customizer.portraitPosition == kDialogPortraitPositionLeft)
-    {
-      CGFloat x = customizer.portraitOffset.x + _defaultPortraitSprite.contentSize.width + \
-      customizer.dialogTextOffset.x;
-      self.label.position = ccp(x, customizer.dialogTextOffset.y);
-    }
-    CCLOG(@"label position: (%0.2f, %0.2f)", self.label.position.x, self.label.position.y);
-    
-    // Adjust label size
-    CGFloat width = dialogSize.width - customizer.dialogTextOffset.x * 2;
-    if (self.defaultPortraitSprite && customizer.portaitInsideDialog) {
-      width = width - _defaultPortraitSprite.contentSize.width - \
-              customizer.portraitOffset.x;
-    }
-    [self.label setWidth:width];
-    
-    // Adjust portrait image position
-    CGSize portraitSize = self.portrait.contentSize;
-    CGPoint portraitOffset = customizer.portraitOffset;
-    if (customizer.portraitPosition == kDialogPortraitPositionLeft)
-    {
-      if (customizer.portaitInsideDialog) {
-        self.portrait.position = ccp(portraitOffset.x,
-                                     dialogSize.height - portraitSize.height - \
-                                     portraitOffset.y);
-      }else {
-        self.portrait.position = portraitOffset;
-      }
-    }
-    else
-    {
-      // Portrait is on the right side
-      CGFloat x = dialogSize.width - portraitSize.width - portraitOffset.x;
-      CGFloat y = 0;
-      if (customizer.portaitInsideDialog) {
-        y = dialogSize.height - portraitOffset.y - portraitSize.height;
-      }else {
-        y = portraitOffset.y;
-      }
-      self.portrait.position = ccp(x, y);
-    }
-    
-    // Adjust portrait z index
-    if (customizer.portaitInsideDialog) {
-      self.portrait.zOrder = kPageTextZIndex + 1;
-    }else {
-      self.portrait.zOrder = kBackgroundSpriteZIndex - 1;
-    }
-    
-    // Adjust choice dialog look and feel
-    // If we already created our choice dialog and its got the same customizer then
-    // it would no nothing
-    if (self.choiceDialog) {
-      self.choiceDialog.customizer = customizer.choiceDialogCustomizer;
-    }
-    
-    // Update page finished indicator
-    BOOL newIndicatorSame = NO;
-    if (_customizer && _customizer.pageFinishedIndicator == customizer.pageFinishedIndicator) {
-      newIndicatorSame = YES;
-    }
-    
-    // Remove existing indicator if exists and not same as new one
-    if (_customizer && _customizer.pageFinishedIndicator && !newIndicatorSame) {
-      [_customizer.pageFinishedIndicator removeFromParentAndCleanup:YES];
-      
-    }
-    
-    // Create our new page indicator if our previous one is not the same as this one
-    if (customizer.pageFinishedIndicator && !newIndicatorSame) {
-      CCSprite *indicator = customizer.pageFinishedIndicator;
-      indicator.anchorPoint = ccp(0, 0);
-      
-      // By default the indicator's offset uses the same one as the dialogTextOffset
-      indicator.position = ccp(dialogSize.width - indicator.contentSize.width - customizer.dialogTextOffset.x,
-                               customizer.dialogTextOffset.y);
-      indicator.visible = NO;
-      [self addChild:indicator z:kPageIndicatorZIndex];
-    }
-    
-    // Finally set our new customizer
-    _customizer = customizer;
-  }
-}
-
 - (void)setChoices:(NSArray *)choices
 {
   if (_choices != choices) {
     _choices = choices;
     
+    // Remove existing choice dialogs
     if (self.choiceDialog) {
-      // Remove existing choice dialogs
       [self.choiceDialog removeFromParentAndCleanup:YES];
       self.choiceDialog.delegate = nil;
     }
     
-    // Make new choice dialog
+    // Make new choice dialog with our customizer
     if (choices && choices.count > 0) {
       self.choiceDialog = [DLChoiceDialog dialogWithChoices:choices
                                            dialogCustomizer:self.customizer.choiceDialogCustomizer];
@@ -295,35 +190,22 @@
   }
 }
 
-- (void)setHandleTapInputs:(BOOL)handleTapInputs
+- (NSUInteger)currentTextPage
 {
-  if (_handleTapInputs != handleTapInputs) {
-    
-    // Remove previous touch dispatcher
-    if (_handleTapInputs) {
-      [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
-    }
-    
-    // Add touch dispatcher
-    if (handleTapInputs) {
-      [[[CCDirector sharedDirector] touchDispatcher]
-       addTargetedDelegate:self
-       priority:kDialogBoxTouchPriority
-       swallowsTouches:NO];
-    }
-    
-    _handleTapInputs = handleTapInputs;
-  }
+  int currentCount = self.textArray.count;
+  int oriCount = self.initialTextArray.count;
+  return oriCount - currentCount;
 }
+
 
 #pragma mark - Public methods
 
 - (void)finishCurrentPageOrAdvance
 {
   // If current page is still being animated, then finish it
-  if ([self.label numberOfRunningActions] > 0) {
+  if ([self.dialogLabel numberOfRunningActions] > 0) {
     [self finishCurrentPage];
-  }else {
+  }else if (self.currentPageTyped) {
     // If current page is already displayed go to next page
     [self advanceToNextPage];
   }
@@ -331,15 +213,17 @@
 
 - (void)finishCurrentPage
 {
-  [self.label finishTypingAnimation];
+  // Finish typing current page if typing has not finished.
+  // If typing has already finished then this method would do nothing and the
+  // typing finished delegate wont be called.
+  [self.dialogLabel finishTypingAnimation];
 }
 
 - (void)advanceToNextPage
 {
-  // Stop any existing blinking cursor
-  if (self.customizer.pageFinishedIndicator) {
-    [self.customizer.pageFinishedIndicator stopAllActions];
-    self.customizer.pageFinishedIndicator.visible = NO;
+  // If choice dialog is on, dialog will not be able to advance
+  if (self.choiceDialog && self.choiceDialog.parent && self.choiceDialog.visible) {
+    return;
   }
   
   // Alert delegate if no more text and has no choice dialog.
@@ -351,17 +235,16 @@
     }
     
     // Close dialog box if enabled when no more content to display
-    if (self.closeWhenDialogFinished) {
+    if (self.customizer.closeWhenDialogFinished) {
       [self removeDialogBoxAndCleanUp];
     }
     return;
   }
   
-  // Do nothing if we have no more words to display and choice dialog is displayed
-  if (self.textArray.count == 0 &&
-      self.choiceDialog.parent &&
-      self.choiceDialog.visible) {
-    return;
+  // Stop any existing blinking cursor
+  if (self.customizer.pageFinishedIndicator) {
+    [self.customizer.pageFinishedIndicator stopAllActions];
+    self.customizer.pageFinishedIndicator.visible = NO;
   }
   
   // Remove the text to be displayed from our text array
@@ -374,12 +257,10 @@
   if (self.prependText) {
     stringToType = [NSString stringWithFormat:@"%@%@", self.prependText, stringToType];
   }
-  [self.label typeText:stringToType withDelay:self.typingDelay];
-  self.label.delegate = self;
-  self.label.visible = YES;
-  self.currentTextPage += 1;
+  [self.dialogLabel typeText:stringToType withDelay:self.customizer.typingDelay];
+  self.dialogLabel.visible = YES;
   
-  // Update for any custom portrait
+  // Update for any custom portrait for this page
   if (self.customPortraitForPages) {
     NSString *pageString = [NSString stringWithFormat:@"%d", self.currentTextPage];
     id value = [self.customPortraitForPages valueForKey:pageString];
@@ -391,8 +272,11 @@
     {
       CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:(NSString *)value];
       [self updatePortraitTextureWithSprite:sprite];
+    }else {
+      [self updatePortraitTextureWithSprite:self.defaultPortraitSprite];
     }
   }else {
+    // Make sure we are displaying the default sprite.
     [self updatePortraitTextureWithSprite:self.defaultPortraitSprite];
   }
 }
@@ -429,8 +313,98 @@
   [self removeChoiceDialogAndCleanUp];
   [self removeFromParentAndCleanup:YES];
   self.delegate = nil;
-  self.label.delegate = nil;
-  self.handleTapInputs = NO;
+  self.dialogLabel.delegate = nil;
+  [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
+}
+
+
+#pragma mark - Private methods
+
+- (void)initializeDialogBoxWithCurrentCustomizer
+{
+  DLDialogBoxCustomizer *customizer = _customizer;
+  
+  // Make sure DLChoiceDialog uses DLDialogBoxCustomizer's font if not set
+  if (!customizer.choiceDialogCustomizer.fntFile) {
+    customizer.choiceDialogCustomizer.fntFile = customizer.fntFile;
+  }
+  
+  // Create the dialog background image
+  CGSize dialogSize = customizer.dialogSize;
+  if (customizer.backgroundSpriteFrameName)
+  {
+    _bgSprite = [CCScale9Sprite spriteWithSpriteFrameName:customizer.backgroundSpriteFrameName];
+    [_bgSprite setContentSize:dialogSize];
+  }
+  else if (customizer.backgroundSpriteFile)
+  {
+    _bgSprite = [CCScale9Sprite spriteWithFile:customizer.backgroundSpriteFile];
+    [_bgSprite setContentSize:dialogSize];
+  }
+  else {
+    // If no border just create choice dialog background
+    _bgSprite = [CCSprite rectangleOfSize:dialogSize
+                                    color:customizer.backgroundColor];
+  }
+  _bgSprite.anchorPoint = ccp(0, 0);
+  _bgSprite.position = ccp(0, 0);
+  [self.dialogContent addChild:_bgSprite z:kBackgroundSpriteZIndex];
+  
+  // Adjust label text position
+  CGFloat labelY = dialogSize.height - customizer.dialogTextOffset.y;
+  self.dialogLabel.position = ccp(customizer.dialogTextOffset.x, labelY);
+  
+  // If portrait is on the left and inside, we must adjust label position to make room
+  if (self.defaultPortraitSprite && customizer.portaitInsideDialog &&
+      customizer.portraitPosition == kDialogPortraitPositionLeft)
+  {
+    CGFloat x = customizer.portraitOffset.x + _defaultPortraitSprite.contentSize.width + \
+    customizer.dialogTextOffset.x;
+    self.dialogLabel.position = ccp(x, labelY);
+  }
+  
+  // Adjust label width to fit inside dialog
+  CGFloat width = dialogSize.width - customizer.dialogTextOffset.x * 2;
+  if (self.defaultPortraitSprite && customizer.portaitInsideDialog) {
+    width = width - _defaultPortraitSprite.contentSize.width - \
+    customizer.portraitOffset.x;
+  }
+  [self.dialogLabel setWidth:width];
+  
+  // Adjust portrait image position
+  CGSize portraitSize = _defaultPortraitSprite.contentSize;
+  CGPoint portraitOffset = customizer.portraitOffset;
+  if (customizer.portraitPosition == kDialogPortraitPositionLeft)
+  {
+    if (customizer.portaitInsideDialog) {
+      self.portrait.position = ccp(portraitOffset.x,
+                                   dialogSize.height - portraitSize.height - \
+                                   portraitOffset.y);
+    }else {
+      self.portrait.position = portraitOffset;
+    }
+  }
+  else
+  {
+    // Portrait is on the right side
+    CGFloat x = dialogSize.width - portraitSize.width - portraitOffset.x;
+    CGFloat y = portraitOffset.y;
+    if (customizer.portaitInsideDialog) {
+      y = dialogSize.height - portraitOffset.y - portraitSize.height;
+    }
+    self.portrait.position = ccp(x, y);
+  }
+  
+  // Create our new page indicator
+  if (customizer.pageFinishedIndicator) {
+    CCSprite *indicator = customizer.pageFinishedIndicator;
+    indicator.anchorPoint = ccp(1, 0);
+    
+    // By default the indicator's offset uses the same one as the dialogTextOffset
+    indicator.position = customizer.dialogTextOffset;
+    indicator.visible = NO;
+    [self.dialogContent addChild:indicator z:kPageIndicatorZIndex];
+  }
 }
 
 
@@ -440,9 +414,8 @@
 {
   self.currentPageTyped = YES;
   
-  // Show the choice dialog after all words are displayed and we have a dialog created
-  if (self.textArray.count == 0 &&
-      self.choiceDialog)
+  // Show the choice dialog after all words are displayed and we have a choice dialog
+  if (self.textArray.count == 0 && self.choiceDialog)
   {
     [self showChoiceDialog];
     
@@ -471,7 +444,7 @@
                       choiceIndex:(NSUInteger)index
 {
   // Close dialog box when choice is selected
-  if (self.closeWhenDialogFinished) {
+  if (self.customizer.closeWhenDialogFinished) {
     [self removeDialogBoxAndCleanUp];
   }
   
@@ -490,22 +463,37 @@
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
+  // If the dialog box shouldn't handle any input, we claim none and do nothing.
+  if (!self.customizer.handleTapInputs) {
+    return NO;
+  }
+  
   BOOL shouldClaim = YES;
   
-  if (self.handleOnlyTapInputsInDialogBox) {
+  if (!self.customizer.handleTapInputs) {
+    shouldClaim = NO;
+  }
+  
+  // Check if we should only respond to touch in dialog box
+  if (shouldClaim && self.customizer.handleOnlyTapInputsInDialogBox) {
     CGPoint touchPoint = [self convertTouchToNodeSpaceAR:touch];
-    CGRect relativeRect = self.bgSprite.boundingBox;
+    CGRect relativeRect = self.dialogContent.boundingBox;
     shouldClaim = CGRectContainsPoint(relativeRect, touchPoint);
   }
   
   // Dialog box should not handle any touches when choice dialogs is showing
-  if (self.choiceDialog && self.choiceDialog.parent && self.choiceDialog.visible) {
+  if (shouldClaim &&
+      self.choiceDialog &&
+      self.choiceDialog.parent &&
+      self.choiceDialog.visible) {
     shouldClaim = NO;
   }
   
   if (shouldClaim)
   {
-    if (self.tapToFinishCurrentPage) {
+    // If tap to finish current page is enabled, we finish current page or advance
+    // on touch input. If not, we only advance if current typing is finished.
+    if (self.customizer.tapToFinishCurrentPage) {
       [self finishCurrentPageOrAdvance];
     }else if (self.currentPageTyped) {
       [self advanceToNextPage];
@@ -522,33 +510,22 @@
 {
   [super onEnter];
   
-  // start first page
+  // start first page automatically on page enter.
   [self advanceToNextPage];
   
-  // Animate in our portrait its outsidie of dialog box and animation is enabled
-  if (self.defaultPortraitSprite &&
-      !self.customizer.portaitInsideDialog &&
-      self.customizer.animateOutsidePortraitIn)
-  {
-    CGPoint finalPos = self.portrait.position;
-    
-    // Calculate initial position
-    CGPoint startingPos = CGPointZero;
-    CGSize portraitSize = self.portrait.contentSize;
-    if (self.customizer.portraitPosition == kDialogPortraitPositionLeft) {
-      startingPos = ccpSub(finalPos, CGPointMake(portraitSize.width / 4, 0));
-    }else {
-      startingPos = ccpAdd(finalPos, CGPointMake(portraitSize.width / 4, 0));
-    }
-    
-    // Animate move and fade in
-    self.portrait.position = startingPos;
-    id move = [CCMoveTo actionWithDuration:kPortraitMoveAnimationDuration
-                                  position:finalPos];
-    //    id moveEaseOut = [CCEaseOut actionWithAction:move
-    //                                            rate:kPortraitMoveAnimationEaseRate];
-    id fadeIn = [CCFadeIn actionWithDuration:kPortraitFadeAnimationDuration];
-    [self.portrait runAction:[CCSpawn actions:move, fadeIn, nil]];
+  // Custom on enter animations
+  if (self.customizer.onEnterDialogAnimation) {
+    self.customizer.onEnterDialogAnimation(self);
+  }
+}
+
+- (void)onExit
+{
+  [super onExit];
+  
+  // Custom on exit animatinos
+  if (self.customizer.onExitDialogAnimation) {
+    self.customizer.onExitDialogAnimation(self);
   }
 }
 

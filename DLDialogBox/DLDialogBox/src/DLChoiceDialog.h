@@ -10,6 +10,8 @@
 #import "DLSelectableLabel.h"
 #import "cocos2d.h"
 
+typedef void(^DLAnimationBlock)(id);
+
 #define kChoiceDialogDefaultTouchPriority 1
 
 @interface DLChoiceDialogCustomizer : NSObject
