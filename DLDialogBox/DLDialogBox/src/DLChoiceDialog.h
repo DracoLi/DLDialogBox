@@ -10,11 +10,27 @@
 #import "DLSelectableLabel.h"
 #import "cocos2d.h"
 
+// A block type that will be used for custom animations 
 typedef void(^DLAnimationBlock)(id);
 
-#define kChoiceDialogDefaultTouchPriority 1
+#define kChoiceDialogDefaultTouchPriority -2
 
+/**
+ * A DLChoiceDialogCustomizer is used to determine the __look__, __functionalities__,
+ * and the __animations__ related to a <DLChoiceDialog>.
+ *
+ * Every <DLChoiceDialog> must use a dialog customizer. If no customizers are given the
+ * dialog box will automatically use the default customizer provided through
+ * <defaultCustomizer>.
+ *
+ * The reason a customizer class is used to store how a dialog box should look,
+ * function and animate is because this way you can reuse a single customizer
+ * instance on all the DLChoiceDialogs in your game to achieve a consistent look
+ * and behaviour.
+ */
 @interface DLChoiceDialogCustomizer : NSObject
+
+/// @name Customizing look/UI
 
 /**
  * The file name of a stretchable sprite image that will be used as
@@ -40,39 +56,82 @@ typedef void(^DLAnimationBlock)(id);
  * If a sprite is not provided as the dialog's background, this property will be
  * used as the background color of the dialog box.
  *
- * Defaults to a transparent color (`ccc4(0,0,0,0)`) if not specified.
- *
  * You can create a `ccColor4B` via `ccc4(red, blue, green, alpha)`.
  * Note that all color values are from 0-255.
+ *
+ * __Defaults to a semi-transparent black color (`ccc4(0,0,0,0.8*255)`).__
  */
 @property (nonatomic) ccColor4B backgroundColor;
 
 /**
- * The font file used to style the choice labels
+ * The font file used by the dialog for displaying text.
  *
- * Default to the fnt file packaged with the demo. You must change this if 
- * you are not including that demo font file.
+ * __Defaults to the demo fnt file (`demo_fnt.fnt`) attached with the project__
  */
 @property (nonatomic, copy) NSString *fntFile;
 
 /**
  * This determines the offset between the choice dialog's choice content and
  * the choice dialog itself.
+ *
+ * The size of the choice dialog will adjust according to accommodate both the
+ * choice content and the offset.
+ *
+ * __Defaults to (5, 5)__
  */
 @property (nonatomic) CGPoint contentOffset;
 
 /**
- * As the name implies, this determines the distance between the choice labels. 
+ * The vertical margin between the choice labels.
+ *
+ * Setting a positive `paddingBetweenChoices` will result in more spacing
+ * between choice labels.
+ *
+ * __Defaults to 5.0__
  */
 @property (nonatomic) CGFloat paddingBetweenChoices;
 
 /**
- * Stores customization properties for labels inside choice dialog
+ * The `DLSelectableLabelCustomizer` for customizing the labels inside the choice dialog.
+ *
+ * __Defaults to the default DLSelectableLabelCustomizer__
+ *
+ * @see [DLSelectableLabelCustomizer defaultCustomizer]
  */
 @property (nonatomic, strong) DLSelectableLabelCustomizer *labelCustomizer;
 
+
+/// @name Customizing functionalities
+
 /**
- * Returns the default customizer used by DLChoiceDialog
+ * If enabled, selecting a choice in a choice dialog will first preselect
+ * the choice. The choice will only be selected if selected for the second time.
+ *
+ * Enabling this will result in less errors when the player is selecting a choice.
+ *
+ * __Defaults to YES__
+ */
+@property (nonatomic) BOOL preselectEnabled;
+
+/**
+ * If enabled, the choice dialog will swallow all touches. This can essentially
+ * disable all touch inputs aside from this dialog.
+ *
+ * Enabling this is an easy way to disable all other user inputs when selecting a choice.
+ * However it is likely that you still want your player to tap on things like the
+ * menu button etc, thus `swallowAllTouches` is set to NO by default.
+ *
+ * Please note that once a DLChoiceDialog has been created, changing this value
+ * will not change the behaviour of the DLChoiceDialog since this property, unlike
+ * the other fuctionality related properties, is evaluated during DLChoiceDialog
+ * creation time.
+ *
+ * __Defaults to NO__
+ */
+@property (nonatomic) BOOL swallowAllTouches;
+
+/**
+ * Returns the default customizer used by the DLChoiceDialog
  */
 + (DLChoiceDialogCustomizer *)defaultCustomizer;
 
@@ -81,78 +140,81 @@ typedef void(^DLAnimationBlock)(id);
 @class DLChoiceDialog, DLSelectableLabelCustomizer;
 @protocol DLChoiceDialogDelegate <NSObject>
 @optional
+
+/**
+ * Called when a choice is selected in the choice dialog. Preselects does not
+ * trigger this callback.
+ */
 - (void)choiceDialogLabelSelected:(DLChoiceDialog *)sender
                        choiceText:(NSString *)text
                       choiceIndex:(NSUInteger)index;
+
+/**
+ * Called only when a choice is preselected in the choice dialog.
+ */
+- (void)choiceDialogLabelPreselected:(DLChoiceDialog *)sender
+                          choiceText:(NSString *)text
+                         choiceIndex:(NSUInteger)index;
 @end
 
+/**
+ * DLChoiceDialog is a dialog that asks for user input from a list of choices.
+ *
+ * DLChoiceDialog provides a simple way for you to gain user input without
+ * writing up much code.
+ *
+ * A <DLChoiceDialogCustomizer> is used to customize the choice dialog.
+ *
+ * @see DLDialogBoxCustomizer
+ */
 @interface DLChoiceDialog : CCNode <DLSelectableLabelDelegate, CCTouchOneByOneDelegate>
 
 @property (nonatomic, weak) id<DLChoiceDialogDelegate> delegate;
 
 /**
- * Array of strings that contains the choices for this choice dialog
+ * An array of strings that contains the choices for this choice dialog.
+ *
+ * Setting this array will actually redraw/reposition the choice dialog's content
+ * according to the current customizer.
+ *
+ * However it is still recommended to not change this array once your choice dialog
+ * is created.
  */
 @property (nonatomic, copy) NSArray *choices;
 
 /**
- * Defaults to YES
+ * This customizer is used to customize the UI and functionalities of the choice dialog.
  *
- * If set to YES, labels inside the dialog will have a preselect state.
- * Thus the user must tap on a label twice to select it.
- */
-@property (nonatomic) BOOL preselectEnabled;
-
-/**
- * Defaults to NO
+ * Attempting to update any UI related properties in the customizer
+ * will not do anything and may break some functionalities.
  *
- * If set to true the choice dialog will swallow all touches.
- * Setting this to YES essentially disables all touch inputs aside from this dialog.
+ * You can however update functionality related properties on the customizer
+ * as those are processed whenever they are required.
  *
- * Defaults to NO since its likely you still want your user to tap on things like
- * the menu button etc. However setting this to YES allows you to easily disable
- * user interaction (ie walking) so it is still pretty useful.
- */
-@property (nonatomic) BOOL swallowAllTouches;
-
-/**
- * Stores customization for the choice dialog.
- *
- * Note that changing this will essentially redraw everything inside the choice
- * dialog, so please don't change this refrequently.
+ * @see DLChoiceDialogCustomizer
  */
 @property (nonatomic, strong) DLChoiceDialogCustomizer *customizer;
 
 /**
- * Initialization related.
- *
- * Use the first initializer if you want some control over look and feel but
- * do not have any custom images for your dialog.
- *
- * Use the second initializer if you are fine with the default look and want to
- * just get the choice dialog up and running and ready to rock.
- *
- * Use the third initializer if you want to control the full look and feel of
- * your choice dialog.
+ * @param choices     An array of choice strings to be displayed
+ * @param customizer  A <DLChoiceDialogCustomizer> to customize the choice dialog
  */
-+ (id)dialogWithChoices:(NSArray *)choices
-                fntFile:(NSString *)fntFile
-        backgroundColor:(ccColor4B)color
-          contentOffset:(CGPoint)offset
-  paddingBetweenChoices:(CGFloat)padding;
-+ (id)dialogWithChoices:(NSArray *)choices
-       dialogCustomizer:(DLChoiceDialogCustomizer *)dialogCustomizer;
-+ (id)dialogWithChoices:(NSArray *)choices;
 - (id)initWithChoices:(NSArray *)choices
      dialogCustomizer:(DLChoiceDialogCustomizer *)dialogCustomizer;
 
++ (id)dialogWithChoices:(NSArray *)choices;
++ (id)dialogWithChoices:(NSArray *)choices
+       dialogCustomizer:(DLChoiceDialogCustomizer *)dialogCustomizer;
 
 /**
- * Programatically select a choice.
- * The delegate will be notified of the selection.
+ * Programatically selects a choice by passing the index of the choice in the <choices> array.
  *
- * Will preselect the label if preselectEnabled is YES and the choice is not preselected.
+ * If skipPreselect is set to NO, this method will preselect the label if
+ * <preselectEnabled> is set to YES and the targeted choice has not 
+ * already been preselected.
+ *
+ * __Note:__ The delegate will be notified of this selection (maybe be a preselect or select).
  */
-- (void)selectChoiceAtIndex:(NSUInteger)index;
+- (void)selectChoiceAtIndex:(NSUInteger)index skipPreselect:(BOOL)skipPreselect;
 
 @end

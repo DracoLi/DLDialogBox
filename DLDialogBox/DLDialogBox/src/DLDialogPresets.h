@@ -9,7 +9,7 @@
 #import "DLDialogBox.h"
 
 typedef enum {
-  kDialogBoxCustomizerWithAnimations = 0,
+  kDialogBoxCustomizerWithBasicAnimations = 0,
   kDialogBoxCustomizerWithFancyUI,
 } DialogBoxPreset;
 

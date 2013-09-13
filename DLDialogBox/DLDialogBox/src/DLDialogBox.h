@@ -15,6 +15,8 @@
 #define kDialogHeightNormal 90
 #define kDialogHeightLarge  130
 
+#define kDialogBoxTouchPriority -1
+
 typedef enum {
   kDialogPortraitPositionLeft = 0,
   kDialogPortraitPositionRight
@@ -36,7 +38,7 @@ typedef enum {
 @interface DLDialogBoxCustomizer : NSObject
 
 
-/// @name Customizing DLDialogBox's look/UI
+/// @name Customizing look/UI
 
 /**
  * The size of dialog box (not including the portrait if its outside).
@@ -144,10 +146,10 @@ typedef enum {
 /**
  * The padding between the portrait and the edge of the dialog box.
  *
- * If <portaitInsideDialog> is NO, then this value specifies the offset between
+ * If <portraitInsideDialog> is NO, then this value specifies the offset between
  * the portrait and the bottom edge of the dialog box depending on the <portraitPosition>.
  *
- * If <portaitInsideDialog> is YES, then this value specifies the offset between
+ * If <portraitInsideDialog> is YES, then this value specifies the offset between
  * the portrait and the top edge of the dialog box depending on the <portraitPosition>.
  *
  * __Defaults to (0, 0)__
@@ -160,13 +162,13 @@ typedef enum {
  * By default the portrait will be placed outside of the dialog box so you
  * can use a big beautiful portrait that is just super fabulous. 
  *
- * However if `portaitInsideDialog` is set to YES, then the portrait will instead
+ * However if `portraitInsideDialog` is set to YES, then the portrait will instead
  * be placed inside the dialog and <portraitOffset> will be the spacing
  * between the portrait and the top left edge of the dialog box.
  *
  * __Defaults to NO__
  */
-@property (nonatomic) BOOL portaitInsideDialog;
+@property (nonatomic) BOOL portraitInsideDialog;
 
 /**
  * The font file used by the dialog for displaying text.
@@ -188,7 +190,7 @@ typedef enum {
 @property (nonatomic, strong) DLChoiceDialogCustomizer *choiceDialogCustomizer;
 
 
-/// @name Customizing DLDialogBox's functionalities
+/// @name Customizing functionalities
 
 /**
  * If enabled, tap inputs during dialog typing animation will immediately
@@ -309,8 +311,9 @@ typedef enum {
  * DLDialogBox provides simple methods to display dialog text and also provide
  * an easy way to receive player input through the use of an integrated <DLChoiceDialog>.
  *
- * A DLDialogBoxCustomizer is used to customize the dialog box any way you like.
- * Please refer to <DLDialogBoxCustomizer> for more details on available customizations.
+ * A <DLDialogBoxCustomizer> is used to customize the dialog box.
+ *
+ * @see DLDialogBoxCustomizer
  */
 @interface DLDialogBox : CCNode
 <DLAutoTypeLabelBMDelegate, DLChoiceDialogDelegate, CCTouchOneByOneDelegate>
@@ -318,16 +321,16 @@ typedef enum {
 @property (nonatomic, weak) id<DLDialogBoxDelegate> delegate;
 
 /**
- * This customizer is used to customize the look and feel of the dialog box.
+ * This customizer is used to customize the UI and functionalities of the dialog box.
  *
  * Please note that once a DLDialogBox is created with a customizer, you cannot
  * update UI related properties in the customizer anymore as the dialog box will only
- * process the UI properties once on creation to draw the dialog box.
+ * process the UI properties once during creation to draw the dialog box.
  *
  * Attempting to update any UI related properties in the customizer
  * will not do anything and may break some functionalities.
  *
- * You can however update functionality related properties on the customizer though
+ * You can however update functionality related properties on the customizer
  * as those are processed whenever they are required.
  *
  * @see DLDialogBoxCustomizer

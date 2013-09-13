@@ -14,9 +14,16 @@
 + (DLSelectableLabelCustomizer *)defaultCustomizer
 {
   DLSelectableLabelCustomizer *customizer = [[DLSelectableLabelCustomizer alloc] init];
+  
+  // Look
+  customizer.textAlignment = kCCTextAlignmentCenter;
   customizer.preSelectedBackgroundColor = ccc4(200, 0, 0, 0.70*255);
   customizer.textOffset = ccp(10, 5);
-  customizer.textAlignment = kCCTextAlignmentCenter;
+  
+  // Functionality
+  customizer.deselectOnOutsideTap = NO;
+  customizer.preselectEnabled = YES;
+  
   return customizer;
 }
 
@@ -26,7 +33,6 @@
 @property (nonatomic, strong) CCTexture2D *defaultTexture;
 @property (nonatomic, strong) CCTexture2D *preSelectedTexture;
 @property (nonatomic, strong) CCTexture2D *selectedTexture;
-@property (nonatomic) BOOL isReceivingTouchEvents;
 
 /**
  * I implemented my own version of alignment with anchor point.
@@ -34,7 +40,9 @@
 - (void)updateTextWithAlignment:(CCTextAlignment)alignment;
 
 /**
- * Convevient method to update textures with the colors from customizer
+ * Convenient method to update textures with the colors from customizer and the
+ * current label size.
+ *
  * Also updates our bg sprite contentsize.
  */
 - (void)updateBackgrounds;
@@ -52,7 +60,8 @@
             fntFile:(NSString *)fntFile
 {
   return [[self alloc] initWithText:text
-                            fntFile:fntFile];
+                            fntFile:fntFile
+                          cutomizer:[DLSelectableLabelCustomizer defaultCustomizer]];
 }
 
 + (id)labelWithText:(NSString *)text
@@ -62,16 +71,6 @@
   return [[self alloc] initWithText:text
                             fntFile:fntFile
                           cutomizer:customizer];
-}
-
-- (id)initWithText:(NSString *)text
-           fntFile:(NSString *)fntFile
-{
-  DLSelectableLabelCustomizer *customizer = [DLSelectableLabelCustomizer defaultCustomizer];
-  self = [self initWithText:text
-                    fntFile:fntFile
-                  cutomizer:customizer];
-  return self;
 }
 
 - (id)initWithText:(NSString *)text
@@ -98,6 +97,10 @@
     _bgSprite.anchorPoint = ccp(0, 0);
     _bgSprite.position = ccp(0, 0);
     [self addChild:_bgSprite z:0];
+    
+    // Touch events
+    [[[CCDirector sharedDirector] touchDispatcher]
+     addTargetedDelegate:self priority:kSelectableLabelTouchPriority swallowsTouches:YES];
   }
   
   return self;
@@ -108,7 +111,7 @@
 
 - (void)select
 {
-  if (self.preselectEnabled) {
+  if (self.customizer.preselectEnabled) {
     if (!self.preselected) {
       self.preselected = YES;
     }else {
@@ -117,6 +120,11 @@
   }else {
     self.selected = YES;
   }
+}
+
+- (void)selectWithoutPreselect
+{
+  self.selected = YES;
 }
 
 - (void)deselect
@@ -255,7 +263,7 @@
     }
   }else {
     // Revert background texture to previous state
-    if (self.preselected && self.preselectEnabled) {
+    if (self.preselected && self.customizer.preselectEnabled) {
       self.bgSprite.texture = self.preSelectedTexture;
     }else {
       self.bgSprite.texture = self.defaultTexture;
@@ -263,15 +271,6 @@
   }
 }
 
-- (void)onEnter
-{
-  // Only start collecting touch events once this label is displayed to save
-  // some processing power
-  if (!self.isReceivingTouchEvents) {
-    [[[CCDirector sharedDirector] touchDispatcher]
-     addTargetedDelegate:self priority:kSelectableLabelTouchPriority swallowsTouches:YES];
-  }
-}
 
 #pragma mark - Touch delegate
 
@@ -286,7 +285,6 @@
   
   // Handle touch
   if (touchValid) {
-    CCLOG(@"Touch valid for label with text: %@", self.text.string);
     [self select];
   }
   

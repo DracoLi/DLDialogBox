@@ -124,7 +124,7 @@ typedef enum {
       customizer.dialogSize = CGSizeMake(customizer.dialogSize.width - 50, kDialogHeightNormal);
       customizer.portraitOffset = ccp(0, 0);
       customizer.portraitPosition = kDialogPortraitPositionRight;
-      customizer.portaitInsideDialog = NO;
+      customizer.portraitInsideDialog = NO;
       customizer.animateOutsidePortraitIn = YES;
       customizer.speedPerPageFinishedIndicatorBlink = 0.5; // 2 blinks per second
       

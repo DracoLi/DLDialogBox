@@ -17,12 +17,6 @@
 
 // Other constants
 #define kDefaultTypingSpeed 0.02
-#define kDialogBoxTouchPriority 0
-
-#define kPortraitMoveAnimationDuration 0.3
-#define kPortraitMoveAnimationEaseRate 0.5
-#define kPortraitFadeAnimationDuration 0.2
-
 
 @implementation DLDialogBoxCustomizer
 
@@ -39,7 +33,7 @@
   customizer.dialogTextOffset = ccp(10, 10);
   customizer.portraitPosition = kDialogPortraitPositionLeft;
   customizer.portraitOffset = ccp(0, 0);
-  customizer.portaitInsideDialog = NO;
+  customizer.portraitInsideDialog = NO;
   customizer.fntFile = @"demo_fnt.fnt";;
   customizer.choiceDialogCustomizer = [DLChoiceDialogCustomizer defaultCustomizer];
   
@@ -136,7 +130,7 @@
     [self updatePortraitTextureWithSprite:_defaultPortraitSprite];
     
     // Add portrait to dialog content node if its inside the dialog
-    if (customizer.portaitInsideDialog) {
+    if (customizer.portraitInsideDialog) {
       [_dialogContent addChild:_portrait z:kBackgroundSpriteZIndex + 1];
     }else {
       [self addChild:_portrait z:kBackgroundSpriteZIndex - 1];
@@ -355,7 +349,7 @@
   self.dialogLabel.position = ccp(customizer.dialogTextOffset.x, labelY);
   
   // If portrait is on the left and inside, we must adjust label position to make room
-  if (self.defaultPortraitSprite && customizer.portaitInsideDialog &&
+  if (self.defaultPortraitSprite && customizer.portraitInsideDialog &&
       customizer.portraitPosition == kDialogPortraitPositionLeft)
   {
     CGFloat x = customizer.portraitOffset.x + _defaultPortraitSprite.contentSize.width + \
@@ -365,7 +359,7 @@
   
   // Adjust label width to fit inside dialog
   CGFloat width = dialogSize.width - customizer.dialogTextOffset.x * 2;
-  if (self.defaultPortraitSprite && customizer.portaitInsideDialog) {
+  if (self.defaultPortraitSprite && customizer.portraitInsideDialog) {
     width = width - _defaultPortraitSprite.contentSize.width - \
     customizer.portraitOffset.x;
   }
@@ -376,7 +370,7 @@
   CGPoint portraitOffset = customizer.portraitOffset;
   if (customizer.portraitPosition == kDialogPortraitPositionLeft)
   {
-    if (customizer.portaitInsideDialog) {
+    if (customizer.portraitInsideDialog) {
       self.portrait.position = ccp(portraitOffset.x,
                                    dialogSize.height - portraitSize.height - \
                                    portraitOffset.y);
@@ -389,7 +383,7 @@
     // Portrait is on the right side
     CGFloat x = dialogSize.width - portraitSize.width - portraitOffset.x;
     CGFloat y = portraitOffset.y;
-    if (customizer.portaitInsideDialog) {
+    if (customizer.portraitInsideDialog) {
       y = dialogSize.height - portraitOffset.y - portraitSize.height;
     }
     self.portrait.position = ccp(x, y);
@@ -489,8 +483,7 @@
     shouldClaim = NO;
   }
   
-  if (shouldClaim)
-  {
+  if (shouldClaim) {
     // If tap to finish current page is enabled, we finish current page or advance
     // on touch input. If not, we only advance if current typing is finished.
     if (self.customizer.tapToFinishCurrentPage) {

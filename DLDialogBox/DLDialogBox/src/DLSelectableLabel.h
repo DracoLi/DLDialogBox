@@ -9,41 +9,81 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-#define kSelectableLabelTouchPriority 0
+#define kSelectableLabelTouchPriority -3
 
+/**
+ * A DLSelectableLabelCustomizer is used to determine the __look__, __functionalities__,
+ * and the __animations__ related to a <DLSelectableLabel>.
+ *
+ * Every <DLSelectableLabel> must use a dialog customizer. If no customizers are given the
+ * dialog box will automatically use the default customizer provided through
+ * <defaultCustomizer>.
+ */
 @interface DLSelectableLabelCustomizer : NSObject
 
 /**
- * Defaults is kCCTextAlignmentLeft
+ * The alignment of the text in the label.
  *
- * The alignment of the text in the label
+ * __Defaults to kCCTextAlignmentLeft__
+ *
+ * @bug kCCTextAlignmentCenter currently does not work
  */
 @property (nonatomic) CCTextAlignment textAlignment;
 
 /**
- * Specifies the color for the label's normal state
+ * Specifies the background color of the label in normal state.
+ *
+ * __Defaults to transparent__
  */
 @property (nonatomic) ccColor4B backgroundColor;
 
 /**
- * Specifies a custom color for the label's preselected state
+ * Specifies the background color of the label in its preselected state.
+ *
+ * __Defaults to ccc4(200, 0, 0, 0.70*255)__
  */
 @property (nonatomic) ccColor4B preSelectedBackgroundColor;
 
 /**
- * Specifies a custom color for the label's selected state
+ * Specifies the background color of the label in its selected state.
+ *
+ * __Defaults to transparent__
  */
 @property (nonatomic) ccColor4B selectedBackgroundColor;
 
 /**
- * Specifies the offset between the label's string and the label.
+ * Specifies the offset between the label's text and the label edges.
+ *
  * The larger the string offset the more spacing there are between the label string
  * and the label itself.
+ *
+ * __Defaults to ccp(10, 5)__
  */
 @property (nonatomic) CGPoint textOffset;
 
 /**
- * Returns the default customizer used by DLSelectedLabel
+ * If enabled this label will automatically be deselected if tapped outside.
+ *
+ * __Defaults to NO__
+ */
+@property (nonatomic) BOOL deselectOnOutsideTap;
+
+/**
+ * When set to YES, tapping the label the first time will result in the label
+ * being preselected.
+ *
+ * When preselect the delegate will be notified and the label's background
+ * will change to the preselected background.
+ *
+ * Enable preselect may result in a better user experience since it's easy
+ * for the user to accidentally tap on an unwanted label.
+ *
+ * __Defaults to YES__
+ */
+@property (nonatomic) BOOL preselectEnabled;
+
+/**
+ * Returns the default customizer used by the DLSelectableLabel.
  */
 + (DLSelectableLabelCustomizer *)defaultCustomizer;
 
@@ -52,87 +92,85 @@
 @class DLSelectableLabel;
 @protocol DLSelectableLabelDelegate <NSObject>
 @optional
+
+/**
+ * Called when the label is preselected
+ */
 - (void)selectableLabelPreselected:(DLSelectableLabel *)sender;
+
+/**
+ * Called when the label is selected
+ */
 - (void)selectableLabelSelected:(DLSelectableLabel *)sender;
 @end
 
+/**
+ * DLSelectableLabel is essentialy a button with support for being preselected.
+ *
+ * A <DLSelectableLabelCustomizer> is used to customize the label.
+ *
+ * @see DLSelectableLabelCustomizer
+ */
 @interface DLSelectableLabel : CCNode <CCTouchOneByOneDelegate>
 
 @property (nonatomic, weak) id<DLSelectableLabelDelegate> delegate;
+
+/**
+ * This is used to display the text through the use of a font file
+ */
 @property (nonatomic, strong) CCLabelBMFont *text;
+
+/**
+ * Background sprite for the label.
+ */
 @property (nonatomic, strong) CCSprite *bgSprite;
 
 /**
- * When set to YES, the label's background will change to reflect the label
- * being preselected and the delegate will be notified.
- *
- * This BOOL will do nothing if preselectEnabled is set to NO
- *
- * Default is NO
+ * Returns YES if the label is currently preselected.
  */
 @property (nonatomic) BOOL preselected;
 
 /**
- * When set to YES, the label's background will change to reflect the label
- * being selected and the delegate will be notified.
- *
- * Default is NO
+ * Returns YES if the label is currently selected.
  */
 @property (nonatomic) BOOL selected;
 
 /**
- * If enabled this label will automatically be deselected if tapped outside.
- * Default is NO
- */
-@property (nonatomic) BOOL deselectOnOutsideTap;
-
-/**
- * When set to YES, tapping the label the first time will result in the label
- * being preselected. When preselect the delegate will be notified and the label's
- * background will change to the preselected background (if it is set).
- *
- * Enable preselect may result in a better user experience since its easy
- * for the user to accidentally tap on an unwanted label.
- *
- * Default is YES
- */
-@property (nonatomic) BOOL preselectEnabled;
-
-/**
- * The customizer is used to customize the look of the label
+ * This customizer is used to customize the UI and functionalities of the label.
  */
 @property (nonatomic, strong) DLSelectableLabelCustomizer *customizer;
 
 /**
- * Bunch of initialization methods
- *
- * When a customizer is not provided, DLSelectableLabel will use the default
- * customizer provided by the Customizer Class.
+ * @param text        Text for the label
+ * @param fntFile     Font file to use for the label
+ * @param customizer  A DLSelectableLabelCustomizer to custom the label
  */
+- (id)initWithText:(NSString *)text
+           fntFile:(NSString *)fntFile
+         cutomizer:(DLSelectableLabelCustomizer *)customizer;
+
 + (id)labelWithText:(NSString *)text
             fntFile:(NSString *)fntFile;
-- (id)initWithText:(NSString *)text
-           fntFile:(NSString *)fntFile;
 + (id)labelWithText:(NSString *)text
             fntFile:(NSString *)fntFile
           cutomizer:(DLSelectableLabelCustomizer *)customizer;
-- (id)initWithText:(NSString *)text
-           fntFile:(NSString *)fntFile
-          cutomizer:(DLSelectableLabelCustomizer *)customizer;
 
 /**
- * Called to select the current label.
+ * Selects the current label. If preselect is enabled, this preselects the label
+ * if not already preselected.
  *
- * If preselectEnabled is YES and this label is not select and not preselected
- * then calling select will preselect this label
- *
- * If this label is preselected or not select but preselectEnabled is NO, then
- * calling this method will select the label
+ * __Note:__ Calling `select` when already selected will inform the delegate.
  */
 - (void)select;
 
 /**
- * Deselect reverts the label to the default state. Not selected or preselected
+ * Selects the label. If preselect is enabled, this bypasses the preselect and just
+ * selects the label directly.
+ */
+- (void)selectWithoutPreselect;
+
+/**
+ * Deselect reverts the label to the default state. Not selected or preselected.
  */
 - (void)deselect;
 
@@ -140,7 +178,7 @@
  * Set the width of the label manually.
  *
  * When not set manually, the width of the label equals to the width of the 
- * label text plus 2*stringOffset.x
+ * label text plus `2*[self.customizer.stringOffset.x]`
  */
 - (void)setWidth:(CGFloat)width;
 

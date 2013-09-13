@@ -16,11 +16,18 @@
 + (DLChoiceDialogCustomizer *)defaultCustomizer
 {
   DLChoiceDialogCustomizer *customizer = [[DLChoiceDialogCustomizer alloc] init];
+  
+  // Look
   customizer.backgroundColor = ccc4(0, 0, 0, 0.8*255);
+  customizer.fntFile = @"demo_fnt.fnt";
   customizer.contentOffset = ccp(5, 5);
   customizer.paddingBetweenChoices = 5.0;
-  customizer.fntFile = @"demo_fnt.fnt";
   customizer.labelCustomizer = [DLSelectableLabelCustomizer defaultCustomizer];
+  
+  // Functionalities
+  customizer.preselectEnabled = YES;
+  customizer.swallowAllTouches = NO;
+  
   return customizer;
 }
 
@@ -40,22 +47,14 @@
   for (DLSelectableLabel *label in self.labels) {
     label.delegate = nil;
   }
+  [_customizer removeObserver:self forKeyPath:@"preselectEnabled"];
   [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
 }
 
 + (id)dialogWithChoices:(NSArray *)choices
-                fntFile:(NSString *)fntFile
-        backgroundColor:(ccColor4B)color
-          contentOffset:(CGPoint)offset
-  paddingBetweenChoices:(CGFloat)padding
 {
-  DLChoiceDialogCustomizer *customizer = [DLChoiceDialogCustomizer defaultCustomizer];
-  customizer.fntFile = fntFile;
-  customizer.backgroundColor = color;
-  customizer.contentOffset = offset;
-  customizer.paddingBetweenChoices = padding;
   return [[self alloc] initWithChoices:choices
-                      dialogCustomizer:customizer];
+                      dialogCustomizer:[DLChoiceDialogCustomizer defaultCustomizer]];
 }
 
 + (id)dialogWithChoices:(NSArray *)choices
@@ -65,29 +64,26 @@
                       dialogCustomizer:dialogCustomizer];
 }
 
-+ (id)dialogWithChoices:(NSArray *)choices
-{
-  return [[self alloc] initWithChoices:choices
-                      dialogCustomizer:[DLChoiceDialogCustomizer defaultCustomizer]];
-}
 
 - (id)initWithChoices:(NSArray *)choices
      dialogCustomizer:(DLChoiceDialogCustomizer *)dialogCustomizer
 {
   if (self = [super init])
   {
-    _preselectEnabled = YES;
-    _swallowAllTouches = NO;
-    
     _customizer = dialogCustomizer;
+    
+    // Observe for swallowAllTouches changes
+    [_customizer addObserver:self forKeyPath:@"preselectEnabled"
+                     options:NSKeyValueObservingOptionNew
+                     context:NULL];
     
     // This generates our labels and then update UI according to them
     self.choices = choices;
     
-    [[[CCDirector sharedDirector] touchDispatcher]
-     addTargetedDelegate:self
-     priority:kChoiceDialogDefaultTouchPriority
-     swallowsTouches:YES];
+    // Listen for touch events
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self
+                                                              priority:kChoiceDialogDefaultTouchPriority
+                                                       swallowsTouches:YES];
   }
   
   return self;
@@ -120,6 +116,7 @@
     }
     
     // Make choice labels
+    _customizer.labelCustomizer.preselectEnabled = _customizer.preselectEnabled;
     NSMutableArray *allLabels = [NSMutableArray arrayWithCapacity:_choices.count];
     for (int i = 0; i < _choices.count; i++) {
       NSString *choice = [_choices objectAtIndex:i];
@@ -129,7 +126,6 @@
                                   fntFile:_customizer.fntFile
                                   cutomizer:_customizer.labelCustomizer];
       label.anchorPoint = ccp(0, 1); // top left corner is anchor
-      label.preselectEnabled = _preselectEnabled;
       label.delegate = self;
       label.tag = i;
       [self addChild:label z:1];
@@ -142,25 +138,16 @@
   }
 }
 
-- (void)setPreselectEnabled:(BOOL)preselectEnabled
-{
-  if (_preselectEnabled != preselectEnabled) {
-    _preselectEnabled = preselectEnabled;
-    
-    // Look through all existing labels to update preselect property
-    for (DLSelectableLabel *label in self.labels) {
-      label.preselectEnabled = _preselectEnabled;
-    }
-  }
-}
-
-
 #pragma mark - Public methods
 
-- (void)selectChoiceAtIndex:(NSUInteger)index
+- (void)selectChoiceAtIndex:(NSUInteger)index skipPreselect:(BOOL)skipPreselect
 {
   DLSelectableLabel *targetLabel = [self.labels objectAtIndex:index];
-  [targetLabel select];
+  if (targetLabel.customizer.preselectEnabled && skipPreselect) {
+    [targetLabel selectWithoutPreselect];
+  }else {
+    [targetLabel select];
+  }
 }
 
 
@@ -176,7 +163,7 @@
   CGFloat largestLabelWidth = .0f;
   for (DLSelectableLabel *label in self.labels)
   {
-    // Update label styling
+    // Update label styling (does nothing if customizer is same)
     label.customizer = self.customizer.labelCustomizer;
     
     // Find the largest label width
@@ -248,12 +235,19 @@
       [label deselect];
     }
   }
+  
+  // Inform delegate
+  if (self.delegate &&
+      [self.delegate respondsToSelector:@selector(choiceDialogLabelPreselected:choiceText:choiceIndex:)]) {
+    [self.delegate choiceDialogLabelPreselected:self
+                                     choiceText:sender.text.string
+                                    choiceIndex:sender.tag];
+  }
 }
 
 - (void)selectableLabelSelected:(DLSelectableLabel *)sender
 {
-  CCLOG(@"dialog confirmed with value: %@, index: %i",
-        sender.text.string, sender.tag);
+  // Inform delegate
   if (self.delegate &&
       [self.delegate respondsToSelector:@selector(choiceDialogLabelSelected:choiceText:choiceIndex:)])
   {
@@ -267,10 +261,28 @@
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-  if (self.swallowAllTouches) {
+  if (self.customizer.swallowAllTouches) {
     return YES;
   }
   return NO;
+}
+
+
+#pragma mark - Property Observing
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+  if (self.customizer == object &&
+      [keyPath isEqualToString:@"preselectEnabled"] && self.labels)
+  {
+    // Update preselect of all labels
+    for (DLSelectableLabel *label in self.labels) {
+      label.customizer.preselectEnabled = self.customizer.preselectEnabled;
+    }
+  }
 }
 
 @end
