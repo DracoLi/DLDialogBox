@@ -286,6 +286,8 @@
   // Handle touch
   if (touchValid) {
     [self select];
+  }else if (self.customizer.deselectOnOutsideTap) {
+    [self deselect];
   }
   
   return touchValid;

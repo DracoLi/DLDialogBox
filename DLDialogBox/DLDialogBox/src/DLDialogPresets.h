@@ -28,10 +28,29 @@ typedef enum {
  */
 @interface DLDialogPresets : NSObject
 
+/**
+ * Returns one of my <DLDialogBoxCustomizer> presets.
+ *
+ * Available Presets:
+ *
+ * - kDialogBoxCustomizerWithBasicAnimations
+ * - kDialogBoxCustomizerWithFancyUI
+ */
 + (DLDialogBoxCustomizer *)dialogCustomizerOfType:(DialogBoxPreset)type;
 
-
+/**
+ * Get the shared customizer set by <setSharedCustomizer>.
+ *
+ * @see setSharedCustomizer
+ */
 + (DLDialogBoxCustomizer *)sharedCustomizer;
+
+/**
+ * Sets the shared customizer that you can get easily throughout your app 
+ * via <sharedCustomizer>.
+ *
+ * @see sharedCustomizer
+ */
 + (void)setSharedCustomizer:(DLDialogBoxCustomizer *)customizer;
 
 @end

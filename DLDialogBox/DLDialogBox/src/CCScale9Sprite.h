@@ -8,7 +8,7 @@
 // Modification added by Viktor Lidholt
 // Modifified by Draco Li (Sept 8, 2013)
 //   - Removed all other dependencies
-//   - Made it use ARC (no more ARC detection)
+//   - Made it use ARC only (no more ARC detection)
 //   - Some modifications to support cocos2d 2.1
 //
 

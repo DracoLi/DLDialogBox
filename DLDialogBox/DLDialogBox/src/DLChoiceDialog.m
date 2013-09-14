@@ -275,6 +275,7 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
+  // Allows preselectEnabled to be changed even after the dialog is initialized
   if (self.customizer == object &&
       [keyPath isEqualToString:@"preselectEnabled"] && self.labels)
   {

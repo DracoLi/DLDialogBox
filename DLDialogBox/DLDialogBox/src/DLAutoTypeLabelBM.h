@@ -12,18 +12,26 @@
 @class DLAutoTypeLabelBM;
 @protocol DLAutoTypeLabelBMDelegate
 @optional
+
+/**
+ * Called when typing animation for the string is finished.
+ */
 - (void)autoTypeLabelBMTypingFinished:(DLAutoTypeLabelBM *)sender;
+
 @end
 
+/**
+ * Strings displayed with this class will be animated as if its being typed.
+ */
 @interface DLAutoTypeLabelBM : CCLabelBMFont
 @property (nonatomic, weak) NSObject<DLAutoTypeLabelBMDelegate> *delegate;
 
 
 /**
- * The delay between each word typed.
+ * The delay between each word being typed.
  *
- * Changing this while the label is being typed will speed up or slow down the 
- * current typing speed.
+ * Since typingDelay is evaluated after every typed word, changing this while
+ * the label is being typed will speed up or slow down the current typing speed.
  */
 @property (nonatomic) ccTime typingDelay;
 
@@ -33,8 +41,13 @@
 @property (nonatomic, copy) NSString *autoTypeString;
 
 /**
+ * Returns YES if text is currently being typed.
+ */
+@property (nonatomic, readonly) BOOL currentlyTyping;
+
+/**
  * When called the current typing animation will stop and the label will display
- * whatever has been typed so far. Will trigger tying finished delegate method
+ * whatever has been typed so far. This will not trigger typing finished delegate method.
  * 
  * This method does not do anything if our label is not currently typing.
  */
@@ -47,7 +60,7 @@
 - (void)finishTypingAnimation;
 
 /**
- * Type in some text with a delay for every character typed
+ * Type in some text with a delay for every character typed.
  */
 - (void)typeText:(NSString*)txt withDelay:(ccTime)d;
 

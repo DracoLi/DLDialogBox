@@ -11,26 +11,32 @@
 @interface DLAutoTypeLabelBM ()
 @property (nonatomic, strong) NSMutableArray *arrayOfCharacters;
 @property (nonatomic, copy) NSString *adjustedTypedString;
+@property (nonatomic, readwrite) BOOL currentlyTyping;
 
-- (void)typingFinished;
-- (void)typeWordAtIndex:(int)index;
+- (void)typeCharacterAtIndex:(int)index;
 @end
 
 @implementation DLAutoTypeLabelBM
 
+- (void)dealloc {
+  self.delegate = nil;
+}
+
 - (void)stopTypingAnimation
 {
-  if ([self numberOfRunningActions] > 0) {
-    [self stopAllActions];
-    [self unschedule:@selector(finishCheck:)];
-    [self typingFinished];
-  }
+  [self stopAllActions];
+  self.currentlyTyping = NO;
 }
 
 - (void)finishTypingAnimation
 {
-  [self setString:self.adjustedTypedString];
   [self stopTypingAnimation];
+  [self setString:self.adjustedTypedString];
+  
+  if (self.delegate &&
+      [self.delegate respondsToSelector:@selector(autoTypeLabelBMTypingFinished:)]) {
+    [self.delegate autoTypeLabelBMTypingFinished:self];
+  }
 }
 
 - (void)typeText:(NSString*)txt withDelay:(ccTime)d
@@ -58,12 +64,11 @@
    * 3 characters.
    *
    * This is pretty dumb so this is a hack to fix this by appending some whitespace
-   * at the end of the to our typed string so we can type all the characters we were
-   * supposed to. 
+   * at the end of our typed string so we can type all the characters we were
+   * supposed to.
    *
-   * Typing animation would not take longer though since we are adding the same 
-   * number of whitespaces to the end of the string as there are newlines,
-   * the animation will look just like that we are typing character by character.
+   * For our typing animation, we only type the character count of the original string
+   * so we do not type the extra white spaces.
    */
   for (int i = 0; i < newlineCount; i++) {
     NSString *lastString = [_arrayOfCharacters lastObject];
@@ -77,15 +82,20 @@
   // We are doing this recursively so that we can change the typing speed
   // while the words are being typed out if we want.
   self.typingDelay = d;
-  [self typeWordAtIndex:0];
+  self.currentlyTyping = YES;
+  [self typeCharacterAtIndex:0];
 }
 
-- (void)typeWordAtIndex:(int)index
+- (void)typeCharacterAtIndex:(int)index
 {
+  // Allow typing to be manually determinated
+  if (!self.currentlyTyping) {
+    return;
+  }
+  
   // Finish all typing when we are at end of typing index
   if (index == [self.arrayOfCharacters count]) {
-    [self setString:self.adjustedTypedString];
-    [self typingFinished];
+    [self finishTypingAnimation];
     return;
   }
   
@@ -96,23 +106,10 @@
   // Wait and type next letter after a delay
   __weak DLAutoTypeLabelBM *weakSelf = self;
   id recurseBlock = [CCCallBlock actionWithBlock:^() {
-    [weakSelf typeWordAtIndex:index + 1];
+    [weakSelf typeCharacterAtIndex:index + 1];
   }];
   [self runAction:[CCSequence actions:
                    [CCDelayTime actionWithDuration:self.typingDelay], recurseBlock, nil]];
 }
-
-- (void)typingFinished
-{
-  if (self.delegate &&
-      [self.delegate respondsToSelector:@selector(autoTypeLabelBMTypingFinished:)]) {
-    [self.delegate autoTypeLabelBMTypingFinished:self];
-  }
-}
-
-- (void)dealloc {
-  self.delegate = nil;
-}
-
 
 @end

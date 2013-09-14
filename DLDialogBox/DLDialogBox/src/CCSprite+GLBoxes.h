@@ -10,6 +10,9 @@
 
 @interface CCSprite (GLBoxes)
 
+/**
+ * Create a sprite with a solid color.
+ */
 + (CCSprite *)rectangleOfSize:(CGSize)size
                         color:(ccColor4B)color;
 
