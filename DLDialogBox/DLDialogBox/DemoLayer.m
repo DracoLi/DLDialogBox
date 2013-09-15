@@ -153,6 +153,7 @@ typedef enum {
       third.choiceDialog.position = ccp(0, winSize.height);
       
       third.prependText = @"Draco: ";
+      third.delegate = self;
       
       [self addChild:third z:1];
       
@@ -180,10 +181,24 @@ typedef enum {
 }
 
 
+
 #pragma mark ccTouch Delegate
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+}
+
+
+#pragma mark DLDialogBox Delegate
+
+- (void)dialogBoxCurrentTextPageFinished:(DLDialogBox *)sender
+{
+  NSUInteger index = sender.currentTextPage;
+  NSAssert(sender.currentPageTyped == YES, @"Current page typed must be TRUE");
+  NSAssert(index > 0, @"current page must start from 1");
+  if (index == 2) {
+    sender.customizer.choiceDialogCustomizer.preselectEnabled = NO;
+  }
 }
 
 @end

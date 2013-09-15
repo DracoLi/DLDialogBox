@@ -415,6 +415,12 @@
     }
   }
   
+  // Inform delegate one page finished
+  if (self.delegate &&
+      [self.delegate respondsToSelector:@selector(dialogBoxCurrentTextPageFinished:)]) {
+    [self.delegate dialogBoxCurrentTextPageFinished:self];
+  }
+  
   // Show blinking page finished indicator after every page except last
   if (self.textArray.count != 0 && self.customizer.pageFinishedIndicator)
   {
