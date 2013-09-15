@@ -13,7 +13,8 @@
 // A block type that will be used for custom animations 
 typedef void(^DLAnimationBlock)(id);
 
-#define kChoiceDialogDefaultTouchPriority -2
+// This must be small enough so we can swallow most of other touch handlers
+#define kChoiceDialogDefaultTouchPriority -500
 
 /**
  * A DLChoiceDialogCustomizer is used to determine the __look__, __functionalities__,

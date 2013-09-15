@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-#define kSelectableLabelTouchPriority -3
+#define kSelectableLabelTouchPriority -501
 
 /**
  * A DLSelectableLabelCustomizer is used to determine the __look__, __functionalities__,

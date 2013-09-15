@@ -129,6 +129,7 @@ typedef enum {
       choiceCustomizer.backgroundSpriteFile =  @"fancy_border.png";
       choiceCustomizer.contentInsets = UIEdgeInsetsMake(8, 8, 8, 8);
       choiceCustomizer.spacingBetweenChoices = 0; // Label's closer together
+      choiceCustomizer.swallowAllTouches = NO;
       
       // Customize choice dialog's label
       DLSelectableLabelCustomizer *labelCustomizer = choiceCustomizer.labelCustomizer;
