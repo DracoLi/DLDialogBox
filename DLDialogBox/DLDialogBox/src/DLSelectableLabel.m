@@ -97,10 +97,6 @@
     _bgSprite.anchorPoint = ccp(0, 0);
     _bgSprite.position = ccp(0, 0);
     [self addChild:_bgSprite z:0];
-    
-    // Touch events
-    [[[CCDirector sharedDirector] touchDispatcher]
-     addTargetedDelegate:self priority:kSelectableLabelTouchPriority swallowsTouches:YES];
   }
   
   return self;
@@ -269,6 +265,24 @@
       self.bgSprite.texture = self.defaultTexture;
     }
   }
+}
+
+
+#pragma mark - Transitions
+
+- (void)onEnter
+{
+  [super onEnter];
+  
+  // Touch events
+  [[[CCDirector sharedDirector] touchDispatcher]
+   addTargetedDelegate:self priority:kSelectableLabelTouchPriority swallowsTouches:YES];
+}
+
+- (void)onExit
+{
+  [super onExit];
+  [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
 }
 
 

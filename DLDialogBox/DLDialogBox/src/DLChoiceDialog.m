@@ -48,7 +48,6 @@
     label.delegate = nil;
   }
   [self.customizer removeObserver:self forKeyPath:@"preselectEnabled"];
-  [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
 }
 
 + (id)dialogWithChoices:(NSArray *)choices
@@ -80,11 +79,6 @@
     
     // This generates our labels and then update UI according to them
     self.choices = choices;
-    
-    // Listen for touch events
-    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self
-                                                              priority:kChoiceDialogDefaultTouchPriority
-                                                       swallowsTouches:YES];
   }
   
   return self;
@@ -133,9 +127,7 @@
       [allLabels addObject:label];
     }
     self.labels = [allLabels copy];
-    
-    NSAssert([(DLSelectableLabel *)[self.labels objectAtIndex:1] tag] == 1, @"Index for labels must be correct");
-    
+
     // Update all choice labels on screen according to current customizer
     [self updateChoiceDialogUI];
   }
@@ -260,6 +252,26 @@
                                  choiceIndex:sender.tag];
   }
 }
+
+
+#pragma mark - Transitions
+
+- (void)onEnter
+{
+  [super onEnter];
+  
+  // Listen for touch events
+  [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self
+                                                            priority:kChoiceDialogDefaultTouchPriority
+                                                     swallowsTouches:YES];
+}
+
+- (void)onExit
+{
+  [super onExit];
+  [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
+}
+
 
 #pragma mark - CCTouchOneByOneDelegate
 

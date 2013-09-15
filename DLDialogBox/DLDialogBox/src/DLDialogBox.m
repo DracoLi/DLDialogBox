@@ -151,11 +151,6 @@
     // Adding choices after customizer allows us to create a choice dialog
     // with the current customizer
     self.choices = choices;
-    
-    // Add touch dispatcher
-    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self
-                                                              priority:kDialogBoxTouchPriority
-                                                       swallowsTouches:NO];
   }
   
   return self;
@@ -314,7 +309,6 @@
   [self removeFromParentAndCleanup:YES];
   self.delegate = nil;
   self.dialogLabel.delegate = nil;
-  [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
 }
 
 
@@ -508,6 +502,11 @@
   if (self.customizer.onEnterDialogAnimation) {
     self.customizer.onEnterDialogAnimation(self);
   }
+  
+  // Add touch dispatcher
+  [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self
+                                                            priority:kDialogBoxTouchPriority
+                                                     swallowsTouches:NO];
 }
 
 - (void)onExit
@@ -518,6 +517,8 @@
   if (self.customizer.onExitDialogAnimation) {
     self.customizer.onExitDialogAnimation(self);
   }
+  
+  [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
 }
 
 @end
