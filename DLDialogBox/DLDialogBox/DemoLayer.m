@@ -77,7 +77,6 @@ typedef enum {
       customizer.dialogSize = CGSizeMake(customizer.dialogSize.width, kDialogHeightSmall);
       DLDialogBox *first = [DLDialogBox dialogWithTextArray:words
                                             defaultPortrait:nil customizer:customizer];
-      first.handleOnlyTapInputsInDialogBox = YES;
       first.anchorPoint = ccp(0, 0);
       first.position = ccp(0, 0);
       [self addChild:first z:1];
@@ -100,10 +99,8 @@ typedef enum {
                                              defaultPortrait:portrait
                                                      choices:choices
                                                   customizer:customizer];
-      second.handleOnlyTapInputsInDialogBox = YES;
       second.anchorPoint = ccp(0, 0);
       second.position = ccp(0, 0);
-      second.tapToFinishCurrentPage = YES;
       [self addChild:second z:1];
       
       // Manually set the to be displayed position of the choice dialog
@@ -120,23 +117,22 @@ typedef enum {
       // Customize dialog box
       DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
       customizer.backgroundSpriteFile = @"fancy_border.png";
-      customizer.dialogTextOffset = ccp(15, 15);
+      customizer.dialogTextInsets = UIEdgeInsetsMake(15, 15, 15, 15);
       customizer.dialogSize = CGSizeMake(customizer.dialogSize.width - 50, kDialogHeightNormal);
-      customizer.portraitOffset = ccp(0, 0);
+      customizer.portraitInsets = UIEdgeInsetsZero;
       customizer.portraitPosition = kDialogPortraitPositionRight;
       customizer.portraitInsideDialog = NO;
-      customizer.animateOutsidePortraitIn = YES;
       customizer.speedPerPageFinishedIndicatorBlink = 0.5; // 2 blinks per second
       
       // Customize choice dialog
       DLChoiceDialogCustomizer *choiceCustomizer = customizer.choiceDialogCustomizer;
       choiceCustomizer.backgroundSpriteFile =  @"fancy_border.png";
-      choiceCustomizer.contentOffset = ccp(8, 8);
+      choiceCustomizer.contentInsets = UIEdgeInsetsMake(8, 8, 8, 8);
       choiceCustomizer.spacingBetweenChoices = 0; // Label's closer together
       
       // Customize choice dialog's label
       DLSelectableLabelCustomizer *labelCustomizer = choiceCustomizer.labelCustomizer;
-      labelCustomizer.textOffset = ccp(15, 5); // More horizontal padding
+      labelCustomizer.textInsets = UIEdgeInsetsMake(5, 15, 5, 15); // More horizontal padding
       labelCustomizer.preSelectedBackgroundColor = ccc4(66, 139, 202, 255);
       labelCustomizer.selectedBackgroundColor = ccc4(22, 88, 146, 255);
       labelCustomizer.textAlignment = kCCTextAlignmentLeft;
@@ -148,7 +144,6 @@ typedef enum {
                                             defaultPortrait:portrait
                                                     choices:choices
                                                  customizer:customizer];
-      third.handleOnlyTapInputsInDialogBox = YES;
       third.anchorPoint = ccp(0, 0);
       third.position = ccp(25, 0); // Since dialog box is smaller than screen width, set an offset to center
       

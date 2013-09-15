@@ -21,6 +21,9 @@
  */
 @interface DLSelectableLabelCustomizer : NSObject
 
+
+/// @name Customizing look/UI
+
 /**
  * The alignment of the text in the label.
  *
@@ -52,14 +55,17 @@
 @property (nonatomic) ccColor4B selectedBackgroundColor;
 
 /**
- * Specifies the offset between the label's text and the label edges.
+ * Insets of the label's text.
  *
- * The larger the string offset the more spacing there are between the label string
+ * The larger the insets the more spacing there are between the label's string
  * and the label itself.
  *
- * __Defaults to ccp(10, 5)__
+ * __Defaults to (5, 10, 5, 10)__
  */
-@property (nonatomic) CGPoint textOffset;
+@property (nonatomic) UIEdgeInsets textInsets;
+
+
+/// @name Customizing functionalities
 
 /**
  * If enabled this label will automatically be deselected if tapped outside.

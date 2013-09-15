@@ -18,7 +18,7 @@
   // Look
   customizer.textAlignment = kCCTextAlignmentCenter;
   customizer.preSelectedBackgroundColor = ccc4(200, 0, 0, 0.70*255);
-  customizer.textOffset = ccp(10, 5);
+  customizer.textInsets = UIEdgeInsetsMake(5, 10, 5, 10);
   
   // Functionality
   customizer.deselectOnOutsideTap = NO;
@@ -152,20 +152,20 @@
 - (void)updateTextWithAlignment:(CCTextAlignment)alignment
 {
   DLSelectableLabelCustomizer *customizer = self.customizer;
-  CGSize contentSize = self.contentSize;
   CGSize labelSize = self.text.contentSize;
-  CGFloat halfYOffset = customizer.textOffset.y + labelSize.height / 2;
-  CGFloat halfXOffset = customizer.textOffset.x + labelSize.width / 2;
+  CGFloat halfYOffset = customizer.textInsets.bottom + labelSize.height / 2;
+  CGFloat halfXOffset = customizer.textInsets.left + labelSize.width / 2;
   if (alignment == kCCTextAlignmentLeft) {
     self.text.anchorPoint = ccp(0, 0.5f);
-    self.text.position = ccp(customizer.textOffset.x, halfYOffset);
+    self.text.position = ccp(customizer.textInsets.left, halfYOffset);
   }else if (alignment == kCCTextAlignmentCenter) {
     self.text.anchorPoint = ccp(0.5f, 0.5f);
     self.text.position = ccp(halfXOffset, halfYOffset);
     CCLOGWARN(@"Know bug! DLSelectableLabel currently does not support center align due to cocos2d bug.");
   }else if (alignment == kCCTextAlignmentRight) {
     self.text.anchorPoint = ccp(1.0f, 0.5f);
-    self.text.position = ccp(contentSize.width - customizer.textOffset.x, halfYOffset);
+    self.text.position = ccp(self.contentSize.width - customizer.textInsets.right,
+                             halfYOffset);
   }
 }
 
@@ -204,8 +204,8 @@
     _customizer = customizer;
     
     // Update label size and text position
-    CGSize labelSize = CGSizeMake(_text.contentSize.width + 2 * customizer.textOffset.x,
-                                  _text.contentSize.height + 2 * customizer.textOffset.y);
+    CGSize labelSize = CGSizeMake(_text.contentSize.width + customizer.textInsets.left + customizer.textInsets.right,
+                                  _text.contentSize.height + customizer.textInsets.top + customizer.textInsets.bottom);
     self.contentSize = labelSize;
     [self updateTextWithAlignment:customizer.textAlignment];
     

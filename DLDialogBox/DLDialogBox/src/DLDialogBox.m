@@ -32,7 +32,7 @@
   customizer.speedPerPageFinishedIndicatorBlink = 1.0;
   customizer.dialogTextInsets = UIEdgeInsetsMake(10, 10, 10, 10);
   customizer.portraitPosition = kDialogPortraitPositionLeft;
-  customizer.portraitInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+  customizer.portraitInsets = UIEdgeInsetsZero;
   customizer.portraitInsideDialog = NO;
   customizer.fntFile = @"demo_fnt.fnt";;
   customizer.choiceDialogCustomizer = [DLChoiceDialogCustomizer defaultCustomizer];
