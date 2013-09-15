@@ -353,7 +353,7 @@
   }
   
   // Adjust label width to fit inside dialog
-  CGFloat width = customizer.dialogTextInsets.left - dialogSize.width - \
+  CGFloat width = dialogSize.width - customizer.dialogTextInsets.left - \
                   customizer.dialogTextInsets.right;
   if (self.defaultPortraitSprite && customizer.portraitInsideDialog) {
     width = width - _defaultPortraitSprite.contentSize.width - \

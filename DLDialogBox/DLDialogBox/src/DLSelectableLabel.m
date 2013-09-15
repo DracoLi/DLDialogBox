@@ -53,7 +53,6 @@
 - (void)dealloc
 {
   self.delegate = nil;
-  [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
 }
 
 + (id)labelWithText:(NSString *)text
