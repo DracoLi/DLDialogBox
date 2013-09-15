@@ -56,6 +56,9 @@
 /**
  * When called, the current typing animation will stop and the label will display
  * the full text that is meant to be typed immediately.
+ *
+ * If <currentlyTyping> is NO then this method would not inform the delegate but
+ * will make sure that the displayed text is the final text to display.
  */
 - (void)finishTypingAnimation;
 

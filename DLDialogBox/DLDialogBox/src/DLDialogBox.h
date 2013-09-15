@@ -98,7 +98,7 @@ typedef enum {
  * By default this sprite will blink continously after the dialog texts are typed.
  *
  * Also by default DLDialogBox will position this sprite at the bottom right corner
- * using the same offset as the `dialogTextOffset` of this customizer.
+ * using the same insets as the <dialogTextInsets> of this customizer.
  *
  * Override this sprite's position after setting the customizer on a DLDialogBox
  * to adjust the extact position of this indicator sprite.
@@ -120,19 +120,20 @@ typedef enum {
 @property (nonatomic) ccTime speedPerPageFinishedIndicatorBlink;
 
 /**
- * The offset between the dialog text and the top left edge of the dialog box.
+ * In CSS terms, this is essentially the margin of the dialog text.
  *
  * If the dialog box has an inner portrait on the left side of the dialog,
- * then this offset corresponds to the spacing between the dialog text and the
- * inner portrait (y offest is still the space bewtween the text and the top of
- * the dialog box).
+ * then the insets correspond to the spacing between the dialog box and the
+ * inner portrait.
  *
- * Please note that this value is also used as the default offset between the 
- * `pageFinishedIndicator` and the bottom right of the dialog box.
+ * Please note that this value is also used as the default insets between the
+ * <pageFinishedIndicator> and the bottom right of the dialog box. If you don't
+ * like that, you can always set the position of the indicator manually through
+ * <pageFinishedIndicator>.
  *
- * __Defaults to (10, 10)__
+ * __Defaults to (10, 10, 10, 10)__
  */
-@property (nonatomic) CGPoint dialogTextOffset;
+@property (nonatomic) UIEdgeInsets dialogTextInsets;
 
 /**
  * Position of the portrait in the dialog box.
@@ -144,17 +145,17 @@ typedef enum {
 @property (nonatomic) DialogPortraitPosition portraitPosition;
 
 /**
- * The padding between the portrait and the edge of the dialog box.
+ * This is essentially the margin of the portrait sprite.
  *
- * If <portraitInsideDialog> is NO, then this value specifies the offset between
- * the portrait and the bottom edge of the dialog box depending on the <portraitPosition>.
+ * By default the portrait sprite is placed at the bottom left corner of the dialog
+ * box if <portraitInsideDialog> is set to NO.
  *
- * If <portraitInsideDialog> is YES, then this value specifies the offset between
- * the portrait and the top edge of the dialog box depending on the <portraitPosition>.
+ * If <portraitInsideDialog> is YES, then the portrait is positioned in the top
+ * left corner of the dialog box.
  *
- * __Defaults to (0, 0)__
+ * __Defaults to (0, 0, 0, 0)__
  */
-@property (nonatomic) CGPoint portraitOffset;
+@property (nonatomic) UIEdgeInsets portraitInsets;
 
 /**
  * If set to YES, the dialog's portrait will appear inside the dialog box.
@@ -163,10 +164,11 @@ typedef enum {
  * can use a big beautiful portrait that is just super fabulous. 
  *
  * However if `portraitInsideDialog` is set to YES, then the portrait will instead
- * be placed inside the dialog and <portraitOffset> will be the spacing
- * between the portrait and the top left edge of the dialog box.
+ * be placed inside the dialog.
  *
  * __Defaults to NO__
+ *
+ * @see portraitInsets
  */
 @property (nonatomic) BOOL portraitInsideDialog;
 

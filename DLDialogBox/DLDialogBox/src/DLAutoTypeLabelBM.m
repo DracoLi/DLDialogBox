@@ -30,12 +30,14 @@
 
 - (void)finishTypingAnimation
 {
-  [self stopTypingAnimation];
   [self setString:self.adjustedTypedString];
-  
-  if (self.delegate &&
-      [self.delegate respondsToSelector:@selector(autoTypeLabelBMTypingFinished:)]) {
-    [self.delegate autoTypeLabelBMTypingFinished:self];
+  if (self.currentlyTyping) {
+    [self stopTypingAnimation];
+    
+    if (self.delegate &&
+        [self.delegate respondsToSelector:@selector(autoTypeLabelBMTypingFinished:)]) {
+      [self.delegate autoTypeLabelBMTypingFinished:self];
+    }
   }
 }
 
