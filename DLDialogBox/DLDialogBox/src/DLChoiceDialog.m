@@ -20,8 +20,8 @@
   // Look
   customizer.backgroundColor = ccc4(0, 0, 0, 0.8*255);
   customizer.fntFile = @"demo_fnt.fnt";
-  customizer.contentOffset = ccp(5, 5);
-  customizer.paddingBetweenChoices = 5.0;
+  customizer.contentInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+  customizer.spacingBetweenChoices = 5.0;
   customizer.labelCustomizer = [DLSelectableLabelCustomizer defaultCustomizer];
   
   // Functionalities
@@ -47,7 +47,7 @@
   for (DLSelectableLabel *label in self.labels) {
     label.delegate = nil;
   }
-  [_customizer removeObserver:self forKeyPath:@"preselectEnabled"];
+  [self.customizer removeObserver:self forKeyPath:@"preselectEnabled"];
   [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
 }
 
@@ -73,9 +73,10 @@
     _customizer = dialogCustomizer;
     
     // Observe for swallowAllTouches changes
-    [_customizer addObserver:self forKeyPath:@"preselectEnabled"
-                     options:NSKeyValueObservingOptionNew
-                     context:NULL];
+    [self.customizer addObserver:self
+                      forKeyPath:@"preselectEnabled"
+                         options:NSKeyValueObservingOptionNew
+                         context:NULL];
     
     // This generates our labels and then update UI according to them
     self.choices = choices;
@@ -133,6 +134,8 @@
     }
     self.labels = [allLabels copy];
     
+    NSAssert([(DLSelectableLabel *)[self.labels objectAtIndex:1] tag] == 1, @"Index for labels must be correct");
+    
     // Update all choice labels on screen according to current customizer
     [self updateChoiceDialogUI];
   }
@@ -176,14 +179,15 @@
   // Update choice dialog contentSize
   NSUInteger totalChoices = _choices.count;
   DLSelectableLabel *oneLabel = [self.labels objectAtIndex:0];
-  CGFloat totalHeight = _customizer.contentOffset.y * 2 + \
+  UIEdgeInsets contentInsets = _customizer.contentInsets;
+  CGFloat totalHeight = contentInsets.top + contentInsets.bottom + \
                         totalChoices * oneLabel.contentSize.height +
-                        _customizer.paddingBetweenChoices * (totalChoices - 1);
-  CGFloat totalWidth = largestLabelWidth + _customizer.contentOffset.x * 2;
+                        _customizer.spacingBetweenChoices * (totalChoices - 1);
+  CGFloat totalWidth = largestLabelWidth + contentInsets.left + contentInsets.right;
   self.contentSize = CGSizeMake(totalWidth, totalHeight);
   
   // Position all labels and adjust to common largest width
-  CGFloat heightOffset = totalHeight - _customizer.contentOffset.y;
+  CGFloat heightOffset = totalHeight - contentInsets.top;
   for (int i = 0; i < _choices.count; i++)
   {
     DLSelectableLabel *label = [self.labels objectAtIndex:i];
@@ -193,10 +197,10 @@
     [label setWidth:largestLabelWidth];
     
     // Reposition all labels
-    label.position = ccp(_customizer.contentOffset.x, heightOffset);
+    label.position = ccp(contentInsets.left, heightOffset);
     
     // Set the y position of the next label
-    heightOffset = heightOffset - label.contentSize.height - _customizer.paddingBetweenChoices;
+    heightOffset = heightOffset - label.contentSize.height - _customizer.spacingBetweenChoices;
   }
   
   // Remove any existing background sprite

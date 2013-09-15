@@ -394,7 +394,7 @@
     CCSprite *indicator = customizer.pageFinishedIndicator;
     indicator.anchorPoint = ccp(1, 0);
     
-    // By default the indicator's offset uses the same one as the dialogTextInsets
+    // By default the indicator's insets uses the same one as the dialogTextInsets
     indicator.position = ccp(dialogSize.width - customizer.dialogTextInsets.right,
                              customizer.dialogTextInsets.bottom);
     indicator.visible = NO;

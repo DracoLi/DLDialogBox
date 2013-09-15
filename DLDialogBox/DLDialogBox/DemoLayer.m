@@ -132,7 +132,7 @@ typedef enum {
       DLChoiceDialogCustomizer *choiceCustomizer = customizer.choiceDialogCustomizer;
       choiceCustomizer.backgroundSpriteFile =  @"fancy_border.png";
       choiceCustomizer.contentOffset = ccp(8, 8);
-      choiceCustomizer.paddingBetweenChoices = 0; // Label's closer together
+      choiceCustomizer.spacingBetweenChoices = 0; // Label's closer together
       
       // Customize choice dialog's label
       DLSelectableLabelCustomizer *labelCustomizer = choiceCustomizer.labelCustomizer;

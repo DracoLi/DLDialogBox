@@ -30,6 +30,7 @@ typedef void(^DLAnimationBlock)(id);
  */
 @interface DLChoiceDialogCustomizer : NSObject
 
+
 /// @name Customizing look/UI
 
 /**
@@ -71,28 +72,27 @@ typedef void(^DLAnimationBlock)(id);
 @property (nonatomic, copy) NSString *fntFile;
 
 /**
- * This determines the offset between the choice dialog's choice content and
- * the choice dialog itself.
+ * This sets the insets of the choice dialog's choice content.
  *
- * The size of the choice dialog will adjust according to accommodate both the
- * choice content and the offset.
+ * The size of the choice dialog will adjust accordingly to accommodate both the
+ * choice content and its insets.
  *
- * __Defaults to (5, 5)__
+ * __Defaults to (5, 5, 5, 5)__
  */
-@property (nonatomic) CGPoint contentOffset;
+@property (nonatomic) UIEdgeInsets contentInsets;
 
 /**
  * The vertical margin between the choice labels.
  *
- * Setting a positive `paddingBetweenChoices` will result in more spacing
+ * Setting this to a positive value will result in more spacing
  * between choice labels.
  *
  * __Defaults to 5.0__
  */
-@property (nonatomic) CGFloat paddingBetweenChoices;
+@property (nonatomic) CGFloat spacingBetweenChoices;
 
 /**
- * The `DLSelectableLabelCustomizer` for customizing the labels inside the choice dialog.
+ * The <DLSelectableLabelCustomizer> for customizing the labels inside the choice dialog.
  *
  * __Defaults to the default DLSelectableLabelCustomizer__
  *
@@ -105,7 +105,7 @@ typedef void(^DLAnimationBlock)(id);
 
 /**
  * If enabled, selecting a choice in a choice dialog will first preselect
- * the choice. The choice will only be selected if selected for the second time.
+ * the choice. The choice will only be selected if selected after being preselected.
  *
  * Enabling this will result in less errors when the player is selecting a choice.
  *
@@ -209,11 +209,13 @@ typedef void(^DLAnimationBlock)(id);
 /**
  * Programatically selects a choice by passing the index of the choice in the <choices> array.
  *
- * If skipPreselect is set to NO, this method will preselect the label if
- * <preselectEnabled> is set to YES and the targeted choice has not 
+ * If skipPreselect is set to NO, this method will preselect the label first if
+ * <preselectEnabled> is enabled and the targeted choice has not
  * already been preselected.
  *
  * __Note:__ The delegate will be notified of this selection (maybe be a preselect or select).
+ *
+ * __Note:__ index starts at 0.
  */
 - (void)selectChoiceAtIndex:(NSUInteger)index skipPreselect:(BOOL)skipPreselect;
 
