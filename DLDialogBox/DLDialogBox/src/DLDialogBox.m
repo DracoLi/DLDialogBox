@@ -15,9 +15,6 @@
 #define kPageTextZIndex 1
 #define kPageIndicatorZIndex 2
 
-// Other constants
-#define kDefaultTypingSpeed 0.02
-
 @implementation DLDialogBoxCustomizer
 
 + (DLDialogBoxCustomizer *)defaultCustomizer
@@ -26,10 +23,11 @@
   
   // Look
   customizer.dialogSize = CGSizeMake([[CCDirector sharedDirector] winSize].width,
-                                     kDialogHeightNormal);
+                                     kDialogBoxHeightNormal);
   customizer.backgroundColor = ccc4(0, 0, 0, 0.8*255);
   customizer.pageFinishedIndicator = [CCSprite spriteWithFile:@"arrow_cursor.png"];
   customizer.speedPerPageFinishedIndicatorBlink = 1.0;
+  customizer.hidePageFinishedIndicatorOnLastPage = YES;
   customizer.dialogTextInsets = UIEdgeInsetsMake(10, 10, 10, 10);
   customizer.portraitPosition = kDialogPortraitPositionLeft;
   customizer.portraitInsets = UIEdgeInsetsZero;
@@ -41,7 +39,7 @@
   customizer.tapToFinishCurrentPage = YES;
   customizer.handleTapInputs = YES;
   customizer.handleOnlyTapInputsInDialogBox = YES;
-  customizer.typingDelay = kDefaultTypingSpeed;
+  customizer.typingDelay = kDialogBoxDefaultTypingSpeed;
   customizer.closeWhenDialogFinished = YES;
   
   return customizer;
@@ -417,12 +415,12 @@
   
   // Inform delegate one page finished
   if (self.delegate &&
-      [self.delegate respondsToSelector:@selector(dialogBoxCurrentTextPageFinished:)]) {
-    [self.delegate dialogBoxCurrentTextPageFinished:self];
+      [self.delegate respondsToSelector:@selector(dialogBoxCurrentTextPageFinished:currentPage:)]) {
+    [self.delegate dialogBoxCurrentTextPageFinished:self currentPage:self.currentTextPage];
   }
   
   // Show blinking page finished indicator after every page except last
-  if (self.textArray.count != 0 && self.customizer.pageFinishedIndicator)
+  if (self.customizer.pageFinishedIndicator && (self.textArray.count != 0 || !self.customizer.hidePageFinishedIndicatorOnLastPage))
   {
     // Animate arrow cursor blinking
     id blink = [CCBlink actionWithDuration:5.0 blinks:5.0 / self.customizer.speedPerPageFinishedIndicatorBlink];

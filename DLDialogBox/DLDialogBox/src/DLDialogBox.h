@@ -11,11 +11,12 @@
 #import "DLAutoTypeLabelBM.h"
 #import "DLChoiceDialog.h"
 
-#define kDialogHeightSmall  55
-#define kDialogHeightNormal 90
-#define kDialogHeightLarge  130
+#define kDialogBoxHeightSmall  55
+#define kDialogBoxHeightNormal 90
+#define kDialogBoxHeightLarge  130
 
 #define kDialogBoxTouchPriority -1
+#define kDialogBoxDefaultTypingSpeed 0.02
 
 typedef enum {
   kDialogPortraitPositionLeft = 0,
@@ -54,9 +55,9 @@ typedef enum {
  * 
  * We provided some height constants for you to use:
  *
- * - `kDialogHeightSmall` accommodates about 1-2 lines of text
- * - `kDialogHeightNormal` accommodates about 3-4 lines of text and is the default height
- * - `kDialogHeightLarge` accommodates about 4-5 lines of text
+ * - `kDialogBoxHeightSmall` accommodates about 1-2 lines of text
+ * - `kDialogBoxHeightNormal` accommodates about 3-4 lines of text and is the default height
+ * - `kDialogBoxHeightLarge` accommodates about 4-5 lines of text
  */
 @property (nonatomic) CGSize dialogSize;
 
@@ -118,6 +119,19 @@ typedef enum {
  * __Default is 1.0 for 1 second per blink.__
  */
 @property (nonatomic) ccTime speedPerPageFinishedIndicatorBlink;
+
+/**
+ * Hides the page finished indicator for the last page of the dialog box.
+ *
+ * By default, JRPGs hide the indicator on the last page of the text so that the
+ * player knows that there are no more text to display next. However sometimes
+ * you may want to follow up one dialog box immediately with another one from
+ * another npc, thus it might look better to set this value to NO for these
+ * cases to show that they are more dialogs to follow.
+ *
+ * __Defaults to YES__
+ */
+@property (nonatomic) BOOL hidePageFinishedIndicatorOnLastPage;
 
 /**
  * In CSS terms, this is essentially the margin of the dialog text.
@@ -290,7 +304,8 @@ typedef enum {
  * Since the dialog box can display an array of text, this method is called
  * whenever a single page of text has finished animating and is fully displayed.
  */
-- (void)dialogBoxCurrentTextPageFinished:(DLDialogBox *)sender;
+- (void)dialogBoxCurrentTextPageFinished:(DLDialogBox *)sender
+                             currentPage:(NSUInteger)currentPage;
 
 /**
  * Called when a choice is selected for a <DLDialogBox>

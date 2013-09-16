@@ -74,7 +74,7 @@ typedef enum {
       [self removeAnyDialog];
       
       DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
-      customizer.dialogSize = CGSizeMake(customizer.dialogSize.width, kDialogHeightSmall);
+      customizer.dialogSize = CGSizeMake(customizer.dialogSize.width, kDialogBoxHeightSmall);
       DLDialogBox *first = [DLDialogBox dialogWithTextArray:words
                                             defaultPortrait:nil customizer:customizer];
       first.anchorPoint = ccp(0, 0);
@@ -118,7 +118,7 @@ typedef enum {
       DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
       customizer.backgroundSpriteFile = @"fancy_border.png";
       customizer.dialogTextInsets = UIEdgeInsetsMake(15, 15, 15, 15);
-      customizer.dialogSize = CGSizeMake(customizer.dialogSize.width - 50, kDialogHeightNormal);
+      customizer.dialogSize = CGSizeMake(customizer.dialogSize.width - 50, kDialogBoxHeightNormal);
       customizer.portraitInsets = UIEdgeInsetsZero;
       customizer.portraitPosition = kDialogPortraitPositionRight;
       customizer.portraitInsideDialog = NO;
@@ -141,10 +141,16 @@ typedef enum {
       choiceCustomizer.labelCustomizer = labelCustomizer;
       customizer.choiceDialogCustomizer = choiceCustomizer;
       
+      
+      // Additional potraits
+      NSDictionary *portraits = @{@"2": [CCSprite spriteWithFile:@"sun-face-ques.png"], @"3": [CCSprite spriteWithFile:@"sun-face-sad.png"]};
+      
+      
       DLDialogBox *third = [DLDialogBox dialogWithTextArray:wordsChoices
                                             defaultPortrait:portrait
                                                     choices:choices
                                                  customizer:customizer];
+      third.customPortraitForPages = portraits;
       third.anchorPoint = ccp(0, 0);
       third.position = ccp(25, 0); // Since dialog box is smaller than screen width, set an offset to center
       
@@ -161,7 +167,46 @@ typedef enum {
     }];
     item3.fontSize = fontSize;
     
-    CCMenu *demoMenu = [CCMenu menuWithItems:item1, item2, item3, nil];
+    
+    CCMenuItemFont *item4 = [CCMenuItemFont itemWithString:@"Dialog #4" block:^(id sender){
+      [self removeAnyDialog];
+      
+      // Customize dialog box
+      DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
+      customizer.backgroundSpriteFile = @"fancy_border.png";
+      customizer.dialogSize = CGSizeMake(customizer.dialogSize.width, kDialogBoxHeightNormal + 5);
+      customizer.dialogTextInsets = UIEdgeInsetsMake(15, 10, 15, 15);
+      customizer.portraitInsets = UIEdgeInsetsMake(10, 10, 10, 0);
+      customizer.portraitPosition = kDialogPortraitPositionLeft;
+//      customizer.dialogTextInsets = UIEdgeInsetsMake(15, 15, 15, 10);
+//      customizer.portraitInsets = UIEdgeInsetsMake(10, 0, 10, 10);
+//      customizer.portraitPosition = kDialogPortraitPositionRight;
+      customizer.portraitInsideDialog = YES;
+      customizer.hidePageFinishedIndicatorOnLastPage = NO;
+      
+      // Inner portrait
+      CCSprite *innerPortrait = [CCSprite spriteWithFile:@"face-port.png"];
+      
+      DLDialogBox *third = [DLDialogBox dialogWithTextArray:words
+                                            defaultPortrait:innerPortrait
+                                                 customizer:customizer];
+      third.anchorPoint = ccp(0, 0);
+      third.position = ccp(0, 0); // Since dialog box is smaller than screen width, set an offset to center
+      
+      // Position choice dialog on top left
+      third.choiceDialog.anchorPoint = ccp(0, 1);
+      third.choiceDialog.position = ccp(0, winSize.height);
+      
+      third.prependText = @"Draco: ";
+      third.delegate = self;
+      
+      [self addChild:third z:1];
+      
+      self.currentDialog = third;
+    }];
+    item4.fontSize = fontSize;
+    
+    CCMenu *demoMenu = [CCMenu menuWithItems:item1, item2, item3, item4, nil];
     [demoMenu alignItemsHorizontallyWithPadding:10];
     demoMenu.position = ccp(winSize.width / 2, winSize.height - topPadding);
     [self addChild:demoMenu z:0];
@@ -192,13 +237,22 @@ typedef enum {
 #pragma mark DLDialogBox Delegate
 
 - (void)dialogBoxCurrentTextPageFinished:(DLDialogBox *)sender
+                             currentPage:(NSUInteger)currentPage
 {
   NSUInteger index = sender.currentTextPage;
+  NSAssert(currentPage == index, @"Passed in current page must be same as currentTextPage");
   NSAssert(sender.currentPageTyped == YES, @"Current page typed must be TRUE");
   NSAssert(index > 0, @"current page must start from 1");
-  if (index == 2) {
-    sender.customizer.choiceDialogCustomizer.preselectEnabled = NO;
-  }
+//  if (index == 2) {
+//    sender.customizer.choiceDialogCustomizer.preselectEnabled = NO;
+//  }
+}
+
+
+- (void)dialogBoxAllTextFinished:(DLDialogBox *)sender
+{
+  NSUInteger index = sender.currentTextPage;
+  NSAssert(index == sender.initialTextArray.count, @"This should be the last page");
 }
 
 @end
