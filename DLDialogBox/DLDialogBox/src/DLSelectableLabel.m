@@ -107,7 +107,7 @@
 - (void)select
 {
   if (self.customizer.preselectEnabled) {
-    if (!self.preselected) {
+    if (!self.preselected && !self.selected) {
       self.preselected = YES;
     }else {
       self.selected = YES;

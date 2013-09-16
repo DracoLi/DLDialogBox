@@ -15,7 +15,7 @@
 #define kDialogBoxHeightNormal 90
 #define kDialogBoxHeightLarge  130
 
-#define kDialogBoxTouchPriority -1
+#define kDialogBoxTouchPriority -499
 #define kDialogBoxDefaultTypingSpeed 0.02
 
 typedef enum {
@@ -99,10 +99,12 @@ typedef enum {
  * By default this sprite will blink continously after the dialog texts are typed.
  *
  * Also by default DLDialogBox will position this sprite at the bottom right corner
- * using the same insets as the <dialogTextInsets> of this customizer.
+ * of the dialog text.
  *
- * Override this sprite's position after setting the customizer on a DLDialogBox
- * to adjust the extact position of this indicator sprite.
+ * To change this indicator's position in the dialog box, you can override this
+ * sprite's position after creating a DLDialogBox with this customizer.
+ *
+ * __Note:_ This indicator's default anchor point is (1, 0).
  *
  * __By default `defaultCustomizer` sets this sprite to an arrow cursor sprite
  * attached with the project.__
@@ -237,6 +239,31 @@ typedef enum {
  * __Defaults to YES__
  */
 @property (nonatomic) BOOL handleOnlyTapInputsInDialogBox;
+
+/**
+ * If enabled, the dialog box will swallow all touches inputs. This can essentially
+ * disable all touch inputs aside from this dialog box and its choice dialog.
+ *
+ * Enabling this is an easy way to disable all other user inputs when
+ * the dialog box is displayed.
+ *
+ * However it is likely that you still want your player to tap on things like the
+ * menu button etc, thus `swallowAllTouches` is set to NO by default so that you
+ * can disable user inputs manually.
+ *
+ * Please note that once a DLDialogBox has been displayed, changing this value
+ * will not change the behaviour of the DLDialogBox since this property, unlike
+ * the other fuctionality related properties, is evaluated only when
+ * DLDialogBox is first displayed.
+ *
+ * __Note:__ If something has a higher touch priority than kDialogBoxTouchPriority, then
+ * that receiver will receive touch events even with `swallowAllTouches`
+ * set to YES. However kDialogBoxTouchPriority is currently set to a such
+ * low value that this dialog box should have the highest touch priority.
+ *
+ * __Defaults to NO__
+ */
+@property (nonatomic) BOOL swallowAllTouches;
 
 /**
  * The delay between the typing animation of each character.

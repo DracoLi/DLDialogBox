@@ -165,7 +165,7 @@
  * Selects the current label. If preselect is enabled, this preselects the label
  * if not already preselected.
  *
- * __Note:__ Calling `select` when already selected will inform the delegate.
+ * __Note:__ Calling `select` when already selected will not inform the delegate.
  */
 - (void)select;
 

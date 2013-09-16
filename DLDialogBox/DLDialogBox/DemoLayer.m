@@ -75,6 +75,7 @@ typedef enum {
       
       DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
       customizer.dialogSize = CGSizeMake(customizer.dialogSize.width, kDialogBoxHeightSmall);
+//      customizer.closeWhenDialogFinished = NO;
       DLDialogBox *first = [DLDialogBox dialogWithTextArray:words
                                             defaultPortrait:nil customizer:customizer];
       first.anchorPoint = ccp(0, 0);
@@ -123,11 +124,14 @@ typedef enum {
       customizer.portraitPosition = kDialogPortraitPositionRight;
       customizer.portraitInsideDialog = NO;
       customizer.speedPerPageFinishedIndicatorBlink = 0.5; // 2 blinks per second
+      customizer.handleOnlyTapInputsInDialogBox = NO;
+//      customizer.closeWhenDialogFinished = NO;
+//      customizer.swallowAllTouches = NO;
       
       // Customize choice dialog
       DLChoiceDialogCustomizer *choiceCustomizer = customizer.choiceDialogCustomizer;
       choiceCustomizer.backgroundSpriteFile =  @"fancy_border.png";
-      choiceCustomizer.contentInsets = UIEdgeInsetsMake(8, 8, 8, 8);
+      choiceCustomizer.contentInsets = UIEdgeInsetsMake(8, 8, 30, 8);
       choiceCustomizer.spacingBetweenChoices = 0; // Label's closer together
       choiceCustomizer.swallowAllTouches = NO;
       
@@ -175,12 +179,12 @@ typedef enum {
       DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
       customizer.backgroundSpriteFile = @"fancy_border.png";
       customizer.dialogSize = CGSizeMake(customizer.dialogSize.width, kDialogBoxHeightNormal + 5);
-      customizer.dialogTextInsets = UIEdgeInsetsMake(15, 10, 15, 15);
-      customizer.portraitInsets = UIEdgeInsetsMake(10, 10, 10, 0);
-      customizer.portraitPosition = kDialogPortraitPositionLeft;
-//      customizer.dialogTextInsets = UIEdgeInsetsMake(15, 15, 15, 10);
-//      customizer.portraitInsets = UIEdgeInsetsMake(10, 0, 10, 10);
-//      customizer.portraitPosition = kDialogPortraitPositionRight;
+//      customizer.dialogTextInsets = UIEdgeInsetsMake(15, 10, 15, 15);
+//      customizer.portraitInsets = UIEdgeInsetsMake(10, 10, 10, 0);
+//      customizer.portraitPosition = kDialogPortraitPositionLeft;
+      customizer.dialogTextInsets = UIEdgeInsetsMake(15, 15, 20, 10);
+      customizer.portraitInsets = UIEdgeInsetsMake(10, 0, 10, 10);
+      customizer.portraitPosition = kDialogPortraitPositionRight;
       customizer.portraitInsideDialog = YES;
       customizer.hidePageFinishedIndicatorOnLastPage = NO;
       
@@ -197,7 +201,7 @@ typedef enum {
       third.choiceDialog.anchorPoint = ccp(0, 1);
       third.choiceDialog.position = ccp(0, winSize.height);
       
-      third.prependText = @"Draco: ";
+      third.prependText = @"Cheese: ";
       third.delegate = self;
       
       [self addChild:third z:1];

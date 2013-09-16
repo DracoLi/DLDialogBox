@@ -39,6 +39,7 @@
   customizer.tapToFinishCurrentPage = YES;
   customizer.handleTapInputs = YES;
   customizer.handleOnlyTapInputsInDialogBox = YES;
+  customizer.swallowAllTouches = NO;
   customizer.typingDelay = kDialogBoxDefaultTypingSpeed;
   customizer.closeWhenDialogFinished = YES;
   
@@ -389,6 +390,17 @@
     // By default the indicator's insets uses the same one as the dialogTextInsets
     indicator.position = ccp(dialogSize.width - customizer.dialogTextInsets.right,
                              customizer.dialogTextInsets.bottom);
+    
+    // Handle when portrait is inside and on the right side
+    if (customizer.portraitInsideDialog &&
+        customizer.portraitPosition == kDialogPortraitPositionRight)
+    {
+      CGFloat x = dialogSize.width - self.defaultPortraitSprite.contentSize.width - \
+                  customizer.pageFinishedIndicator.contentSize.width - \
+                  customizer.portraitInsets.left - customizer.dialogTextInsets.right;
+      indicator.position = ccp(x, customizer.dialogTextInsets.bottom);
+    }
+    
     indicator.visible = NO;
     [self.dialogContent addChild:indicator z:kPageIndicatorZIndex];
   }
@@ -489,6 +501,10 @@
     }
   }
   
+  if (self.customizer.swallowAllTouches) {
+    shouldClaim = YES;
+  }
+  
   return shouldClaim;
 }
 
@@ -510,7 +526,7 @@
   // Add touch dispatcher
   [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self
                                                             priority:kDialogBoxTouchPriority
-                                                     swallowsTouches:NO];
+                                                     swallowsTouches:YES];
 }
 
 - (void)onExit

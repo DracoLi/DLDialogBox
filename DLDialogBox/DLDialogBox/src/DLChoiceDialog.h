@@ -120,12 +120,19 @@ typedef void(^DLAnimationBlock)(id);
  *
  * Enabling this is an easy way to disable all other user inputs when selecting a choice.
  * However it is likely that you still want your player to tap on things like the
- * menu button etc, thus `swallowAllTouches` is set to NO by default.
+ * menu button etc, thus `swallowAllTouches` is set to NO by default so that you
+ * can disable user inputs manually.
  *
  * Please note that once a DLChoiceDialog has been created, changing this value
  * will not change the behaviour of the DLChoiceDialog since this property, unlike
- * the other fuctionality related properties, is evaluated during DLChoiceDialog
- * creation time.
+ * the other fuctionality related properties, is evaluated only when the
+ * DLChoiceDialog is first displayed.
+ *
+ * __Note:__ If something has a higher touch priority than 
+ * kChoiceDialogDefaultTouchPriority, then that receiver will receive touch
+ * events even with `swallowAllTouches` set to YES. However 
+ * kChoiceDialogDefaultTouchPriority is currently set to a such low value that
+ * this choice dialog should have the highest touch priority.
  *
  * __Defaults to NO__
  */
