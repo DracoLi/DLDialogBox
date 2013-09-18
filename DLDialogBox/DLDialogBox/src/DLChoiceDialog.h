@@ -10,7 +10,7 @@
 #import "DLSelectableLabel.h"
 #import "cocos2d.h"
 
-// A block type that will be used for custom animations 
+// A block type that will be used for custom animations
 typedef void(^DLAnimationBlock)(id);
 
 // This must be small enough so we can swallow most of other touch handlers
@@ -139,11 +139,85 @@ typedef void(^DLAnimationBlock)(id);
 @property (nonatomic) BOOL swallowAllTouches;
 
 /**
+ * Close the choice dialog when a choice is selected
+ *
+ * If enabled, the choice dialog will be removed when a choice is selected.
+ * However if a <hideAnimation> is specified, the hideAnimation will be called
+ * instead. The hideAnmation block should then be responsible for removing the
+ * choice dialog.
+ *
+ * __Defaults to YES__
+ *
+ * @see [DLChoiceDialog playHideAnimationOrRemoveFromParent]
+ */
+@property (nonatomic) BOOL closeWhenChoiceSelected;
+
+
+/// @name Custom Animations
+
+/**
+ * A block that is run during the onEnter method to display the dialog.
+ *
+ * You should use this to make customization show animations.
+ *
+ * This animation block will be run automatically after the dialog box is
+ * added to a parent.
+ */
+@property (nonatomic, copy) DLAnimationBlock showAnimation;
+
+/**
+ * A block that is run when closing the dialog.
+ *
+ * You should use this to make customization hide animations.
+ *
+ * This animation block is automatically run when a choice is selected if 
+ * <closeWhenChoiceSelected> is set to YES.
+ *
+ * __Note:__ You should remove the choice dialog in your hideAnimation block after
+ * all animations are played. When a hideAnimation is specified, the dialog
+ * does not know when to remove itself so please make sure to do it in your
+ * block.
+ */
+@property (nonatomic, copy) DLAnimationBlock hideAnimation;
+
+/**
  * Returns the default customizer used by the DLChoiceDialog
  */
 + (DLChoiceDialogCustomizer *)defaultCustomizer;
 
+/**
+ * Returns a common show animation for the dialog so you don't have to write them!
+ *
+ * __Note:__ If you do not want to animate the position of the dialog, then
+ * just make the startPosition the same as the finalPosition.
+ *
+ * @param fadeIn            Fades the dialog box in.
+ * @param startPos          Start position of the dialog before the move animation.
+ * @param finalPos          The position where the dialog should move to.
+ * @param speed             Speed of the whole animation sequence.
+ */
++ (DLAnimationBlock)customShowAnimationWithStartPosition:(CGPoint)startPos
+                                           finalPosition:(CGPoint)finalPos
+                                                  fadeIn:(BOOL)fadeIn
+                                                duration:(ccTime)duration;
+
+/**
+ * Returns a common hide animation for the dialog so you don't have to write them!
+ *
+ * __Note:__ If you do not want to animate the position of the dialog, then
+ * just make the finalPosition the same as the position where the dialog is
+ * being displayed.
+ *
+ * @param fadeOut           Fades the dialog box out.
+ * @param finalPos          The position where the dialog should move to.
+ * @param speed             Speed of the whole animation sequence.
+ */
++ (DLAnimationBlock)customHideAnimationWithFinalPosition:(CGPoint)finalPos
+                                                 fadeOut:(BOOL)fadeOut
+                                                duration:(ccTime)duration;
+
 @end
+
 
 @class DLChoiceDialog, DLSelectableLabelCustomizer;
 @protocol DLChoiceDialogDelegate <NSObject>
@@ -226,5 +300,24 @@ typedef void(^DLAnimationBlock)(id);
  * __Note:__ index starts at 0.
  */
 - (void)selectChoiceAtIndex:(NSUInteger)index skipPreselect:(BOOL)skipPreselect;
+
+/**
+ * Play the hide animation block associated with the dialog's customizer if it
+ * exists. Else just remove the dialog from the parent.
+ *
+ * __Note:__ The hide animation block should be responsible for removing the
+ * choice dialog from the parent.
+ */
+- (void)playHideAnimationOrRemoveFromParent;
+
+/**
+ * Fade in the dialog with a specified duration.
+ */
+- (void)fadeInWithDuration:(ccTime)duration;
+
+/**
+ * Fade out the dialog with a specified duration.
+ */
+- (void)fadeOutWithDuration:(ccTime)duration;
 
 @end

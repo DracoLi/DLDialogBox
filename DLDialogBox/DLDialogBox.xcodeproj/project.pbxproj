@@ -164,11 +164,8 @@
 		D4990C9D17D7D83B00430BFB /* DLChoiceDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = D4990C9917D7D83B00430BFB /* DLChoiceDialog.m */; };
 		D4990C9E17D7D83B00430BFB /* DLSelectableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4990C9B17D7D83B00430BFB /* DLSelectableLabel.m */; };
 		D4990CA617D7D97300430BFB /* demo-room.tmx in Resources */ = {isa = PBXBuildFile; fileRef = D4990CA117D7D97300430BFB /* demo-room.tmx */; };
-		D4990CA717D7D97300430BFB /* other-images.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4990CA217D7D97300430BFB /* other-images.plist */; };
-		D4990CA817D7D97300430BFB /* other-images.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = D4990CA317D7D97300430BFB /* other-images.pvr.ccz */; };
-		D49BCF0317E6889000B6929B /* face-port.png in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF0017E6889000B6929B /* face-port.png */; };
-		D49BCF0417E6889000B6929B /* sun-face-ques.png in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF0117E6889000B6929B /* sun-face-ques.png */; };
-		D49BCF0517E6889000B6929B /* sun-face-sad.png in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF0217E6889000B6929B /* sun-face-sad.png */; };
+		D49BCF0817E7959700B6929B /* portraits.plist in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF0617E7959600B6929B /* portraits.plist */; };
+		D49BCF0917E7959700B6929B /* portraits.png in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF0717E7959700B6929B /* portraits.png */; };
 		D49D9FAE17E11078002C8E9B /* DLDialogPresets.m in Sources */ = {isa = PBXBuildFile; fileRef = D49D9FAD17E11078002C8E9B /* DLDialogPresets.m */; };
 		D4AC1C6617D9530F005AA9F5 /* CCSprite+GLBoxes.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC1C6517D9530F005AA9F5 /* CCSprite+GLBoxes.m */; };
 		D4AC1C6E17DA472E005AA9F5 /* fancy_border.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC1C6D17DA472D005AA9F5 /* fancy_border.png */; };
@@ -491,11 +488,8 @@
 		D4990C9A17D7D83B00430BFB /* DLSelectableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSelectableLabel.h; sourceTree = "<group>"; };
 		D4990C9B17D7D83B00430BFB /* DLSelectableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSelectableLabel.m; sourceTree = "<group>"; };
 		D4990CA117D7D97300430BFB /* demo-room.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "demo-room.tmx"; path = "Resources/demo-room.tmx"; sourceTree = "<group>"; };
-		D4990CA217D7D97300430BFB /* other-images.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "other-images.plist"; path = "Resources/other-images.plist"; sourceTree = "<group>"; };
-		D4990CA317D7D97300430BFB /* other-images.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = "other-images.pvr.ccz"; path = "Resources/other-images.pvr.ccz"; sourceTree = "<group>"; };
-		D49BCF0017E6889000B6929B /* face-port.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "face-port.png"; path = "Resources/face-port.png"; sourceTree = "<group>"; };
-		D49BCF0117E6889000B6929B /* sun-face-ques.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sun-face-ques.png"; path = "Resources/sun-face-ques.png"; sourceTree = "<group>"; };
-		D49BCF0217E6889000B6929B /* sun-face-sad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sun-face-sad.png"; path = "Resources/sun-face-sad.png"; sourceTree = "<group>"; };
+		D49BCF0617E7959600B6929B /* portraits.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = portraits.plist; path = Resources/portraits.plist; sourceTree = "<group>"; };
+		D49BCF0717E7959700B6929B /* portraits.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = portraits.png; path = Resources/portraits.png; sourceTree = "<group>"; };
 		D49D9FAC17E11078002C8E9B /* DLDialogPresets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLDialogPresets.h; sourceTree = "<group>"; };
 		D49D9FAD17E11078002C8E9B /* DLDialogPresets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLDialogPresets.m; sourceTree = "<group>"; };
 		D4AC1C6417D9530F005AA9F5 /* CCSprite+GLBoxes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCSprite+GLBoxes.h"; sourceTree = "<group>"; };
@@ -598,9 +592,8 @@
 		D499097017D7D5F800430BFB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D49BCF0017E6889000B6929B /* face-port.png */,
-				D49BCF0117E6889000B6929B /* sun-face-ques.png */,
-				D49BCF0217E6889000B6929B /* sun-face-sad.png */,
+				D49BCF0617E7959600B6929B /* portraits.plist */,
+				D49BCF0717E7959700B6929B /* portraits.png */,
 				D4661D8B17DD533B001BDA8B /* normal_bg.png */,
 				D4AC1C6D17DA472D005AA9F5 /* fancy_border.png */,
 				D4AC1C7C17DAD813005AA9F5 /* meta_tiles.png */,
@@ -608,8 +601,6 @@
 				D4AC1C7E17DAD813005AA9F5 /* InnerModern-TileB.png */,
 				D4AC1C7F17DAD813005AA9F5 /* newa4.png */,
 				D4990CA117D7D97300430BFB /* demo-room.tmx */,
-				D4990CA217D7D97300430BFB /* other-images.plist */,
-				D4990CA317D7D97300430BFB /* other-images.pvr.ccz */,
 				D499097117D7D5F800430BFB /* Default.png */,
 				D499097317D7D5F800430BFB /* Default@2x.png */,
 				D499097517D7D5F800430BFB /* Default-568h@2x.png */,
@@ -1112,8 +1103,6 @@
 				D499098417D7D5F800430BFB /* Icon@2x.png in Resources */,
 				D499098717D7D5F800430BFB /* iTunesArtwork in Resources */,
 				D4990CA617D7D97300430BFB /* demo-room.tmx in Resources */,
-				D4990CA717D7D97300430BFB /* other-images.plist in Resources */,
-				D4990CA817D7D97300430BFB /* other-images.pvr.ccz in Resources */,
 				D4AC1C6E17DA472E005AA9F5 /* fancy_border.png in Resources */,
 				D4AC1C7317DA6B73005AA9F5 /* arrow_cursor.png in Resources */,
 				D4AC1C7A17DA6C1D005AA9F5 /* demo_fnt.fnt in Resources */,
@@ -1123,9 +1112,8 @@
 				D4AC1C8217DAD813005AA9F5 /* InnerModern-TileB.png in Resources */,
 				D4AC1C8317DAD813005AA9F5 /* newa4.png in Resources */,
 				D4661D8C17DD533C001BDA8B /* normal_bg.png in Resources */,
-				D49BCF0317E6889000B6929B /* face-port.png in Resources */,
-				D49BCF0417E6889000B6929B /* sun-face-ques.png in Resources */,
-				D49BCF0517E6889000B6929B /* sun-face-sad.png in Resources */,
+				D49BCF0817E7959700B6929B /* portraits.plist in Resources */,
+				D49BCF0917E7959700B6929B /* portraits.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

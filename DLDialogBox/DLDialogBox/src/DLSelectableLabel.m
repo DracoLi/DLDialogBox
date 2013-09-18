@@ -141,6 +141,20 @@
   [self updateTextWithAlignment:self.customizer.textAlignment];
 }
 
+- (void)fadeInWithDuration:(ccTime)duration
+{
+  id fade = [CCFadeIn actionWithDuration:duration];
+  [self.bgSprite runAction:fade];
+  [self.text runAction:[fade copy]];
+}
+
+- (void)fadeOutWithDuration:(ccTime)duration
+{
+  id fade = [CCFadeOut actionWithDuration:duration];
+  [self.bgSprite runAction:fade];
+  [self.text runAction:[fade copy]];
+}
+
 
 #pragma mark - Private methods
 

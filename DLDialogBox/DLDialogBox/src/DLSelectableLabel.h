@@ -188,4 +188,14 @@
  */
 - (void)setWidth:(CGFloat)width;
 
+/**
+ * Fade this label in with duration.
+ */
+- (void)fadeInWithDuration:(ccTime)duration;
+
+/**
+ * Fade this label out with duration.
+ */
+- (void)fadeOutWithDuration:(ccTime)duration;
+
 @end

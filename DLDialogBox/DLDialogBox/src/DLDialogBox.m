@@ -46,11 +46,76 @@
   return customizer;
 }
 
++ (DLAnimationBlock)customShowAnimationWithSlideDistance:(CGFloat)distance
+                                                  fadeIn:(BOOL)fadeIn
+                                                duration:(ccTime)duration
+{
+  return ^(DLDialogBox *dialog)
+  {
+    // Animate any outside portrait independently
+    [dialog animateOutsidePortraitInWithFadeIn:NO
+                                      distance:dialog.portrait.contentSize.width / 4
+                                      duration:duration];
+    
+    // Animate dialog content slides in
+    if (distance != 0) {
+      CGPoint startPos = CGPointZero;
+      CGPoint finalPos = dialog.dialogContent.position;
+      CGPoint travelDiff = CGPointMake(0, distance);
+      startPos = ccpSub(dialog.dialogContent.position, travelDiff);
+      dialog.dialogContent.position = startPos;
+      id move = [CCMoveTo actionWithDuration:duration position:finalPos];
+      [dialog.dialogContent runAction:move];
+    }
+    
+    // Animate dialog content fade in
+    if (fadeIn) {
+      [dialog fadeInWithDuration:duration];
+    }
+  };
+}
+
++ (DLAnimationBlock)customHideAnimationWithSlideDistance:(CGFloat)distance
+                                                 fadeOut:(BOOL)fadeOut
+                                                duration:(ccTime)duration
+{
+  return ^(DLDialogBox *dialog)
+  {
+    // Animate any outside portrait independently
+    [dialog animateOutsidePortraitOutWithFadeOut:fadeOut
+                                        distance:dialog.portrait.contentSize.width / 4
+                                        duration:duration];
+    
+    // Animate dialog content slide out
+    if (distance != 0) {
+      CGPoint finalPos = CGPointZero;
+      CGPoint travelDiff = CGPointMake(0, distance);
+      finalPos = ccpSub(dialog.dialogContent.position, travelDiff);
+      id move = [CCMoveTo actionWithDuration:duration position:finalPos];
+      [dialog.dialogContent runAction:move];
+    }
+    
+    // Animate dialog content fade in
+    if (fadeOut) {
+      [dialog fadeOutWithDuration:duration];
+    }
+    
+    // Done callback to remove the dialog
+    __weak DLDialogBox *weakDialog = dialog;
+    id done = [CCCallBlock actionWithBlock:^() {
+      [weakDialog removeFromParentAndCleanup:YES];
+    }];
+    [dialog runAction:[CCSequence actions:
+                       [CCDelayTime actionWithDuration:duration],
+                       done,
+                       nil]];
+  };
+}
+
 @end
 
 @interface DLDialogBox ()
 @property (nonatomic, strong) NSMutableArray *textArray;
-@property (nonatomic, strong) CCNode *bgSprite;
 @property (nonatomic, readwrite) BOOL currentPageTyped;
 
 - (void)initializeDialogBoxWithCurrentCustomizer;
@@ -60,7 +125,12 @@
 
 - (void)dealloc
 {
-  [self removeDialogBoxAndCleanUp];
+  self.delegate = nil;
+  self.dialogLabel.delegate = nil;
+  if (self.choiceDialog) {
+    self.choiceDialog.delegate = nil;
+  }
+  [self.customizer removeObserver:self forKeyPath:@"typingDelay"];
 }
 
 
@@ -126,6 +196,7 @@
     _defaultPortraitSprite = portrait;
     _portrait = [CCSprite node];
     _portrait.anchorPoint = ccp(0, 0);
+    _portrait.visible = YES;
     [self updatePortraitTextureWithSprite:_defaultPortraitSprite];
     
     // Add portrait to dialog content node if its inside the dialog
@@ -150,6 +221,12 @@
     // Adding choices after customizer allows us to create a choice dialog
     // with the current customizer
     self.choices = choices;
+    
+    // Observe for typing delay changes on the customizer
+    [self.customizer addObserver:self
+                      forKeyPath:@"typingDelay"
+                         options:NSKeyValueObservingOptionNew
+                         context:NULL];
   }
   
   return self;
@@ -178,6 +255,7 @@
       }
       self.choiceDialog = [DLChoiceDialog dialogWithChoices:choices
                                            dialogCustomizer:self.customizer.choiceDialogCustomizer];
+      self.choiceDialog.customizer.closeWhenChoiceSelected = NO; // This dialog box takes full control over what happens
       self.choiceDialog.delegate = self;
     }
   }
@@ -229,8 +307,9 @@
     
     // Close dialog box if enabled when no more content to display
     if (self.customizer.closeWhenDialogFinished) {
-      [self removeDialogBoxAndCleanUp];
+      [self playHideAnimationOrRemoveFromParent];
     }
+    
     return;
   }
   
@@ -294,20 +373,125 @@
   }
 }
 
-- (void)removeChoiceDialogAndCleanUp
+- (void)removeDialogBoxFromParentAndCleanup
 {
-  if (self.choiceDialog && self.choiceDialog.parent) {
+  if (self.choiceDialog) {
     [self.choiceDialog removeFromParentAndCleanup:YES];
-    self.choiceDialog.delegate = nil;
+  }
+  [self removeFromParentAndCleanup:YES];
+}
+
+- (void)playHideAnimationOrRemoveFromParent
+{
+  // Remove the dialog box
+  if (self.customizer.hideAnimation) {
+    self.customizer.hideAnimation(self);
+  }else {
+    [self removeFromParentAndCleanup:YES];
+  }
+  
+  // Remove the choice dialog if its exists and is shown
+  if (self.choiceDialog && self.choiceDialog.parent) {
+    if (self.choiceDialog.customizer.hideAnimation) {
+      [self.choiceDialog playHideAnimationOrRemoveFromParent];
+    }else {
+      [self.choiceDialog removeFromParentAndCleanup:YES];
+      self.choiceDialog.delegate = nil;
+    }
   }
 }
 
-- (void)removeDialogBoxAndCleanUp
+- (void)fadeInWithDuration:(ccTime)duration
 {
-  [self removeChoiceDialogAndCleanUp];
-  [self removeFromParentAndCleanup:YES];
-  self.delegate = nil;
-  self.dialogLabel.delegate = nil;
+  id fade = [CCFadeIn actionWithDuration:duration];
+  [self.bgSprite runAction:fade];
+  [self.dialogLabel runAction:[fade copy]];
+  if (self.customizer.pageFinishedIndicator) {
+    [self.customizer.pageFinishedIndicator runAction:[fade copy]];
+  }
+  if (self.defaultPortraitSprite) {
+    [self.portrait runAction:[fade copy]];
+  }
+}
+
+- (void)fadeOutWithDuration:(ccTime)duration
+{
+  id fade = [CCFadeOut actionWithDuration:duration];
+  [self.bgSprite runAction:fade];
+  [self.dialogLabel runAction:[fade copy]];
+  if (self.customizer.pageFinishedIndicator) {
+    [self.customizer.pageFinishedIndicator runAction:[fade copy]];
+  }
+  if (self.defaultPortraitSprite) {
+    [self.portrait runAction:[fade copy]];
+  }
+}
+
+- (void)animateOutsidePortraitInWithFadeIn:(BOOL)fadeIn
+                                  distance:(CGFloat)distance
+                                  duration:(ccTime)duration
+{
+  // Animate in outside portrait independently
+  if (self.defaultPortraitSprite && !self.customizer.portraitInsideDialog)
+  {
+    CGPoint finalPos = self.portrait.position;
+    
+    // Calculate initial position
+    CGPoint startingPos = CGPointZero;
+    if (self.customizer.portraitPosition == kDialogPortraitPositionLeft) {
+      startingPos = ccpSub(finalPos, CGPointMake(distance, 0));
+    }else {
+      startingPos = ccpAdd(finalPos, CGPointMake(distance, 0));
+    }
+    
+    // Animate move and fade in
+    self.portrait.position = startingPos;
+    id move = [CCMoveTo actionWithDuration:duration
+                                  position:finalPos];
+    //    id moveEaseOut = [CCEaseOut actionWithAction:move
+    //                                            rate:kPortraitMoveAnimationEaseRate];D
+    id fadeIn = [CCFadeIn actionWithDuration:duration];
+    id action = nil;
+    if (fadeIn && distance != 0) {
+      action = [CCSpawn actions:move, fadeIn, nil];
+    }else if (fadeIn) {
+      action = fadeIn;
+    }else if (distance != 0) {
+      action = move;
+    }
+    [self.portrait runAction:action];
+  }
+}
+
+- (void)animateOutsidePortraitOutWithFadeOut:(BOOL)fadeOut
+                                    distance:(CGFloat)distance
+                                    duration:(ccTime)duration
+{
+  // Animate out outside portrait independently
+  if (self.defaultPortraitSprite && !self.customizer.portraitInsideDialog)
+  {
+    // Calculate final position
+    CGPoint finalPos = CGPointZero;
+    CGPoint startPos = self.portrait.position;
+    if (self.customizer.portraitPosition == kDialogPortraitPositionLeft) {
+      finalPos = ccpSub(startPos, CGPointMake(distance, 0));
+    }else {
+      finalPos = ccpAdd(startPos, CGPointMake(distance, 0));
+    }
+    
+    // Animate move and fade in
+    id move = [CCMoveTo actionWithDuration:duration position:finalPos];
+    id fadeOut = [CCFadeOut actionWithDuration:duration];
+    id action = nil;
+    if (fadeOut && distance != 0) {
+      action = [CCSpawn actions:move, fadeOut, nil];
+    }else if (fadeOut) {
+      action = fadeOut;
+    }else if (distance != 0) {
+      action = move;
+    }
+    [self.portrait runAction:action];
+  }
 }
 
 
@@ -347,16 +531,16 @@
       customizer.portraitPosition == kDialogPortraitPositionLeft)
   {
     CGFloat x = customizer.portraitInsets.left + _defaultPortraitSprite.contentSize.width + \
-                customizer.portraitInsets.right + customizer.dialogTextInsets.left;
+    customizer.portraitInsets.right + customizer.dialogTextInsets.left;
     self.dialogLabel.position = ccp(x, labelY);
   }
   
   // Adjust label width to fit inside dialog
   CGFloat width = dialogSize.width - customizer.dialogTextInsets.left - \
-                  customizer.dialogTextInsets.right;
+  customizer.dialogTextInsets.right;
   if (self.defaultPortraitSprite && customizer.portraitInsideDialog) {
     width = width - _defaultPortraitSprite.contentSize.width - \
-            customizer.portraitInsets.left - customizer.portraitInsets.right;
+    customizer.portraitInsets.left - customizer.portraitInsets.right;
   }
   [self.dialogLabel setWidth:width];
   
@@ -396,14 +580,41 @@
         customizer.portraitPosition == kDialogPortraitPositionRight)
     {
       CGFloat x = dialogSize.width - self.defaultPortraitSprite.contentSize.width - \
-                  customizer.pageFinishedIndicator.contentSize.width - \
-                  customizer.portraitInsets.left - customizer.dialogTextInsets.right;
+      customizer.pageFinishedIndicator.contentSize.width - \
+      customizer.portraitInsets.left - customizer.dialogTextInsets.right;
       indicator.position = ccp(x, customizer.dialogTextInsets.bottom);
     }
     
     indicator.visible = NO;
     [self.dialogContent addChild:indicator z:kPageIndicatorZIndex];
   }
+}
+
+
+#pragma mark - Method overrides
+
+- (void)onEnter
+{
+  [super onEnter];
+  
+  // Start first page automatically on page enter.
+  [self advanceToNextPage];
+  
+  // Custom on enter animations
+  if (self.customizer.showAnimation) {
+    self.customizer.showAnimation(self);
+  }
+  
+  // Add touch dispatcher
+  [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self
+                                                            priority:kDialogBoxTouchPriority
+                                                     swallowsTouches:YES];
+}
+
+- (void)onExit
+{
+  [super onExit];
+  [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
 }
 
 
@@ -438,7 +649,7 @@
     id blink = [CCBlink actionWithDuration:5.0 blinks:5.0 / self.customizer.speedPerPageFinishedIndicatorBlink];
     [self.customizer.pageFinishedIndicator
      runAction:[CCRepeatForever actionWithAction:blink]];
-  }  
+  }
 }
 
 
@@ -460,7 +671,7 @@
   
   // Close dialog box when choice is selected
   if (self.customizer.closeWhenDialogFinished) {
-    [self removeDialogBoxAndCleanUp];
+    [self playHideAnimationOrRemoveFromParent];
   }
 }
 
@@ -509,36 +720,20 @@
 }
 
 
-#pragma mark - Method overrides
+#pragma mark - Property Observing
 
-- (void)onEnter
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
 {
-  [super onEnter];
-  
-  // Start first page automatically on page enter.
-  [self advanceToNextPage];
-  
-  // Custom on enter animations
-  if (self.customizer.onEnterDialogAnimation) {
-    self.customizer.onEnterDialogAnimation(self);
+  // Allows preselectEnabled to be changed even after the dialog is initialized
+  if (self.customizer == object &&
+      [keyPath isEqualToString:@"typingDelay"] && self.dialogLabel)
+  {
+    // Update dialog label current typing delay
+    self.dialogLabel.typingDelay = self.customizer.typingDelay;
   }
-  
-  // Add touch dispatcher
-  [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self
-                                                            priority:kDialogBoxTouchPriority
-                                                     swallowsTouches:YES];
-}
-
-- (void)onExit
-{
-  [super onExit];
-  
-  // Custom on exit animatinos
-  if (self.customizer.onExitDialogAnimation) {
-    self.customizer.onExitDialogAnimation(self);
-  }
-  
-  [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
 }
 
 @end

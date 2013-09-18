@@ -27,8 +27,59 @@
   // Functionalities
   customizer.preselectEnabled = YES;
   customizer.swallowAllTouches = NO;
+  customizer.closeWhenChoiceSelected = YES;
   
   return customizer;
+}
+
++ (DLAnimationBlock)customShowAnimationWithStartPosition:(CGPoint)startPos
+                                           finalPosition:(CGPoint)finalPos
+                                                  fadeIn:(BOOL)fadeIn
+                                                duration:(ccTime)duration
+{
+  return ^(DLChoiceDialog *dialog)
+  {
+    // Run fade
+    if (fadeIn) {
+      [dialog fadeInWithDuration:duration];
+    }
+    
+    // Run move
+    if (!CGPointEqualToPoint(startPos, finalPos)) {
+      dialog.position = startPos;
+      id move = [CCMoveTo actionWithDuration:duration position:finalPos];
+      [dialog runAction:move];
+    }
+  };
+}
+
++ (DLAnimationBlock)customHideAnimationWithFinalPosition:(CGPoint)finalPos
+                                                 fadeOut:(BOOL)fadeOut
+                                                duration:(ccTime)duration
+{
+  return ^(DLChoiceDialog *dialog)
+  {
+    // Run fade
+    if (fadeOut) {
+      [dialog fadeOutWithDuration:duration];
+    }
+    
+    // Run move
+    if (!CGPointEqualToPoint(dialog.position, finalPos)) {
+      id move = [CCMoveTo actionWithDuration:duration position:finalPos];
+      [dialog runAction:move];
+    }
+    
+    // Remove the choice dialog after done
+    __weak DLChoiceDialog *weakDialog = dialog;
+    id done = [CCCallBlock actionWithBlock:^() {
+      [weakDialog removeFromParentAndCleanup:YES];
+    }];
+    [dialog runAction:[CCSequence actions:
+                       [CCDelayTime actionWithDuration:duration],
+                       done,
+                       nil]];
+  };
 }
 
 @end
@@ -47,6 +98,7 @@
   for (DLSelectableLabel *label in self.labels) {
     label.delegate = nil;
   }
+  self.delegate = nil;
   [self.customizer removeObserver:self forKeyPath:@"preselectEnabled"];
 }
 
@@ -145,6 +197,33 @@
   }
 }
 
+- (void)playHideAnimationOrRemoveFromParent;
+{
+  if (self.customizer.hideAnimation) {
+    self.customizer.hideAnimation(self);
+  }else {
+    [self removeFromParentAndCleanup:YES];
+  }
+}
+
+- (void)fadeInWithDuration:(ccTime)duration
+{
+  id fade = [CCFadeIn actionWithDuration:duration];
+  [self.bgSprite runAction:fade];
+  for (DLSelectableLabel *label in self.labels) {
+    [label fadeInWithDuration:duration];
+  }
+}
+
+- (void)fadeOutWithDuration:(ccTime)duration
+{
+  id fade = [CCFadeOut actionWithDuration:duration];
+  [self.bgSprite runAction:fade];
+  for (DLSelectableLabel *label in self.labels) {
+    [label fadeOutWithDuration:duration];
+  }
+}
+
 
 #pragma mark - Private methods
 
@@ -221,6 +300,7 @@
   [self addChild:_bgSprite z:0];
 }
 
+
 #pragma mark - DSSelectableLabel Delegate
 
 - (void)selectableLabelPreselected:(DLSelectableLabel *)sender
@@ -251,6 +331,11 @@
                                   choiceText:sender.text.string
                                  choiceIndex:sender.tag];
   }
+  
+  // Close choice dialog if specified
+  if (self.customizer.closeWhenChoiceSelected) {
+    [self playHideAnimationOrRemoveFromParent];
+  }
 }
 
 
@@ -259,6 +344,11 @@
 - (void)onEnter
 {
   [super onEnter];
+  
+  // Play any show animations
+  if (self.customizer.showAnimation) {
+    self.customizer.showAnimation(self);
+  }
   
   // Listen for touch events
   [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self

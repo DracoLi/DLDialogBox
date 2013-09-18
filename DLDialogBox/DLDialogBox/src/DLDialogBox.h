@@ -279,36 +279,82 @@ typedef enum {
  * this dialog box on tap after all dialog text are displayed.
  *
  * When there are choices to be displayed at the end, this dialog will close
- * automatically after a choice is selected.
+ * automatically after a choice is selected (animated if the choice dialog has
+ * a hideAnimation).
  *
  * __Defaults to YES__
  *
- * @see [DLDialogBox removeDialogBoxAndCleanUp]
+ * @see [DLDialogBox playHideAnimationOrRemoveFromParent]
  */
 @property (nonatomic) BOOL closeWhenDialogFinished;
 
 
-/// @name Animating a DLDialogBox
+/// @name Custom Animations
 
 /**
- * A block that is run during the onEnter method of the <DLDialogBox>
+ * A block that is run during the onEnter method to display the dialog.
  *
- * You should use this to make customization show animations for a DLDialogBox.
+ * You should use this to make customization show animations.
+ *
+ * This animation block will be run automatically after the dialog box is
+ * added to a parent.
  */
-@property (nonatomic, copy) DLAnimationBlock onEnterDialogAnimation;
+@property (nonatomic, copy) DLAnimationBlock showAnimation;
 
 /**
- * A block that is run during the onExit method of the <DLDialogBox>
+ * A block that is run when closing the dialog.
  *
- * You should use this to make customization hide animations for a DLDialogBox.
+ * You should use this to make customization hide animations.
+ *
+ * This animation block is automatically run if <closeWhenDialogFinished> is
+ * set to YES and the dialog has finished.
+ *
+ * Or you can run this animation block manually by calling `playHideAnimation`.
+ *
+ * __Note:__ You should remove the dialog box in your hideAnimation block after
+ * all animations are played. When a hideAnimation is specified, DLDialogBox
+ * does not know when to remove itself so please make sure to do it in your
+ * block.
  */
-@property (nonatomic, copy) DLAnimationBlock onExitDialogAnimation;
+@property (nonatomic, copy) DLAnimationBlock hideAnimation;
 
 
 /**
  * Returns a default customizer for the dialog box
  */
 + (DLDialogBoxCustomizer *)defaultCustomizer;
+
+/**
+ * Returns a common show animation for the dialog so you don't have to write them!
+ *
+ * __Note:__ The default slide direction is up. However if you want the dialog
+ * content box to slide down instead of sliding up when showing then just specify
+ * a negative distance. Furthermore, the move animation will not be performed
+ * if the distance is 0.
+ *
+ * @param distance          The distance the dialog should travel for the slide up.
+ * @param fadeIn            Fades the dialog in.
+ * @param speed             Speed of the whole animation sequence.
+ */
++ (DLAnimationBlock)customShowAnimationWithSlideDistance:(CGFloat)distance
+                                                  fadeIn:(BOOL)fadeIn
+                                                duration:(ccTime)duration;
+
+/**
+ * Returns a common hide animation for the dialog so you don't have to write them!
+ *
+ * __Note:__ The default slide direction is down. However if you want the dialog
+ * content box to slide up instead of sliding down when hiding then just specify
+ * a negative distance. Furthermore, the move animation will not be performed
+ * if the distance is 0.
+ *
+ * @param distance          The distance the dialog should travel for the slide down.
+ * @param fadeOut           Fades the dialog out.
+ * @param speed             Speed of the whole animation sequence.
+ */
++ (DLAnimationBlock)customHideAnimationWithSlideDistance:(CGFloat)distance
+                                                 fadeOut:(BOOL)fadeOut
+                                                duration:(ccTime)duration;
 
 @end
 
@@ -401,6 +447,11 @@ typedef enum {
  * You can customize this choice dialog through the <customizer>.
  *
  * The choice dialog is only created when the <choices> array is set.
+ *
+ * Since this choice dialog is added to the same parent as the dialog box, as
+ * opposed to as a child of the dialog box, removing the dialog box will not
+ * remove the choice dialog if its displayed. You will need to remove this choice
+ * dialog individually or by calling <playHideAnimationOrRemoveFromParent>.
  */
 @property (nonatomic, strong) DLChoiceDialog *choiceDialog;
 
@@ -509,6 +560,15 @@ typedef enum {
 @property (nonatomic, strong) DLAutoTypeLabelBM *dialogLabel;
 
 /**
+ * Sprite of the dialog box background.
+ *
+ * Exposed here so you can animate the dialog's background during onEnter or onExit.
+ *
+ * This sprite is created after the DLDialogBox is initialized with a customizer.
+ */
+@property (nonatomic, strong) CCSprite *bgSprite;
+
+/**
  * @param texts       An array of texts to display
  * @param portrait    The portrait sprite to show
  * @param choices     An array of choice strings for the choice dialog
@@ -586,26 +646,74 @@ typedef enum {
  * so it is always above the dialog box.
  * 
  * <showChoiceDialog> is automatically called after a <DLDialogBox> has finished
- * typing all its text array.
+ * typing all its text array. However you can show the choice dialog earlier
+ * manually by calling this method.
  *
  * The <choiceDialog> is only created when <choices> are set.
  */
 - (void)showChoiceDialog;
 
 /**
- * Remove any displayed choice dialog and then perform any cleanup.
+ * A convenience method to remove this dialog and also its choice dialog (since
+ * its not a child of this dialog box) from the parent and clean up.
+ *
+ * Call this method directly if you want to make sure to remove the dialog box
+ * and its choice dialog immediately.
  */
-- (void)removeChoiceDialogAndCleanUp;
+- (void)removeDialogBoxFromParentAndCleanup;
 
 /**
- * Remove this dialog box from the parent and clean up.
+ * Play the hide animation block associated with this dialog's customizer and 
+ * the choice dialog's cutomizer if they exist. Else just remove the dialog
+ * from the parent.
  *
- * Also removes any existing choice dialogs by calling <removeChoiceDialogAndCleanUp>.
+ * This method is automatically called when the dialog is finished if
+ * `closeWhenDialogFinished` is set to `YES` in the customizer.
  *
- * If <closeWhenDialogFinished> is set to YES, then this method will be called
- * automatically after a choice has been selected or if no choices are needed
- * then when all text are displayed by the dialog box.
+ * __Note:__ The hide animation blocks should be responsible for removing the
+ * dialog from the parent.
  */
-- (void)removeDialogBoxAndCleanUp;
+- (void)playHideAnimationOrRemoveFromParent;
 
+/**
+ * Fade in the dialog with a specified duration.
+ */
+- (void)fadeInWithDuration:(ccTime)duration;
+
+/**
+ * Fade out the dialog with a specified duration.
+ */
+- (void)fadeOutWithDuration:(ccTime)duration;
+
+/**
+ * Animates the outside portrait in if it exists.
+ *
+ * If the portrait is positioned on the left side, then the animation will slide
+ * in from the left and vice versa if positioned on the right side.
+ *
+ * __Note:__ If you do not want a move animation then just set the distance to 0.
+ *
+ * @param fadeIn    Should the portrait be faded in?
+ * @param distance  The distance the portrait should travel to get to the final position.
+ * @param speed     Speed of the animation sequence.
+ */
+- (void)animateOutsidePortraitInWithFadeIn:(BOOL)fadeIn
+                                  distance:(CGFloat)distance
+                                  duration:(ccTime)duration;
+
+/**
+ * Animates the outside portrait out if it exists.
+ *
+ * If the portrait is positioned on the left side, then the animation will slide
+ * to the left and vice versa if positioned on the right side.
+ *
+ * __Note:__ If you do not want a move animation then just set the distance to 0.
+ *
+ * @param fadeOut   Should the portrait be faded out?
+ * @param distance  The distance the portrait should travel in its slide direction.
+ * @param speed     Speed of the animation sequence.
+ */
+- (void)animateOutsidePortraitOutWithFadeOut:(BOOL)fadeOut
+                                    distance:(CGFloat)distance
+                                    duration:(ccTime)duration;
 @end

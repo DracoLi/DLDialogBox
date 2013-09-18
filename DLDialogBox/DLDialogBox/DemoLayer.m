@@ -7,6 +7,7 @@
 //
 
 #import "DemoLayer.h"
+#import "DLDialogPresets.h"
 
 typedef enum {
   kBasicDialog = 0,
@@ -41,7 +42,7 @@ typedef enum {
     [self addChild:self.tileMap z:-1];
     
     // Load in some of the images we gonna use for our dialog
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"other-images.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"portraits.plist"];
     
     // TODO: Add in a hint label
     
@@ -116,15 +117,16 @@ typedef enum {
       [self removeAnyDialog];
       
       // Customize dialog box
-      DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
+      DLDialogBoxCustomizer *customizer = [DLDialogPresets dialogCustomizerOfType:kDialogBoxCustomizerWithBasicAnimations];
       customizer.backgroundSpriteFile = @"fancy_border.png";
       customizer.dialogTextInsets = UIEdgeInsetsMake(15, 15, 15, 15);
       customizer.dialogSize = CGSizeMake(customizer.dialogSize.width - 50, kDialogBoxHeightNormal);
-      customizer.portraitInsets = UIEdgeInsetsZero;
-      customizer.portraitPosition = kDialogPortraitPositionRight;
+      customizer.portraitInsets = UIEdgeInsetsMake(0, -40, -10, 0);
+      customizer.portraitPosition = kDialogPortraitPositionLeft;
       customizer.portraitInsideDialog = NO;
       customizer.speedPerPageFinishedIndicatorBlink = 0.5; // 2 blinks per second
-      customizer.handleOnlyTapInputsInDialogBox = NO;
+      customizer.closeWhenDialogFinished = YES;
+//      customizer.handleOnlyTapInputsInDialogBox = NO;
 //      customizer.closeWhenDialogFinished = NO;
 //      customizer.swallowAllTouches = NO;
       
@@ -134,6 +136,17 @@ typedef enum {
       choiceCustomizer.contentInsets = UIEdgeInsetsMake(8, 8, 30, 8);
       choiceCustomizer.spacingBetweenChoices = 0; // Label's closer together
       choiceCustomizer.swallowAllTouches = NO;
+      
+      CGPoint finalPos = ccp(0, winSize.height);
+      CGPoint startPos = ccpSub(finalPos, CGPointMake(100, 0));
+      choiceCustomizer.showAnimation = [DLChoiceDialogCustomizer
+                                        customShowAnimationWithStartPosition:startPos
+                                        finalPosition:finalPos
+                                        fadeIn:YES
+                                        duration:0.3];
+      choiceCustomizer.hideAnimation = [DLChoiceDialogCustomizer
+                                        customHideAnimationWithFinalPosition:startPos
+                                        fadeOut:YES duration:0.2];
       
       // Customize choice dialog's label
       DLSelectableLabelCustomizer *labelCustomizer = choiceCustomizer.labelCustomizer;
@@ -147,7 +160,7 @@ typedef enum {
       
       
       // Additional potraits
-      NSDictionary *portraits = @{@"2": [CCSprite spriteWithFile:@"sun-face-ques.png"], @"3": [CCSprite spriteWithFile:@"sun-face-sad.png"]};
+      NSDictionary *portraits = @{@"2": @"sun-face-ques.png", @"3": [CCSprite spriteWithSpriteFrameName:@"sun-face-sad.png"]};
       
       
       DLDialogBox *third = [DLDialogBox dialogWithTextArray:wordsChoices
@@ -156,7 +169,7 @@ typedef enum {
                                                  customizer:customizer];
       third.customPortraitForPages = portraits;
       third.anchorPoint = ccp(0, 0);
-      third.position = ccp(25, 0); // Since dialog box is smaller than screen width, set an offset to center
+      third.position = ccp(25, 10); // Since dialog box is smaller than screen width, set an offset to center
       
       // Position choice dialog on top left
       third.choiceDialog.anchorPoint = ccp(0, 1);
@@ -176,7 +189,7 @@ typedef enum {
       [self removeAnyDialog];
       
       // Customize dialog box
-      DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
+      DLDialogBoxCustomizer *customizer = [DLDialogPresets dialogCustomizerOfType:kDialogBoxCustomizerWithBasicAnimations];
       customizer.backgroundSpriteFile = @"fancy_border.png";
       customizer.dialogSize = CGSizeMake(customizer.dialogSize.width, kDialogBoxHeightNormal + 5);
 //      customizer.dialogTextInsets = UIEdgeInsetsMake(15, 10, 15, 15);
@@ -186,10 +199,11 @@ typedef enum {
       customizer.portraitInsets = UIEdgeInsetsMake(10, 0, 10, 10);
       customizer.portraitPosition = kDialogPortraitPositionRight;
       customizer.portraitInsideDialog = YES;
+      customizer.handleOnlyTapInputsInDialogBox = NO;
       customizer.hidePageFinishedIndicatorOnLastPage = NO;
       
       // Inner portrait
-      CCSprite *innerPortrait = [CCSprite spriteWithFile:@"face-port.png"];
+      CCSprite *innerPortrait = [CCSprite spriteWithSpriteFrameName:@"face-port.png"];
       
       DLDialogBox *third = [DLDialogBox dialogWithTextArray:words
                                             defaultPortrait:innerPortrait
@@ -203,6 +217,16 @@ typedef enum {
       
       third.prependText = @"Cheese: ";
       third.delegate = self;
+      
+      third.dialogContent.anchorPoint = ccp(0, 1);
+      third.dialogContent.position = ccp(0, [[CCDirector sharedDirector] winSize].height);
+      
+      third.customizer.showAnimation = [DLDialogBoxCustomizer
+                                        customShowAnimationWithSlideDistance:-50
+                                        fadeIn:YES duration:0.4];
+      third.customizer.hideAnimation = [DLDialogBoxCustomizer
+                                        customHideAnimationWithSlideDistance:-50
+                                        fadeOut:YES duration:0.28];
       
       [self addChild:third z:1];
       
@@ -224,8 +248,9 @@ typedef enum {
 
 - (void)removeAnyDialog
 {
-  if (self.currentDialog) {
-    [self.currentDialog removeDialogBoxAndCleanUp];
+  if (self.currentDialog && self.currentDialog.parent) {
+    [self.currentDialog removeDialogBoxFromParentAndCleanup];
+    self.currentDialog = nil;
   }
 }
 
@@ -257,6 +282,13 @@ typedef enum {
 {
   NSUInteger index = sender.currentTextPage;
   NSAssert(index == sender.initialTextArray.count, @"This should be the last page");
+}
+
+- (void)dialogBoxChoiceSelected:(DLDialogBox *)sender choiceDialog:(DLChoiceDialog *)choiceDialog choiceText:(NSString *)text choiceIndex:(NSUInteger)index
+{
+  if (sender.tag == 10) {
+    [sender playHideAnimationOrRemoveFromParent];
+  }
 }
 
 @end
