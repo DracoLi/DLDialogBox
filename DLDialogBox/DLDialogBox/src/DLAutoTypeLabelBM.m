@@ -127,8 +127,8 @@
   [self runAction:self.typingAction];
   
   // Inform delegate this character is typed
-  if (self.delegate && [self.delegate respondsToSelector:@selector(autoTypeLabelBMCharacterTyped:)]) {
-    [self.delegate autoTypeLabelBMCharacterTyped:self];
+  if (self.delegate && [self.delegate respondsToSelector:@selector(autoTypeLabelBMCharacterBlockTyped:)]) {
+    [self.delegate autoTypeLabelBMCharacterBlockTyped:self];
   }
 }
 

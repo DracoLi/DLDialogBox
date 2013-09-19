@@ -25,9 +25,14 @@
 - (void)autoTypeLabelBMTypingFinished:(DLAutoTypeLabelBM *)sender;
 
 /**
- * Called whenever a single character is typed;
+ * Called whenever a single or block of characters are typed.
+ *
+ * When the typing speed is slow, this method will be called for every character
+ * typed. However they the typing speed is really fast, we actually type
+ * multiple characters per typing interval. Thus in this case this method
+ * is called for every character block typed.
  */
-- (void)autoTypeLabelBMCharacterTyped:(DLAutoTypeLabelBM *)sender;
+- (void)autoTypeLabelBMCharacterBlockTyped:(DLAutoTypeLabelBM *)sender;
 
 @end
 
@@ -39,11 +44,10 @@
 
 
 /**
- * Typing speed in terms of characters to be typed per second
+ * Typing speed in terms of characters to be typed per second.
  *
  * Since typingSpeed is evaluated after every typed character, changing this
  * while the label is being typed will speed up or slow down the current typing speed.
- *
  *
  * You can use our provided speed constants for differents speeds:
  * - `kTypingSpeedSuperMegaFast`
@@ -67,8 +71,6 @@
 /**
  * When called the current typing animation will stop and the label will display
  * whatever has been typed so far. This will not trigger typing finished delegate method.
- * 
- * This method does not do anything if our label is not currently typing.
  */
 - (void)stopTypingAnimation;
 
@@ -76,13 +78,18 @@
  * When called, the current typing animation will stop and the label will display
  * the full text that is meant to be typed immediately.
  *
- * If <currentlyTyping> is NO then this method would not inform the delegate but
- * will make sure that the displayed text is the final text to display.
+ * If <currentlyTyping> is set to NO then this method would not inform the
+ * delegate that the typing is finished but will make sure that the displayed text
+ * is the final text to display.
  */
 - (void)finishTypingAnimation;
 
 /**
- * Type in some text with a delay for every character typed.
+ * Type in some text with the specified typing speed.
+ *
+ * @see typingSpeed
+ * @param txt   The text to type.
+ * @param speed The typing speed to type the text
  */
 - (void)typeText:(NSString*)txt typingSpeed:(CGFloat)speed;
 
