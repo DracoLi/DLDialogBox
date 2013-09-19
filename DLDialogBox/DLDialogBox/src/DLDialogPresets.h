@@ -9,8 +9,33 @@
 #import "DLDialogBox.h"
 
 typedef enum {
-  kDialogBoxCustomizerWithBasicAnimations = 0,
+  
+  //// Animations
+  
+  // Animates only outside portrait - slides in
+  kDialogBoxWithOutsidePortraitSlideAnimation = 0,
+  
+  // Animate only outside portrait - fade and slide in
+  kDialogBoxWithOutsidePortraitFadeAndSlideAnimation,
+  
+  // Animate everything with fade and slide assuming dialog is placed on bottom
+  kDialogBoxWithFadeAndSlideAnimationAssumingOnScreenBottom,
+  
+  // Animate everything with fade and slide assuming dialog is placed on top
+  kDialogBoxWithFadeAndSlideAnimationAssumingOnScreenTop,
+  
+  
+  //// UI Customizations
+  
   kDialogBoxCustomizerWithFancyUI,
+  kDialogBoxCustomizerWithModernUI,
+  kDialogBoxCustomizerWithWhiteUI,
+  
+  
+  //// All-in-one
+  
+  kDialogBoxCustomizerDracoSpecial
+  
 } DialogBoxPreset;
 
 
@@ -37,6 +62,12 @@ typedef enum {
  * - kDialogBoxCustomizerWithFancyUI
  */
 + (DLDialogBoxCustomizer *)dialogCustomizerOfType:(DialogBoxPreset)type;
+
+/**
+ *
+ */
++ (DLDialogBoxCustomizer *)dialogCustomizerOfType:(DialogBoxPreset)type
+                               withBaseCustomizer:(DLDialogBoxCustomizer *)baseCusomizer;
 
 /**
  * Get the shared customizer set by <setSharedCustomizer>.
