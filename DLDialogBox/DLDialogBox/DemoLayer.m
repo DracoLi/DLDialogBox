@@ -144,12 +144,12 @@ typedef enum {
       customizer.portraitPosition = kDialogPortraitPositionLeft;
       customizer.portraitInsideDialog = NO;
       customizer.speedPerPageFinishedIndicatorBlink = 0.5; // 2 blinks per second
-      customizer.handleTapInputs = NO;
+//      customizer.handleTapInputs = NO;
 //      customizer.closeWhenDialogFinished = YES;
       customizer.typingSpeed = kTypingSpeedFast;
       customizer.textPageStartedSoundFileName = @"text_page.wav";
 //      customizer.handleOnlyTapInputsInDialogBox = NO;
-      customizer.closeWhenDialogFinished = NO;
+//      customizer.closeWhenDialogFinished = NO;
 //      customizer.swallowAllTouches = YES;
       
       // Customize choice dialog
@@ -160,6 +160,7 @@ typedef enum {
 //      choiceCustomizer.swallowAllTouches = YES;
       choiceCustomizer.preselectSoundFileName = @"preselected.wav";
       choiceCustomizer.selectedSoundFileName = @"selected.wav";
+      choiceCustomizer.closeWhenChoiceSelected = NO;
       
       CGPoint finalPos = ccp(0, winSize.height);
       CGPoint startPos = ccpSub(finalPos, CGPointMake(100, 0));

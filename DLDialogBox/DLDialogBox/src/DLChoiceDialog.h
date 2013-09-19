@@ -191,6 +191,8 @@ typedef void(^DLAnimationBlock)(id);
  * all animations are played. When a hideAnimation is specified, the dialog
  * does not know when to remove itself so please make sure to do it in your
  * block.
+ *
+ * @see [DLChoiceDialog removeFromParentAndCleanupAfterDelay]
  */
 @property (nonatomic, copy) DLAnimationBlock hideAnimation;
 
