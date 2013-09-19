@@ -71,14 +71,7 @@
     }
     
     // Remove the choice dialog after done
-    __weak DLChoiceDialog *weakDialog = dialog;
-    id done = [CCCallBlock actionWithBlock:^() {
-      [weakDialog removeFromParentAndCleanup:YES];
-    }];
-    [dialog runAction:[CCSequence actions:
-                       [CCDelayTime actionWithDuration:duration],
-                       done,
-                       nil]];
+    [dialog removeFromParentAndCleanupAfterDelay:duration];
   };
 }
 
