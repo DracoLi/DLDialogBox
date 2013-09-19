@@ -8,7 +8,7 @@
 
 #import "DLAutoTypeLabelBM.h"
 
-#define kMinCharactersPerSecond 50.0
+#define kMinCharactersPerSecond 40.0
 
 @interface DLAutoTypeLabelBM ()
 @property (nonatomic, strong) NSMutableArray *arrayOfCharacters;
@@ -110,7 +110,7 @@
   
   if (self.typingSpeed > kMinCharactersPerSecond) {
     charsToDisplay = ceil((self.typingSpeed / kMinCharactersPerSecond));
-    typingDelay = 1.0 / kMinCharactersPerSecond;
+    typingDelay =  1.0 / (self.typingSpeed / charsToDisplay);
   }
   NSUInteger indexToType = MIN(self.arrayOfCharacters.count - 1, index + charsToDisplay - 1);
   NSString *string = [self.arrayOfCharacters objectAtIndex:indexToType];

@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-#define kTypingSpeedSuperMegaFast 450
-#define kTypingSpeedSuperFast     200
-#define kTypingSpeedFast          100
+#define kTypingSpeedSuperMegaFast 550
+#define kTypingSpeedSuperFast     220
+#define kTypingSpeedFast          120
 #define kTypingSpeedNormal        60
 #define kTypingSpeedSlow          35
 
