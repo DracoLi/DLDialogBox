@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+#define kTypingSpeedSuperMegaFast 450
+#define kTypingSpeedSuperFast     200
+#define kTypingSpeedFast          100
+#define kTypingSpeedNormal        60
+#define kTypingSpeedSlow          35
+
 @class DLAutoTypeLabelBM;
 @protocol DLAutoTypeLabelBMDelegate
 @optional
@@ -17,6 +23,11 @@
  * Called when typing animation for the string is finished.
  */
 - (void)autoTypeLabelBMTypingFinished:(DLAutoTypeLabelBM *)sender;
+
+/**
+ * Called whenever a single character is typed;
+ */
+- (void)autoTypeLabelBMCharacterTyped:(DLAutoTypeLabelBM *)sender;
 
 @end
 
@@ -28,12 +39,20 @@
 
 
 /**
- * The delay between each word being typed.
+ * Typing speed in terms of characters to be typed per second
  *
- * Since typingDelay is evaluated after every typed word, changing this while
- * the label is being typed will speed up or slow down the current typing speed.
+ * Since typingSpeed is evaluated after every typed character, changing this
+ * while the label is being typed will speed up or slow down the current typing speed.
+ *
+ *
+ * You can use our provided speed constants for differents speeds:
+ * - `kTypingSpeedSuperMegaFast`
+ * - `kTypingSpeedSuperFast`
+ * - `kTypingSpeedFast`
+ * - `kTypingSpeedNormal`
+ * - `kTypingSpeedSlow`
  */
-@property (nonatomic) ccTime typingDelay;
+@property (nonatomic) CGFloat typingSpeed;
 
 /**
  * The string this label is about to type.
@@ -65,6 +84,6 @@
 /**
  * Type in some text with a delay for every character typed.
  */
-- (void)typeText:(NSString*)txt withDelay:(ccTime)d;
+- (void)typeText:(NSString*)txt typingSpeed:(CGFloat)speed;
 
 @end

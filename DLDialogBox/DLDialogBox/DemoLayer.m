@@ -8,6 +8,7 @@
 
 #import "DemoLayer.h"
 #import "DLDialogPresets.h"
+#import "SimpleAudioEngine.h"
 
 typedef enum {
   kBasicDialog = 0,
@@ -93,6 +94,7 @@ typedef enum {
       // Customize the choice dialog box labels to align right
       DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
       customizer.choiceDialogCustomizer.labelCustomizer.textAlignment = kCCTextAlignmentRight;
+      customizer.typingSpeed = kTypingSpeedSuperFast;
       
       // TESTING: If choice dialog's fnt is not set, then it should uses the dialogbox's provide font file
       customizer.choiceDialogCustomizer.fntFile = nil;
@@ -126,6 +128,8 @@ typedef enum {
       customizer.portraitInsideDialog = NO;
       customizer.speedPerPageFinishedIndicatorBlink = 0.5; // 2 blinks per second
       customizer.closeWhenDialogFinished = YES;
+      customizer.typingSpeed = kTypingSpeedSuperFast;
+      customizer.textPageStartedSoundFileName = @"text_page.wav";
 //      customizer.handleOnlyTapInputsInDialogBox = NO;
 //      customizer.closeWhenDialogFinished = NO;
 //      customizer.swallowAllTouches = NO;
@@ -136,6 +140,8 @@ typedef enum {
       choiceCustomizer.contentInsets = UIEdgeInsetsMake(8, 8, 30, 8);
       choiceCustomizer.spacingBetweenChoices = 0; // Label's closer together
       choiceCustomizer.swallowAllTouches = NO;
+      choiceCustomizer.preselectSoundFileName = @"preselected.wav";
+      choiceCustomizer.selectedSoundFileName = @"selected.wav";
       
       CGPoint finalPos = ccp(0, winSize.height);
       CGPoint startPos = ccpSub(finalPos, CGPointMake(100, 0));
@@ -143,7 +149,7 @@ typedef enum {
                                         customShowAnimationWithStartPosition:startPos
                                         finalPosition:finalPos
                                         fadeIn:YES
-                                        duration:0.3];
+                                        duration:0.14];
       choiceCustomizer.hideAnimation = [DLChoiceDialogCustomizer
                                         customHideAnimationWithFinalPosition:startPos
                                         fadeOut:YES duration:0.2];
@@ -177,6 +183,7 @@ typedef enum {
       
       third.prependText = @"Draco: ";
       third.delegate = self;
+      third.tag = 3;
       
       [self addChild:third z:1];
       
@@ -275,6 +282,10 @@ typedef enum {
 //  if (index == 2) {
 //    sender.customizer.choiceDialogCustomizer.preselectEnabled = NO;
 //  }
+}
+
+- (void)dialogBoxCurrentTextPageStarted:(DLDialogBox *)sender currentPage:(NSUInteger)currentPage
+{
 }
 
 

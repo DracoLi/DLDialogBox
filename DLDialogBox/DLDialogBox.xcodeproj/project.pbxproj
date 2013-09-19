@@ -166,6 +166,11 @@
 		D4990CA617D7D97300430BFB /* demo-room.tmx in Resources */ = {isa = PBXBuildFile; fileRef = D4990CA117D7D97300430BFB /* demo-room.tmx */; };
 		D49BCF0817E7959700B6929B /* portraits.plist in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF0617E7959600B6929B /* portraits.plist */; };
 		D49BCF0917E7959700B6929B /* portraits.png in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF0717E7959700B6929B /* portraits.png */; };
+		D49BCF1317EA728700B6929B /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF1017EA728400B6929B /* click.wav */; };
+		D49BCF1417EA728700B6929B /* preselected.wav in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF1117EA728400B6929B /* preselected.wav */; };
+		D49BCF1517EA728700B6929B /* selected.wav in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF1217EA728600B6929B /* selected.wav */; };
+		D49BCF1717EA734B00B6929B /* click-another.wav in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF1617EA734B00B6929B /* click-another.wav */; };
+		D49BCF1B17EAC11D00B6929B /* text_page.wav in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF1A17EAC11D00B6929B /* text_page.wav */; };
 		D49D9FAE17E11078002C8E9B /* DLDialogPresets.m in Sources */ = {isa = PBXBuildFile; fileRef = D49D9FAD17E11078002C8E9B /* DLDialogPresets.m */; };
 		D4AC1C6617D9530F005AA9F5 /* CCSprite+GLBoxes.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC1C6517D9530F005AA9F5 /* CCSprite+GLBoxes.m */; };
 		D4AC1C6E17DA472E005AA9F5 /* fancy_border.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC1C6D17DA472D005AA9F5 /* fancy_border.png */; };
@@ -490,6 +495,11 @@
 		D4990CA117D7D97300430BFB /* demo-room.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "demo-room.tmx"; path = "Resources/demo-room.tmx"; sourceTree = "<group>"; };
 		D49BCF0617E7959600B6929B /* portraits.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = portraits.plist; path = Resources/portraits.plist; sourceTree = "<group>"; };
 		D49BCF0717E7959700B6929B /* portraits.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = portraits.png; path = Resources/portraits.png; sourceTree = "<group>"; };
+		D49BCF1017EA728400B6929B /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click.wav; path = Resources/click.wav; sourceTree = "<group>"; };
+		D49BCF1117EA728400B6929B /* preselected.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = preselected.wav; path = Resources/preselected.wav; sourceTree = "<group>"; };
+		D49BCF1217EA728600B6929B /* selected.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = selected.wav; path = Resources/selected.wav; sourceTree = "<group>"; };
+		D49BCF1617EA734B00B6929B /* click-another.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "click-another.wav"; path = "Resources/click-another.wav"; sourceTree = "<group>"; };
+		D49BCF1A17EAC11D00B6929B /* text_page.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = text_page.wav; path = Resources/text_page.wav; sourceTree = "<group>"; };
 		D49D9FAC17E11078002C8E9B /* DLDialogPresets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLDialogPresets.h; sourceTree = "<group>"; };
 		D49D9FAD17E11078002C8E9B /* DLDialogPresets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLDialogPresets.m; sourceTree = "<group>"; };
 		D4AC1C6417D9530F005AA9F5 /* CCSprite+GLBoxes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCSprite+GLBoxes.h"; sourceTree = "<group>"; };
@@ -592,6 +602,11 @@
 		D499097017D7D5F800430BFB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D49BCF1A17EAC11D00B6929B /* text_page.wav */,
+				D49BCF1617EA734B00B6929B /* click-another.wav */,
+				D49BCF1017EA728400B6929B /* click.wav */,
+				D49BCF1117EA728400B6929B /* preselected.wav */,
+				D49BCF1217EA728600B6929B /* selected.wav */,
 				D49BCF0617E7959600B6929B /* portraits.plist */,
 				D49BCF0717E7959700B6929B /* portraits.png */,
 				D4661D8B17DD533B001BDA8B /* normal_bg.png */,
@@ -1114,6 +1129,11 @@
 				D4661D8C17DD533C001BDA8B /* normal_bg.png in Resources */,
 				D49BCF0817E7959700B6929B /* portraits.plist in Resources */,
 				D49BCF0917E7959700B6929B /* portraits.png in Resources */,
+				D49BCF1317EA728700B6929B /* click.wav in Resources */,
+				D49BCF1417EA728700B6929B /* preselected.wav in Resources */,
+				D49BCF1517EA728700B6929B /* selected.wav in Resources */,
+				D49BCF1717EA734B00B6929B /* click-another.wav in Resources */,
+				D49BCF1B17EAC11D00B6929B /* text_page.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

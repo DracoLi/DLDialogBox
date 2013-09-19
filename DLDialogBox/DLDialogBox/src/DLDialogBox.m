@@ -9,6 +9,7 @@
 #import "DLDialogBox.h"
 #import "CCSprite+GLBoxes.h"
 #import "CCScale9Sprite.h"
+#import "SimpleAudioEngine.h"
 
 // Constants for z indexes
 #define kBackgroundSpriteZIndex 0
@@ -40,8 +41,11 @@
   customizer.handleTapInputs = YES;
   customizer.handleOnlyTapInputsInDialogBox = YES;
   customizer.swallowAllTouches = NO;
-  customizer.typingDelay = kDialogBoxDefaultTypingSpeed;
+  customizer.typingSpeed = kTypingSpeedNormal;
   customizer.closeWhenDialogFinished = YES;
+  
+  // Sounds
+//  customizer.characterTypedSoundFileName = @"character_typed.wav";
   
   return customizer;
 }
@@ -130,7 +134,7 @@
   if (self.choiceDialog) {
     self.choiceDialog.delegate = nil;
   }
-  [self.customizer removeObserver:self forKeyPath:@"typingDelay"];
+//  [self.customizer removeObserver:self forKeyPath:@"typingDelay"];
 }
 
 
@@ -223,10 +227,10 @@
     self.choices = choices;
     
     // Observe for typing delay changes on the customizer
-    [self.customizer addObserver:self
-                      forKeyPath:@"typingDelay"
-                         options:NSKeyValueObservingOptionNew
-                         context:NULL];
+//    [self.customizer addObserver:self
+//                      forKeyPath:@"typingDelay"
+//                         options:NSKeyValueObservingOptionNew
+//                         context:NULL];
   }
   
   return self;
@@ -329,7 +333,7 @@
   if (self.prependText) {
     stringToType = [NSString stringWithFormat:@"%@%@", self.prependText, stringToType];
   }
-  [self.dialogLabel typeText:stringToType withDelay:self.customizer.typingDelay];
+  [self.dialogLabel typeText:stringToType typingSpeed:self.customizer.typingSpeed];
   self.dialogLabel.visible = YES;
   
   // Update for any custom portrait for this page
@@ -350,6 +354,18 @@
   }else {
     // Make sure we are displaying the default sprite.
     [self updatePortraitTextureWithSprite:self.defaultPortraitSprite];
+  }
+  
+  // Play sound fx
+  if (self.customizer.textPageStartedSoundFileName) {
+    [[SimpleAudioEngine sharedEngine] playEffect:self.customizer.textPageStartedSoundFileName];
+  }
+  
+  // Inform delegate of new page animation
+  if (self.delegate &&
+      [self.delegate respondsToSelector:@selector(dialogBoxCurrentTextPageStarted:currentPage:)])
+  {
+    [self.delegate dialogBoxCurrentTextPageStarted:self currentPage:self.currentTextPage];
   }
 }
 
@@ -412,6 +428,12 @@
   if (self.defaultPortraitSprite) {
     [self.portrait runAction:[fade copy]];
   }
+  
+//  __weak DLDialogBox *weakSelf = self;
+//  id callblock = [CCCallBlock actionWithBlock:^() {
+//    [weakSelf.dialogLabel setOpacity:255];
+//  }];
+//  [self runAction:[CCSequence actions:[CCDelayTime actionWithDuration:duration], callblock, nil]];
 }
 
 - (void)fadeOutWithDuration:(ccTime)duration
@@ -715,7 +737,7 @@
   if (self.customizer.swallowAllTouches) {
     shouldClaim = YES;
   }
-  
+
   return shouldClaim;
 }
 
@@ -728,12 +750,12 @@
                        context:(void *)context
 {
   // Allows preselectEnabled to be changed even after the dialog is initialized
-  if (self.customizer == object &&
-      [keyPath isEqualToString:@"typingDelay"] && self.dialogLabel)
-  {
-    // Update dialog label current typing delay
-    self.dialogLabel.typingDelay = self.customizer.typingDelay;
-  }
+//  if (self.customizer == object &&
+//      [keyPath isEqualToString:@"typingDelay"] && self.dialogLabel)
+//  {
+//    // Update dialog label current typing delay
+//    self.dialogLabel.typingDelay = self.customizer.typingDelay;
+//  }
 }
 
 @end

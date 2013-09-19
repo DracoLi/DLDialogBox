@@ -100,6 +100,8 @@
   }
   self.delegate = nil;
   [self.customizer removeObserver:self forKeyPath:@"preselectEnabled"];
+  [self.customizer removeObserver:self forKeyPath:@"preselectSoundFileName"];
+  [self.customizer removeObserver:self forKeyPath:@"selectedSoundFileName"];
 }
 
 + (id)dialogWithChoices:(NSArray *)choices
@@ -123,9 +125,17 @@
   {
     _customizer = dialogCustomizer;
     
-    // Observe for swallowAllTouches changes
+    // Observe for customizer changes
     [self.customizer addObserver:self
                       forKeyPath:@"preselectEnabled"
+                         options:NSKeyValueObservingOptionNew
+                         context:NULL];
+    [self.customizer addObserver:self
+                      forKeyPath:@"preselectSoundFileName"
+                         options:NSKeyValueObservingOptionNew
+                         context:NULL];
+    [self.customizer addObserver:self
+                      forKeyPath:@"selectedSoundFileName"
                          options:NSKeyValueObservingOptionNew
                          context:NULL];
     
@@ -164,6 +174,8 @@
     
     // Make choice labels
     _customizer.labelCustomizer.preselectEnabled = _customizer.preselectEnabled;
+    _customizer.labelCustomizer.preselectSoundFileName = _customizer.preselectSoundFileName;
+    _customizer.labelCustomizer.selectedSoundFileName = _customizer.selectedSoundFileName;
     NSMutableArray *allLabels = [NSMutableArray arrayWithCapacity:_choices.count];
     for (int i = 0; i < _choices.count; i++) {
       NSString *choice = [_choices objectAtIndex:i];
@@ -381,13 +393,12 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-  // Allows preselectEnabled to be changed even after the dialog is initialized
-  if (self.customizer == object &&
-      [keyPath isEqualToString:@"preselectEnabled"] && self.labels)
+  // Update label's customizer when this customizer changes
+  if (self.customizer == object && self.labels)
   {
-    // Update preselect of all labels
     for (DLSelectableLabel *label in self.labels) {
-      label.customizer.preselectEnabled = self.customizer.preselectEnabled;
+      id newValue = [self.customizer valueForKey:keyPath];
+      [label.customizer setValue:newValue forKey:keyPath];
     }
   }
 }

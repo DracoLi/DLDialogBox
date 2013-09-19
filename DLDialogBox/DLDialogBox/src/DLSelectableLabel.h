@@ -89,6 +89,16 @@
 @property (nonatomic) BOOL preselectEnabled;
 
 /**
+ * The sound file to play when the label is preselected.
+ */
+@property (nonatomic, copy) NSString *preselectSoundFileName;
+
+/**
+ * The sound file to play when the label is selected.
+ */
+@property (nonatomic, copy) NSString *selectedSoundFileName;
+
+/**
  * Returns the default customizer used by the DLSelectableLabel.
  */
 + (DLSelectableLabelCustomizer *)defaultCustomizer;

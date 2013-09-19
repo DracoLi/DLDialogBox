@@ -152,6 +152,16 @@ typedef void(^DLAnimationBlock)(id);
  */
 @property (nonatomic) BOOL closeWhenChoiceSelected;
 
+/**
+ * The sound file to play when the label is preselected.
+ */
+@property (nonatomic, copy) NSString *preselectSoundFileName;
+
+/**
+ * The sound file to play when the label is selected.
+ */
+@property (nonatomic, copy) NSString *selectedSoundFileName;
+
 
 /// @name Custom Animations
 

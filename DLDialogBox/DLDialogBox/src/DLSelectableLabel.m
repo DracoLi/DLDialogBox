@@ -7,6 +7,7 @@
 //
 
 #import "DLSelectableLabel.h"
+#import "SimpleAudioEngine.h"
 #import "CCSprite+GLBoxes.h"
 
 @implementation DLSelectableLabelCustomizer
@@ -238,6 +239,12 @@
     // Update texture
     self.bgSprite.texture = self.preSelectedTexture;
     
+    // Play sound fx
+    if (self.customizer.preselectSoundFileName) {
+      [[SimpleAudioEngine sharedEngine]
+       playEffect:self.customizer.preselectSoundFileName];
+    }
+    
     // Update delegate
     if (self.delegate &&
         [self.delegate respondsToSelector:@selector(selectableLabelPreselected:)]) {
@@ -264,6 +271,10 @@
     self.bgSprite.texture = self.selectedTexture;
     
     // Play sound fx
+    if (self.customizer.selectedSoundFileName) {
+      [[SimpleAudioEngine sharedEngine]
+       playEffect:self.customizer.selectedSoundFileName];
+    }
     
     // Update delegate
     if (self.delegate &&

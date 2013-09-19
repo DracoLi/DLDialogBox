@@ -16,7 +16,7 @@
 #define kDialogBoxHeightLarge  130
 
 #define kDialogBoxTouchPriority -499
-#define kDialogBoxDefaultTypingSpeed 0.02
+#define kDialogBoxDefaultTypingSpeed 0.016
 
 typedef enum {
   kDialogPortraitPositionLeft = 0,
@@ -266,11 +266,11 @@ typedef enum {
 @property (nonatomic) BOOL swallowAllTouches;
 
 /**
- * The delay between the typing animation of each character.
+ * The number of characters to type per second.
  *
- * __Defaults to 0.02__
+ * __Defaults to kTypingSpeedNormal__
  */
-@property (nonatomic) ccTime typingDelay;
+@property (nonatomic) CGFloat typingSpeed;
 
 /**
  * When enabled, this dialog box will automatically close on tap or on choice selection.
@@ -287,6 +287,14 @@ typedef enum {
  * @see [DLDialogBox playHideAnimationOrRemoveFromParent]
  */
 @property (nonatomic) BOOL closeWhenDialogFinished;
+
+
+/// @name Sound related
+
+/**
+ * The sound file to play whenever a new page of text has started.
+ */
+@property (nonatomic, copy) NSString *textPageStartedSoundFileName;
 
 
 /// @name Custom Animations
@@ -372,7 +380,13 @@ typedef enum {
 - (void)dialogBoxAllTextFinished:(DLDialogBox *)sender;
 
 /**
- * Called when a <DLDialogBox> has finished animating its current page.
+ * Called when a <DLDialogBox> has started animating a text page.
+ */
+- (void)dialogBoxCurrentTextPageStarted:(DLDialogBox *)sender
+                            currentPage:(NSUInteger)currentPage;
+
+/**
+ * Called when a <DLDialogBox> has finished animating a text page.
  *
  * Since the dialog box can display an array of text, this method is called
  * whenever a single page of text has finished animating and is fully displayed.

@@ -8,10 +8,13 @@
 
 #import "DLAutoTypeLabelBM.h"
 
+#define kMinCharactersPerSecond 50.0
+
 @interface DLAutoTypeLabelBM ()
 @property (nonatomic, strong) NSMutableArray *arrayOfCharacters;
 @property (nonatomic, copy) NSString *adjustedTypedString;
 @property (nonatomic, readwrite) BOOL currentlyTyping;
+@property (nonatomic, strong) CCAction *typingAction;
 
 - (void)typeCharacterAtIndex:(int)index;
 @end
@@ -24,7 +27,7 @@
 
 - (void)stopTypingAnimation
 {
-  [self stopAllActions];
+  [self stopAction:self.typingAction];
   self.currentlyTyping = NO;
 }
 
@@ -41,7 +44,7 @@
   }
 }
 
-- (void)typeText:(NSString*)txt withDelay:(ccTime)d
+- (void)typeText:(NSString*)txt typingSpeed:(CGFloat)speed
 {
   // Stop any existing typing animations
   [self stopTypingAnimation];
@@ -83,7 +86,7 @@
   // This starts our recursive typing animation
   // We are doing this recursively so that we can change the typing speed
   // while the words are being typed out if we want.
-  self.typingDelay = d;
+  self.typingSpeed = speed;
   self.currentlyTyping = YES;
   [self typeCharacterAtIndex:0];
 }
@@ -96,22 +99,37 @@
   }
   
   // Finish all typing when we are at end of typing index
-  if (index == [self.arrayOfCharacters count]) {
+  if (index >= [self.arrayOfCharacters count]) {
     [self finishTypingAnimation];
     return;
   }
-  
+
   // Sets string to our current word index
-  NSString *string = [_arrayOfCharacters objectAtIndex:index];
+  NSUInteger charsToDisplay = 1;
+  ccTime typingDelay = 1 / self.typingSpeed;
+  
+  if (self.typingSpeed > kMinCharactersPerSecond) {
+    charsToDisplay = ceil((self.typingSpeed / kMinCharactersPerSecond));
+    typingDelay = 1.0 / kMinCharactersPerSecond;
+  }
+  NSUInteger indexToType = MIN(self.arrayOfCharacters.count - 1, index + charsToDisplay - 1);
+  NSString *string = [self.arrayOfCharacters objectAtIndex:indexToType];
   [self setString:string];
   
   // Wait and type next letter after a delay
   __weak DLAutoTypeLabelBM *weakSelf = self;
   id recurseBlock = [CCCallBlock actionWithBlock:^() {
-    [weakSelf typeCharacterAtIndex:index + 1];
+    [weakSelf typeCharacterAtIndex:indexToType + 1];
   }];
-  [self runAction:[CCSequence actions:
-                   [CCDelayTime actionWithDuration:self.typingDelay], recurseBlock, nil]];
+  self.typingAction = [CCSequence actions:
+                       [CCDelayTime actionWithDuration:typingDelay],
+                       recurseBlock, nil];
+  [self runAction:self.typingAction];
+  
+  // Inform delegate this character is typed
+  if (self.delegate && [self.delegate respondsToSelector:@selector(autoTypeLabelBMCharacterTyped:)]) {
+    [self.delegate autoTypeLabelBMCharacterTyped:self];
+  }
 }
 
 @end
