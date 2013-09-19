@@ -82,6 +82,14 @@
   }
   
   self.adjustedTypedString = [_arrayOfCharacters lastObject];
+
+  // Make sure we have enough capacity to display all the text
+  NSUInteger newCapacity = self.adjustedTypedString.length + 1;
+  if (self.textureAtlas.totalQuads < newCapacity) {
+    if (![self.textureAtlas resizeCapacity:newCapacity]) {
+      CCLOG(@"cocos2d: WARNING: Not enough memory to resize the atlas");
+    }
+  }
   
   // This starts our recursive typing animation
   // We are doing this recursively so that we can change the typing speed

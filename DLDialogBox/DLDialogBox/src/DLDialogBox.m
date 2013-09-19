@@ -672,7 +672,8 @@
   }
   
   // Show blinking page finished indicator after every page except last
-  if (self.customizer.pageFinishedIndicator && (self.textArray.count != 0 || !self.customizer.hidePageFinishedIndicatorOnLastPage))
+  if (self.customizer.pageFinishedIndicator &&
+      (self.textArray.count != 0 || !self.customizer.hidePageFinishedIndicatorOnLastPage))
   {
     // Animate arrow cursor blinking
     id blink = [CCBlink actionWithDuration:5.0 blinks:5.0 / self.customizer.speedPerPageFinishedIndicatorBlink];
