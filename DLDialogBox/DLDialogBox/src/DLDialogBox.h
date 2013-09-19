@@ -333,7 +333,7 @@ typedef enum {
  * does not know when to remove itself so please make sure to do it in your
  * block.
  *
- * @see [DLDialogBox removeDialogBoxFromParentAndCleanupAfterDelay]
+ * @see [DLDialogBox removeFromParentAndCleanupAfterDelay]
  */
 @property (nonatomic, copy) DLAnimationBlock hideAnimation;
 

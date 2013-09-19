@@ -209,6 +209,24 @@
   }
 }
 
+- (void)removeFromParentAndCleanupAfterDelay:(ccTime)delay
+{
+  // If delay is 0, remove from parent immediately
+  if (delay <= 0) {
+    [self removeFromParentAndCleanup:YES];
+    return;
+  }
+  
+  // Remove after delay
+  __weak DLChoiceDialog *weakSelf = self;
+  id removeBlock = [CCCallBlock actionWithBlock:^() {
+    [weakSelf removeFromParentAndCleanup:YES];
+  }];
+  [self runAction:[CCSequence actions:
+                   [CCDelayTime actionWithDuration:delay],
+                   removeBlock, nil]];
+}
+
 - (void)playHideAnimationOrRemoveFromParent;
 {
   if (self.customizer.hideAnimation) {

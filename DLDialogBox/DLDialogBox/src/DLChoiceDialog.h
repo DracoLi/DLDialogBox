@@ -316,6 +316,15 @@ typedef void(^DLAnimationBlock)(id);
 - (void)selectChoiceAtIndex:(NSUInteger)index skipPreselect:(BOOL)skipPreselect;
 
 /**
+ * Removes this dialog from its parent after a delay.
+ *
+ * Useful for removing the choice dialog from the parent after all hide animations
+ * are finished. In this case, set the delay to the duration of the hide
+ * animation so the dialog will be removed after animation is finished.
+ */
+- (void)removeFromParentAndCleanupAfterDelay:(ccTime)delay;
+
+/**
  * Play the hide animation block associated with the dialog's customizer if it
  * exists. Else just remove the dialog from the parent.
  *
