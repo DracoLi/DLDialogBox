@@ -16,7 +16,6 @@
 #define kDialogBoxHeightLarge  130
 
 #define kDialogBoxTouchPriority -499
-#define kDialogBoxDefaultTypingSpeed 0.016
 
 typedef enum {
   kDialogPortraitPositionLeft = 0,
@@ -223,10 +222,18 @@ typedef enum {
 /**
  * When enabled, the dialog box will process all tap inputs on the screen.
  *
- * When the dialog's typing animation has finished, tap inputs will result in
- * the dialog displaying the following page.
+ * By default when the dialog's typing animation has finished, tap inputs
+ * will result in the dialog displaying the following page.
+ *
+ * Also depending on what other functionalities are enabled, tap inputs will
+ * also do other things.
  *
  * __Defaults to YES__
+ *
+ * @see tapToFinishCurrentPage
+ * @see handleOnlyTapInputsInDialogBox
+ * @see swallowAllTouches
+ * @see closeWhenDialogFinished
  */
 @property (nonatomic) BOOL handleTapInputs;
 
@@ -256,9 +263,9 @@ typedef enum {
  * the other fuctionality related properties, is evaluated only when
  * DLDialogBox is first displayed.
  *
- * __Note:__ If something has a higher touch priority than kDialogBoxTouchPriority, then
- * that receiver will receive touch events even with `swallowAllTouches`
- * set to YES. However kDialogBoxTouchPriority is currently set to a such
+ * __Note:__ If something has a higher touch priority than `kDialogBoxTouchPriority`,
+ * then that receiver will receive touch events even with `swallowAllTouches`
+ * set to YES. However `kDialogBoxTouchPriority` is currently set to a such
  * low value that this dialog box should have the highest touch priority.
  *
  * __Defaults to NO__
@@ -266,17 +273,11 @@ typedef enum {
 @property (nonatomic) BOOL swallowAllTouches;
 
 /**
- * The number of characters to type per second.
- *
- * __Defaults to kTypingSpeedNormal__
- */
-@property (nonatomic) CGFloat typingSpeed;
-
-/**
- * When enabled, this dialog box will automatically close on tap or on choice selection.
+ * When enabled, this dialog box will automatically close when the dialog
+ * has finished all its tasks.
  *
  * When there are no choices to be shown, this will allow the player to close
- * this dialog box on tap after all dialog text are displayed.
+ * this dialog box on tap after all text pages are displayed.
  *
  * When there are choices to be displayed at the end, this dialog will close
  * automatically after a choice is selected (animated if the choice dialog has
@@ -287,6 +288,13 @@ typedef enum {
  * @see [DLDialogBox playHideAnimationOrRemoveFromParent]
  */
 @property (nonatomic) BOOL closeWhenDialogFinished;
+
+/**
+ * The number of characters to be typed per second.
+ *
+ * __Defaults to kTypingSpeedNormal__
+ */
+@property (nonatomic) CGFloat typingSpeed;
 
 
 /// @name Sound related
@@ -302,7 +310,7 @@ typedef enum {
 /**
  * A block that is run during the onEnter method to display the dialog.
  *
- * You should use this to make customization show animations.
+ * You should use this to make custom show animations.
  *
  * This animation block will be run automatically after the dialog box is
  * added to a parent.
@@ -312,17 +320,20 @@ typedef enum {
 /**
  * A block that is run when closing the dialog.
  *
- * You should use this to make customization hide animations.
+ * You should use this to make custom hide animations.
  *
  * This animation block is automatically run if <closeWhenDialogFinished> is
  * set to YES and the dialog has finished.
  *
- * Or you can run this animation block manually by calling `playHideAnimation`.
+ * Or you can run this animation block manually by calling
+ * `playHideAnimationOrRemoveFromParent` on the dialog box.
  *
  * __Note:__ You should remove the dialog box in your hideAnimation block after
  * all animations are played. When a hideAnimation is specified, DLDialogBox
  * does not know when to remove itself so please make sure to do it in your
  * block.
+ *
+ * @see [DLDialogBox removeDialogBoxFromParentAndCleanupAfterDelay]
  */
 @property (nonatomic, copy) DLAnimationBlock hideAnimation;
 
@@ -674,7 +685,17 @@ typedef enum {
  * Call this method directly if you want to make sure to remove the dialog box
  * and its choice dialog immediately.
  */
-- (void)removeDialogBoxFromParentAndCleanup;
+- (void)removeDialogBoxAndChoiceDialogFromParentAndCleanup;
+
+/**
+ * Removes the dialog box from its parent after a delay. Does not remove the 
+ * dialog's choice dialog.
+ *
+ * Useful for removing the dialog box from the parent after all hide animations
+ * are finished. In this case, set the delay to the duration of the hide
+ * animation so the dialog box will be removed after animation is finished.
+ */
+- (void)removeFromParentAndCleanupAfterDelay:(ccTime)delay;
 
 /**
  * Play the hide animation block associated with this dialog's customizer and 
@@ -686,6 +707,8 @@ typedef enum {
  *
  * __Note:__ The hide animation blocks should be responsible for removing the
  * dialog from the parent.
+ *
+ * __Note:__ This method does not remove the choice dialog from the parent.
  */
 - (void)playHideAnimationOrRemoveFromParent;
 

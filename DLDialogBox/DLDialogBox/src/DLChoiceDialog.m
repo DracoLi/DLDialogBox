@@ -364,7 +364,7 @@
   
   // Listen for touch events
   [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self
-                                                            priority:kChoiceDialogDefaultTouchPriority
+                                                            priority:kChoiceDialogTouchPriority
                                                      swallowsTouches:YES];
 }
 

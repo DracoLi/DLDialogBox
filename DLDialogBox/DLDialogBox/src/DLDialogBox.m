@@ -105,14 +105,7 @@
     }
     
     // Done callback to remove the dialog
-    __weak DLDialogBox *weakDialog = dialog;
-    id done = [CCCallBlock actionWithBlock:^() {
-      [weakDialog removeFromParentAndCleanup:YES];
-    }];
-    [dialog runAction:[CCSequence actions:
-                       [CCDelayTime actionWithDuration:duration],
-                       done,
-                       nil]];
+    [dialog removeFromParentAndCleanupAfterDelay:duration];
   };
 }
 
@@ -134,7 +127,7 @@
   if (self.choiceDialog) {
     self.choiceDialog.delegate = nil;
   }
-//  [self.customizer removeObserver:self forKeyPath:@"typingDelay"];
+  [self.customizer removeObserver:self forKeyPath:@"typingSpeed"];
 }
 
 
@@ -226,11 +219,11 @@
     // with the current customizer
     self.choices = choices;
     
-    // Observe for typing delay changes on the customizer
-//    [self.customizer addObserver:self
-//                      forKeyPath:@"typingDelay"
-//                         options:NSKeyValueObservingOptionNew
-//                         context:NULL];
+    // Observe for typing speed changes on the customizer
+    [self.customizer addObserver:self
+                      forKeyPath:@"typingSpeed"
+                         options:NSKeyValueObservingOptionNew
+                         context:NULL];
   }
   
   return self;
@@ -389,12 +382,30 @@
   }
 }
 
-- (void)removeDialogBoxFromParentAndCleanup
+- (void)removeDialogBoxAndChoiceDialogFromParentAndCleanup
 {
   if (self.choiceDialog) {
     [self.choiceDialog removeFromParentAndCleanup:YES];
   }
   [self removeFromParentAndCleanup:YES];
+}
+
+- (void)removeFromParentAndCleanupAfterDelay:(ccTime)delay
+{
+  // If delay is 0, remove from parent immediately
+  if (delay <= 0) {
+    [self removeFromParentAndCleanup:YES];
+    return;
+  }
+  
+  // Remove after delay
+  __weak DLDialogBox *weakSelf = self;
+  id removeBlock = [CCCallBlock actionWithBlock:^() {
+    [weakSelf removeFromParentAndCleanup:YES];
+  }];
+  [self runAction:[CCSequence actions:
+                   [CCDelayTime actionWithDuration:delay],
+                   removeBlock, nil]];
 }
 
 - (void)playHideAnimationOrRemoveFromParent
@@ -422,18 +433,13 @@
   id fade = [CCFadeIn actionWithDuration:duration];
   [self.bgSprite runAction:fade];
   [self.dialogLabel runAction:[fade copy]];
-  if (self.customizer.pageFinishedIndicator) {
+  if (self.customizer.pageFinishedIndicator &&
+      self.customizer.pageFinishedIndicator.parent) {
     [self.customizer.pageFinishedIndicator runAction:[fade copy]];
   }
   if (self.defaultPortraitSprite) {
     [self.portrait runAction:[fade copy]];
   }
-  
-//  __weak DLDialogBox *weakSelf = self;
-//  id callblock = [CCCallBlock actionWithBlock:^() {
-//    [weakSelf.dialogLabel setOpacity:255];
-//  }];
-//  [self runAction:[CCSequence actions:[CCDelayTime actionWithDuration:duration], callblock, nil]];
 }
 
 - (void)fadeOutWithDuration:(ccTime)duration
@@ -441,7 +447,8 @@
   id fade = [CCFadeOut actionWithDuration:duration];
   [self.bgSprite runAction:fade];
   [self.dialogLabel runAction:[fade copy]];
-  if (self.customizer.pageFinishedIndicator) {
+  if (self.customizer.pageFinishedIndicator &&
+      self.customizer.pageFinishedIndicator.parent) {
     [self.customizer.pageFinishedIndicator runAction:[fade copy]];
   }
   if (self.defaultPortraitSprite) {
@@ -750,12 +757,12 @@
                        context:(void *)context
 {
   // Allows preselectEnabled to be changed even after the dialog is initialized
-//  if (self.customizer == object &&
-//      [keyPath isEqualToString:@"typingDelay"] && self.dialogLabel)
-//  {
-//    // Update dialog label current typing delay
-//    self.dialogLabel.typingDelay = self.customizer.typingDelay;
-//  }
+  if (self.customizer == object &&
+      [keyPath isEqualToString:@"typingSpeed"] && self.dialogLabel)
+  {
+    // Update dialog label current typing delay
+    self.dialogLabel.typingSpeed = self.customizer.typingSpeed;
+  }
 }
 
 @end

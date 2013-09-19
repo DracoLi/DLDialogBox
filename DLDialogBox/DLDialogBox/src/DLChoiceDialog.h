@@ -14,7 +14,7 @@
 typedef void(^DLAnimationBlock)(id);
 
 // This must be small enough so we can swallow most of other touch handlers
-#define kChoiceDialogDefaultTouchPriority -500
+#define kChoiceDialogTouchPriority -500
 
 /**
  * A DLChoiceDialogCustomizer is used to determine the __look__, __functionalities__,
@@ -129,10 +129,11 @@ typedef void(^DLAnimationBlock)(id);
  * DLChoiceDialog is first displayed.
  *
  * __Note:__ If something has a higher touch priority than 
- * kChoiceDialogDefaultTouchPriority, then that receiver will receive touch
+ * kChoiceDialogTouchPriority, then that receiver will receive touch
  * events even with `swallowAllTouches` set to YES. However 
- * kChoiceDialogDefaultTouchPriority is currently set to a such low value that
- * this choice dialog should have the highest touch priority.
+ * kChoiceDialogTouchPriority is currently set to a such low value that
+ * this choice dialog should have the highest touch priority (even higher than
+ * a DLDialogBox).
  *
  * __Defaults to NO__
  */
@@ -168,7 +169,7 @@ typedef void(^DLAnimationBlock)(id);
 /**
  * A block that is run during the onEnter method to display the dialog.
  *
- * You should use this to make customization show animations.
+ * You should use this to make custom show animations.
  *
  * This animation block will be run automatically after the dialog box is
  * added to a parent.
@@ -178,10 +179,13 @@ typedef void(^DLAnimationBlock)(id);
 /**
  * A block that is run when closing the dialog.
  *
- * You should use this to make customization hide animations.
+ * You should use this to make custom hide animations.
  *
  * This animation block is automatically run when a choice is selected if 
  * <closeWhenChoiceSelected> is set to YES.
+ *
+ * Or you can run this animation block manually by calling
+ * `playHideAnimationOrRemoveFromParent` on the dialog box.
  *
  * __Note:__ You should remove the choice dialog in your hideAnimation block after
  * all animations are played. When a hideAnimation is specified, the dialog

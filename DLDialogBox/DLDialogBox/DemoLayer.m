@@ -77,7 +77,9 @@ typedef enum {
       
       DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
       customizer.dialogSize = CGSizeMake(customizer.dialogSize.width, kDialogBoxHeightSmall);
-//      customizer.closeWhenDialogFinished = NO;
+      customizer.closeWhenDialogFinished = NO;
+      customizer.tapToFinishCurrentPage = NO;
+//      customizer.handleOnlyTapInputsInDialogBox = NO;
       DLDialogBox *first = [DLDialogBox dialogWithTextArray:words
                                             defaultPortrait:nil customizer:customizer];
       first.anchorPoint = ccp(0, 0);
@@ -94,10 +96,25 @@ typedef enum {
       // Customize the choice dialog box labels to align right
       DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
       customizer.choiceDialogCustomizer.labelCustomizer.textAlignment = kCCTextAlignmentRight;
-      customizer.typingSpeed = kTypingSpeedSuperFast;
+      customizer.typingSpeed = kTypingSpeedSlow;
       
       // TESTING: If choice dialog's fnt is not set, then it should uses the dialogbox's provide font file
       customizer.choiceDialogCustomizer.fntFile = nil;
+      
+      
+      // Animate portrait
+      customizer.showAnimation = ^(DLDialogBox *dialog) {
+        [dialog animateOutsidePortraitInWithFadeIn:YES
+                                          distance:40
+                                          duration:0.3];
+      };
+      customizer.hideAnimation = ^(DLDialogBox *dialog) {
+        [dialog animateOutsidePortraitOutWithFadeOut:YES
+                                            distance:40
+                                            duration:0.3];
+        [dialog.dialogContent removeFromParentAndCleanup:YES];
+        [dialog removeFromParentAndCleanupAfterDelay:0.3];
+      };
       
       DLDialogBox *second = [DLDialogBox dialogWithTextArray:wordsChoices
                                              defaultPortrait:portrait
@@ -127,19 +144,20 @@ typedef enum {
       customizer.portraitPosition = kDialogPortraitPositionLeft;
       customizer.portraitInsideDialog = NO;
       customizer.speedPerPageFinishedIndicatorBlink = 0.5; // 2 blinks per second
-      customizer.closeWhenDialogFinished = YES;
-      customizer.typingSpeed = kTypingSpeedSuperFast;
+      customizer.handleTapInputs = NO;
+//      customizer.closeWhenDialogFinished = YES;
+      customizer.typingSpeed = kTypingSpeedFast;
       customizer.textPageStartedSoundFileName = @"text_page.wav";
 //      customizer.handleOnlyTapInputsInDialogBox = NO;
-//      customizer.closeWhenDialogFinished = NO;
-//      customizer.swallowAllTouches = NO;
+      customizer.closeWhenDialogFinished = NO;
+//      customizer.swallowAllTouches = YES;
       
       // Customize choice dialog
       DLChoiceDialogCustomizer *choiceCustomizer = customizer.choiceDialogCustomizer;
       choiceCustomizer.backgroundSpriteFile =  @"fancy_border.png";
       choiceCustomizer.contentInsets = UIEdgeInsetsMake(8, 8, 30, 8);
       choiceCustomizer.spacingBetweenChoices = 0; // Label's closer together
-      choiceCustomizer.swallowAllTouches = NO;
+//      choiceCustomizer.swallowAllTouches = YES;
       choiceCustomizer.preselectSoundFileName = @"preselected.wav";
       choiceCustomizer.selectedSoundFileName = @"selected.wav";
       
@@ -199,12 +217,12 @@ typedef enum {
       DLDialogBoxCustomizer *customizer = [DLDialogPresets dialogCustomizerOfType:kDialogBoxCustomizerWithBasicAnimations];
       customizer.backgroundSpriteFile = @"fancy_border.png";
       customizer.dialogSize = CGSizeMake(customizer.dialogSize.width, kDialogBoxHeightNormal + 5);
-//      customizer.dialogTextInsets = UIEdgeInsetsMake(15, 10, 15, 15);
-//      customizer.portraitInsets = UIEdgeInsetsMake(10, 10, 10, 0);
-//      customizer.portraitPosition = kDialogPortraitPositionLeft;
-      customizer.dialogTextInsets = UIEdgeInsetsMake(15, 15, 20, 10);
-      customizer.portraitInsets = UIEdgeInsetsMake(10, 0, 10, 10);
-      customizer.portraitPosition = kDialogPortraitPositionRight;
+      customizer.dialogTextInsets = UIEdgeInsetsMake(15, 10, 15, 15);
+      customizer.portraitInsets = UIEdgeInsetsMake(10, 10, 10, 0);
+      customizer.portraitPosition = kDialogPortraitPositionLeft;
+//      customizer.dialogTextInsets = UIEdgeInsetsMake(15, 15, 20, 10);
+//      customizer.portraitInsets = UIEdgeInsetsMake(10, 0, 10, 10);
+//      customizer.portraitPosition = kDialogPortraitPositionRight;
       customizer.portraitInsideDialog = YES;
       customizer.handleOnlyTapInputsInDialogBox = NO;
       customizer.hidePageFinishedIndicatorOnLastPage = NO;
@@ -256,11 +274,10 @@ typedef enum {
 - (void)removeAnyDialog
 {
   if (self.currentDialog && self.currentDialog.parent) {
-    [self.currentDialog removeDialogBoxFromParentAndCleanup];
+    [self.currentDialog removeDialogBoxAndChoiceDialogFromParentAndCleanup];
     self.currentDialog = nil;
   }
 }
-
 
 
 #pragma mark ccTouch Delegate
@@ -279,13 +296,29 @@ typedef enum {
   NSAssert(currentPage == index, @"Passed in current page must be same as currentTextPage");
   NSAssert(sender.currentPageTyped == YES, @"Current page typed must be TRUE");
   NSAssert(index > 0, @"current page must start from 1");
-//  if (index == 2) {
+  
+  // Test changing choice dialog's customizer properties on runtime
+//  if (index == 2 && sender.tag == 3) {
 //    sender.customizer.choiceDialogCustomizer.preselectEnabled = NO;
+//    sender.customizer.choiceDialogCustomizer.preselectSoundFileName = @"preselected.wav";
+//    sender.customizer.choiceDialogCustomizer.selectedSoundFileName = @"selected.wav";
+//  }
+  
+  // Test changing typing speed after page
+//  if (index == 2) {
+//    sender.customizer.typingSpeed = kTypingSpeedSlow;
 //  }
 }
 
 - (void)dialogBoxCurrentTextPageStarted:(DLDialogBox *)sender currentPage:(NSUInteger)currentPage
 {
+  // Test changing typing speed half way
+//  sender.customizer.typingSpeed = kTypingSpeedSlow;
+//  __weak DLDialogBox *weakSender = sender;
+//  id block = [CCCallBlock actionWithBlock:^() {
+//    weakSender.customizer.typingSpeed = kTypingSpeedSuperFast;
+//  }];
+//  [sender runAction:[CCSequence actions:[CCDelayTime actionWithDuration:1.0], block, nil]];
 }
 
 
