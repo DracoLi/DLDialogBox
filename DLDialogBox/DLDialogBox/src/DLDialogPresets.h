@@ -55,26 +55,63 @@ typedef enum {
 
 
 /**
- * Use this class to get access to some awesome DLDialogBox customizers made by Draco.
+ * Use this class to get access to some awesome DLDialogBox customizations
+ * premade by Draco.
+ *
  * See README for screenshots of some of these presets.
  *
+ * ---
+ *
+ * To use the presets, you first need to get a basic customizer.
+ *     DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
+ * Then you call `customizeDialogWithPresets` with an array of presets that
+ * you want to apply to your customizer. The order of the presets matters since
+ * some presets may use an existing property on the customizer.
+ *
+ * Usage Example:
+ *
+ *    DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
+ *
+ *    // Customize the customizer before going through our default presets
+ *    customizer.dialogSize = ccp(300, 200);
+ *    customizer.portraitInsideDialog = YES;
+ *
+ *    // Apply some presets
+ *    customizer = [DLDialogPresets customizeDialogWithPresets:
+ *                  @[@(kCustomizerWithDialogOnBottom),
+ *                  @(kCustomizerWithDialogCenterAligned),
+ *                  @(kCustomizerWithFadeAndSlideAnimationFromBottom),
+ *                  @(kCustomizerWithEightBitUI)] baseCustomizer:customizer];
+ *
+ * ---
+ *
  * You can also use this class to manage your own single <DLDialogBoxCusotmizer>
- * that you can use on all your dialogs to make sure that they all follow a
- * consistent theme.
+ * instance that you can use on all your dialogs to make sure that they all
+ * follow a consistent theme.
  *
  * From example:
- *     // Do a bunch 
+ *
+ *     // Create a basic customizer
+ *     DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
+ *     
+ *     // Customize the customizer
+ *     // ...
+ *
+ *     // Set it as the default customizer
+ *     [DLDialogPresets setSharedCustomizer:customizer];
+ *
+ *     // Get the default customizer
+ *     [DLDialogPresets sharedCustomizer]
  *
  */
 @interface DLDialogPresets : NSObject
 
 /**
- * Returns one of my <DLDialogBoxCustomizer> presets.
+ * Returns a <DLDialogBoxCustomizer> with the specified presets applied in order.
  *
- * Available Presets:
+ * Refer to <DLDialogPresets> for available presets.
  *
- * - kDialogBoxCustomizerWithBasicAnimations
- * - kDialogBoxCustomizerWithFancyUI
+ * @see DLDialogPresets
  */
 + (DLDialogBoxCustomizer *)customizeDialogWithPresets:(NSArray *)presets
                                        baseCustomizer:(DLDialogBoxCustomizer *)customizer;
@@ -97,6 +134,12 @@ typedef enum {
  */
 + (void)setSharedCustomizer:(DLDialogBoxCustomizer *)customizer;
 
+/**
+ * Adds the resources used by <DLDialogPresets> into the shared `CCSpriteFrameCache`.
+ *
+ * After this is called, you will be able to use the resources attached
+ * with the DLDialogBox project via `[CCSprite spriteWithSpriteFrameName]`.
+ */
 + (void)addDLDialogBoxPresetResources;
 
 @end

@@ -172,8 +172,7 @@ typedef enum {
                     @[@(kCustomizerWithDialogOnBottom),
                     @(kCustomizerWithDialogCenterAligned),
                     @(kCustomizerWithFadeAndSlideAnimationFromBottom),
-                    @(kCustomizerWithEightBitUI)]
-                                         baseCustomizer:customizer];
+                    @(kCustomizerWithEightBitUI)] baseCustomizer:customizer];
       
       
       DLDialogBox *fourth = [DLDialogBox dialogWithTextArray:wordsChoices
