@@ -13,30 +13,45 @@ typedef enum {
   //// Animations
   
   // Animates only outside portrait - slides in
-  kDialogBoxWithOutsidePortraitSlideAnimation = 0,
+  kCustomizerWithOutsidePortraitSlideAnimation = 0,
   
   // Animate only outside portrait - fade and slide in
-  kDialogBoxWithOutsidePortraitFadeAndSlideAnimation,
+  kCustomizerWithOutsidePortraitFadeAndSlideAnimation,
   
-  // Animate everything with fade and slide assuming dialog is placed on bottom
-  kDialogBoxWithFadeAndSlideAnimationAssumingOnScreenBottom,
+  // Animate everything with fade and top to bottom slide
+  kCustomizerWithFadeAndSlideAnimationFromTop,
   
   // Animate everything with fade and slide assuming dialog is placed on top
-  kDialogBoxWithFadeAndSlideAnimationAssumingOnScreenTop,
+  kCustomizerWithFadeAndSlideAnimationFromBottom,
+  
+  
+  //// Positions
+  
+  kCustomizerWithDialogOnTop,
+  kCustomizerWithDialogOnBottom,
+  kCustomizerWithDialogInMiddle,
+  kCustomizerWithDialogLeftAligned,
+  kCustomizerWithDialogRightAligned,
+  kCustomizerWithDialogCenterAligned,
   
   
   //// UI Customizations
   
-  kDialogBoxCustomizerWithFancyUI,
-  kDialogBoxCustomizerWithModernUI,
-  kDialogBoxCustomizerWithWhiteUI,
+  kCustomizerWithFancyUI,
+  kCustomizerWithWhiteUI,
+  kCustomizerWithEightBitUI,
+  
+  
+  //// Sounds
+  
+  kCustomizerWithRetroSounds,
   
   
   //// All-in-one
   
-  kDialogBoxCustomizerDracoSpecial
+  kCustomizerDracoSpecial
   
-} DialogBoxPreset;
+} DialogBoxCustomizerPreset;
 
 
 /**
@@ -61,13 +76,11 @@ typedef enum {
  * - kDialogBoxCustomizerWithBasicAnimations
  * - kDialogBoxCustomizerWithFancyUI
  */
-+ (DLDialogBoxCustomizer *)dialogCustomizerOfType:(DialogBoxPreset)type;
++ (DLDialogBoxCustomizer *)dialogCustomizerOfTypes:(NSArray *)types
+                                withBaseCustomizer:(DLDialogBoxCustomizer *)customizer;
 
-/**
- *
- */
-+ (DLDialogBoxCustomizer *)dialogCustomizerOfType:(DialogBoxPreset)type
-                               withBaseCustomizer:(DLDialogBoxCustomizer *)baseCusomizer;
++ (DLDialogBoxCustomizer *)dialogCustomizerOfType:(DialogBoxCustomizerPreset)type
+                               withBaseCustomizer:(DLDialogBoxCustomizer *)customizer;
 
 /**
  * Get the shared customizer set by <setSharedCustomizer>.
@@ -83,5 +96,7 @@ typedef enum {
  * @see sharedCustomizer
  */
 + (void)setSharedCustomizer:(DLDialogBoxCustomizer *)customizer;
+
++ (void)addDLDialogBoxPresetResources;
 
 @end

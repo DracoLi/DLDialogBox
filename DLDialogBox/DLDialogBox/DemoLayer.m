@@ -56,7 +56,7 @@ typedef enum {
     
     NSArray *wordsChoices = [NSArray arrayWithObjects:
                              @"DLDialog can be fully customized is almost \nevery aspect.",
-                             @"You can customize borders, portraits, text, etc. DLDialogBox also handles getting choice inputs from the player ;D",
+                             @"You can customize borders, portraits, text, etc. ;D",
                              @"How awesome is DLDialogBox?!\nYou tell me!", nil];
     NSArray *choices = [NSArray arrayWithObjects:
                         @"Pretty Damn Awesome",
@@ -64,9 +64,7 @@ typedef enum {
                         @"Too awesome for words",
                         @"I'm not awesome", nil];
     CCSprite *portrait = [CCSprite spriteWithSpriteFrameName:@"sun-face.png"];
-    
-    
-    // TODO: Create the forth dialog with inner portrait
+    CCSprite *innerPortrait = [CCSprite spriteWithSpriteFrameName:@"face-port.png"];
     
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     CGFloat topPadding = 40;
@@ -75,15 +73,7 @@ typedef enum {
     CCMenuItemFont *item1 = [CCMenuItemFont itemWithString:@"Dialog #1" block:^(id sender){
       [self removeAnyDialog];
       
-      DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
-      customizer.dialogSize = CGSizeMake(customizer.dialogSize.width, kDialogBoxHeightSmall);
-      customizer.closeWhenDialogFinished = NO;
-      customizer.tapToFinishCurrentPage = NO;
-//      customizer.handleOnlyTapInputsInDialogBox = NO;
-      DLDialogBox *first = [DLDialogBox dialogWithTextArray:words
-                                            defaultPortrait:nil customizer:customizer];
-      first.anchorPoint = ccp(0, 0);
-      first.position = ccp(0, 0);
+      DLDialogBox *first = [DLDialogBox dialogWithTextArray:words defaultPortrait:nil];
       [self addChild:first z:1];
       
       self.currentDialog = first;
@@ -93,41 +83,24 @@ typedef enum {
     CCMenuItemFont *item2 = [CCMenuItemFont itemWithString:@"Dialog #2" block:^(id sender){
       [self removeAnyDialog];
       
-      // Customize the choice dialog box labels to align right
       DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
-      customizer.choiceDialogCustomizer.labelCustomizer.textAlignment = kCCTextAlignmentRight;
-      customizer.typingSpeed = kTypingSpeedSlow;
       
-      // TESTING: If choice dialog's fnt is not set, then it should uses the dialogbox's provide font file
-      customizer.choiceDialogCustomizer.fntFile = nil;
+      // Set the position of the choice dialog
+      customizer.choiceDialogCustomizer.dialogAnchorPoint = ccp(1, 0);
+      customizer.choiceDialogCustomizer.dialogPosition = ccp(winSize.width, 100);
       
-      
-      // Animate portrait
-      customizer.showAnimation = ^(DLDialogBox *dialog) {
-        [dialog animateOutsidePortraitInWithFadeIn:YES
-                                          distance:40
-                                          duration:0.3];
-      };
-      customizer.hideAnimation = ^(DLDialogBox *dialog) {
-        [dialog animateOutsidePortraitOutWithFadeOut:YES
-                                            distance:40
-                                            duration:0.3];
-        [dialog.dialogContent removeFromParentAndCleanup:YES];
-        [dialog removeFromParentAndCleanupAfterDelay:0.3];
-      };
+      // Customize the choice dialog box labels to align right
+      customizer = [DLDialogPresets dialogCustomizerOfTypes:
+       @[@(kCustomizerWithDialogOnBottom), @(kCustomizerWithDialogCenterAligned),
+         @(kCustomizerWithFadeAndSlideAnimationFromBottom),
+         @(kCustomizerWithFancyUI)] withBaseCustomizer:customizer];
       
       DLDialogBox *second = [DLDialogBox dialogWithTextArray:wordsChoices
                                              defaultPortrait:portrait
                                                      choices:choices
                                                   customizer:customizer];
-      second.anchorPoint = ccp(0, 0);
-      second.position = ccp(0, 0);
       [self addChild:second z:1];
-      
-      // Manually set the to be displayed position of the choice dialog
-      second.choiceDialog.anchorPoint = ccp(1, 0);
-      second.choiceDialog.position = ccp(winSize.width, 100);
-      
+
       self.currentDialog = second;
     }];
     item2.fontSize = fontSize;
@@ -135,71 +108,35 @@ typedef enum {
     CCMenuItemFont *item3 = [CCMenuItemFont itemWithString:@"Dialog #3" block:^(id sender){
       [self removeAnyDialog];
       
-      // Customize dialog box
-      DLDialogBoxCustomizer *customizer = [DLDialogPresets dialogCustomizerOfType:kDialogBoxCustomizerWithBasicAnimations];
-      customizer.backgroundSpriteFile = @"fancy_border.png";
-      customizer.dialogTextInsets = UIEdgeInsetsMake(15, 15, 15, 15);
-      customizer.dialogSize = CGSizeMake(customizer.dialogSize.width - 50, kDialogBoxHeightNormal);
-      customizer.portraitInsets = UIEdgeInsetsMake(0, -40, -10, 0);
-      customizer.portraitPosition = kDialogPortraitPositionLeft;
-      customizer.portraitInsideDialog = NO;
-      customizer.speedPerPageFinishedIndicatorBlink = 0.5; // 2 blinks per second
-//      customizer.handleTapInputs = NO;
-//      customizer.closeWhenDialogFinished = YES;
-      customizer.typingSpeed = kTypingSpeedFast;
-      customizer.textPageStartedSoundFileName = @"text_page.wav";
-//      customizer.handleOnlyTapInputsInDialogBox = NO;
-//      customizer.closeWhenDialogFinished = NO;
-//      customizer.swallowAllTouches = YES;
+      DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
       
-      // Customize choice dialog
+      // Set the position of the choice dialog
+      customizer.choiceDialogCustomizer.dialogAnchorPoint = ccp(1, 0);
+      customizer.choiceDialogCustomizer.dialogPosition = ccp(winSize.width, 0);
+      
+      // Others
+      customizer.portraitInsideDialog = YES;
+      customizer.typingSpeed = kTypingSpeedNormal;
+      customizer.dialogSize = CGSizeMake(customizer.dialogSize.width, innerPortrait.contentSize.height);
+      customizer.dialogTextInsets = UIEdgeInsetsMake(7, 10, 7, 10);
+      customizer.textPageStartedSoundFileName = @"text_page.wav";
       DLChoiceDialogCustomizer *choiceCustomizer = customizer.choiceDialogCustomizer;
-      choiceCustomizer.backgroundSpriteFile =  @"fancy_border.png";
-      choiceCustomizer.contentInsets = UIEdgeInsetsMake(8, 8, 30, 8);
-      choiceCustomizer.spacingBetweenChoices = 0; // Label's closer together
-//      choiceCustomizer.swallowAllTouches = YES;
       choiceCustomizer.preselectSoundFileName = @"preselected.wav";
       choiceCustomizer.selectedSoundFileName = @"selected.wav";
-      choiceCustomizer.closeWhenChoiceSelected = NO;
       
-      CGPoint finalPos = ccp(0, winSize.height);
-      CGPoint startPos = ccpSub(finalPos, CGPointMake(100, 0));
-      choiceCustomizer.showAnimation = [DLChoiceDialogCustomizer
-                                        customShowAnimationWithStartPosition:startPos
-                                        finalPosition:finalPos
-                                        fadeIn:YES
-                                        duration:0.14];
-      choiceCustomizer.hideAnimation = [DLChoiceDialogCustomizer
-                                        customHideAnimationWithFinalPosition:startPos
-                                        fadeOut:YES duration:0.2];
-      
-      // Customize choice dialog's label
-      DLSelectableLabelCustomizer *labelCustomizer = choiceCustomizer.labelCustomizer;
-      labelCustomizer.textInsets = UIEdgeInsetsMake(5, 15, 5, 15); // More horizontal padding
-      labelCustomizer.preSelectedBackgroundColor = ccc4(66, 139, 202, 255);
-      labelCustomizer.selectedBackgroundColor = ccc4(22, 88, 146, 255);
-      labelCustomizer.textAlignment = kCCTextAlignmentLeft;
-      
-      choiceCustomizer.labelCustomizer = labelCustomizer;
-      customizer.choiceDialogCustomizer = choiceCustomizer;
-      
-      
-      // Additional potraits
-      NSDictionary *portraits = @{@"2": @"sun-face-ques.png", @"3": [CCSprite spriteWithSpriteFrameName:@"sun-face-sad.png"]};
+      // Go through our customizer presets
+      customizer = [DLDialogPresets dialogCustomizerOfTypes:
+                    @[@(kCustomizerWithDialogOnTop),
+                    @(kCustomizerWithDialogLeftAligned),
+                    @(kCustomizerWithFadeAndSlideAnimationFromTop),
+                    @(kCustomizerWithWhiteUI)]
+                                         withBaseCustomizer:customizer];
       
       
       DLDialogBox *third = [DLDialogBox dialogWithTextArray:wordsChoices
-                                            defaultPortrait:portrait
-                                                    choices:choices
-                                                 customizer:customizer];
-      third.customPortraitForPages = portraits;
-      third.anchorPoint = ccp(0, 0);
-      third.position = ccp(25, 10); // Since dialog box is smaller than screen width, set an offset to center
-      
-      // Position choice dialog on top left
-      third.choiceDialog.anchorPoint = ccp(0, 1);
-      third.choiceDialog.position = ccp(0, winSize.height);
-      
+                                             defaultPortrait:innerPortrait
+                                                     choices:choices
+                                                  customizer:customizer];
       third.prependText = @"Draco: ";
       third.delegate = self;
       third.tag = 3;
@@ -214,49 +151,40 @@ typedef enum {
     CCMenuItemFont *item4 = [CCMenuItemFont itemWithString:@"Dialog #4" block:^(id sender){
       [self removeAnyDialog];
       
-      // Customize dialog box
-      DLDialogBoxCustomizer *customizer = [DLDialogPresets dialogCustomizerOfType:kDialogBoxCustomizerWithBasicAnimations];
-      customizer.backgroundSpriteFile = @"fancy_border.png";
-      customizer.dialogSize = CGSizeMake(customizer.dialogSize.width, kDialogBoxHeightNormal + 5);
-      customizer.dialogTextInsets = UIEdgeInsetsMake(15, 10, 15, 15);
-      customizer.portraitInsets = UIEdgeInsetsMake(10, 10, 10, 0);
-      customizer.portraitPosition = kDialogPortraitPositionLeft;
-//      customizer.dialogTextInsets = UIEdgeInsetsMake(15, 15, 20, 10);
-//      customizer.portraitInsets = UIEdgeInsetsMake(10, 0, 10, 10);
-//      customizer.portraitPosition = kDialogPortraitPositionRight;
+      DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
+      
+      // Set the position of the choice dialog
+      customizer.choiceDialogCustomizer.dialogAnchorPoint = ccp(1, 1);
+      customizer.choiceDialogCustomizer.dialogPosition = ccp(winSize.width, winSize.height - 50);
+      
+      // Others
       customizer.portraitInsideDialog = YES;
-      customizer.handleOnlyTapInputsInDialogBox = NO;
-      customizer.hidePageFinishedIndicatorOnLastPage = NO;
+      customizer.typingSpeed = kTypingSpeedSuperFast;
+      customizer.dialogSize = CGSizeMake(customizer.dialogSize.width,
+                                         innerPortrait.contentSize.height + 10);
+      customizer.textPageStartedSoundFileName = @"text_page.wav";
+      DLChoiceDialogCustomizer *choiceCustomizer = customizer.choiceDialogCustomizer;
+      choiceCustomizer.preselectSoundFileName = @"preselected.wav";
+      choiceCustomizer.selectedSoundFileName = @"selected.wav";
       
-      // Inner portrait
-      CCSprite *innerPortrait = [CCSprite spriteWithSpriteFrameName:@"face-port.png"];
+      // Go through our customizer presets
+      customizer = [DLDialogPresets dialogCustomizerOfTypes:
+                    @[@(kCustomizerWithDialogOnBottom),
+                    @(kCustomizerWithDialogCenterAligned),
+                    @(kCustomizerWithFadeAndSlideAnimationFromBottom),
+                    @(kCustomizerWithEightBitUI)]
+                                         withBaseCustomizer:customizer];
       
-      DLDialogBox *third = [DLDialogBox dialogWithTextArray:words
+      
+      DLDialogBox *fourth = [DLDialogBox dialogWithTextArray:wordsChoices
                                             defaultPortrait:innerPortrait
+                                                    choices:choices
                                                  customizer:customizer];
-      third.anchorPoint = ccp(0, 0);
-      third.position = ccp(0, 0); // Since dialog box is smaller than screen width, set an offset to center
+      fourth.delegate = self;
+      fourth.tag = 4;
+      [self addChild:fourth z:1];
       
-      // Position choice dialog on top left
-      third.choiceDialog.anchorPoint = ccp(0, 1);
-      third.choiceDialog.position = ccp(0, winSize.height);
-      
-      third.prependText = @"Cheese: ";
-      third.delegate = self;
-      
-      third.dialogContent.anchorPoint = ccp(0, 1);
-      third.dialogContent.position = ccp(0, [[CCDirector sharedDirector] winSize].height);
-      
-      third.customizer.showAnimation = [DLDialogBoxCustomizer
-                                        customShowAnimationWithSlideDistance:-50
-                                        fadeIn:YES duration:0.4];
-      third.customizer.hideAnimation = [DLDialogBoxCustomizer
-                                        customHideAnimationWithSlideDistance:-50
-                                        fadeOut:YES duration:0.28];
-      
-      [self addChild:third z:1];
-      
-      self.currentDialog = third;
+      self.currentDialog = fourth;
     }];
     item4.fontSize = fontSize;
     

@@ -35,6 +35,25 @@ typedef void(^DLAnimationBlock)(id);
 /// @name Customizing look/UI
 
 /**
+ * The position of the choice dialog.
+ *
+ * The <DLChoiceDialog> will use this position when configured with a customizer.
+ * However you can set the choice dialog's position manually to override this position.
+ *
+ * __Defaults to (0, 0)__
+ */
+@property (nonatomic) CGPoint dialogPosition;
+
+/**
+ * The anchor point of the choice dialog.
+ *
+ * The <DLChoiceDialog> will use this anchor point when configured with a customizer.
+ *
+ * __Defaults to (0, 0)__
+ */
+@property (nonatomic) CGPoint dialogAnchorPoint;
+
+/**
  * The file name of a stretchable sprite image that will be used as
  * the background image for the dialog box.
  *

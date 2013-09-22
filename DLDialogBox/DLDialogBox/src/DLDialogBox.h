@@ -61,6 +61,25 @@ typedef enum {
 @property (nonatomic) CGSize dialogSize;
 
 /**
+ * The position of the dialog box.
+ *
+ * The <DLDialogBox> will use this position when configured with a customizer.
+ * However you can set the dialog box's position manually to override this position.
+ *
+ * __Defaults to (0, 0)__
+ */
+@property (nonatomic) CGPoint dialogPosition;
+
+/**
+ * The anchor point of the dialog box.
+ *
+ * The <DLDialogBox> will use this anchor point when configured with a customizer.
+ *
+ * __Defaults to (0, 0)__
+ */
+@property (nonatomic) CGPoint dialogAnchorPoint;
+
+/**
  * The file name of a stretchable sprite image that will be used as
  * the background image for the dialog box.
  *
@@ -111,15 +130,13 @@ typedef enum {
 @property (nonatomic, strong) CCSprite *pageFinishedIndicator;
 
 /**
- * The speed per blink for the page finished indicator sprite.
+ * The animation to play for the page finished indicator when its displayed.
  *
- * Higher value means it will take longer per blink.
+ * If not provided, the indicator will just appear instantly.
  *
- * Example: 0.5 will result in a blink every half second.
- *
- * __Default is 1.0 for 1 second per blink.__
+ * __Defaults to a blinking animation__
  */
-@property (nonatomic) ccTime speedPerPageFinishedIndicatorBlink;
+@property (nonatomic, copy) DLAnimationBlock pageFinishedIndicatorAnimation;
 
 /**
  * Hides the page finished indicator for the last page of the dialog box.

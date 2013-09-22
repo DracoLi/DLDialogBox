@@ -25,9 +25,14 @@
   // Look
   customizer.dialogSize = CGSizeMake([[CCDirector sharedDirector] winSize].width,
                                      kDialogBoxHeightNormal);
+  customizer.dialogPosition = ccp(0, 0);
   customizer.backgroundColor = ccc4(0, 0, 0, 0.8*255);
   customizer.pageFinishedIndicator = [CCSprite spriteWithFile:@"arrow_cursor.png"];
-  customizer.speedPerPageFinishedIndicatorBlink = 1.0;
+  customizer.pageFinishedIndicatorAnimation = ^(DLDialogBox *dialog) {
+    // Animate arrow cursor blinking
+    id blink = [CCBlink actionWithDuration:5.0 blinks:5.0];
+    [dialog.customizer.pageFinishedIndicator runAction:[CCRepeatForever actionWithAction:blink]];
+  };
   customizer.hidePageFinishedIndicatorOnLastPage = YES;
   customizer.dialogTextInsets = UIEdgeInsetsMake(10, 10, 10, 10);
   customizer.portraitPosition = kDialogPortraitPositionLeft;
@@ -530,6 +535,10 @@
 {
   DLDialogBoxCustomizer *customizer = _customizer;
   
+  // Update dialog position and anchor
+  self.position = _customizer.dialogPosition;
+  self.anchorPoint = _customizer.dialogAnchorPoint;
+  
   // Create the dialog background image
   CGSize dialogSize = customizer.dialogSize;
   if (customizer.backgroundSpriteFrameName)
@@ -671,14 +680,14 @@
     [self.delegate dialogBoxCurrentTextPageFinished:self currentPage:self.currentTextPage];
   }
   
-  // Show blinking page finished indicator after every page except last
+  // Show page finished indicator after every page except last
   if (self.customizer.pageFinishedIndicator &&
       (self.textArray.count != 0 || !self.customizer.hidePageFinishedIndicatorOnLastPage))
   {
-    // Animate arrow cursor blinking
-    id blink = [CCBlink actionWithDuration:5.0 blinks:5.0 / self.customizer.speedPerPageFinishedIndicatorBlink];
-    [self.customizer.pageFinishedIndicator
-     runAction:[CCRepeatForever actionWithAction:blink]];
+    self.customizer.pageFinishedIndicator.visible = YES;
+    if (self.customizer.pageFinishedIndicatorAnimation) {
+      self.customizer.pageFinishedIndicatorAnimation(self);
+    }
   }
 }
 
@@ -715,24 +724,26 @@
     return NO;
   }
   
-  BOOL shouldClaim = YES;
+  CGPoint touchPoint = [self convertTouchToNodeSpaceAR:touch];
+  CGRect relativeRect = self.dialogContent.boundingBox;
+  BOOL tapInDialogBox = CGRectContainsPoint(relativeRect, touchPoint);
+  
+  BOOL handleTap = YES;
   
   // Check if we should only respond to touch in dialog box
-  if (shouldClaim && self.customizer.handleOnlyTapInputsInDialogBox) {
-    CGPoint touchPoint = [self convertTouchToNodeSpaceAR:touch];
-    CGRect relativeRect = self.dialogContent.boundingBox;
-    shouldClaim = CGRectContainsPoint(relativeRect, touchPoint);
+  if (self.customizer.handleOnlyTapInputsInDialogBox) {
+    handleTap = tapInDialogBox;
   }
   
   // Dialog box should not handle any touches when choice dialogs is showing
-  if (shouldClaim &&
+  if (handleTap &&
       self.choiceDialog &&
       self.choiceDialog.parent &&
       self.choiceDialog.visible) {
-    shouldClaim = NO;
+    handleTap = NO;
   }
   
-  if (shouldClaim) {
+  if (handleTap) {
     // If tap to finish current page is enabled, we finish current page or advance
     // on touch input. If not, we only advance if current typing is finished.
     if (self.customizer.tapToFinishCurrentPage) {
@@ -742,8 +753,15 @@
     }
   }
   
+  BOOL shouldClaim = NO;
+  
   if (self.customizer.swallowAllTouches) {
     shouldClaim = YES;
+  }else {
+    // Swallow all touches in dialog content by default
+    if (tapInDialogBox) {
+      shouldClaim = YES;
+    }
   }
 
   return shouldClaim;

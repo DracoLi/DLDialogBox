@@ -17,7 +17,7 @@
   DLSelectableLabelCustomizer *customizer = [[DLSelectableLabelCustomizer alloc] init];
   
   // Look
-  customizer.textAlignment = kCCTextAlignmentCenter;
+  customizer.textAlignment = kCCTextAlignmentLeft;
   customizer.preSelectedBackgroundColor = ccc4(200, 0, 0, 0.70*255);
   customizer.textInsets = UIEdgeInsetsMake(5, 10, 5, 10);
   

@@ -18,6 +18,8 @@
   DLChoiceDialogCustomizer *customizer = [[DLChoiceDialogCustomizer alloc] init];
   
   // Look
+  customizer.dialogPosition = ccp(0, 0);
+  customizer.dialogAnchorPoint = ccp(0, 0);
   customizer.backgroundColor = ccc4(0, 0, 0, 0.8*255);
   customizer.fntFile = @"demo_fnt.fnt";
   customizer.contentInsets = UIEdgeInsetsMake(5, 5, 5, 5);
@@ -256,6 +258,10 @@
     return;
   }
   
+  // Update choice dialog position and anchor
+  self.position = _customizer.dialogPosition;
+  self.anchorPoint = _customizer.dialogAnchorPoint;
+  
   // First update all label styling and find out largest label width
   CGFloat largestLabelWidth = .0f;
   for (DLSelectableLabel *label in self.labels)
@@ -393,6 +399,14 @@
   if (self.customizer.swallowAllTouches) {
     return YES;
   }
+  
+  // Swallow all touches inside dialog
+  CGPoint touchPoint = [self convertTouchToNodeSpace:touch];
+  CGRect relativeRect = self.bgSprite.boundingBox;
+  if (CGRectContainsPoint(relativeRect, touchPoint)) {
+    return YES;
+  }
+  
   return NO;
 }
 
