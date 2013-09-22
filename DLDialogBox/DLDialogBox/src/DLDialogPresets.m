@@ -30,31 +30,18 @@
 
 #pragma mark - Public methods
 
-+ (DLDialogBoxCustomizer *)dialogCustomizerOfType:(DialogBoxCustomizerPreset)type
++ (DLDialogBoxCustomizer *)customizeDialogWithPresets:(NSArray *)presets
+                                       baseCustomizer:(DLDialogBoxCustomizer *)customizer
 {
-  DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
-  return [self dialogCustomizerOfType:type withBaseCustomizer:customizer];
-}
-
-
-+ (DLDialogBoxCustomizer *)dialogCustomizerOfTypes:(NSArray *)types
-{
-  return [self dialogCustomizerOfTypes:types
-                    withBaseCustomizer:[DLDialogBoxCustomizer defaultCustomizer]];
-}
-
-+ (DLDialogBoxCustomizer *)dialogCustomizerOfTypes:(NSArray *)types
-                                withBaseCustomizer:(DLDialogBoxCustomizer *)customizer
-{
-  for (NSNumber *type in types) {
-    customizer = [self dialogCustomizerOfType:[type intValue] withBaseCustomizer:customizer];
+  for (NSNumber *preset in presets) {
+    customizer = [self customizeDialogWithPreset:preset baseCustomizer:customizer];
   }
   return customizer;
 }
 
 
-+ (DLDialogBoxCustomizer *)dialogCustomizerOfType:(DialogBoxCustomizerPreset)type
-                               withBaseCustomizer:(DLDialogBoxCustomizer *)customizer
++ (DLDialogBoxCustomizer *)customizeDialogWithPreset:(DialogBoxCustomizerPreset)type
+                                      baseCustomizer:(DLDialogBoxCustomizer *)customizer
 {
   /// Animations
   

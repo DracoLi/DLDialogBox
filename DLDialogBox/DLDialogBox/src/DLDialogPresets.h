@@ -76,11 +76,11 @@ typedef enum {
  * - kDialogBoxCustomizerWithBasicAnimations
  * - kDialogBoxCustomizerWithFancyUI
  */
-+ (DLDialogBoxCustomizer *)dialogCustomizerOfTypes:(NSArray *)types
-                                withBaseCustomizer:(DLDialogBoxCustomizer *)customizer;
++ (DLDialogBoxCustomizer *)customizeDialogWithPresets:(NSArray *)presets
+                                       baseCustomizer:(DLDialogBoxCustomizer *)customizer;
 
-+ (DLDialogBoxCustomizer *)dialogCustomizerOfType:(DialogBoxCustomizerPreset)type
-                               withBaseCustomizer:(DLDialogBoxCustomizer *)customizer;
++ (DLDialogBoxCustomizer *)customizeDialogWithPreset:(DialogBoxCustomizerPreset)type
+                                   baseCustomizer:(DLDialogBoxCustomizer *)customizer;
 
 /**
  * Get the shared customizer set by <setSharedCustomizer>.

@@ -90,10 +90,10 @@ typedef enum {
       customizer.choiceDialogCustomizer.dialogPosition = ccp(winSize.width, 100);
       
       // Customize the choice dialog box labels to align right
-      customizer = [DLDialogPresets dialogCustomizerOfTypes:
+      customizer = [DLDialogPresets customizeDialogWithPresets:
        @[@(kCustomizerWithDialogOnBottom), @(kCustomizerWithDialogCenterAligned),
          @(kCustomizerWithFadeAndSlideAnimationFromBottom),
-         @(kCustomizerWithFancyUI)] withBaseCustomizer:customizer];
+         @(kCustomizerWithFancyUI)] baseCustomizer:customizer];
       
       DLDialogBox *second = [DLDialogBox dialogWithTextArray:wordsChoices
                                              defaultPortrait:portrait
@@ -125,12 +125,12 @@ typedef enum {
       choiceCustomizer.selectedSoundFileName = @"selected.wav";
       
       // Go through our customizer presets
-      customizer = [DLDialogPresets dialogCustomizerOfTypes:
+      customizer = [DLDialogPresets customizeDialogWithPresets:
                     @[@(kCustomizerWithDialogOnTop),
                     @(kCustomizerWithDialogLeftAligned),
                     @(kCustomizerWithFadeAndSlideAnimationFromTop),
                     @(kCustomizerWithWhiteUI)]
-                                         withBaseCustomizer:customizer];
+                                         baseCustomizer:customizer];
       
       
       DLDialogBox *third = [DLDialogBox dialogWithTextArray:wordsChoices
@@ -168,12 +168,12 @@ typedef enum {
       choiceCustomizer.selectedSoundFileName = @"selected.wav";
       
       // Go through our customizer presets
-      customizer = [DLDialogPresets dialogCustomizerOfTypes:
+      customizer = [DLDialogPresets customizeDialogWithPresets:
                     @[@(kCustomizerWithDialogOnBottom),
                     @(kCustomizerWithDialogCenterAligned),
                     @(kCustomizerWithFadeAndSlideAnimationFromBottom),
                     @(kCustomizerWithEightBitUI)]
-                                         withBaseCustomizer:customizer];
+                                         baseCustomizer:customizer];
       
       
       DLDialogBox *fourth = [DLDialogBox dialogWithTextArray:wordsChoices
