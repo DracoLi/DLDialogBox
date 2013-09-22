@@ -34,7 +34,7 @@
                                        baseCustomizer:(DLDialogBoxCustomizer *)customizer
 {
   for (NSNumber *preset in presets) {
-    customizer = [self customizeDialogWithPreset:preset baseCustomizer:customizer];
+    customizer = [self customizeDialogWithPreset:[preset integerValue] baseCustomizer:customizer];
   }
   return customizer;
 }
@@ -192,7 +192,7 @@
   {
     [self addDLDialogBoxPresetResources];
     NSString *bg = @"plain_border.png";
-    NSString *fnt = @"start-16.fnt";
+    NSString *fnt = @"start-12.fnt";
 
     // Custom border and font
     customizer.backgroundSpriteFrameName = bg;
