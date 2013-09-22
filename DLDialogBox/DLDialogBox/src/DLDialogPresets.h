@@ -46,11 +46,6 @@ typedef enum {
   
   kCustomizerWithRetroSounds,
   
-  
-  //// All-in-one
-  
-  kCustomizerDracoSpecial
-  
 } DialogBoxCustomizerPreset;
 
 

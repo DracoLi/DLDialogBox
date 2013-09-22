@@ -222,14 +222,6 @@
   }
   
   
-  //// All-in-one
-  
-  else if (type == kCustomizerDracoSpecial)
-  {
-    
-  }
-  
-  
   return customizer;
 }
 
