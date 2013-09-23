@@ -1,0 +1,760 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>DLChoiceDialog Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 858)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">DLDialogBoxDemo </a></h1>
+				<a id="developerHome" href="../index.html">Draco</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">DLChoiceDialog Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/choices">&nbsp;&nbsp;&nbsp;&nbsp;choices</option>
+	
+	<option value="//api/name/customizer">&nbsp;&nbsp;&nbsp;&nbsp;customizer</option>
+	
+	
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/fadeInWithDuration:">&nbsp;&nbsp;&nbsp;&nbsp;- fadeInWithDuration:</option>
+	
+	<option value="//api/name/fadeOutWithDuration:">&nbsp;&nbsp;&nbsp;&nbsp;- fadeOutWithDuration:</option>
+	
+	<option value="//api/name/initWithChoices:dialogCustomizer:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithChoices:dialogCustomizer:</option>
+	
+	<option value="//api/name/playHideAnimationOrRemoveFromParent">&nbsp;&nbsp;&nbsp;&nbsp;- playHideAnimationOrRemoveFromParent</option>
+	
+	<option value="//api/name/removeFromParentAndCleanupAfterDelay:">&nbsp;&nbsp;&nbsp;&nbsp;- removeFromParentAndCleanupAfterDelay:</option>
+	
+	<option value="//api/name/selectChoiceAtIndex:skipPreselect:">&nbsp;&nbsp;&nbsp;&nbsp;- selectChoiceAtIndex:skipPreselect:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/choices">choices</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/customizer">customizer</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fadeInWithDuration:">fadeInWithDuration:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fadeOutWithDuration:">fadeOutWithDuration:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithChoices:dialogCustomizer:">initWithChoices:dialogCustomizer:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/playHideAnimationOrRemoveFromParent">playHideAnimationOrRemoveFromParent</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/removeFromParentAndCleanupAfterDelay:">removeFromParentAndCleanupAfterDelay:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/selectChoiceAtIndex:skipPreselect:">selectChoiceAtIndex:skipPreselect:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="DLChoiceDialog Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">DLChoiceDialog Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">CCNode</td>
+</tr><tr>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value">CCTouchOneByOneDelegate<br /><a href="../Protocols/DLSelectableLabelDelegate.html">DLSelectableLabelDelegate</a></td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">DLChoiceDialog.h</td>
+</tr>
+						</tbody></table></div>
+					
+                    
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>DLChoiceDialog is a dialog that asks for user input from a list of choices.</p>
+
+<p>DLChoiceDialog provides a simple way for you to gain user input without
+writing up much code.</p>
+
+<p>A <a href="../Classes/DLChoiceDialogCustomizer.html">DLChoiceDialogCustomizer</a> is used to customize the choice dialog.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/choices">&nbsp;&nbsp;choices</a></code>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/customizer">&nbsp;&nbsp;customizer</a></code>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithChoices:dialogCustomizer:">&ndash;&nbsp;initWithChoices:dialogCustomizer:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/selectChoiceAtIndex:skipPreselect:">&ndash;&nbsp;selectChoiceAtIndex:skipPreselect:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/removeFromParentAndCleanupAfterDelay:">&ndash;&nbsp;removeFromParentAndCleanupAfterDelay:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/playHideAnimationOrRemoveFromParent">&ndash;&nbsp;playHideAnimationOrRemoveFromParent</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fadeInWithDuration:">&ndash;&nbsp;fadeInWithDuration:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fadeOutWithDuration:">&ndash;&nbsp;fadeOutWithDuration:</a></code>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/choices" title="choices"></a>
+	<h3 class="subsubtitle method-title">choices</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>An array of strings that contains the choices for this choice dialog.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSArray *choices</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Setting this array will actually redraw/reposition the choice dialog&rsquo;s content
+according to the current customizer.</p>
+
+<p>However it is still recommended to not change this array once your choice dialog
+is created.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DLChoiceDialog.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/customizer" title="customizer"></a>
+	<h3 class="subsubtitle method-title">customizer</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>This customizer is used to customize the UI and functionalities of the choice dialog.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) DLChoiceDialogCustomizer *customizer</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Attempting to update any UI related properties in the customizer
+will not do anything and may break some functionalities.</p>
+
+<p>You can however update functionality related properties on the customizer
+as those are processed whenever they are required.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Classes/DLChoiceDialogCustomizer.html">DLChoiceDialogCustomizer</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DLChoiceDialog.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/fadeInWithDuration:" title="fadeInWithDuration:"></a>
+	<h3 class="subsubtitle method-title">fadeInWithDuration:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Fade in the dialog with a specified duration.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)fadeInWithDuration:(ccTime)<em>duration</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>duration</em></dt>
+			<dd><p>Duration of the fade</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DLChoiceDialog.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/fadeOutWithDuration:" title="fadeOutWithDuration:"></a>
+	<h3 class="subsubtitle method-title">fadeOutWithDuration:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Fade out the dialog with a specified duration.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)fadeOutWithDuration:(ccTime)<em>duration</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>duration</em></dt>
+			<dd><p>Duration of the fade</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DLChoiceDialog.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithChoices:dialogCustomizer:" title="initWithChoices:dialogCustomizer:"></a>
+	<h3 class="subsubtitle method-title">initWithChoices:dialogCustomizer:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>An array of choice strings to be displayed.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (id)initWithChoices:(NSArray *)<em>choices</em> dialogCustomizer:(DLChoiceDialogCustomizer *)<em>dialogCustomizer</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>choices</em></dt>
+			<dd><p>An array of choice strings to be displayed.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>dialogCustomizer</em></dt>
+			<dd><p>A <a href="../Classes/DLChoiceDialogCustomizer.html">DLChoiceDialogCustomizer</a> to customize the choice dialog.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DLChoiceDialog.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/playHideAnimationOrRemoveFromParent" title="playHideAnimationOrRemoveFromParent"></a>
+	<h3 class="subsubtitle method-title">playHideAnimationOrRemoveFromParent</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Play the hide animation block associated with the dialog&rsquo;s customizer if it
+exists. Else just remove the dialog from the parent.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)playHideAnimationOrRemoveFromParent</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p><strong>Note:</strong> The hide animation block should be responsible for removing the
+choice dialog from the parent.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DLChoiceDialog.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/removeFromParentAndCleanupAfterDelay:" title="removeFromParentAndCleanupAfterDelay:"></a>
+	<h3 class="subsubtitle method-title">removeFromParentAndCleanupAfterDelay:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Removes this dialog from its parent after a delay.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)removeFromParentAndCleanupAfterDelay:(ccTime)<em>delay</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>delay</em></dt>
+			<dd><p>Delay before the dialog is removed</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Useful for removing the choice dialog from the parent after all hide animations
+are finished. In this case, set the delay to the duration of the hide
+animation so the dialog will be removed after animation is finished.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DLChoiceDialog.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/selectChoiceAtIndex:skipPreselect:" title="selectChoiceAtIndex:skipPreselect:"></a>
+	<h3 class="subsubtitle method-title">selectChoiceAtIndex:skipPreselect:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Programatically selects a choice by passing the index of the choice in the <a href="#//api/name/choices">choices</a> array.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)selectChoiceAtIndex:(NSUInteger)<em>index</em> skipPreselect:(BOOL)<em>skipPreselect</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>index</em></dt>
+			<dd><p>Index of the choice. Starts at 0.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>skipPreselect</em></dt>
+			<dd><p>If set to YES, this method will bypass any preselects.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>If skipPreselect is set to NO, this method will preselect the label first if
+<preselectEnabled> is enabled and the targeted choice has not
+already been preselected.</p>
+
+<p><strong>Note:</strong> The delegate will be notified of this selection (maybe be a preselect or select).</p>
+
+<p><strong>Note:</strong> index starts at 0.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DLChoiceDialog.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+                    
+                    
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2013 Draco. All rights reserved. (Last updated: 2013-09-22)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>

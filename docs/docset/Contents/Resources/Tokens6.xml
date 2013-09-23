@@ -1,0 +1,1045 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/DLDialogBoxCustomizer.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/DLDialogBoxCustomizer</TokenIdentifier>
+			<Abstract type="html">A DLDialogBoxCustomizer is used to determine the look, functionalities,
+and the animations related to a DLDialogBox.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+            <Availability type="html"></Availability>
+			
+			<NodeRef refid="6"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setDialogSize:</TokenIdentifier>
+			<Abstract type="html">The size of dialog box (not including the portrait if its outside).</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) CGSize dialogSize</Declaration>
+			
+			
+			<Anchor>//api/name/dialogSize</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/dialogSize</TokenIdentifier>
+			<Abstract type="html">The size of dialog box (not including the portrait if its outside).</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) CGSize dialogSize</Declaration>
+			
+			
+			<Anchor>//api/name/dialogSize</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/dialogSize</TokenIdentifier>
+			<Abstract type="html">The size of dialog box (not including the portrait if its outside).</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) CGSize dialogSize</Declaration>
+			
+			
+			<Anchor>//api/name/dialogSize</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setDialogPosition:</TokenIdentifier>
+			<Abstract type="html">The position of the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) CGPoint dialogPosition</Declaration>
+			
+			
+			<Anchor>//api/name/dialogPosition</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/dialogPosition</TokenIdentifier>
+			<Abstract type="html">The position of the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) CGPoint dialogPosition</Declaration>
+			
+			
+			<Anchor>//api/name/dialogPosition</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/dialogPosition</TokenIdentifier>
+			<Abstract type="html">The position of the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) CGPoint dialogPosition</Declaration>
+			
+			
+			<Anchor>//api/name/dialogPosition</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setDialogAnchorPoint:</TokenIdentifier>
+			<Abstract type="html">The anchor point of the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) CGPoint dialogAnchorPoint</Declaration>
+			
+			
+			<Anchor>//api/name/dialogAnchorPoint</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/dialogAnchorPoint</TokenIdentifier>
+			<Abstract type="html">The anchor point of the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) CGPoint dialogAnchorPoint</Declaration>
+			
+			
+			<Anchor>//api/name/dialogAnchorPoint</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/dialogAnchorPoint</TokenIdentifier>
+			<Abstract type="html">The anchor point of the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) CGPoint dialogAnchorPoint</Declaration>
+			
+			
+			<Anchor>//api/name/dialogAnchorPoint</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setBackgroundSpriteFile:</TokenIdentifier>
+			<Abstract type="html">The file name of a stretchable sprite image that will be used as
+the background image for the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *backgroundSpriteFile</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundSpriteFile</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/backgroundSpriteFile</TokenIdentifier>
+			<Abstract type="html">The file name of a stretchable sprite image that will be used as
+the background image for the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *backgroundSpriteFile</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundSpriteFile</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/backgroundSpriteFile</TokenIdentifier>
+			<Abstract type="html">The file name of a stretchable sprite image that will be used as
+the background image for the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *backgroundSpriteFile</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundSpriteFile</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setBackgroundSpriteFrameName:</TokenIdentifier>
+			<Abstract type="html">The sprite frame name of a stretchable sprite image that will be used as
+the background image for the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *backgroundSpriteFrameName</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundSpriteFrameName</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/backgroundSpriteFrameName</TokenIdentifier>
+			<Abstract type="html">The sprite frame name of a stretchable sprite image that will be used as
+the background image for the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *backgroundSpriteFrameName</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundSpriteFrameName</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/backgroundSpriteFrameName</TokenIdentifier>
+			<Abstract type="html">The sprite frame name of a stretchable sprite image that will be used as
+the background image for the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *backgroundSpriteFrameName</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundSpriteFrameName</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setBackgroundColor:</TokenIdentifier>
+			<Abstract type="html">If a sprite is not provided as the dialog&apos;s background, this property will be
+used as the background color of the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) ccColor4B backgroundColor</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundColor</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/backgroundColor</TokenIdentifier>
+			<Abstract type="html">If a sprite is not provided as the dialog&apos;s background, this property will be
+used as the background color of the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) ccColor4B backgroundColor</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundColor</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/backgroundColor</TokenIdentifier>
+			<Abstract type="html">If a sprite is not provided as the dialog&apos;s background, this property will be
+used as the background color of the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) ccColor4B backgroundColor</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundColor</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setPageFinishedIndicator:</TokenIdentifier>
+			<Abstract type="html">The sprite to be used by the dialog box after a page of text is displayed.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) CCSprite *pageFinishedIndicator</Declaration>
+			
+			
+			<Anchor>//api/name/pageFinishedIndicator</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/pageFinishedIndicator</TokenIdentifier>
+			<Abstract type="html">The sprite to be used by the dialog box after a page of text is displayed.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) CCSprite *pageFinishedIndicator</Declaration>
+			
+			
+			<Anchor>//api/name/pageFinishedIndicator</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/pageFinishedIndicator</TokenIdentifier>
+			<Abstract type="html">The sprite to be used by the dialog box after a page of text is displayed.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) CCSprite *pageFinishedIndicator</Declaration>
+			
+			
+			<Anchor>//api/name/pageFinishedIndicator</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setPageFinishedIndicatorAnimation:</TokenIdentifier>
+			<Abstract type="html">The animation to play for the page finished indicator when its displayed.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) DLAnimationBlock pageFinishedIndicatorAnimation</Declaration>
+			
+			
+			<Anchor>//api/name/pageFinishedIndicatorAnimation</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/pageFinishedIndicatorAnimation</TokenIdentifier>
+			<Abstract type="html">The animation to play for the page finished indicator when its displayed.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) DLAnimationBlock pageFinishedIndicatorAnimation</Declaration>
+			
+			
+			<Anchor>//api/name/pageFinishedIndicatorAnimation</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/pageFinishedIndicatorAnimation</TokenIdentifier>
+			<Abstract type="html">The animation to play for the page finished indicator when its displayed.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) DLAnimationBlock pageFinishedIndicatorAnimation</Declaration>
+			
+			
+			<Anchor>//api/name/pageFinishedIndicatorAnimation</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setHidePageFinishedIndicatorOnLastPage:</TokenIdentifier>
+			<Abstract type="html">Hides the page finished indicator for the last page of the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL hidePageFinishedIndicatorOnLastPage</Declaration>
+			
+			
+			<Anchor>//api/name/hidePageFinishedIndicatorOnLastPage</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/hidePageFinishedIndicatorOnLastPage</TokenIdentifier>
+			<Abstract type="html">Hides the page finished indicator for the last page of the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL hidePageFinishedIndicatorOnLastPage</Declaration>
+			
+			
+			<Anchor>//api/name/hidePageFinishedIndicatorOnLastPage</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/hidePageFinishedIndicatorOnLastPage</TokenIdentifier>
+			<Abstract type="html">Hides the page finished indicator for the last page of the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL hidePageFinishedIndicatorOnLastPage</Declaration>
+			
+			
+			<Anchor>//api/name/hidePageFinishedIndicatorOnLastPage</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setDialogTextInsets:</TokenIdentifier>
+			<Abstract type="html">In CSS terms, this is essentially the margin of the dialog text.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) UIEdgeInsets dialogTextInsets</Declaration>
+			
+			
+			<Anchor>//api/name/dialogTextInsets</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/dialogTextInsets</TokenIdentifier>
+			<Abstract type="html">In CSS terms, this is essentially the margin of the dialog text.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) UIEdgeInsets dialogTextInsets</Declaration>
+			
+			
+			<Anchor>//api/name/dialogTextInsets</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/dialogTextInsets</TokenIdentifier>
+			<Abstract type="html">In CSS terms, this is essentially the margin of the dialog text.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) UIEdgeInsets dialogTextInsets</Declaration>
+			
+			
+			<Anchor>//api/name/dialogTextInsets</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setPortraitPosition:</TokenIdentifier>
+			<Abstract type="html">Position of the portrait in the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) DialogPortraitPosition portraitPosition</Declaration>
+			
+			
+			<Anchor>//api/name/portraitPosition</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/portraitPosition</TokenIdentifier>
+			<Abstract type="html">Position of the portrait in the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) DialogPortraitPosition portraitPosition</Declaration>
+			
+			
+			<Anchor>//api/name/portraitPosition</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/portraitPosition</TokenIdentifier>
+			<Abstract type="html">Position of the portrait in the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) DialogPortraitPosition portraitPosition</Declaration>
+			
+			
+			<Anchor>//api/name/portraitPosition</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setPortraitInsets:</TokenIdentifier>
+			<Abstract type="html">This is essentially the margin of the portrait sprite.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) UIEdgeInsets portraitInsets</Declaration>
+			
+			
+			<Anchor>//api/name/portraitInsets</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/portraitInsets</TokenIdentifier>
+			<Abstract type="html">This is essentially the margin of the portrait sprite.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) UIEdgeInsets portraitInsets</Declaration>
+			
+			
+			<Anchor>//api/name/portraitInsets</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/portraitInsets</TokenIdentifier>
+			<Abstract type="html">This is essentially the margin of the portrait sprite.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) UIEdgeInsets portraitInsets</Declaration>
+			
+			
+			<Anchor>//api/name/portraitInsets</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setPortraitInsideDialog:</TokenIdentifier>
+			<Abstract type="html">If set to YES, the dialog&apos;s portrait will appear inside the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/portraitInsets</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic) BOOL portraitInsideDialog</Declaration>
+			
+			
+			<Anchor>//api/name/portraitInsideDialog</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/portraitInsideDialog</TokenIdentifier>
+			<Abstract type="html">If set to YES, the dialog&apos;s portrait will appear inside the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/portraitInsets</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic) BOOL portraitInsideDialog</Declaration>
+			
+			
+			<Anchor>//api/name/portraitInsideDialog</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/portraitInsideDialog</TokenIdentifier>
+			<Abstract type="html">If set to YES, the dialog&apos;s portrait will appear inside the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/portraitInsets</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic) BOOL portraitInsideDialog</Declaration>
+			
+			
+			<Anchor>//api/name/portraitInsideDialog</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setFntFile:</TokenIdentifier>
+			<Abstract type="html">The font file used by the dialog for displaying text.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *fntFile</Declaration>
+			
+			
+			<Anchor>//api/name/fntFile</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/fntFile</TokenIdentifier>
+			<Abstract type="html">The font file used by the dialog for displaying text.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *fntFile</Declaration>
+			
+			
+			<Anchor>//api/name/fntFile</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/fntFile</TokenIdentifier>
+			<Abstract type="html">The font file used by the dialog for displaying text.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *fntFile</Declaration>
+			
+			
+			<Anchor>//api/name/fntFile</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setChoiceDialogCustomizer:</TokenIdentifier>
+			<Abstract type="html">The DLChoiceDialogCustomizer for the dialog box&apos;s choice dialog.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/clm/DLChoiceDialogCustomizer/defaultCustomizer</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) DLChoiceDialogCustomizer *choiceDialogCustomizer</Declaration>
+			
+			
+			<Anchor>//api/name/choiceDialogCustomizer</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/choiceDialogCustomizer</TokenIdentifier>
+			<Abstract type="html">The DLChoiceDialogCustomizer for the dialog box&apos;s choice dialog.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/clm/DLChoiceDialogCustomizer/defaultCustomizer</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) DLChoiceDialogCustomizer *choiceDialogCustomizer</Declaration>
+			
+			
+			<Anchor>//api/name/choiceDialogCustomizer</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/choiceDialogCustomizer</TokenIdentifier>
+			<Abstract type="html">The DLChoiceDialogCustomizer for the dialog box&apos;s choice dialog.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/clm/DLChoiceDialogCustomizer/defaultCustomizer</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) DLChoiceDialogCustomizer *choiceDialogCustomizer</Declaration>
+			
+			
+			<Anchor>//api/name/choiceDialogCustomizer</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setTapToFinishCurrentPage:</TokenIdentifier>
+			<Abstract type="html">If enabled, tap inputs during dialog typing animation will immediately
+finish the current page, bypassing anymore typing animations.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL tapToFinishCurrentPage</Declaration>
+			
+			
+			<Anchor>//api/name/tapToFinishCurrentPage</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/tapToFinishCurrentPage</TokenIdentifier>
+			<Abstract type="html">If enabled, tap inputs during dialog typing animation will immediately
+finish the current page, bypassing anymore typing animations.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL tapToFinishCurrentPage</Declaration>
+			
+			
+			<Anchor>//api/name/tapToFinishCurrentPage</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/tapToFinishCurrentPage</TokenIdentifier>
+			<Abstract type="html">If enabled, tap inputs during dialog typing animation will immediately
+finish the current page, bypassing anymore typing animations.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL tapToFinishCurrentPage</Declaration>
+			
+			
+			<Anchor>//api/name/tapToFinishCurrentPage</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setHandleTapInputs:</TokenIdentifier>
+			<Abstract type="html">When enabled, the dialog box will process all tap inputs on the screen.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/tapToFinishCurrentPage</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/handleOnlyTapInputsInDialogBox</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/swallowAllTouches</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/closeWhenDialogFinished</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic) BOOL handleTapInputs</Declaration>
+			
+			
+			<Anchor>//api/name/handleTapInputs</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/handleTapInputs</TokenIdentifier>
+			<Abstract type="html">When enabled, the dialog box will process all tap inputs on the screen.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/tapToFinishCurrentPage</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/handleOnlyTapInputsInDialogBox</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/swallowAllTouches</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/closeWhenDialogFinished</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic) BOOL handleTapInputs</Declaration>
+			
+			
+			<Anchor>//api/name/handleTapInputs</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/handleTapInputs</TokenIdentifier>
+			<Abstract type="html">When enabled, the dialog box will process all tap inputs on the screen.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/tapToFinishCurrentPage</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/handleOnlyTapInputsInDialogBox</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/swallowAllTouches</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/closeWhenDialogFinished</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic) BOOL handleTapInputs</Declaration>
+			
+			
+			<Anchor>//api/name/handleTapInputs</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setHandleOnlyTapInputsInDialogBox:</TokenIdentifier>
+			<Abstract type="html">When enabled, this dialog box will only process tap inputs that are inside
+the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL handleOnlyTapInputsInDialogBox</Declaration>
+			
+			
+			<Anchor>//api/name/handleOnlyTapInputsInDialogBox</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/handleOnlyTapInputsInDialogBox</TokenIdentifier>
+			<Abstract type="html">When enabled, this dialog box will only process tap inputs that are inside
+the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL handleOnlyTapInputsInDialogBox</Declaration>
+			
+			
+			<Anchor>//api/name/handleOnlyTapInputsInDialogBox</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/handleOnlyTapInputsInDialogBox</TokenIdentifier>
+			<Abstract type="html">When enabled, this dialog box will only process tap inputs that are inside
+the dialog box.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL handleOnlyTapInputsInDialogBox</Declaration>
+			
+			
+			<Anchor>//api/name/handleOnlyTapInputsInDialogBox</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setSwallowAllTouches:</TokenIdentifier>
+			<Abstract type="html">If enabled, the dialog box will swallow all touches inputs. This can essentially
+disable all touch inputs aside from this dialog box and its choice dialog.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL swallowAllTouches</Declaration>
+			
+			
+			<Anchor>//api/name/swallowAllTouches</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/swallowAllTouches</TokenIdentifier>
+			<Abstract type="html">If enabled, the dialog box will swallow all touches inputs. This can essentially
+disable all touch inputs aside from this dialog box and its choice dialog.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL swallowAllTouches</Declaration>
+			
+			
+			<Anchor>//api/name/swallowAllTouches</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/swallowAllTouches</TokenIdentifier>
+			<Abstract type="html">If enabled, the dialog box will swallow all touches inputs. This can essentially
+disable all touch inputs aside from this dialog box and its choice dialog.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL swallowAllTouches</Declaration>
+			
+			
+			<Anchor>//api/name/swallowAllTouches</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setCloseWhenDialogFinished:</TokenIdentifier>
+			<Abstract type="html">When enabled, this dialog box will automatically close when the dialog
+has finished all its tasks.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/playHideAnimationOrRemoveFromParent</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic) BOOL closeWhenDialogFinished</Declaration>
+			
+			
+			<Anchor>//api/name/closeWhenDialogFinished</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/closeWhenDialogFinished</TokenIdentifier>
+			<Abstract type="html">When enabled, this dialog box will automatically close when the dialog
+has finished all its tasks.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/playHideAnimationOrRemoveFromParent</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic) BOOL closeWhenDialogFinished</Declaration>
+			
+			
+			<Anchor>//api/name/closeWhenDialogFinished</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/closeWhenDialogFinished</TokenIdentifier>
+			<Abstract type="html">When enabled, this dialog box will automatically close when the dialog
+has finished all its tasks.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/playHideAnimationOrRemoveFromParent</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic) BOOL closeWhenDialogFinished</Declaration>
+			
+			
+			<Anchor>//api/name/closeWhenDialogFinished</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setTypingSpeed:</TokenIdentifier>
+			<Abstract type="html">The number of characters to be typed per second.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) CGFloat typingSpeed</Declaration>
+			
+			
+			<Anchor>//api/name/typingSpeed</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/typingSpeed</TokenIdentifier>
+			<Abstract type="html">The number of characters to be typed per second.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) CGFloat typingSpeed</Declaration>
+			
+			
+			<Anchor>//api/name/typingSpeed</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/typingSpeed</TokenIdentifier>
+			<Abstract type="html">The number of characters to be typed per second.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) CGFloat typingSpeed</Declaration>
+			
+			
+			<Anchor>//api/name/typingSpeed</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setTextPageStartedSoundFileName:</TokenIdentifier>
+			<Abstract type="html">The sound file to play whenever a new page of text has started.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *textPageStartedSoundFileName</Declaration>
+			
+			
+			<Anchor>//api/name/textPageStartedSoundFileName</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/textPageStartedSoundFileName</TokenIdentifier>
+			<Abstract type="html">The sound file to play whenever a new page of text has started.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *textPageStartedSoundFileName</Declaration>
+			
+			
+			<Anchor>//api/name/textPageStartedSoundFileName</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/textPageStartedSoundFileName</TokenIdentifier>
+			<Abstract type="html">The sound file to play whenever a new page of text has started.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *textPageStartedSoundFileName</Declaration>
+			
+			
+			<Anchor>//api/name/textPageStartedSoundFileName</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setShowAnimation:</TokenIdentifier>
+			<Abstract type="html">A block that is run during the onEnter method to display the dialog.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) DLAnimationBlock showAnimation</Declaration>
+			
+			
+			<Anchor>//api/name/showAnimation</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/showAnimation</TokenIdentifier>
+			<Abstract type="html">A block that is run during the onEnter method to display the dialog.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) DLAnimationBlock showAnimation</Declaration>
+			
+			
+			<Anchor>//api/name/showAnimation</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/showAnimation</TokenIdentifier>
+			<Abstract type="html">A block that is run during the onEnter method to display the dialog.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) DLAnimationBlock showAnimation</Declaration>
+			
+			
+			<Anchor>//api/name/showAnimation</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/setHideAnimation:</TokenIdentifier>
+			<Abstract type="html">A block that is run when closing the dialog.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/removeFromParentAndCleanupAfterDelay:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, copy) DLAnimationBlock hideAnimation</Declaration>
+			
+			
+			<Anchor>//api/name/hideAnimation</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLDialogBoxCustomizer/hideAnimation</TokenIdentifier>
+			<Abstract type="html">A block that is run when closing the dialog.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/removeFromParentAndCleanupAfterDelay:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, copy) DLAnimationBlock hideAnimation</Declaration>
+			
+			
+			<Anchor>//api/name/hideAnimation</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLDialogBoxCustomizer/hideAnimation</TokenIdentifier>
+			<Abstract type="html">A block that is run when closing the dialog.</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/DLDialogBox/removeFromParentAndCleanupAfterDelay:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, copy) DLAnimationBlock hideAnimation</Declaration>
+			
+			
+			<Anchor>//api/name/hideAnimation</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DLDialogBoxCustomizer/defaultCustomizer</TokenIdentifier>
+			<Abstract type="html">Returns a default customizer for the dialog box</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>+ (DLDialogBoxCustomizer *)defaultCustomizer</Declaration>
+			
+			
+			<Anchor>//api/name/defaultCustomizer</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DLDialogBoxCustomizer/customShowAnimationWithSlideDistance:fadeIn:duration:</TokenIdentifier>
+			<Abstract type="html">Returns a common show animation for the dialog so you don&apos;t have to write them!</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>+ (DLAnimationBlock)customShowAnimationWithSlideDistance:(CGFloat)distance fadeIn:(BOOL)fadeIn duration:(ccTime)duration</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>distance</Name>
+					<Abstract type="html">The distance the dialog should travel for the slide up.</Abstract>
+				</Parameter><Parameter>
+					<Name>fadeIn</Name>
+					<Abstract type="html">Fades the dialog in.</Abstract>
+				</Parameter><Parameter>
+					<Name>duration</Name>
+					<Abstract type="html">Duration of the whole animation sequence.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/customShowAnimationWithSlideDistance:fadeIn:duration:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DLDialogBoxCustomizer/customHideAnimationWithSlideDistance:fadeOut:duration:</TokenIdentifier>
+			<Abstract type="html">Returns a common hide animation for the dialog so you don&apos;t have to write them!</Abstract>
+			<DeclaredIn>DLDialogBox.h</DeclaredIn>
+			
+			<Declaration>+ (DLAnimationBlock)customHideAnimationWithSlideDistance:(CGFloat)distance fadeOut:(BOOL)fadeOut duration:(ccTime)duration</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>distance</Name>
+					<Abstract type="html">The distance the dialog should travel for the slide down.</Abstract>
+				</Parameter><Parameter>
+					<Name>fadeOut</Name>
+					<Abstract type="html">Fades the dialog out.</Abstract>
+				</Parameter><Parameter>
+					<Name>duration</Name>
+					<Abstract type="html">Duration of the whole animation sequence.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/customHideAnimationWithSlideDistance:fadeOut:duration:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

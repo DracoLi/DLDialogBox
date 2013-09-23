@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/DLSelectableLabel.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/DLSelectableLabel</TokenIdentifier>
+			<Abstract type="html">DLSelectableLabel is essentialy a button with support for being preselected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+            <Availability type="html"></Availability>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/DLSelectableLabelCustomizer</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<NodeRef refid="8"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/setText:</TokenIdentifier>
+			<Abstract type="html">This is used to display the text through the use of a font file</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) CCLabelBMFont *text</Declaration>
+			
+			
+			<Anchor>//api/name/text</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/text</TokenIdentifier>
+			<Abstract type="html">This is used to display the text through the use of a font file</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) CCLabelBMFont *text</Declaration>
+			
+			
+			<Anchor>//api/name/text</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabel/text</TokenIdentifier>
+			<Abstract type="html">This is used to display the text through the use of a font file</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) CCLabelBMFont *text</Declaration>
+			
+			
+			<Anchor>//api/name/text</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/setBgSprite:</TokenIdentifier>
+			<Abstract type="html">Background sprite for the label.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) CCSprite *bgSprite</Declaration>
+			
+			
+			<Anchor>//api/name/bgSprite</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/bgSprite</TokenIdentifier>
+			<Abstract type="html">Background sprite for the label.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) CCSprite *bgSprite</Declaration>
+			
+			
+			<Anchor>//api/name/bgSprite</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabel/bgSprite</TokenIdentifier>
+			<Abstract type="html">Background sprite for the label.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) CCSprite *bgSprite</Declaration>
+			
+			
+			<Anchor>//api/name/bgSprite</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/setPreselected:</TokenIdentifier>
+			<Abstract type="html">Returns YES if the label is currently preselected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL preselected</Declaration>
+			
+			
+			<Anchor>//api/name/preselected</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/preselected</TokenIdentifier>
+			<Abstract type="html">Returns YES if the label is currently preselected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL preselected</Declaration>
+			
+			
+			<Anchor>//api/name/preselected</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabel/preselected</TokenIdentifier>
+			<Abstract type="html">Returns YES if the label is currently preselected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL preselected</Declaration>
+			
+			
+			<Anchor>//api/name/preselected</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/setSelected:</TokenIdentifier>
+			<Abstract type="html">Returns YES if the label is currently selected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL selected</Declaration>
+			
+			
+			<Anchor>//api/name/selected</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/selected</TokenIdentifier>
+			<Abstract type="html">Returns YES if the label is currently selected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL selected</Declaration>
+			
+			
+			<Anchor>//api/name/selected</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabel/selected</TokenIdentifier>
+			<Abstract type="html">Returns YES if the label is currently selected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL selected</Declaration>
+			
+			
+			<Anchor>//api/name/selected</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/setCustomizer:</TokenIdentifier>
+			<Abstract type="html">This customizer is used to customize the UI and functionalities of the label.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) DLSelectableLabelCustomizer *customizer</Declaration>
+			
+			
+			<Anchor>//api/name/customizer</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/customizer</TokenIdentifier>
+			<Abstract type="html">This customizer is used to customize the UI and functionalities of the label.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) DLSelectableLabelCustomizer *customizer</Declaration>
+			
+			
+			<Anchor>//api/name/customizer</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabel/customizer</TokenIdentifier>
+			<Abstract type="html">This customizer is used to customize the UI and functionalities of the label.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) DLSelectableLabelCustomizer *customizer</Declaration>
+			
+			
+			<Anchor>//api/name/customizer</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/initWithText:fntFile:cutomizer:</TokenIdentifier>
+			<Abstract type="html">Text for the label</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>- (id)initWithText:(NSString *)text fntFile:(NSString *)fntFile cutomizer:(DLSelectableLabelCustomizer *)customizer</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>text</Name>
+					<Abstract type="html">Text for the label</Abstract>
+				</Parameter><Parameter>
+					<Name>fntFile</Name>
+					<Abstract type="html">Font file to use for the label</Abstract>
+				</Parameter><Parameter>
+					<Name>customizer</Name>
+					<Abstract type="html">A DLSelectableLabelCustomizer to custom the label</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/initWithText:fntFile:cutomizer:</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/select</TokenIdentifier>
+			<Abstract type="html">Selects the current label. If preselect is enabled, this preselects the label
+if not already preselected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>- (void)select</Declaration>
+			
+			
+			<Anchor>//api/name/select</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/selectWithoutPreselect</TokenIdentifier>
+			<Abstract type="html">Selects the label. If preselect is enabled, this bypasses the preselect and just
+selects the label directly.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>- (void)selectWithoutPreselect</Declaration>
+			
+			
+			<Anchor>//api/name/selectWithoutPreselect</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/deselect</TokenIdentifier>
+			<Abstract type="html">Deselect reverts the label to the default state. Not selected or preselected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>- (void)deselect</Declaration>
+			
+			
+			<Anchor>//api/name/deselect</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/setWidth:</TokenIdentifier>
+			<Abstract type="html">Set the width of the label manually.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>- (void)setWidth:(CGFloat)width</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>width</Name>
+					<Abstract type="html">New width of the label.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setWidth:</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/fadeInWithDuration:</TokenIdentifier>
+			<Abstract type="html">Fade this label in with duration.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>- (void)fadeInWithDuration:(ccTime)duration</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>duration</Name>
+					<Abstract type="html">Duration of the fade</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/fadeInWithDuration:</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabel/fadeOutWithDuration:</TokenIdentifier>
+			<Abstract type="html">Fade this label out with duration.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>- (void)fadeOutWithDuration:(ccTime)duration</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>duration</Name>
+					<Abstract type="html">Duration of the fade</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/fadeOutWithDuration:</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

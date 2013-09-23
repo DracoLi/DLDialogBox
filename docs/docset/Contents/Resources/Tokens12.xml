@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/DLChoiceDialogDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/DLChoiceDialogDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DLChoiceDialog.h</DeclaredIn>
+            <Availability type="html"></Availability>
+			
+			<NodeRef refid="12"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DLChoiceDialogDelegate/choiceDialogLabelSelected:choiceText:choiceIndex:</TokenIdentifier>
+			<Abstract type="html">Called when a choice is selected in the choice dialog. Preselects does not
+trigger this callback.</Abstract>
+			<DeclaredIn>DLChoiceDialog.h</DeclaredIn>
+			
+			<Declaration>- (void)choiceDialogLabelSelected:(DLChoiceDialog *)sender choiceText:(NSString *)text choiceIndex:(NSUInteger)index</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sender</Name>
+					<Abstract type="html">The choice dialog.</Abstract>
+				</Parameter><Parameter>
+					<Name>text</Name>
+					<Abstract type="html">The text of the selected choice.</Abstract>
+				</Parameter><Parameter>
+					<Name>index</Name>
+					<Abstract type="html">The index of the choice selection.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/choiceDialogLabelSelected:choiceText:choiceIndex:</Anchor>
+            <NodeRef refid="12"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DLChoiceDialogDelegate/choiceDialogLabelPreselected:choiceText:choiceIndex:</TokenIdentifier>
+			<Abstract type="html">Called only when a choice is preselected in the choice dialog.</Abstract>
+			<DeclaredIn>DLChoiceDialog.h</DeclaredIn>
+			
+			<Declaration>- (void)choiceDialogLabelPreselected:(DLChoiceDialog *)sender choiceText:(NSString *)text choiceIndex:(NSUInteger)index</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sender</Name>
+					<Abstract type="html">The choice dialog.</Abstract>
+				</Parameter><Parameter>
+					<Name>text</Name>
+					<Abstract type="html">The text of the preselected text.</Abstract>
+				</Parameter><Parameter>
+					<Name>index</Name>
+					<Abstract type="html">The index of the choice selection.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/choiceDialogLabelPreselected:choiceText:choiceIndex:</Anchor>
+            <NodeRef refid="12"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

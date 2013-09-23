@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/CCSprite+GLBoxes.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/CCSprite(GLBoxes)</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>CCSprite+GLBoxes.h</DeclaredIn>
+            <Availability type="html"></Availability>
+			
+			<NodeRef refid="10"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/CCSprite/rectangleOfSize:color:</TokenIdentifier>
+			<Abstract type="html">Create a sprite with a solid color.</Abstract>
+			<DeclaredIn>CCSprite+GLBoxes.h</DeclaredIn>
+			
+			<Declaration>+ (CCSprite *)rectangleOfSize:(CGSize)size color:(ccColor4B)color</Declaration>
+			
+			
+			<Anchor>//api/name/rectangleOfSize:color:</Anchor>
+            <NodeRef refid="10"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

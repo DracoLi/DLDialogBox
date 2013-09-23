@@ -1,4 +1,0 @@
-Documentation set was installed to Xcode!
-
-Path: /Users/dracoli/Library/Developer/Shared/Documentation/DocSets/com.dracoli.DLDialogBox.docset
-Time: 2013-09-10 05:05:05 +0000

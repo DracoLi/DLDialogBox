@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/DLAutoTypeLabelBMDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/DLAutoTypeLabelBMDelegate</TokenIdentifier>
+			<Abstract type="html">Delegate for a DLAutoTypeLabelBM.</Abstract>
+			<DeclaredIn>DLAutoTypeLabelBM.h</DeclaredIn>
+            <Availability type="html"></Availability>
+			
+			<NodeRef refid="11"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DLAutoTypeLabelBMDelegate/autoTypeLabelBMTypingFinished:</TokenIdentifier>
+			<Abstract type="html">Called when typing animation for the string is finished.</Abstract>
+			<DeclaredIn>DLAutoTypeLabelBM.h</DeclaredIn>
+			
+			<Declaration>- (void)autoTypeLabelBMTypingFinished:(DLAutoTypeLabelBM *)sender</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sender</Name>
+					<Abstract type="html">The typeLabel that just finished.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/autoTypeLabelBMTypingFinished:</Anchor>
+            <NodeRef refid="11"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DLAutoTypeLabelBMDelegate/autoTypeLabelBMCharacterBlockTyped:</TokenIdentifier>
+			<Abstract type="html">Called whenever a single or block of characters are typed.</Abstract>
+			<DeclaredIn>DLAutoTypeLabelBM.h</DeclaredIn>
+			
+			<Declaration>- (void)autoTypeLabelBMCharacterBlockTyped:(DLAutoTypeLabelBM *)sender</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sender</Name>
+					<Abstract type="html">The DLAutoTypeLabelBM.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/autoTypeLabelBMCharacterBlockTyped:</Anchor>
+            <NodeRef refid="11"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

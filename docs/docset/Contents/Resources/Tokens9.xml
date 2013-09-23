@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/DLSelectableLabelCustomizer.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/DLSelectableLabelCustomizer</TokenIdentifier>
+			<Abstract type="html">A DLSelectableLabelCustomizer is used to determine the look, functionalities,
+and the animations related to a DLSelectableLabel.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+            <Availability type="html"></Availability>
+			
+			<NodeRef refid="9"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/setTextAlignment:</TokenIdentifier>
+			<Abstract type="html">The alignment of the text in the label.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) CCTextAlignment textAlignment</Declaration>
+			
+			
+			<Anchor>//api/name/textAlignment</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/textAlignment</TokenIdentifier>
+			<Abstract type="html">The alignment of the text in the label.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) CCTextAlignment textAlignment</Declaration>
+			
+			
+			<Anchor>//api/name/textAlignment</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabelCustomizer/textAlignment</TokenIdentifier>
+			<Abstract type="html">The alignment of the text in the label.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) CCTextAlignment textAlignment</Declaration>
+			
+			
+			<Anchor>//api/name/textAlignment</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/setBackgroundColor:</TokenIdentifier>
+			<Abstract type="html">Specifies the background color of the label in normal state.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) ccColor4B backgroundColor</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundColor</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/backgroundColor</TokenIdentifier>
+			<Abstract type="html">Specifies the background color of the label in normal state.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) ccColor4B backgroundColor</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundColor</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabelCustomizer/backgroundColor</TokenIdentifier>
+			<Abstract type="html">Specifies the background color of the label in normal state.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) ccColor4B backgroundColor</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundColor</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/setPreSelectedBackgroundColor:</TokenIdentifier>
+			<Abstract type="html">Specifies the background color of the label in its preselected state.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) ccColor4B preSelectedBackgroundColor</Declaration>
+			
+			
+			<Anchor>//api/name/preSelectedBackgroundColor</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/preSelectedBackgroundColor</TokenIdentifier>
+			<Abstract type="html">Specifies the background color of the label in its preselected state.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) ccColor4B preSelectedBackgroundColor</Declaration>
+			
+			
+			<Anchor>//api/name/preSelectedBackgroundColor</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabelCustomizer/preSelectedBackgroundColor</TokenIdentifier>
+			<Abstract type="html">Specifies the background color of the label in its preselected state.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) ccColor4B preSelectedBackgroundColor</Declaration>
+			
+			
+			<Anchor>//api/name/preSelectedBackgroundColor</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/setSelectedBackgroundColor:</TokenIdentifier>
+			<Abstract type="html">Specifies the background color of the label in its selected state.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) ccColor4B selectedBackgroundColor</Declaration>
+			
+			
+			<Anchor>//api/name/selectedBackgroundColor</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/selectedBackgroundColor</TokenIdentifier>
+			<Abstract type="html">Specifies the background color of the label in its selected state.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) ccColor4B selectedBackgroundColor</Declaration>
+			
+			
+			<Anchor>//api/name/selectedBackgroundColor</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabelCustomizer/selectedBackgroundColor</TokenIdentifier>
+			<Abstract type="html">Specifies the background color of the label in its selected state.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) ccColor4B selectedBackgroundColor</Declaration>
+			
+			
+			<Anchor>//api/name/selectedBackgroundColor</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/setTextInsets:</TokenIdentifier>
+			<Abstract type="html">Insets of the label&apos;s text.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) UIEdgeInsets textInsets</Declaration>
+			
+			
+			<Anchor>//api/name/textInsets</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/textInsets</TokenIdentifier>
+			<Abstract type="html">Insets of the label&apos;s text.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) UIEdgeInsets textInsets</Declaration>
+			
+			
+			<Anchor>//api/name/textInsets</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabelCustomizer/textInsets</TokenIdentifier>
+			<Abstract type="html">Insets of the label&apos;s text.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) UIEdgeInsets textInsets</Declaration>
+			
+			
+			<Anchor>//api/name/textInsets</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/setDeselectOnOutsideTap:</TokenIdentifier>
+			<Abstract type="html">If enabled this label will automatically be deselected if tapped outside.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL deselectOnOutsideTap</Declaration>
+			
+			
+			<Anchor>//api/name/deselectOnOutsideTap</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/deselectOnOutsideTap</TokenIdentifier>
+			<Abstract type="html">If enabled this label will automatically be deselected if tapped outside.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL deselectOnOutsideTap</Declaration>
+			
+			
+			<Anchor>//api/name/deselectOnOutsideTap</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabelCustomizer/deselectOnOutsideTap</TokenIdentifier>
+			<Abstract type="html">If enabled this label will automatically be deselected if tapped outside.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL deselectOnOutsideTap</Declaration>
+			
+			
+			<Anchor>//api/name/deselectOnOutsideTap</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/setPreselectEnabled:</TokenIdentifier>
+			<Abstract type="html">When set to YES, tapping the label the first time will result in the label
+being preselected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL preselectEnabled</Declaration>
+			
+			
+			<Anchor>//api/name/preselectEnabled</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/preselectEnabled</TokenIdentifier>
+			<Abstract type="html">When set to YES, tapping the label the first time will result in the label
+being preselected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL preselectEnabled</Declaration>
+			
+			
+			<Anchor>//api/name/preselectEnabled</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabelCustomizer/preselectEnabled</TokenIdentifier>
+			<Abstract type="html">When set to YES, tapping the label the first time will result in the label
+being preselected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) BOOL preselectEnabled</Declaration>
+			
+			
+			<Anchor>//api/name/preselectEnabled</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/setPreselectSoundFileName:</TokenIdentifier>
+			<Abstract type="html">The sound file to play when the label is preselected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *preselectSoundFileName</Declaration>
+			
+			
+			<Anchor>//api/name/preselectSoundFileName</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/preselectSoundFileName</TokenIdentifier>
+			<Abstract type="html">The sound file to play when the label is preselected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *preselectSoundFileName</Declaration>
+			
+			
+			<Anchor>//api/name/preselectSoundFileName</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabelCustomizer/preselectSoundFileName</TokenIdentifier>
+			<Abstract type="html">The sound file to play when the label is preselected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *preselectSoundFileName</Declaration>
+			
+			
+			<Anchor>//api/name/preselectSoundFileName</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/setSelectedSoundFileName:</TokenIdentifier>
+			<Abstract type="html">The sound file to play when the label is selected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *selectedSoundFileName</Declaration>
+			
+			
+			<Anchor>//api/name/selectedSoundFileName</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLSelectableLabelCustomizer/selectedSoundFileName</TokenIdentifier>
+			<Abstract type="html">The sound file to play when the label is selected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *selectedSoundFileName</Declaration>
+			
+			
+			<Anchor>//api/name/selectedSoundFileName</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLSelectableLabelCustomizer/selectedSoundFileName</TokenIdentifier>
+			<Abstract type="html">The sound file to play when the label is selected.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *selectedSoundFileName</Declaration>
+			
+			
+			<Anchor>//api/name/selectedSoundFileName</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DLSelectableLabelCustomizer/defaultCustomizer</TokenIdentifier>
+			<Abstract type="html">Returns the default customizer used by the DLSelectableLabel.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>+ (DLSelectableLabelCustomizer *)defaultCustomizer</Declaration>
+			
+			
+			<Anchor>//api/name/defaultCustomizer</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

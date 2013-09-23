@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/DLSelectableLabelDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/DLSelectableLabelDelegate</TokenIdentifier>
+			<Abstract type="html">Delegate for the DLSelectableLabel.</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+            <Availability type="html"></Availability>
+			
+			<NodeRef refid="14"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DLSelectableLabelDelegate/selectableLabelPreselected:</TokenIdentifier>
+			<Abstract type="html">Called when the label is preselected</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>- (void)selectableLabelPreselected:(DLSelectableLabel *)sender</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sender</Name>
+					<Abstract type="html">The DLSelectableLabel that is preselected</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/selectableLabelPreselected:</Anchor>
+            <NodeRef refid="14"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DLSelectableLabelDelegate/selectableLabelSelected:</TokenIdentifier>
+			<Abstract type="html">Called when the label is selected</Abstract>
+			<DeclaredIn>DLSelectableLabel.h</DeclaredIn>
+			
+			<Declaration>- (void)selectableLabelSelected:(DLSelectableLabel *)sender</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sender</Name>
+					<Abstract type="html">The DLSelectableLabel that is selected</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/selectableLabelSelected:</Anchor>
+            <NodeRef refid="14"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

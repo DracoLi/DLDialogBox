@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/DLChoiceDialog.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/DLChoiceDialog</TokenIdentifier>
+			<Abstract type="html">DLChoiceDialog is a dialog that asks for user input from a list of choices.</Abstract>
+			<DeclaredIn>DLChoiceDialog.h</DeclaredIn>
+            <Availability type="html"></Availability>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/DLDialogBoxCustomizer</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<NodeRef refid="3"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLChoiceDialog/setChoices:</TokenIdentifier>
+			<Abstract type="html">An array of strings that contains the choices for this choice dialog.</Abstract>
+			<DeclaredIn>DLChoiceDialog.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSArray *choices</Declaration>
+			
+			
+			<Anchor>//api/name/choices</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLChoiceDialog/choices</TokenIdentifier>
+			<Abstract type="html">An array of strings that contains the choices for this choice dialog.</Abstract>
+			<DeclaredIn>DLChoiceDialog.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSArray *choices</Declaration>
+			
+			
+			<Anchor>//api/name/choices</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLChoiceDialog/choices</TokenIdentifier>
+			<Abstract type="html">An array of strings that contains the choices for this choice dialog.</Abstract>
+			<DeclaredIn>DLChoiceDialog.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSArray *choices</Declaration>
+			
+			
+			<Anchor>//api/name/choices</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLChoiceDialog/setCustomizer:</TokenIdentifier>
+			<Abstract type="html">This customizer is used to customize the UI and functionalities of the choice dialog.</Abstract>
+			<DeclaredIn>DLChoiceDialog.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/DLChoiceDialogCustomizer</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) DLChoiceDialogCustomizer *customizer</Declaration>
+			
+			
+			<Anchor>//api/name/customizer</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLChoiceDialog/customizer</TokenIdentifier>
+			<Abstract type="html">This customizer is used to customize the UI and functionalities of the choice dialog.</Abstract>
+			<DeclaredIn>DLChoiceDialog.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/DLChoiceDialogCustomizer</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) DLChoiceDialogCustomizer *customizer</Declaration>
+			
+			
+			<Anchor>//api/name/customizer</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DLChoiceDialog/customizer</TokenIdentifier>
+			<Abstract type="html">This customizer is used to customize the UI and functionalities of the choice dialog.</Abstract>
+			<DeclaredIn>DLChoiceDialog.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/DLChoiceDialogCustomizer</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) DLChoiceDialogCustomizer *customizer</Declaration>
+			
+			
+			<Anchor>//api/name/customizer</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLChoiceDialog/initWithChoices:dialogCustomizer:</TokenIdentifier>
+			<Abstract type="html">An array of choice strings to be displayed.</Abstract>
+			<DeclaredIn>DLChoiceDialog.h</DeclaredIn>
+			
+			<Declaration>- (id)initWithChoices:(NSArray *)choices dialogCustomizer:(DLChoiceDialogCustomizer *)dialogCustomizer</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>choices</Name>
+					<Abstract type="html">An array of choice strings to be displayed.</Abstract>
+				</Parameter><Parameter>
+					<Name>dialogCustomizer</Name>
+					<Abstract type="html">A DLChoiceDialogCustomizer to customize the choice dialog.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/initWithChoices:dialogCustomizer:</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLChoiceDialog/selectChoiceAtIndex:skipPreselect:</TokenIdentifier>
+			<Abstract type="html">Programatically selects a choice by passing the index of the choice in the choices array.</Abstract>
+			<DeclaredIn>DLChoiceDialog.h</DeclaredIn>
+			
+			<Declaration>- (void)selectChoiceAtIndex:(NSUInteger)index skipPreselect:(BOOL)skipPreselect</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>index</Name>
+					<Abstract type="html">Index of the choice. Starts at 0.</Abstract>
+				</Parameter><Parameter>
+					<Name>skipPreselect</Name>
+					<Abstract type="html">If set to YES, this method will bypass any preselects.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/selectChoiceAtIndex:skipPreselect:</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLChoiceDialog/removeFromParentAndCleanupAfterDelay:</TokenIdentifier>
+			<Abstract type="html">Removes this dialog from its parent after a delay.</Abstract>
+			<DeclaredIn>DLChoiceDialog.h</DeclaredIn>
+			
+			<Declaration>- (void)removeFromParentAndCleanupAfterDelay:(ccTime)delay</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>delay</Name>
+					<Abstract type="html">Delay before the dialog is removed</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/removeFromParentAndCleanupAfterDelay:</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLChoiceDialog/playHideAnimationOrRemoveFromParent</TokenIdentifier>
+			<Abstract type="html">Play the hide animation block associated with the dialog&apos;s customizer if it
+exists. Else just remove the dialog from the parent.</Abstract>
+			<DeclaredIn>DLChoiceDialog.h</DeclaredIn>
+			
+			<Declaration>- (void)playHideAnimationOrRemoveFromParent</Declaration>
+			
+			
+			<Anchor>//api/name/playHideAnimationOrRemoveFromParent</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLChoiceDialog/fadeInWithDuration:</TokenIdentifier>
+			<Abstract type="html">Fade in the dialog with a specified duration.</Abstract>
+			<DeclaredIn>DLChoiceDialog.h</DeclaredIn>
+			
+			<Declaration>- (void)fadeInWithDuration:(ccTime)duration</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>duration</Name>
+					<Abstract type="html">Duration of the fade</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/fadeInWithDuration:</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DLChoiceDialog/fadeOutWithDuration:</TokenIdentifier>
+			<Abstract type="html">Fade out the dialog with a specified duration.</Abstract>
+			<DeclaredIn>DLChoiceDialog.h</DeclaredIn>
+			
+			<Declaration>- (void)fadeOutWithDuration:(ccTime)duration</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>duration</Name>
+					<Abstract type="html">Duration of the fade</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/fadeOutWithDuration:</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>
