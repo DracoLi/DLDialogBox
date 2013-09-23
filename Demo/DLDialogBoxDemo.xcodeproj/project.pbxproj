@@ -1014,13 +1014,13 @@
 				D49BD5FF17EFB42C00B6929B /* DLDialogPresets.m */,
 				D49BD60017EFB42C00B6929B /* DLSelectableLabel.h */,
 				D49BD60117EFB42C00B6929B /* DLSelectableLabel.m */,
-				D49BD60217EFB42C00B6929B /* Preset Resources */,
+				D49BD60217EFB42C00B6929B /* PresetResources */,
 			);
 			name = DLDialogBox;
 			path = ../../DLDialogBox;
 			sourceTree = "<group>";
 		};
-		D49BD60217EFB42C00B6929B /* Preset Resources */ = {
+		D49BD60217EFB42C00B6929B /* PresetResources */ = {
 			isa = PBXGroup;
 			children = (
 				D49BD60317EFB42C00B6929B /* dldialogbox_preset_resources.plist */,
@@ -1034,7 +1034,7 @@
 				D49BD60B17EFB42C00B6929B /* start-12.fnt */,
 				D49BD60C17EFB42C00B6929B /* start-12.png */,
 			);
-			path = "Preset Resources";
+			path = PresetResources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
