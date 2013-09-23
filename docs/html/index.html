@@ -36,26 +36,45 @@
 						
 						<h1>DLDialogBox</h1>
 
-<p>DLDialogBox is an easy to use dialog solution for cocos2d games. DLDialogBox takes care of many details and functionalities of a dialog box in standard RPG games so you don&rsquo;t have to.</p>
+<p>DLDialogBox is an <strong>easy to use dialog solution</strong> for iOS games made with <strong><a href="http://www.cocos2d-iphone.org/">cocos2d</a></strong>. DLDialogBox takes care of many details and functionalities of a dialog box in standard RPG games <strong>so you don&rsquo;t have to.</strong></p>
+
+<p>[insert omg screenshot]</p>
 
 <p>Check out the <a href="#features">features</a> and <a href="#screenshots">screenshots</a> below to get an idea of what you can do with DLDialogBox.</p>
 
-<h2>Features</h2>
+<h2>Key Features</h2>
 
 <ul>
-<li><strong>Powerful Customizations:</strong> You can custom every aspect of DLDialogBox. dialog sizes, backgrounds, fonts, typing speeds, # of lines to display, content paddings, choice dialog backgrounds, dialog portraits, and many many more! (See <a href="#usage">Usage</a> section)</li>
-<li><strong>Integrated Choice Dialogs:</strong> No need to roll your own choice picker! I know that many times you would want to ask the player to select something after a dialog, thus DLDialogBox has an integrated choice dialog and using it is as simple as <code>[DLDialogBox dialogWithTextArray:texts choices:choices defaultPortrait:portrait];</code>.</li>
-<li><strong>Easy to Use and Customize:</strong> Start using DLDialogBox with a single line of code! Even with a lot of customization you only need to write a simple customization template for all your dialog boxes!</li>
-<li><strong>Custom Animations:</strong> Animations for showing or removing dialog boxes, choice dialogs, or event the portraits can be animated in any way you like. The control is yours with DLDialogBox as it exposes a very simple API for you to animate all these interactions.</li>
-<li><strong>Beautiful Presets:</strong> DLDialogBox comes with some beatiful presets for dialog boxes with custom animations graphics. Use them directly or build on top of them!</li>
-<li><strong>Great Utilities:</strong> DLDialogBox comes with a <code>DLChoiceDialog</code> for getting user input, a <code>DLSelectableLabel</code> for generating labels that can be selected and <code>DLAutoTypeLabelBM</code> for animation text typing. All these classes can be used indepedentely for your needs. The same awesomeness of customization applies to all these classes!</li>
-<li><strong>Awesome Examples &amp; Documentations:</strong> Run the demo project to see some awesome example usages of DLDialogBox. Or if want to become an expert you can read the header files of the DLDialogBox related classes. All class properties and public methods are documented in great detail.</li>
+<li><strong>Powerful Customizations:</strong> You can customize almost every aspect of a DLDialogBox. You&rsquo;d be surpised :wink:. (See <a href="#usage">Usage</a>)</li>
+<li><strong>Easy to Use:</strong> Its as easy as <code>[DLDialogBox dialogWithTextArray:array defaultPortrait:nil]</code>.</li>
+<li><strong>Beautiful Presets:</strong> Customize your dialogs with the beautiful presets I wrote just for you. (See <a href="#screenshots">Screenshots</a>)</li>
+<li><strong>Integrated Choice Dialogs:</strong> Asking for user input is now super easy with DLDialogBox! :heart_eyes:</li>
+<li><strong>Awesome Examples &amp; Documentations:</strong> Fully documented + Clean Demo project = :moneybag:</li>
 </ul>
 
 
 <p>[insert i&rsquo;m awesome gif]</p>
 
 <h2>Screenshots</h2>
+
+<h2>Requirements</h2>
+
+<ul>
+<li>ARC</li>
+<li>iOS 5.0 or higher</li>
+<li>cocos2d for iPhone 2.1 or higher</li>
+</ul>
+
+
+<h2>Installation</h2>
+
+<h3>CocoaPods</h3>
+
+<h3>Manual Install</h3>
+
+<p>All you need to do is to drop the <code>DLDialogBox</code> folder into your project.</p>
+
+<p>Optionally, you can remove the <code>DLDialogBox.bundle</code> file if you do not plan to use any of my provided fonts or sprites. Just make sure to specify a different <code>fntFile</code> and <code>pageFinishedIndicator</code> sprite for the dialogs as the default customizer will use my provided resources.</p>
 
 <h2>Get Started</h2>
 
@@ -64,7 +83,7 @@
 <h2>Known Bugs</h2>
 
 <ul>
-<li>DLSelectableLabel does not support center alignment now. Thus you cannot center align choice labels in the DLChoicePicker. Left and right align works though. This is a cocos2d bug.</li>
+<li>DLSelectableLabel does not support center alignment right now. Therefore you cannot center align choice labels in a DLChoiceDialog.This is a cocos2d bug.</li>
 </ul>
 
 
@@ -72,11 +91,12 @@
 
 <p>DLDialogBox is created by <a href="http://www.dracoli.com">Draco Li</a> when he is chilling at home with his laptop on while listening to <a href="http://www.youtube.com/watch?v=TROd29XFHY0">The Developer Song</a> in Toronto, Canada.</p>
 
-<h2>Thanks</h2>
+<h2>Credits</h2>
 
 <ul>
 <li><a href="https://github.com/YannickL/CCControlExtension/tree/master/CCControlExtension/CCControl/Utils">CCScale9Sprite</a></li>
 <li><a href="https://github.com/sceresia/CCAutoType">CCAutoType</a></li>
+<li><a href="http://gentlebytes.com/appledoc/">appledoc</a></li>
 </ul>
 
 
