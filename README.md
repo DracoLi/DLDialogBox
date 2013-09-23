@@ -10,9 +10,9 @@ You can also take a casual stroll around DLDialogBox's [website](http://www.drac
 
 ## Key Features
 
-- **Powerful Customizations:** You can customize almost every aspect of a DLDialogBox. You'd be surpised :wink:. (See [Usage](#usage))
+- **Powerful Customizations:** You can customize almost every aspect of a DLDialogBox :sunglasses: (See [Usage](#usage))
 - **Easy to Use:** Its as easy as `[DLDialogBox dialogWithTextArray:array defaultPortrait:nil]`.
-- **Beautiful Presets:** Customize your dialogs with the beautiful presets I wrote just for you. (See [Screenshots](#screenshots))
+- **Beautiful Presets:** Customize your dialogs with the beautiful presets I wrote for you. (See [Screenshots](#screenshots))
 - **Integrated Choice Dialogs:** Asking for user input is now super easy with DLDialogBox! :heart_eyes:
 - **Awesome Examples & Documentations:** Fully documented + Clean Demo project = :moneybag:
 
