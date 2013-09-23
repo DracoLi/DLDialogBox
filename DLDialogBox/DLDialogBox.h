@@ -17,10 +17,24 @@
 
 #define kDialogBoxTouchPriority -499
 
-typedef enum {
+/**
+ * Constants to specify the position of the portrait in a <DLDialogBoxCustomizer>
+ * for a <DLDialogBox>.
+ *
+ * @see [DLDialogBoxCustomizer portraitPosition]
+ */
+typedef NS_ENUM(NSInteger, DialogPortraitPosition) {
+  
+  /**
+   * Portrait by the left of the dialog.
+   */
   kDialogPortraitPositionLeft = 0,
+  
+  /**
+   * Portrait by the right of the dialog.
+   */
   kDialogPortraitPositionRight
-} DialogPortraitPosition;
+};
 
 /**
  * A DLDialogBoxCustomizer is used to determine the __look__, __functionalities__,

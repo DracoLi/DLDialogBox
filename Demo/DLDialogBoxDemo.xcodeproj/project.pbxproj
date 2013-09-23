@@ -163,14 +163,14 @@
 		D49BCF6917EBB6B400B6929B /* newa4.png in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF5F17EBB6B300B6929B /* newa4.png */; };
 		D49BCF6A17EBB6B400B6929B /* portraits.plist in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF6017EBB6B300B6929B /* portraits.plist */; };
 		D49BCF6B17EBB6B400B6929B /* portraits.png in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF6117EBB6B300B6929B /* portraits.png */; };
-		D49BD60D17EFB42C00B6929B /* CCScale9Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5F517EFB42C00B6929B /* CCScale9Sprite.m */; };
-		D49BD60E17EFB42C00B6929B /* CCSprite+GLBoxes.m in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5F717EFB42C00B6929B /* CCSprite+GLBoxes.m */; };
 		D49BD60F17EFB42C00B6929B /* DLAutoTypeLabelBM.m in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5F917EFB42C00B6929B /* DLAutoTypeLabelBM.m */; };
 		D49BD61017EFB42C00B6929B /* DLChoiceDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5FB17EFB42C00B6929B /* DLChoiceDialog.m */; };
 		D49BD61117EFB42C00B6929B /* DLDialogBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5FD17EFB42C00B6929B /* DLDialogBox.m */; };
 		D49BD61217EFB42C00B6929B /* DLDialogPresets.m in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5FF17EFB42C00B6929B /* DLDialogPresets.m */; };
 		D49BD61317EFB42C00B6929B /* DLSelectableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D49BD60117EFB42C00B6929B /* DLSelectableLabel.m */; };
 		D49BD62517F0060300B6929B /* DLDialogBox.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D49BD62417F0060200B6929B /* DLDialogBox.bundle */; };
+		D49BD62C17F00AEB00B6929B /* CCScale9Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D49BD62917F00AEB00B6929B /* CCScale9Sprite.m */; };
+		D49BD62D17F00AEB00B6929B /* CCSprite+GLBoxes.m in Sources */ = {isa = PBXBuildFile; fileRef = D49BD62B17F00AEB00B6929B /* CCSprite+GLBoxes.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -475,10 +475,6 @@
 		D49BCF5F17EBB6B300B6929B /* newa4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newa4.png; sourceTree = "<group>"; };
 		D49BCF6017EBB6B300B6929B /* portraits.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = portraits.plist; sourceTree = "<group>"; };
 		D49BCF6117EBB6B300B6929B /* portraits.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = portraits.png; sourceTree = "<group>"; };
-		D49BD5F417EFB42C00B6929B /* CCScale9Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScale9Sprite.h; sourceTree = "<group>"; };
-		D49BD5F517EFB42C00B6929B /* CCScale9Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScale9Sprite.m; sourceTree = "<group>"; };
-		D49BD5F617EFB42C00B6929B /* CCSprite+GLBoxes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCSprite+GLBoxes.h"; sourceTree = "<group>"; };
-		D49BD5F717EFB42C00B6929B /* CCSprite+GLBoxes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCSprite+GLBoxes.m"; sourceTree = "<group>"; };
 		D49BD5F817EFB42C00B6929B /* DLAutoTypeLabelBM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLAutoTypeLabelBM.h; sourceTree = "<group>"; };
 		D49BD5F917EFB42C00B6929B /* DLAutoTypeLabelBM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLAutoTypeLabelBM.m; sourceTree = "<group>"; };
 		D49BD5FA17EFB42C00B6929B /* DLChoiceDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLChoiceDialog.h; sourceTree = "<group>"; };
@@ -490,6 +486,10 @@
 		D49BD60017EFB42C00B6929B /* DLSelectableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSelectableLabel.h; sourceTree = "<group>"; };
 		D49BD60117EFB42C00B6929B /* DLSelectableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSelectableLabel.m; sourceTree = "<group>"; };
 		D49BD62417F0060200B6929B /* DLDialogBox.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DLDialogBox.bundle; sourceTree = "<group>"; };
+		D49BD62817F00AEB00B6929B /* CCScale9Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScale9Sprite.h; sourceTree = "<group>"; };
+		D49BD62917F00AEB00B6929B /* CCScale9Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScale9Sprite.m; sourceTree = "<group>"; };
+		D49BD62A17F00AEB00B6929B /* CCSprite+GLBoxes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCSprite+GLBoxes.h"; sourceTree = "<group>"; };
+		D49BD62B17F00AEB00B6929B /* CCSprite+GLBoxes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCSprite+GLBoxes.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -973,10 +973,7 @@
 		D49BD5F317EFB42C00B6929B /* DLDialogBox */ = {
 			isa = PBXGroup;
 			children = (
-				D49BD5F417EFB42C00B6929B /* CCScale9Sprite.h */,
-				D49BD5F517EFB42C00B6929B /* CCScale9Sprite.m */,
-				D49BD5F617EFB42C00B6929B /* CCSprite+GLBoxes.h */,
-				D49BD5F717EFB42C00B6929B /* CCSprite+GLBoxes.m */,
+				D49BD62717F00AEB00B6929B /* Helpers */,
 				D49BD5F817EFB42C00B6929B /* DLAutoTypeLabelBM.h */,
 				D49BD5F917EFB42C00B6929B /* DLAutoTypeLabelBM.m */,
 				D49BD60017EFB42C00B6929B /* DLSelectableLabel.h */,
@@ -991,6 +988,17 @@
 			);
 			name = DLDialogBox;
 			path = ../../DLDialogBox;
+			sourceTree = "<group>";
+		};
+		D49BD62717F00AEB00B6929B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D49BD62817F00AEB00B6929B /* CCScale9Sprite.h */,
+				D49BD62917F00AEB00B6929B /* CCScale9Sprite.m */,
+				D49BD62A17F00AEB00B6929B /* CCSprite+GLBoxes.h */,
+				D49BD62B17F00AEB00B6929B /* CCSprite+GLBoxes.m */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1099,7 +1107,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#appledoc Xcode script\n# Start constants\ncompany=\"Draco\";\ncompanyID=\"com.dracoli\";\ncompanyURL=\"http://www.dracoli.com\";\ntarget=\"iphoneos\";\n#target=\"macosx\";\noutputPath=\"../docs\";\n# End constants\n/usr/local/bin/appledoc \\\n--project-name \"${PROJECT_NAME}\" \\\n--project-company \"${company}\" \\\n--company-id \"${companyID}\" \\\n--docset-atom-filename \"${company}.atom\" \\\n--docset-feed-url \"${companyURL}/${company}/%DOCSETATOMFILENAME\" \\\n--docset-package-url \"${companyURL}/${company}/%DOCSETPACKAGEFILENAME\" \\\n--docset-fallback-url \"${companyURL}/${company}\" \\\n--output \"${outputPath}\" \\\n--publish-docset \\\n--docset-platform-family \"${target}\" \\\n--logformat xcode \\\n--keep-intermediate-files \\\n--no-repeat-first-par \\\n--no-warn-invalid-crossref \\\n--exit-threshold 2 \\\n--crossref-format \"<%@>\" \\\n--index-desc \"${PROJECT_DIR}/../README.md\" \\\n--ignore \"*.m\" \\\n\"${PROJECT_DIR}/../DLDialogBox\"";
+			shellScript = "#appledoc Xcode script\n# Start constants\ncompany=\"Draco\";\ncompanyID=\"com.dracoli\";\ncompanyURL=\"http://www.dracoli.com\";\ntarget=\"iphoneos\";\n#target=\"macosx\";\noutputPath=\"../docs\";\n# End constants\n/usr/local/bin/appledoc \\\n--project-name \"${PROJECT_NAME}\" \\\n--project-company \"${company}\" \\\n--company-id \"${companyID}\" \\\n--docset-atom-filename \"${company}.atom\" \\\n--docset-feed-url \"${companyURL}/${company}/%DOCSETATOMFILENAME\" \\\n--docset-package-url \"${companyURL}/${company}/%DOCSETPACKAGEFILENAME\" \\\n--docset-fallback-url \"${companyURL}/${company}\" \\\n--output \"${outputPath}\" \\\n--publish-docset \\\n--docset-platform-family \"${target}\" \\\n--logformat xcode \\\n--keep-intermediate-files \\\n--no-repeat-first-par \\\n--no-warn-invalid-crossref \\\n--exit-threshold 2 \\\n--crossref-format \"<%@>\" \\\n--index-desc \"${PROJECT_DIR}/../README.md\" \\\n--ignore \"/DLDialogBox/Helpers\" \\\n--ignore \"*.m\" \\\n\"${PROJECT_DIR}/../DLDialogBox\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1112,13 +1120,13 @@
 				D4990B0217D7D5FC00430BFB /* AppDelegate.m in Sources */,
 				D4990B0817D7D5FC00430BFB /* PromoLayer.m in Sources */,
 				D4990C9417D7D7F800430BFB /* DemoLayer.m in Sources */,
-				D49BD60D17EFB42C00B6929B /* CCScale9Sprite.m in Sources */,
-				D49BD60E17EFB42C00B6929B /* CCSprite+GLBoxes.m in Sources */,
 				D49BD60F17EFB42C00B6929B /* DLAutoTypeLabelBM.m in Sources */,
 				D49BD61017EFB42C00B6929B /* DLChoiceDialog.m in Sources */,
 				D49BD61117EFB42C00B6929B /* DLDialogBox.m in Sources */,
 				D49BD61217EFB42C00B6929B /* DLDialogPresets.m in Sources */,
 				D49BD61317EFB42C00B6929B /* DLSelectableLabel.m in Sources */,
+				D49BD62C17F00AEB00B6929B /* CCScale9Sprite.m in Sources */,
+				D49BD62D17F00AEB00B6929B /* CCSprite+GLBoxes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

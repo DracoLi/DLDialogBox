@@ -11,7 +11,7 @@ s.name         = "DLDialogBox"
   # s.source       = { :git => "https://github.com/DracoLi/DLDialogBox.git", :tag => "0.0.1" }
   s.source       = { :git => "https://github.com/DracoLi/DLDialogBox.git" }
   s.source_files  = 'DLDialogBox/*.{h,m}'
-  s.private_header_files = 'DLDialogBox/CCScale9Sprite.h', 'DLDialogBox/CCSprite+GLBoxes.h'
+  s.private_header_files = 'Helpers/*.h'
   s.resource_bundles = { 'DLDialogBox' => 'DLDialogBox/PresetResources/*.{png,plist,fnt}' }
   # s.resources = "DLDialogBox/PresetResources/*.{png,plist,fnt}"
 end
