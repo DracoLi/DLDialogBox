@@ -18,3 +18,6 @@ DerivedData
 .idea/
 *.hmap
 
+# Docs
+docs/docset-installed.txt
+docs/docset
