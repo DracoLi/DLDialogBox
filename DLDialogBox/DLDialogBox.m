@@ -22,8 +22,8 @@
 {
   DLDialogBoxCustomizer *customizer = [[DLDialogBoxCustomizer alloc] init];
   
-  // Load up sprite for our arrow_cursor
-  NSString *fileName = @"dldialogbox_preset_resources.plist";
+  // Load up sprite for our font and arrow sprite
+  NSString *fileName = @"DLDialogBox.bundle/dldialogbox_preset_resources.plist";
   [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:fileName];
   
   // Look
@@ -42,7 +42,7 @@
   customizer.portraitPosition = kDialogPortraitPositionLeft;
   customizer.portraitInsets = UIEdgeInsetsZero;
   customizer.portraitInsideDialog = NO;
-  customizer.fntFile = @"dldialogbox_default_fnt.fnt";
+  customizer.fntFile = @"DLDialogBox.bundle/dldialogbox_default_fnt.fnt";
   customizer.choiceDialogCustomizer = [DLChoiceDialogCustomizer defaultCustomizer];
   
   // Functionalities

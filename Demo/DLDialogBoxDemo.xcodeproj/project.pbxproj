@@ -163,9 +163,6 @@
 		D49BCF6917EBB6B400B6929B /* newa4.png in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF5F17EBB6B300B6929B /* newa4.png */; };
 		D49BCF6A17EBB6B400B6929B /* portraits.plist in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF6017EBB6B300B6929B /* portraits.plist */; };
 		D49BCF6B17EBB6B400B6929B /* portraits.png in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF6117EBB6B300B6929B /* portraits.png */; };
-		D49BCF6C17EBB6B400B6929B /* preselected.wav in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF6217EBB6B400B6929B /* preselected.wav */; };
-		D49BCF6D17EBB6B400B6929B /* selected.wav in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF6317EBB6B400B6929B /* selected.wav */; };
-		D49BCF6E17EBB6B400B6929B /* text_page.wav in Resources */ = {isa = PBXBuildFile; fileRef = D49BCF6417EBB6B400B6929B /* text_page.wav */; };
 		D49BD60D17EFB42C00B6929B /* CCScale9Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5F517EFB42C00B6929B /* CCScale9Sprite.m */; };
 		D49BD60E17EFB42C00B6929B /* CCSprite+GLBoxes.m in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5F717EFB42C00B6929B /* CCSprite+GLBoxes.m */; };
 		D49BD60F17EFB42C00B6929B /* DLAutoTypeLabelBM.m in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5F917EFB42C00B6929B /* DLAutoTypeLabelBM.m */; };
@@ -173,16 +170,7 @@
 		D49BD61117EFB42C00B6929B /* DLDialogBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5FD17EFB42C00B6929B /* DLDialogBox.m */; };
 		D49BD61217EFB42C00B6929B /* DLDialogPresets.m in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5FF17EFB42C00B6929B /* DLDialogPresets.m */; };
 		D49BD61317EFB42C00B6929B /* DLSelectableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D49BD60117EFB42C00B6929B /* DLSelectableLabel.m */; };
-		D49BD61417EFB42C00B6929B /* dldialogbox_preset_resources.plist in Resources */ = {isa = PBXBuildFile; fileRef = D49BD60317EFB42C00B6929B /* dldialogbox_preset_resources.plist */; };
-		D49BD61517EFB42C00B6929B /* dldialogbox_preset_resources.png in Resources */ = {isa = PBXBuildFile; fileRef = D49BD60417EFB42C00B6929B /* dldialogbox_preset_resources.png */; };
-		D49BD61617EFB42C00B6929B /* dldialogbox_default_fnt.fnt in Resources */ = {isa = PBXBuildFile; fileRef = D49BD60517EFB42C00B6929B /* dldialogbox_default_fnt.fnt */; };
-		D49BD61717EFB42C00B6929B /* dldialogbox_default_fnt.png in Resources */ = {isa = PBXBuildFile; fileRef = D49BD60617EFB42C00B6929B /* dldialogbox_default_fnt.png */; };
-		D49BD61817EFB42C00B6929B /* gill-sans-17.fnt in Resources */ = {isa = PBXBuildFile; fileRef = D49BD60717EFB42C00B6929B /* gill-sans-17.fnt */; };
-		D49BD61917EFB42C00B6929B /* gill-sans-17.png in Resources */ = {isa = PBXBuildFile; fileRef = D49BD60817EFB42C00B6929B /* gill-sans-17.png */; };
-		D49BD61A17EFB42C00B6929B /* source-sans-pro-16.fnt in Resources */ = {isa = PBXBuildFile; fileRef = D49BD60917EFB42C00B6929B /* source-sans-pro-16.fnt */; };
-		D49BD61B17EFB42C00B6929B /* source-sans-pro-16.png in Resources */ = {isa = PBXBuildFile; fileRef = D49BD60A17EFB42C00B6929B /* source-sans-pro-16.png */; };
-		D49BD61C17EFB42C00B6929B /* start-12.fnt in Resources */ = {isa = PBXBuildFile; fileRef = D49BD60B17EFB42C00B6929B /* start-12.fnt */; };
-		D49BD61D17EFB42C00B6929B /* start-12.png in Resources */ = {isa = PBXBuildFile; fileRef = D49BD60C17EFB42C00B6929B /* start-12.png */; };
+		D49BD62517F0060300B6929B /* DLDialogBox.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D49BD62417F0060200B6929B /* DLDialogBox.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -487,9 +475,6 @@
 		D49BCF5F17EBB6B300B6929B /* newa4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newa4.png; sourceTree = "<group>"; };
 		D49BCF6017EBB6B300B6929B /* portraits.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = portraits.plist; sourceTree = "<group>"; };
 		D49BCF6117EBB6B300B6929B /* portraits.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = portraits.png; sourceTree = "<group>"; };
-		D49BCF6217EBB6B400B6929B /* preselected.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = preselected.wav; sourceTree = "<group>"; };
-		D49BCF6317EBB6B400B6929B /* selected.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = selected.wav; sourceTree = "<group>"; };
-		D49BCF6417EBB6B400B6929B /* text_page.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = text_page.wav; sourceTree = "<group>"; };
 		D49BD5F417EFB42C00B6929B /* CCScale9Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScale9Sprite.h; sourceTree = "<group>"; };
 		D49BD5F517EFB42C00B6929B /* CCScale9Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScale9Sprite.m; sourceTree = "<group>"; };
 		D49BD5F617EFB42C00B6929B /* CCSprite+GLBoxes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCSprite+GLBoxes.h"; sourceTree = "<group>"; };
@@ -504,16 +489,7 @@
 		D49BD5FF17EFB42C00B6929B /* DLDialogPresets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLDialogPresets.m; sourceTree = "<group>"; };
 		D49BD60017EFB42C00B6929B /* DLSelectableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSelectableLabel.h; sourceTree = "<group>"; };
 		D49BD60117EFB42C00B6929B /* DLSelectableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSelectableLabel.m; sourceTree = "<group>"; };
-		D49BD60317EFB42C00B6929B /* dldialogbox_preset_resources.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dldialogbox_preset_resources.plist; sourceTree = "<group>"; };
-		D49BD60417EFB42C00B6929B /* dldialogbox_preset_resources.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dldialogbox_preset_resources.png; sourceTree = "<group>"; };
-		D49BD60517EFB42C00B6929B /* dldialogbox_default_fnt.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dldialogbox_default_fnt.fnt; sourceTree = "<group>"; };
-		D49BD60617EFB42C00B6929B /* dldialogbox_default_fnt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dldialogbox_default_fnt.png; sourceTree = "<group>"; };
-		D49BD60717EFB42C00B6929B /* gill-sans-17.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "gill-sans-17.fnt"; sourceTree = "<group>"; };
-		D49BD60817EFB42C00B6929B /* gill-sans-17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gill-sans-17.png"; sourceTree = "<group>"; };
-		D49BD60917EFB42C00B6929B /* source-sans-pro-16.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "source-sans-pro-16.fnt"; sourceTree = "<group>"; };
-		D49BD60A17EFB42C00B6929B /* source-sans-pro-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "source-sans-pro-16.png"; sourceTree = "<group>"; };
-		D49BD60B17EFB42C00B6929B /* start-12.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "start-12.fnt"; sourceTree = "<group>"; };
-		D49BD60C17EFB42C00B6929B /* start-12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start-12.png"; sourceTree = "<group>"; };
+		D49BD62417F0060200B6929B /* DLDialogBox.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DLDialogBox.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -990,9 +966,6 @@
 				D49BCF5F17EBB6B300B6929B /* newa4.png */,
 				D49BCF6017EBB6B300B6929B /* portraits.plist */,
 				D49BCF6117EBB6B300B6929B /* portraits.png */,
-				D49BCF6217EBB6B400B6929B /* preselected.wav */,
-				D49BCF6317EBB6B400B6929B /* selected.wav */,
-				D49BCF6417EBB6B400B6929B /* text_page.wav */,
 			);
 			path = "Demo Resources";
 			sourceTree = "<group>";
@@ -1006,35 +979,18 @@
 				D49BD5F717EFB42C00B6929B /* CCSprite+GLBoxes.m */,
 				D49BD5F817EFB42C00B6929B /* DLAutoTypeLabelBM.h */,
 				D49BD5F917EFB42C00B6929B /* DLAutoTypeLabelBM.m */,
+				D49BD60017EFB42C00B6929B /* DLSelectableLabel.h */,
+				D49BD60117EFB42C00B6929B /* DLSelectableLabel.m */,
 				D49BD5FA17EFB42C00B6929B /* DLChoiceDialog.h */,
 				D49BD5FB17EFB42C00B6929B /* DLChoiceDialog.m */,
 				D49BD5FC17EFB42C00B6929B /* DLDialogBox.h */,
 				D49BD5FD17EFB42C00B6929B /* DLDialogBox.m */,
 				D49BD5FE17EFB42C00B6929B /* DLDialogPresets.h */,
 				D49BD5FF17EFB42C00B6929B /* DLDialogPresets.m */,
-				D49BD60017EFB42C00B6929B /* DLSelectableLabel.h */,
-				D49BD60117EFB42C00B6929B /* DLSelectableLabel.m */,
-				D49BD60217EFB42C00B6929B /* PresetResources */,
+				D49BD62417F0060200B6929B /* DLDialogBox.bundle */,
 			);
 			name = DLDialogBox;
 			path = ../../DLDialogBox;
-			sourceTree = "<group>";
-		};
-		D49BD60217EFB42C00B6929B /* PresetResources */ = {
-			isa = PBXGroup;
-			children = (
-				D49BD60317EFB42C00B6929B /* dldialogbox_preset_resources.plist */,
-				D49BD60417EFB42C00B6929B /* dldialogbox_preset_resources.png */,
-				D49BD60517EFB42C00B6929B /* dldialogbox_default_fnt.fnt */,
-				D49BD60617EFB42C00B6929B /* dldialogbox_default_fnt.png */,
-				D49BD60717EFB42C00B6929B /* gill-sans-17.fnt */,
-				D49BD60817EFB42C00B6929B /* gill-sans-17.png */,
-				D49BD60917EFB42C00B6929B /* source-sans-pro-16.fnt */,
-				D49BD60A17EFB42C00B6929B /* source-sans-pro-16.png */,
-				D49BD60B17EFB42C00B6929B /* start-12.fnt */,
-				D49BD60C17EFB42C00B6929B /* start-12.png */,
-			);
-			path = PresetResources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1125,19 +1081,7 @@
 				D49BCF6917EBB6B400B6929B /* newa4.png in Resources */,
 				D49BCF6A17EBB6B400B6929B /* portraits.plist in Resources */,
 				D49BCF6B17EBB6B400B6929B /* portraits.png in Resources */,
-				D49BCF6C17EBB6B400B6929B /* preselected.wav in Resources */,
-				D49BCF6D17EBB6B400B6929B /* selected.wav in Resources */,
-				D49BCF6E17EBB6B400B6929B /* text_page.wav in Resources */,
-				D49BD61417EFB42C00B6929B /* dldialogbox_preset_resources.plist in Resources */,
-				D49BD61517EFB42C00B6929B /* dldialogbox_preset_resources.png in Resources */,
-				D49BD61617EFB42C00B6929B /* dldialogbox_default_fnt.fnt in Resources */,
-				D49BD61717EFB42C00B6929B /* dldialogbox_default_fnt.png in Resources */,
-				D49BD61817EFB42C00B6929B /* gill-sans-17.fnt in Resources */,
-				D49BD61917EFB42C00B6929B /* gill-sans-17.png in Resources */,
-				D49BD61A17EFB42C00B6929B /* source-sans-pro-16.fnt in Resources */,
-				D49BD61B17EFB42C00B6929B /* source-sans-pro-16.png in Resources */,
-				D49BD61C17EFB42C00B6929B /* start-12.fnt in Resources */,
-				D49BD61D17EFB42C00B6929B /* start-12.png in Resources */,
+				D49BD62517F0060300B6929B /* DLDialogBox.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

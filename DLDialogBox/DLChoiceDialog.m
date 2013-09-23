@@ -21,7 +21,7 @@
   customizer.dialogPosition = ccp(0, 0);
   customizer.dialogAnchorPoint = ccp(0, 0);
   customizer.backgroundColor = ccc4(0, 0, 0, 0.8*255);
-  customizer.fntFile = @"dldialogbox_default_fnt.fnt";
+  customizer.fntFile = @"DLDialogBox.bundle/dldialogbox_default_fnt.fnt";
   customizer.contentInsets = UIEdgeInsetsMake(5, 5, 5, 5);
   customizer.spacingBetweenChoices = 5.0;
   customizer.labelCustomizer = [DLSelectableLabelCustomizer defaultCustomizer];

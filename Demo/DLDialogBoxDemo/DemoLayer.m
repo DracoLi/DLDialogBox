@@ -119,18 +119,14 @@ typedef enum {
       customizer.typingSpeed = kTypingSpeedNormal;
       customizer.dialogSize = CGSizeMake(customizer.dialogSize.width, innerPortrait.contentSize.height);
       customizer.dialogTextInsets = UIEdgeInsetsMake(7, 10, 7, 10);
-      customizer.textPageStartedSoundFileName = @"text_page.wav";
-      DLChoiceDialogCustomizer *choiceCustomizer = customizer.choiceDialogCustomizer;
-      choiceCustomizer.preselectSoundFileName = @"preselected.wav";
-      choiceCustomizer.selectedSoundFileName = @"selected.wav";
       
       // Go through our customizer presets
       customizer = [DLDialogPresets customizeDialogWithPresets:
                     @[@(kCustomizerWithDialogOnTop),
                     @(kCustomizerWithDialogLeftAligned),
                     @(kCustomizerWithFadeAndSlideAnimationFromTop),
-                    @(kCustomizerWithWhiteUI)]
-                                         baseCustomizer:customizer];
+                    @(kCustomizerWithWhiteUI),
+                    @(kCustomizerWithRetroSounds)] baseCustomizer:customizer];
       
       
       DLDialogBox *third = [DLDialogBox dialogWithTextArray:wordsChoices
@@ -162,17 +158,14 @@ typedef enum {
       customizer.typingSpeed = kTypingSpeedSuperFast;
       customizer.dialogSize = CGSizeMake(customizer.dialogSize.width,
                                          innerPortrait.contentSize.height + 10);
-      customizer.textPageStartedSoundFileName = @"text_page.wav";
-      DLChoiceDialogCustomizer *choiceCustomizer = customizer.choiceDialogCustomizer;
-      choiceCustomizer.preselectSoundFileName = @"preselected.wav";
-      choiceCustomizer.selectedSoundFileName = @"selected.wav";
       
       // Go through our customizer presets
       customizer = [DLDialogPresets customizeDialogWithPresets:
                     @[@(kCustomizerWithDialogOnBottom),
                     @(kCustomizerWithDialogCenterAligned),
                     @(kCustomizerWithFadeAndSlideAnimationFromBottom),
-                    @(kCustomizerWithEightBitUI)] baseCustomizer:customizer];
+                    @(kCustomizerWithEightBitUI),
+                    @(kCustomizerWithRetroSounds)] baseCustomizer:customizer];
       
       
       DLDialogBox *fourth = [DLDialogBox dialogWithTextArray:wordsChoices

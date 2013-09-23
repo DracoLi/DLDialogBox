@@ -173,7 +173,7 @@
     [self addDLDialogBoxPresetResources];
     
     ccColor4B bgColor = ccc4(232, 228, 215, 255);
-    NSString *fntFile = @"gill-sans-17.fnt";
+    NSString *fntFile = @"DLDialogBox.bundle/gill_sans_17.fnt";
     
     // Custom border and font
     customizer.backgroundColor = bgColor;
@@ -192,7 +192,7 @@
   {
     [self addDLDialogBoxPresetResources];
     NSString *bg = @"plain_border.png";
-    NSString *fnt = @"start-12.fnt";
+    NSString *fnt = @"DLDialogBox.bundle/start_12.fnt";
 
     // Custom border and font
     customizer.backgroundSpriteFrameName = bg;
@@ -216,9 +216,9 @@
   
   else if (preset == kCustomizerWithRetroSounds)
   {
-    customizer.textPageStartedSoundFileName = @"text_page.wav";
-    customizer.choiceDialogCustomizer.preselectSoundFileName = @"preselected.wav";
-    customizer.choiceDialogCustomizer.selectedSoundFileName = @"selected.wav";
+    customizer.textPageStartedSoundFileName = @"DLDialogBox.bundle/text_page.wav";
+    customizer.choiceDialogCustomizer.preselectSoundFileName = @"DLDialogBox.bundle/preselected.wav";
+    customizer.choiceDialogCustomizer.selectedSoundFileName = @"DLDialogBox.bundle/selected.wav";
   }
   
   
@@ -252,7 +252,7 @@
 
 + (void)addDLDialogBoxPresetResources
 {
-  NSString *fileName = @"dldialogbox_preset_resources.plist";
+  NSString *fileName = @"DLDialogBox.bundle/dldialogbox_preset_resources.plist";
   [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:fileName];
 }
 
