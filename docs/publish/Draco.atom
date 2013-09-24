@@ -1,19 +1,19 @@
 <?xml version="1.0" standalone="no"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:docset="http://developer.apple.com/rss/docset_extensions" xml:lang="en">
-    <id>http://www.dracoli.com/Draco/Draco.atom/20130923021858</id>
-    <title type="text">DLDialogBoxDemo Documentation</title>
+    <id>http://www.dracoli.com/Draco/Draco.atom/20130923154303</id>
+    <title type="text">DLDialogBox Documentation</title>
     <rights>Copyright © 2013 Draco. All rights reserved.</rights>
     <link rel="self" href="http://www.dracoli.com/Draco/Draco.atom"></link>
     <docset:publisherName>Draco</docset:publisherName>
     <docset:publisherID>com.dracoli.documentation</docset:publisherID>
-    <updated>2013-09-23T02:18:58-04:00</updated>
+    <updated>2013-09-23T15:43:03-04:00</updated>
     <entry>
-        <id>tag:www.dracoli.com,2013-09-23:com.dracoli.DLDialogBoxDemo/1.0.0</id>
-        <title type="text">DLDialogBoxDemo Documentation</title>
-        <updated>2013-09-23T02:18:58-04:00</updated>
-        <content type="text">DLDialogBoxDemo Documentation (v1.0.0)</content>
-        <link rel="enclosure" type="application/octet-stream" href="http:/www.dracoli.com/Draco/com.dracoli.DLDialogBoxDemo-1.0.xar" length="159302"></link>
-        <docset:identifier>com.dracoli.DLDialogBoxDemo</docset:identifier>
+        <id>tag:www.dracoli.com,2013-09-23:com.dracoli.DLDialogBox/1.0.0</id>
+        <title type="text">DLDialogBox Documentation</title>
+        <updated>2013-09-23T15:43:03-04:00</updated>
+        <content type="text">DLDialogBox Documentation (v1.0.0)</content>
+        <link rel="enclosure" type="application/octet-stream" href="http:/www.dracoli.com/Draco/com.dracoli.DLDialogBox-1.0.xar" length="171763"></link>
+        <docset:identifier>com.dracoli.DLDialogBox</docset:identifier>
         <docset:version>1.0.0</docset:version>
         <docset:minimumXcodeVersion>3.0.0</docset:minimumXcodeVersion>
     </entry>

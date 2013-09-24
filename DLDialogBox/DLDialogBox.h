@@ -642,8 +642,8 @@ typedef NS_ENUM(NSInteger, DialogPortraitPosition) {
  * @param customizer  A <DLDialogBoxCustomizer> to customize the dialog box
  */
 - (id)initWithTextArray:(NSArray *)texts
-        defaultPortrait:(CCSprite *)portrait
                 choices:(NSArray *)choices
+        defaultPortrait:(CCSprite *)portrait
              customizer:(DLDialogBoxCustomizer *)customizer;
 
 + (id)dialogWithTextArray:(NSArray *)texts
@@ -655,8 +655,8 @@ typedef NS_ENUM(NSInteger, DialogPortraitPosition) {
                   choices:(NSArray *)choices
           defaultPortrait:(CCSprite *)portrait;
 + (id)dialogWithTextArray:(NSArray *)texts
-          defaultPortrait:(CCSprite *)portrait
                   choices:(NSArray *)choices
+          defaultPortrait:(CCSprite *)portrait
                customizer:(DLDialogBoxCustomizer *)customizer;
 
 /**

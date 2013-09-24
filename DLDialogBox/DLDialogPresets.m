@@ -228,7 +228,12 @@
 
 + (DLDialogBoxCustomizer *)sharedCustomizer
 {
-  return [[self sharedInstance] dialogCustomizer];
+  DLDialogBoxCustomizer *customizer = [[self sharedInstance] dialogCustomizer];
+  if (!customizer) {
+    CCLOGWARN(@"No shared customizer set! Will now set the default customizer as the shared customizer.");
+    [self setSharedCustomizer:[DLDialogBoxCustomizer defaultCustomizer]];
+  }
+  return customizer;
 }
 
 + (void)setSharedCustomizer:(DLDialogBoxCustomizer *)customizer

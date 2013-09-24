@@ -85,7 +85,7 @@
 							   numberOfSamples:0];
 	
 	director_ = (CCDirectorIOS*) [CCDirector sharedDirector];
-	
+  
 	director_.wantsFullScreenLayout = YES;
 	
 	// Display FSP and SPF

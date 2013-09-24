@@ -170,8 +170,8 @@
 }
 
 + (id)dialogWithTextArray:(NSArray *)texts
-          defaultPortrait:(CCSprite *)portrait
                   choices:(NSArray *)choices
+          defaultPortrait:(CCSprite *)portrait
                customizer:(DLDialogBoxCustomizer *)customizer
 {
   return [[self alloc] initWithTextArray:texts
@@ -181,8 +181,8 @@
 }
 
 - (id)initWithTextArray:(NSArray *)texts
-        defaultPortrait:(CCSprite *)portrait
                 choices:(NSArray *)choices
+        defaultPortrait:(CCSprite *)portrait
              customizer:(DLDialogBoxCustomizer *)customizer
 {
   if (self = [super init])
