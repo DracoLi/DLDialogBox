@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name         = "DLDialogBox"
-  s.version      = "0.16"
+  s.version      = "0.17"
   s.summary      = "Easy dialog creation for your iOS cocos2d game."
   s.homepage     = "http://dracoli.github.io/DLDialogBox"
   s.license      = { :type => 'MIT', :file => 'LICENSE.md' }
