@@ -19,7 +19,7 @@
  * dialog box will automatically use the default customizer provided through
  * <defaultCustomizer>.
  */
-@interface DLSelectableLabelCustomizer : NSObject
+@interface DLSelectableLabelCustomizer : NSObject <NSCopying>
 
 
 /// @name Customizing look/UI

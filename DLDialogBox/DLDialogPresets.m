@@ -15,8 +15,6 @@
 @interface DLDialogPresets ()
 @property (nonatomic, strong) DLDialogBoxCustomizer *dialogCustomizer;
 
-+ (DLDialogPresets *)sharedInstance;
-
 // Preset helpers
 + (DLDialogBoxCustomizer *)addHandIndicatorWithCustomAnimation:(DLDialogBoxCustomizer *)baseCustomizer;
 + (DLDialogBoxCustomizer *)onlyOutsidePortraitAnimation:(DLDialogBoxCustomizer *)customizer
@@ -30,18 +28,18 @@
 
 #pragma mark - Public methods
 
-+ (DLDialogBoxCustomizer *)customizeDialogWithPresets:(NSArray *)presets
-                                       baseCustomizer:(DLDialogBoxCustomizer *)customizer
++ (DLDialogBoxCustomizer *)dialogBoxCustomizerWithPresets:(NSArray *)presets
+                                           baseCustomizer:(DLDialogBoxCustomizer *)customizer
 {
   for (NSNumber *preset in presets) {
-    customizer = [self customizeDialogWithPreset:[preset integerValue] baseCustomizer:customizer];
+    customizer = [self dialogBoxCustomizerWithPreset:[preset integerValue] baseCustomizer:customizer];
   }
   return customizer;
 }
 
 
-+ (DLDialogBoxCustomizer *)customizeDialogWithPreset:(DialogBoxCustomizerPreset)preset
-                                      baseCustomizer:(DLDialogBoxCustomizer *)customizer
++ (DLDialogBoxCustomizer *)dialogBoxCustomizerWithPreset:(DialogBoxCustomizerPreset)preset
+                                          baseCustomizer:(DLDialogBoxCustomizer *)customizer
 {
   /// Animations
   
@@ -178,7 +176,7 @@
     // Custom border and font
     customizer.backgroundColor = bgColor;
     customizer.fntFile = fntFile;
-    customizer.pageFinishedIndicator = [CCSprite spriteWithSpriteFrameName:@"arrow_cursor_black.png"];
+    customizer.pageFinishedIndicatorSpriteFrameName = @"arrow_cursor_black.png";
     
     // Custom choice dialog
     DLChoiceDialogCustomizer *choiceCustomizer = customizer.choiceDialogCustomizer;
@@ -226,34 +224,7 @@
 }
 
 
-+ (DLDialogBoxCustomizer *)sharedCustomizer
-{
-  DLDialogBoxCustomizer *customizer = [[self sharedInstance] dialogCustomizer];
-  if (!customizer) {
-    CCLOGWARN(@"No shared customizer set! Will now set the default customizer as the shared customizer.");
-    [self setSharedCustomizer:[DLDialogBoxCustomizer defaultCustomizer]];
-  }
-  return customizer;
-}
-
-+ (void)setSharedCustomizer:(DLDialogBoxCustomizer *)customizer
-{
-  [[self sharedInstance] setDialogCustomizer:customizer];
-}
-
-
 #pragma mark - Private methods
-
-+ (DLDialogPresets *)sharedInstance
-{
-  static DLDialogPresets *instance = nil;
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    instance = [[DLDialogPresets alloc] init];
-  });
-  return instance;
-}
-
 
 + (void)addDLDialogBoxPresetResources
 {
@@ -283,9 +254,9 @@
 
 + (DLDialogBoxCustomizer *)addHandIndicatorWithCustomAnimation:(DLDialogBoxCustomizer *)baseCustomizer
 {
-  baseCustomizer.pageFinishedIndicator = [CCSprite spriteWithSpriteFrameName:@"hand_indicator.png"];
+  baseCustomizer.pageFinishedIndicatorSpriteFrameName = @"hand_indicator.png";
   baseCustomizer.pageFinishedIndicatorAnimation = ^(DLDialogBox *dialog) {
-    CCSprite *indicator = dialog.customizer.pageFinishedIndicator;
+    CCSprite *indicator = dialog.pageFinishedIndicator;
     indicator.position = ccpSub(indicator.position, CGPointMake(0, 1));
     id moveBack = [CCMoveBy actionWithDuration:0.2 position:CGPointMake(0, 5)];
     id moveReverse = [moveBack reverse];

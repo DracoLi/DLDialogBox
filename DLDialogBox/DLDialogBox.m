@@ -18,6 +18,37 @@
 
 @implementation DLDialogBoxCustomizer
 
+- (id)copyWithZone:(NSZone *)zone
+{
+  DLDialogBoxCustomizer *another = [[self class] allocWithZone:zone];
+  another.dialogSize = self.dialogSize;
+  another.dialogPosition = self.dialogPosition;
+  another.dialogAnchorPoint = self.dialogAnchorPoint;
+  another.backgroundSpriteFile = [self.backgroundSpriteFile copyWithZone:zone];
+  another.backgroundSpriteFrameName = [self.backgroundSpriteFrameName copyWithZone:zone];
+  another.backgroundColor = self.backgroundColor;
+  another.pageFinishedIndicatorSpriteFrameName = [self.pageFinishedIndicatorSpriteFrameName copyWithZone:zone];
+  another.pageFinishedIndicatorSpriteFile = [self.pageFinishedIndicatorSpriteFile copyWithZone:zone];
+  another.pageFinishedIndicatorAnimation = self.pageFinishedIndicatorAnimation;
+  another.hidePageFinishedIndicatorOnLastPage = self.hidePageFinishedIndicatorOnLastPage;
+  another.dialogTextInsets = self.dialogTextInsets;
+  another.portraitPosition = self.portraitPosition;
+  another.portraitInsets = self.portraitInsets;
+  another.portraitInsideDialog = self.portraitInsideDialog;
+  another.fntFile = [self.fntFile copyWithZone:zone];
+  another.choiceDialogCustomizer = [self.choiceDialogCustomizer copyWithZone:zone];
+  another.tapToFinishCurrentPage = self.tapToFinishCurrentPage;
+  another.handleTapInputs = self.handleTapInputs;
+  another.handleOnlyTapInputsInDialogBox = self.handleOnlyTapInputsInDialogBox;
+  another.swallowAllTouches = self.swallowAllTouches;
+  another.closeWhenDialogFinished = self.closeWhenDialogFinished;
+  another.typingSpeed = self.typingSpeed;
+  another.textPageStartedSoundFileName = [self.textPageStartedSoundFileName copyWithZone:zone];
+  another.showAnimation = self.showAnimation;
+  another.hideAnimation = self.hideAnimation;
+  return another;
+}
+
 + (DLDialogBoxCustomizer *)defaultCustomizer
 {
   DLDialogBoxCustomizer *customizer = [[DLDialogBoxCustomizer alloc] init];
@@ -31,11 +62,13 @@
                                      kDialogBoxHeightNormal);
   customizer.dialogPosition = ccp(0, 0);
   customizer.backgroundColor = ccc4(0, 0, 0, 0.8*255);
-  customizer.pageFinishedIndicator = [CCSprite spriteWithSpriteFrameName:@"arrow_cursor.png"];
+  customizer.pageFinishedIndicatorSpriteFrameName = @"arrow_cursor.png";
   customizer.pageFinishedIndicatorAnimation = ^(DLDialogBox *dialog) {
     // Animate arrow cursor blinking
-    id blink = [CCBlink actionWithDuration:5.0 blinks:5.0];
-    [dialog.customizer.pageFinishedIndicator runAction:[CCRepeatForever actionWithAction:blink]];
+    if (dialog.pageFinishedIndicator) {
+      id blink = [CCBlink actionWithDuration:5.0 blinks:5.0];
+      [dialog.pageFinishedIndicator runAction:[CCRepeatForever actionWithAction:blink]];
+    }
   };
   customizer.hidePageFinishedIndicatorOnLastPage = YES;
   customizer.dialogTextInsets = UIEdgeInsetsMake(10, 10, 10, 10);
@@ -52,9 +85,6 @@
   customizer.swallowAllTouches = NO;
   customizer.typingSpeed = kTypingSpeedNormal;
   customizer.closeWhenDialogFinished = YES;
-  
-  // Sounds
-//  customizer.characterTypedSoundFileName = @"character_typed.wav";
   
   return customizer;
 }
@@ -120,6 +150,8 @@
 
 @end
 
+static DLDialogBoxCustomizer *defaultCustomizer = nil;
+
 @interface DLDialogBox ()
 @property (nonatomic, strong) NSMutableArray *textArray;
 @property (nonatomic, readwrite) BOOL currentPageTyped;
@@ -143,10 +175,14 @@
 + (id)dialogWithTextArray:(NSArray *)texts
           defaultPortrait:(CCSprite *)portrait
 {
+  DLDialogBoxCustomizer *customizer = [[DLDialogBox defaultCustomizer] copy];
+  if (!customizer) {
+    customizer = [DLDialogBoxCustomizer defaultCustomizer];
+  }
   return [[self alloc] initWithTextArray:texts
-                         defaultPortrait:portrait
                                  choices:nil
-                              customizer:[DLDialogBoxCustomizer defaultCustomizer]];
+                         defaultPortrait:portrait
+                              customizer:customizer];
 }
 
 + (id)dialogWithTextArray:(NSArray *)texts
@@ -154,8 +190,8 @@
                customizer:(DLDialogBoxCustomizer *)customizer
 {
   return [[self alloc] initWithTextArray:texts
-                         defaultPortrait:portrait
                                  choices:nil
+                         defaultPortrait:portrait
                               customizer:customizer];
 }
 
@@ -163,10 +199,14 @@
                   choices:(NSArray *)choices
           defaultPortrait:(CCSprite *)portrait
 {
+  DLDialogBoxCustomizer *customizer = [[DLDialogBox defaultCustomizer] copy];
+  if (!customizer) {
+    customizer = [DLDialogBoxCustomizer defaultCustomizer];
+  }
   return [[self alloc] initWithTextArray:texts
-                         defaultPortrait:portrait
                                  choices:choices
-                              customizer:[DLDialogBoxCustomizer defaultCustomizer]];
+                         defaultPortrait:portrait
+                              customizer:customizer];
 }
 
 + (id)dialogWithTextArray:(NSArray *)texts
@@ -175,8 +215,8 @@
                customizer:(DLDialogBoxCustomizer *)customizer
 {
   return [[self alloc] initWithTextArray:texts
-                         defaultPortrait:portrait
                                  choices:choices
+                         defaultPortrait:portrait
                               customizer:customizer];
 }
 
@@ -320,9 +360,9 @@
   }
   
   // Stop any existing blinking cursor
-  if (self.customizer.pageFinishedIndicator) {
-    [self.customizer.pageFinishedIndicator stopAllActions];
-    self.customizer.pageFinishedIndicator.visible = NO;
+  if (self.pageFinishedIndicator) {
+    [self.pageFinishedIndicator stopAllActions];
+    self.pageFinishedIndicator.visible = NO;
   }
   
   // Remove the text to be displayed from our text array
@@ -442,9 +482,8 @@
   id fade = [CCFadeIn actionWithDuration:duration];
   [self.bgSprite runAction:fade];
   [self.dialogLabel runAction:[fade copy]];
-  if (self.customizer.pageFinishedIndicator &&
-      self.customizer.pageFinishedIndicator.parent) {
-    [self.customizer.pageFinishedIndicator runAction:[fade copy]];
+  if (self.pageFinishedIndicator && self.pageFinishedIndicator.parent) {
+    [self.pageFinishedIndicator runAction:[fade copy]];
   }
   if (self.defaultPortraitSprite) {
     [self.portrait runAction:[fade copy]];
@@ -456,9 +495,8 @@
   id fade = [CCFadeOut actionWithDuration:duration];
   [self.bgSprite runAction:fade];
   [self.dialogLabel runAction:[fade copy]];
-  if (self.customizer.pageFinishedIndicator &&
-      self.customizer.pageFinishedIndicator.parent) {
-    [self.customizer.pageFinishedIndicator runAction:[fade copy]];
+  if (self.pageFinishedIndicator && self.pageFinishedIndicator.parent) {
+    [self.pageFinishedIndicator runAction:[fade copy]];
   }
   if (self.defaultPortraitSprite) {
     [self.portrait runAction:[fade copy]];
@@ -530,6 +568,19 @@
     }
     [self.portrait runAction:action];
   }
+}
+
+
+#pragma mark - Class methods
+
++ (void)setDefaultCustomizer:(DLDialogBoxCustomizer *)customizer
+{
+  defaultCustomizer = customizer;
+}
+
++ (DLDialogBoxCustomizer *)defaultCustomizer
+{
+  return defaultCustomizer;
 }
 
 
@@ -609,8 +660,16 @@
   }
   
   // Create our new page indicator
-  if (customizer.pageFinishedIndicator) {
-    CCSprite *indicator = customizer.pageFinishedIndicator;
+  self.pageFinishedIndicator = nil;
+  if (customizer.pageFinishedIndicatorSpriteFrameName) {
+    self.pageFinishedIndicator = [CCSprite spriteWithSpriteFrameName:customizer.pageFinishedIndicatorSpriteFrameName];
+  }else if (customizer.pageFinishedIndicatorSpriteFile) {
+    self.pageFinishedIndicator = [CCSprite spriteWithFile:customizer.pageFinishedIndicatorSpriteFile];
+  }
+  
+  // Position and add our page finished indicator
+  if (self.pageFinishedIndicator) {
+    CCSprite *indicator = self.pageFinishedIndicator;
     indicator.anchorPoint = ccp(1, 0);
     
     // By default the indicator's insets uses the same one as the dialogTextInsets
@@ -622,7 +681,7 @@
         customizer.portraitPosition == kDialogPortraitPositionRight)
     {
       CGFloat x = dialogSize.width - self.defaultPortraitSprite.contentSize.width - \
-      customizer.pageFinishedIndicator.contentSize.width - \
+      self.pageFinishedIndicator.contentSize.width - \
       customizer.portraitInsets.left - customizer.dialogTextInsets.right;
       indicator.position = ccp(x, customizer.dialogTextInsets.bottom);
     }
@@ -685,10 +744,10 @@
   }
   
   // Show page finished indicator after every page except last
-  if (self.customizer.pageFinishedIndicator &&
+  if (self.pageFinishedIndicator &&
       (self.textArray.count != 0 || !self.customizer.hidePageFinishedIndicatorOnLastPage))
   {
-    self.customizer.pageFinishedIndicator.visible = YES;
+    self.pageFinishedIndicator.visible = YES;
     if (self.customizer.pageFinishedIndicatorAnimation) {
       self.customizer.pageFinishedIndicatorAnimation(self);
     }

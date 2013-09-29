@@ -29,7 +29,7 @@ typedef void(^DLAnimationBlock)(id);
  * instance on all the DLChoiceDialogs in your game to achieve a consistent look
  * and behaviour.
  */
-@interface DLChoiceDialogCustomizer : NSObject
+@interface DLChoiceDialogCustomizer : NSObject <NSCopying>
 
 
 /// @name Customizing look/UI

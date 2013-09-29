@@ -41,15 +41,9 @@
 	
 	<option value="class_methods">Class Methods</option>
 	
-	<option value="//api/name/addDLDialogBoxPresetResources">&nbsp;&nbsp;&nbsp;&nbsp;+ addDLDialogBoxPresetResources</option>
+	<option value="//api/name/dialogBoxCustomizerWithPreset:baseCustomizer:">&nbsp;&nbsp;&nbsp;&nbsp;+ dialogBoxCustomizerWithPreset:baseCustomizer:</option>
 	
-	<option value="//api/name/customizeDialogWithPreset:baseCustomizer:">&nbsp;&nbsp;&nbsp;&nbsp;+ customizeDialogWithPreset:baseCustomizer:</option>
-	
-	<option value="//api/name/customizeDialogWithPresets:baseCustomizer:">&nbsp;&nbsp;&nbsp;&nbsp;+ customizeDialogWithPresets:baseCustomizer:</option>
-	
-	<option value="//api/name/setSharedCustomizer:">&nbsp;&nbsp;&nbsp;&nbsp;+ setSharedCustomizer:</option>
-	
-	<option value="//api/name/sharedCustomizer">&nbsp;&nbsp;&nbsp;&nbsp;+ sharedCustomizer</option>
+	<option value="//api/name/dialogBoxCustomizerWithPresets:baseCustomizer:">&nbsp;&nbsp;&nbsp;&nbsp;+ dialogBoxCustomizerWithPresets:baseCustomizer:</option>
 	
 	
 	
@@ -79,15 +73,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/addDLDialogBoxPresetResources">addDLDialogBoxPresetResources</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/dialogBoxCustomizerWithPreset:baseCustomizer:">dialogBoxCustomizerWithPreset:baseCustomizer:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/customizeDialogWithPreset:baseCustomizer:">customizeDialogWithPreset:baseCustomizer:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/customizeDialogWithPresets:baseCustomizer:">customizeDialogWithPresets:baseCustomizer:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setSharedCustomizer:">setSharedCustomizer:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/sharedCustomizer">sharedCustomizer</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/dialogBoxCustomizerWithPresets:baseCustomizer:">dialogBoxCustomizerWithPresets:baseCustomizer:</a></span></li>
 	
 </ul></li>
 
@@ -159,27 +147,6 @@ customizer = [DLDialogPresets customizeDialogWithPresets:
 @(kCustomizerWithFadeAndSlideAnimationFromBottom),
 @(kCustomizerWithEightBitUI)] baseCustomizer:customizer];
 </code></pre>
-
-<hr />
-
-<p>You can also use this class to manage your own single <DLDialogBoxCusotmizer>
-instance that you can use on all your dialogs to make sure that they all
-follow a consistent theme.</p>
-
-<p>From example:</p>
-
-<pre><code>// Create a basic customizer
-DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
-
-// Customize the customizer
-// ...
-
-// Set it as the default customizer
-[DLDialogPresets setSharedCustomizer:customizer];
-
-// Get the default customizer
-[DLDialogPresets sharedCustomizer]
-</code></pre>
 					</div>
 					
 					
@@ -197,31 +164,13 @@ DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/customizeDialogWithPresets:baseCustomizer:">+&nbsp;customizeDialogWithPresets:baseCustomizer:</a></code>
+		<code><a href="#//api/name/dialogBoxCustomizerWithPresets:baseCustomizer:">+&nbsp;dialogBoxCustomizerWithPresets:baseCustomizer:</a></code>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/customizeDialogWithPreset:baseCustomizer:">+&nbsp;customizeDialogWithPreset:baseCustomizer:</a></code>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/sharedCustomizer">+&nbsp;sharedCustomizer</a></code>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/setSharedCustomizer:">+&nbsp;setSharedCustomizer:</a></code>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/addDLDialogBoxPresetResources">+&nbsp;addDLDialogBoxPresetResources</a></code>
+		<code><a href="#//api/name/dialogBoxCustomizerWithPreset:baseCustomizer:">+&nbsp;dialogBoxCustomizerWithPreset:baseCustomizer:</a></code>
 	</span>
 	
 	
@@ -241,50 +190,8 @@ DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/addDLDialogBoxPresetResources" title="addDLDialogBoxPresetResources"></a>
-	<h3 class="subsubtitle method-title">addDLDialogBoxPresetResources</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Adds the resources used by <DLDialogPresets> into the shared <code>CCSpriteFrameCache</code>.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>+ (void)addDLDialogBoxPresetResources</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>After this is called, you will be able to use the resources attached
-with the DLDialogBox project via <code>[CCSprite spriteWithSpriteFrameName]</code>.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">DLDialogPresets.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/customizeDialogWithPreset:baseCustomizer:" title="customizeDialogWithPreset:baseCustomizer:"></a>
-	<h3 class="subsubtitle method-title">customizeDialogWithPreset:baseCustomizer:</h3>
+	<a name="//api/name/dialogBoxCustomizerWithPreset:baseCustomizer:" title="dialogBoxCustomizerWithPreset:baseCustomizer:"></a>
+	<h3 class="subsubtitle method-title">dialogBoxCustomizerWithPreset:baseCustomizer:</h3>
 	
 	
 	
@@ -294,7 +201,7 @@ with the DLDialogBox project via <code>[CCSprite spriteWithSpriteFrameName]</cod
 	
     
 
-	<div class="method-subsection method-declaration"><code>+ (DLDialogBoxCustomizer *)customizeDialogWithPreset:(DialogBoxCustomizerPreset)<em>preset</em> baseCustomizer:(DLDialogBoxCustomizer *)<em>customizer</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (DLDialogBoxCustomizer *)dialogBoxCustomizerWithPreset:(DialogBoxCustomizerPreset)<em>preset</em> baseCustomizer:(DLDialogBoxCustomizer *)<em>customizer</em></code></div>
 
     
 	
@@ -334,8 +241,8 @@ with the DLDialogBox project via <code>[CCSprite spriteWithSpriteFrameName]</cod
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/customizeDialogWithPresets:baseCustomizer:" title="customizeDialogWithPresets:baseCustomizer:"></a>
-	<h3 class="subsubtitle method-title">customizeDialogWithPresets:baseCustomizer:</h3>
+	<a name="//api/name/dialogBoxCustomizerWithPresets:baseCustomizer:" title="dialogBoxCustomizerWithPresets:baseCustomizer:"></a>
+	<h3 class="subsubtitle method-title">dialogBoxCustomizerWithPresets:baseCustomizer:</h3>
 	
 	
 	
@@ -345,7 +252,7 @@ with the DLDialogBox project via <code>[CCSprite spriteWithSpriteFrameName]</cod
 	
     
 
-	<div class="method-subsection method-declaration"><code>+ (DLDialogBoxCustomizer *)customizeDialogWithPresets:(NSArray *)<em>presets</em> baseCustomizer:(DLDialogBoxCustomizer *)<em>customizer</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (DLDialogBoxCustomizer *)dialogBoxCustomizerWithPresets:(NSArray *)<em>presets</em> baseCustomizer:(DLDialogBoxCustomizer *)<em>customizer</em></code></div>
 
     
 	
@@ -389,107 +296,6 @@ with the DLDialogBox project via <code>[CCSprite spriteWithSpriteFrameName]</cod
 	
 </div>
 						
-						<div class="section-method">
-	<a name="//api/name/setSharedCustomizer:" title="setSharedCustomizer:"></a>
-	<h3 class="subsubtitle method-title">setSharedCustomizer:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Sets the shared customizer that you can get easily throughout your app
-via <a href="#//api/name/sharedCustomizer">sharedCustomizer</a>.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>+ (void)setSharedCustomizer:(DLDialogBoxCustomizer *)<em>customizer</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>customizer</em></dt>
-			<dd><p>The customizer to set as default</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection see-also-section">
-		<h4 class="method-subtitle">See Also</h4>
-		<ul>
-			
-			<li><code><p><a href="#//api/name/sharedCustomizer">+ sharedCustomizer</a></p></code></li>
-			
-		</ul>
-	</div>
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">DLDialogPresets.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/sharedCustomizer" title="sharedCustomizer"></a>
-	<h3 class="subsubtitle method-title">sharedCustomizer</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Get the shared customizer set by <a href="#//api/name/setSharedCustomizer:">setSharedCustomizer:</a>.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>+ (DLDialogBoxCustomizer *)sharedCustomizer</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection see-also-section">
-		<h4 class="method-subtitle">See Also</h4>
-		<ul>
-			
-			<li><code><p><a href="#//api/name/setSharedCustomizer:">+ setSharedCustomizer:</a></p></code></li>
-			
-		</ul>
-	</div>
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">DLDialogPresets.h</code><br />
-	</div>				
-	
-	
-</div>
-						
 					</div>
 					
 					
@@ -507,7 +313,7 @@ via <a href="#//api/name/sharedCustomizer">sharedCustomizer</a>.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Draco. All rights reserved. (Last updated: 2013-09-23)</span><br />
+						<p><span class="copyright">&copy; 2013 Draco. All rights reserved. (Last updated: 2013-09-29)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

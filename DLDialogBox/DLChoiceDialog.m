@@ -13,6 +13,28 @@
 
 @implementation DLChoiceDialogCustomizer
 
+- (id)copyWithZone:(NSZone *)zone
+{
+  DLChoiceDialogCustomizer *another = [[self class] allocWithZone:zone];
+  another.dialogPosition = self.dialogPosition;
+  another.dialogAnchorPoint = self.dialogAnchorPoint;
+  another.backgroundSpriteFile = [self.backgroundSpriteFile copyWithZone:zone];
+  another.backgroundSpriteFrameName = [self.backgroundSpriteFrameName copyWithZone:zone];
+  another.backgroundColor = self.backgroundColor;
+  another.fntFile = [self.fntFile copyWithZone:zone];
+  another.contentInsets = self.contentInsets;
+  another.spacingBetweenChoices = self.spacingBetweenChoices;
+  another.labelCustomizer = [self.labelCustomizer copyWithZone:zone];
+  another.preselectEnabled = self.preselectEnabled;
+  another.swallowAllTouches = self.swallowAllTouches;
+  another.closeWhenChoiceSelected = self.closeWhenChoiceSelected;
+  another.preselectSoundFileName = [self.preselectSoundFileName copyWithZone:zone];
+  another.selectedSoundFileName = [self.selectedSoundFileName copyWithZone:zone];
+  another.showAnimation = self.showAnimation;
+  another.hideAnimation = self.hideAnimation;
+  return another;
+}
+
 + (DLChoiceDialogCustomizer *)defaultCustomizer
 {
   DLChoiceDialogCustomizer *customizer = [[DLChoiceDialogCustomizer alloc] init];

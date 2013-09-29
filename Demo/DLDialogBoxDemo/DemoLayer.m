@@ -90,15 +90,15 @@ typedef enum {
       customizer.choiceDialogCustomizer.dialogPosition = ccp(winSize.width, 100);
       
       // Customize the choice dialog box labels to align right
-      customizer = [DLDialogPresets customizeDialogWithPresets:
+      customizer = [DLDialogPresets dialogBoxCustomizerWithPresets:
        @[@(kCustomizerWithDialogOnBottom), @(kCustomizerWithDialogCenterAligned),
          @(kCustomizerWithFadeAndSlideAnimationFromBottom),
          @(kCustomizerWithFancyUI)] baseCustomizer:customizer];
       
+      [DLDialogBox setDefaultCustomizer:customizer];
       DLDialogBox *second = [DLDialogBox dialogWithTextArray:wordsChoices
-                                             defaultPortrait:portrait
                                                      choices:choices
-                                                  customizer:customizer];
+                                             defaultPortrait:portrait];
       [self addChild:second z:1];
 
       self.currentDialog = second;
@@ -121,18 +121,17 @@ typedef enum {
       customizer.dialogTextInsets = UIEdgeInsetsMake(7, 10, 7, 10);
       
       // Go through our customizer presets
-      customizer = [DLDialogPresets customizeDialogWithPresets:
+      customizer = [DLDialogPresets dialogBoxCustomizerWithPresets:
                     @[@(kCustomizerWithDialogOnTop),
                     @(kCustomizerWithDialogLeftAligned),
                     @(kCustomizerWithFadeAndSlideAnimationFromTop),
                     @(kCustomizerWithWhiteUI),
                     @(kCustomizerWithRetroSounds)] baseCustomizer:customizer];
       
-      
       DLDialogBox *third = [DLDialogBox dialogWithTextArray:wordsChoices
-                                             defaultPortrait:innerPortrait
                                                      choices:choices
-                                                  customizer:customizer];
+                                             defaultPortrait:innerPortrait
+                                                 customizer:customizer];
       third.prependText = @"Draco: ";
       third.delegate = self;
       third.tag = 3;
@@ -160,7 +159,7 @@ typedef enum {
                                          innerPortrait.contentSize.height + 10);
       
       // Go through our customizer presets
-      customizer = [DLDialogPresets customizeDialogWithPresets:
+      customizer = [DLDialogPresets dialogBoxCustomizerWithPresets:
                     @[@(kCustomizerWithDialogOnBottom),
                     @(kCustomizerWithDialogCenterAligned),
                     @(kCustomizerWithFadeAndSlideAnimationFromBottom),
@@ -169,9 +168,8 @@ typedef enum {
       
       
       DLDialogBox *fourth = [DLDialogBox dialogWithTextArray:wordsChoices
-                                            defaultPortrait:innerPortrait
                                                     choices:choices
-                                                 customizer:customizer];
+                                             defaultPortrait:portrait];
       fourth.delegate = self;
       fourth.tag = 4;
       [self addChild:fourth z:1];

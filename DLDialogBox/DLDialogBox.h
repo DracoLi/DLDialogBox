@@ -49,7 +49,7 @@ typedef NS_ENUM(NSInteger, DialogPortraitPosition) {
  * instance on all the DLDialogBoxes in your game to achieve a consistent look
  * and behaviour.
  */
-@interface DLDialogBoxCustomizer : NSObject
+@interface DLDialogBoxCustomizer : NSObject <NSCopying>
 
 
 /// @name Customizing look/UI
@@ -125,23 +125,31 @@ typedef NS_ENUM(NSInteger, DialogPortraitPosition) {
 @property (nonatomic) ccColor4B backgroundColor;
 
 /**
- * The sprite to be used by the dialog box after a page of text is displayed.
+ * This is the sprite frame name for the sprite to be used by the dialog box
+ * after a page of text is displayed.
  *
- * Currently custom animation for this sprite is not supported.
- * By default this sprite will blink continously after the dialog texts are typed.
+ * By default DLDialogBox will position the page finished indicator at the
+ * bottom right corner of the dialog box.
  *
- * Also by default DLDialogBox will position this sprite at the bottom right corner
- * of the dialog text.
+ * __By default `defaultCustomizer` sets this to the name of the arrow
+ * cursor sprite attached with the project.__
  *
- * To change this indicator's position in the dialog box, you can override this
- * sprite's position after creating a DLDialogBox with this customizer.
+ * __Note:__ When this property is set, <pageFinishedIndicatorSpriteFile> will
+ * not be used.
  *
- * __Note:_ This indicator's default anchor point is (1, 0).
- *
- * __By default `defaultCustomizer` sets this sprite to an arrow cursor sprite
- * attached with the project.__
+ * @see [DLDialogBox pageFinishedIndicator]
  */
-@property (nonatomic, strong) CCSprite *pageFinishedIndicator;
+@property (nonatomic, copy) NSString *pageFinishedIndicatorSpriteFrameName;
+
+/**
+ * Name of the sprite file for the page finished indicator.
+ *
+ * If <pageFinishedIndicatorSpriteFrameName> is provided, then this value
+ * will not be used.
+ *
+ * @see pageFinishedIndicatorSpriteFrameName
+ */
+@property (nonatomic, copy) NSString *pageFinishedIndicatorSpriteFile;
 
 /**
  * The animation to play for the page finished indicator when its displayed.
@@ -357,12 +365,12 @@ typedef NS_ENUM(NSInteger, DialogPortraitPosition) {
  * set to YES and the dialog has finished.
  *
  * Or you can run this animation block manually by calling
- * `playHideAnimationOrRemoveFromParent` on the dialog box.
+ * <[DLDialogBox playHideAnimationOrRemoveFromParent]> on the dialog box.
  *
- * __Note:__ You should remove the dialog box in your hideAnimation block after
- * all animations are played. When a hideAnimation is specified, DLDialogBox
- * does not know when to remove itself so please make sure to do it in your
- * block.
+ * __Note:__ You should call <[DLDialogBox removeFromParentAndCleanupAfterDelay:]>
+ * in your animation block to remove the dialog box after the duration of your
+ * hide animation. This is required because DLDialogBox will not remove itself
+ * after the hide animation has played.
  *
  * @see [DLDialogBox removeFromParentAndCleanupAfterDelay:]
  */
@@ -470,29 +478,73 @@ typedef NS_ENUM(NSInteger, DialogPortraitPosition) {
  *
  * A <DLDialogBoxCustomizer> is used to customize the dialog box.
  *
+ * ---
+ * ### Shared Default Customizer
+ *
+ * You can also use this class to set a single shared <DLDialogBoxCustomizer>
+ * that you can use on all your dialogs to make sure that they all
+ * follow a consistent theme.
+ *
+ * Usage example:
+ *
+ * ```
+ *     // Create a basic customizer
+ *     DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
+ *
+ *     // Customize the customizer however you want (you can use DLDialogPresets).
+ *     // ...
+ *
+ *     // Set it as the default customizer
+ *     [DLDialogBox setDefaultCustomizer:customizer];
+ *
+ *     // Create a dialog box like usual
+ *     DLDialogBox *dialog = [DLDialogBox dialogWithTextArray:texts defaultPortrait:portrait];
+ *
+ *     // Fetch the default customizer when needed
+ *    [DLDialogBox defaultCustomizer];
+ * ```
+ *
  * @see DLDialogBoxCustomizer
+ * @see setDefaultCustomizer:
  */
 @interface DLDialogBox : CCNode
 <DLAutoTypeLabelBMDelegate, DLChoiceDialogDelegate, CCTouchOneByOneDelegate>
 
 @property (nonatomic, weak) id<DLDialogBoxDelegate> delegate;
 
+
+/// @name Dialog Box Information
+
 /**
- * This customizer is used to customize the UI and functionalities of the dialog box.
+ * Current dialog page. Starts at 1. 0 when nothing has been typed.
  *
- * Please note that once a DLDialogBox is created with a customizer, you cannot
- * update UI related properties in the customizer anymore as the dialog box will only
- * process the UI properties once during creation to draw the dialog box.
- *
- * Attempting to update any UI related properties in the customizer
- * will not do anything and may break some functionalities.
- *
- * You can however update functionality related properties on the customizer
- * as those are processed whenever they are required.
- *
- * @see DLDialogBoxCustomizer
+ * __Defaults to 0__
  */
-@property (nonatomic, strong) DLDialogBoxCustomizer *customizer;
+@property (nonatomic, readonly) NSUInteger currentTextPage;
+
+
+/// @name Functionalities
+
+/**
+ * The text to be displayed before every dialog content.
+ *
+ * A good use of this will be adding a character name before all dialog content.
+ *
+ * For example setting `prependText` to "Draco: " will result in all text displayed
+ * by the dialog box to start with "Draco: [content]" as if it's me saying it :)
+ */
+@property (nonatomic, copy) NSString *prependText;
+
+/**
+ * This value will be YES when the current page displayed by the dialog box
+ * has been fully typed/displayed.
+ *
+ * __By default this is NO__
+ */
+@property (nonatomic, readonly) BOOL currentPageTyped;
+
+
+/// @name Dialog Box Data
 
 /**
  * An array of choices for the dialog box's choice dialog.
@@ -507,20 +559,6 @@ typedef NS_ENUM(NSInteger, DialogPortraitPosition) {
  * @see DLChoiceDialog
  */
 @property (nonatomic, copy) NSArray *choices;
-
-/**
- * The `DLChoiceDialog` to be displayed at the last text page if <choices> are provided.
- *
- * You can customize this choice dialog through the <customizer>.
- *
- * The choice dialog is only created when the <choices> array is set.
- *
- * Since this choice dialog is added to the same parent as the dialog box, as
- * opposed to as a child of the dialog box, removing the dialog box will not
- * remove the choice dialog if its displayed. You will need to remove this choice
- * dialog individually or by calling <playHideAnimationOrRemoveFromParent>.
- */
-@property (nonatomic, strong) DLChoiceDialog *choiceDialog;
 
 /**
  * This is used provide unique portrait sprites for the different dialog pages in a <DLDialogBox>.
@@ -548,11 +586,46 @@ typedef NS_ENUM(NSInteger, DialogPortraitPosition) {
 @property (nonatomic, copy) NSDictionary *customPortraitForPages;
 
 /**
- * Current dialog page. Starts at 1. 0 when nothing has been typed.
+ * An array of text that this dialog will be typing.
  *
- * __Defaults to 0__
+ * Each element of this array will be display as a single page.
+ * <currentTextPage> should corresponds to the current page that is being typed.
  */
-@property (nonatomic, readonly) NSUInteger currentTextPage;
+@property (nonatomic, copy) NSArray *initialTextArray;
+
+
+/// @name Dialog Box Node Content
+
+/**
+ * This customizer is used to customize the UI and functionalities of the dialog box.
+ *
+ * Please note that once a DLDialogBox is created with a customizer, you cannot
+ * update UI related properties in the customizer anymore as the dialog box will only
+ * process the UI properties once during creation to draw the dialog box.
+ *
+ * Attempting to update any UI related properties in the customizer
+ * will not do anything and may break some functionalities.
+ *
+ * You can however update functionality related properties on the customizer
+ * as those are processed whenever they are required.
+ *
+ * @see DLDialogBoxCustomizer
+ */
+@property (nonatomic, strong) DLDialogBoxCustomizer *customizer;
+
+/**
+ * The `DLChoiceDialog` to be displayed at the last text page if <choices> are provided.
+ *
+ * You can customize this choice dialog through the <customizer>.
+ *
+ * The choice dialog is only created when the <choices> array is set.
+ *
+ * Since this choice dialog is added to the same parent as the dialog box, as
+ * opposed to as a child of the dialog box, removing the dialog box will not
+ * remove the choice dialog if its displayed. You will need to remove this choice
+ * dialog individually or by calling <playHideAnimationOrRemoveFromParent>.
+ */
+@property (nonatomic, strong) DLChoiceDialog *choiceDialog;
 
 /**
  * The portrait sprite to display by default.
@@ -564,30 +637,14 @@ typedef NS_ENUM(NSInteger, DialogPortraitPosition) {
 @property (nonatomic, strong) CCSprite *defaultPortraitSprite;
 
 /**
- * An array of text that this dialog will be typing.
+ * A page finished indicator sprite to be shown after each page have been finished.
  *
- * Each element of this array will be display as a single page.
- * <currentTextPage> should corresponds to the current page that is being typed.
+ * The sprite is determined by the <customizer>.
+ *
+ * By default DLDialogBox will position the page finished indicator at the
+ * bottom right corner of the dialog box.
  */
-@property (nonatomic, copy) NSArray *initialTextArray;
-
-/**
- * The text to be displayed before every dialog content.
- *
- * A good use of this will be adding a character name before all dialog content.
- *
- * For example setting `prependText` to "Draco: " will result in all text displayed
- * by the dialog box to start with "Draco: [content]" as if it's me saying it :)
- */
-@property (nonatomic, copy) NSString *prependText;
-
-/**
- * This value will be YES when the current page displayed by the dialog box
- * has been fully typed/displayed.
- *
- * __By default this is NO__
- */
-@property (nonatomic, readonly) BOOL currentPageTyped;
+@property (nonatomic, strong) CCSprite *pageFinishedIndicator;
 
 /**
  * The portrait that is being displayed by the dialog box.
@@ -635,6 +692,9 @@ typedef NS_ENUM(NSInteger, DialogPortraitPosition) {
  */
 @property (nonatomic, strong) CCSprite *bgSprite;
 
+
+/// @name Initializers
+
 /**
  * @param texts       An array of texts to display
  * @param portrait    The portrait sprite to show
@@ -646,18 +706,44 @@ typedef NS_ENUM(NSInteger, DialogPortraitPosition) {
         defaultPortrait:(CCSprite *)portrait
              customizer:(DLDialogBoxCustomizer *)customizer;
 
+/**
+ * @param texts       An array of texts to display
+ * @param portrait    The portrait sprite to show
+ */
 + (id)dialogWithTextArray:(NSArray *)texts
           defaultPortrait:(CCSprite *)portrait;
+
+/**
+ * @param texts       An array of texts to display
+ * @param portrait    The portrait sprite to show
+ * @param customizer  A <DLDialogBoxCustomizer> to customize the dialog box
+ */
 + (id)dialogWithTextArray:(NSArray *)texts
           defaultPortrait:(CCSprite *)portrait
                customizer:(DLDialogBoxCustomizer *)customizer;
+
+/**
+ * @param texts       An array of texts to display
+ * @param choices     An array of choice strings for the choice dialog
+ * @param portrait    The portrait sprite to show
+ */
 + (id)dialogWithTextArray:(NSArray *)texts
                   choices:(NSArray *)choices
           defaultPortrait:(CCSprite *)portrait;
+
+/**
+ * @param texts       An array of texts to display
+ * @param choices     An array of choice strings for the choice dialog
+ * @param portrait    The portrait sprite to show
+ * @param customizer  A <DLDialogBoxCustomizer> to customize the dialog box
+ */
 + (id)dialogWithTextArray:(NSArray *)texts
                   choices:(NSArray *)choices
           defaultPortrait:(CCSprite *)portrait
                customizer:(DLDialogBoxCustomizer *)customizer;
+
+
+/// @name Controlling DialogBox Interactions
 
 /**
  * Finish animating the current page if the dialog content is still being typed,
@@ -720,6 +806,9 @@ typedef NS_ENUM(NSInteger, DialogPortraitPosition) {
  */
 - (void)showChoiceDialog;
 
+
+/// @name Removing the DialogBox
+
 /**
  * A convenience method to remove this dialog and also its choice dialog (since
  * its not a child of this dialog box) from the parent and clean up.
@@ -737,22 +826,29 @@ typedef NS_ENUM(NSInteger, DialogPortraitPosition) {
  * are finished. In this case, set the delay to the duration of the hide
  * animation so the dialog box will be removed after animation is finished.
  *
+ * @see [DLDialogBoxCustomizer hideAnimation]
+ *
  * @param delay   The delay before the dialog is removed
  */
 - (void)removeFromParentAndCleanupAfterDelay:(ccTime)delay;
 
+
+/// @name Animations
+
 /**
  * Play the hide animation block associated with this dialog's customizer and 
- * the choice dialog's cutomizer if they exist. Else just remove the dialog
- * from the parent.
+ * the choice dialog's cutomizer if they exist. 
+ *
+ * If no hide Animation exists, then this method will just remove the dialog
+ * box and its choice dialog from the parent.
  *
  * This method is automatically called when the dialog is finished if
- * `closeWhenDialogFinished` is set to `YES` in the customizer.
+ * <[DLDialogBoxCustomizer closeWhenDialogFinished]> is set to `YES` in the customizer.
  *
  * __Note:__ The hide animation blocks should be responsible for removing the
  * dialog from the parent.
  *
- * __Note:__ This method does not remove the choice dialog from the parent.
+ * @see [DLDialogBoxCustomizer hideAnimation]
  */
 - (void)playHideAnimationOrRemoveFromParent;
 
@@ -801,4 +897,21 @@ typedef NS_ENUM(NSInteger, DialogPortraitPosition) {
 - (void)animateOutsidePortraitOutWithFadeOut:(BOOL)fadeOut
                                     distance:(CGFloat)distance
                                     duration:(ccTime)duration;
+
+
+/// @name Default Shared Customizer
+
+/**
+ * Set the default customizer used by all DLDialogBox instances when a customizer
+ * is not specified.
+ *
+ * @param customizer  The customizer to use by default
+ */
++ (void)setDefaultCustomizer:(DLDialogBoxCustomizer *)customizer;
+
+/**
+ * Get the default customizer used by all DLDialogBox instances.
+ */
++ (DLDialogBoxCustomizer *)defaultCustomizer;
+
 @end

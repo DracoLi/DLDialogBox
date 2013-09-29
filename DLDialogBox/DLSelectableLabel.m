@@ -12,6 +12,21 @@
 
 @implementation DLSelectableLabelCustomizer
 
+- (id)copyWithZone:(NSZone *)zone
+{
+  DLSelectableLabelCustomizer *another = [[self class] allocWithZone:zone];
+  another.textAlignment = self.textAlignment;
+  another.backgroundColor = self.backgroundColor;
+  another.preSelectedBackgroundColor = self.preSelectedBackgroundColor;
+  another.selectedBackgroundColor = self.selectedBackgroundColor;
+  another.textInsets = self.textInsets;
+  another.deselectOnOutsideTap = self.deselectOnOutsideTap;
+  another.preselectEnabled = self.preselectEnabled;
+  another.preselectSoundFileName = [self.preselectSoundFileName copyWithZone:zone];
+  another.selectedSoundFileName = [self.selectedSoundFileName copyWithZone:zone];
+  return another;
+}
+
 + (DLSelectableLabelCustomizer *)defaultCustomizer
 {
   DLSelectableLabelCustomizer *customizer = [[DLSelectableLabelCustomizer alloc] init];

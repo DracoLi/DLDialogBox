@@ -9,11 +9,11 @@
 #import "DLDialogBox.h"
 
 /**
- * Available presets that you can use for [DLDialogPresets customizeDialogWithPresets:baseCustomizer:].
+ * Available presets that you can use for [DLDialogPresets dialogBoxCustomizerWithPresets:baseCustomizer:].
  *
  * You can use multiple presets to customize your dialog box customizer.
  *
- * @see [DLDialogPresets customizeDialogWithPresets:baseCustomizer:]
+ * @see [DLDialogPresets dialogBoxCustomizerWithPresets:baseCustomizer:]
  */
 typedef NS_ENUM(NSInteger, DialogBoxCustomizerPreset) {
   
@@ -136,28 +136,6 @@ typedef NS_ENUM(NSInteger, DialogBoxCustomizerPreset) {
  *                  @(kCustomizerWithFadeAndSlideAnimationFromBottom),
  *                  @(kCustomizerWithEightBitUI)] baseCustomizer:customizer];
  * ```
- *
- * ---
- *
- * You can also use this class to manage your own single <DLDialogBoxCusotmizer>
- * instance that you can use on all your dialogs to make sure that they all
- * follow a consistent theme.
- *
- * From example:
- *
- * ```
- *     // Create a basic customizer
- *     DLDialogBoxCustomizer *customizer = [DLDialogBoxCustomizer defaultCustomizer];
- *     
- *     // Customize the customizer
- *     // ...
- *
- *     // Set it as the default customizer
- *     [DLDialogPresets setSharedCustomizer:customizer];
- *
- *     // Get the default customizer
- *     [DLDialogPresets sharedCustomizer]
- * ```
  */
 @interface DLDialogPresets : NSObject
 
@@ -169,8 +147,8 @@ typedef NS_ENUM(NSInteger, DialogBoxCustomizerPreset) {
  * @param presets     An array of presets. The constants need to be wrapped in NSNumber.
  * @param customizer  The base customizer
  */
-+ (DLDialogBoxCustomizer *)customizeDialogWithPresets:(NSArray *)presets
-                                       baseCustomizer:(DLDialogBoxCustomizer *)customizer;
++ (DLDialogBoxCustomizer *)dialogBoxCustomizerWithPresets:(NSArray *)presets
+                                           baseCustomizer:(DLDialogBoxCustomizer *)customizer;
 
 /**
  * Returns a <DLDialogBoxCustomizer> with the specified preset applied in order.
@@ -178,31 +156,7 @@ typedef NS_ENUM(NSInteger, DialogBoxCustomizerPreset) {
  * @param preset      A preset constant wrapped in NSNumber.
  * @param customizer  The base customizer
  */
-+ (DLDialogBoxCustomizer *)customizeDialogWithPreset:(DialogBoxCustomizerPreset)preset
-                                   baseCustomizer:(DLDialogBoxCustomizer *)customizer;
-
-/**
- * Get the shared customizer set by <setSharedCustomizer:>.
- *
- * @see setSharedCustomizer:
- */
-+ (DLDialogBoxCustomizer *)sharedCustomizer;
-
-/**
- * Sets the shared customizer that you can get easily throughout your app 
- * via <sharedCustomizer>.
- *
- * @see sharedCustomizer
- * @param customizer The customizer to set as default
- */
-+ (void)setSharedCustomizer:(DLDialogBoxCustomizer *)customizer;
-
-/**
- * Adds the resources used by <DLDialogPresets> into the shared `CCSpriteFrameCache`.
- *
- * After this is called, you will be able to use the resources attached
- * with the DLDialogBox project via `[CCSprite spriteWithSpriteFrameName]`.
- */
-+ (void)addDLDialogBoxPresetResources;
++ (DLDialogBoxCustomizer *)dialogBoxCustomizerWithPreset:(DialogBoxCustomizerPreset)preset
+                                          baseCustomizer:(DLDialogBoxCustomizer *)customizer;
 
 @end
